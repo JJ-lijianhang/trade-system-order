@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantSettleBatchMapper">
+
+    <!-- Base Result Map -->
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.MerchantSettleBatch">
+        <result column="id" property="id" />
+        <result column="batch_no" property="batchNo" />
+        <result column="batch_status" property="batchStatus" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="merchant_name" property="merchantName" />
+        <result column="provider_id" property="providerId" />
+        <result column="provider_name" property="providerName" />
+        <result column="payment_id" property="paymentId" />
+        <result column="payment_method" property="paymentMethod" />
+        <result column="payment_method_name" property="paymentMethodName" />
+        <result column="settlement_currency" property="settlementCurrency" />
+        <result column="settlement_range" property="settlementRange" />
+        <result column="settlement_method" property="settlementMethod" />
+        <result column="min_settlement_amount" property="minSettlementAmount" />
+        <result column="settlement_exchange_margin" property="settlementExchangeMargin" />
+        <result column="consumer_exchange_margin" property="consumerExchangeMargin" />
+        <result column="reconciliation_date" property="reconciliationDate" />
+        <result column="reconciliation_start_time" property="reconciliationStartTime" />
+        <result column="reconciliation_end_time" property="reconciliationEndTime" />
+        <result column="settlement_date" property="settlementDate" />
+        <result column="settlement_acture_date" property="settlementActureDate" />
+        <result column="settlement_start_time" property="settlementStartTime" />
+        <result column="settlement_end_time" property="settlementEndTime" />
+        <result column="settlement_remark" property="settlementRemark" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- Base Column List -->
+    <sql id="Base_Column_List">
+        id, batch_no, batch_status, merchant_id, merchant_name, provider_id, provider_name, payment_id, payment_method, payment_method_name,
+        settlement_currency, settlement_range, settlement_method, min_settlement_amount, settlement_exchange_margin, consumer_exchange_margin,
+        reconciliation_date, reconciliation_start_time, reconciliation_end_time, settlement_date,settlement_acture_date, settlement_start_time,
+        settlement_end_time, settlement_remark, revision, created_by, created_time, updated_by, updated_time
+    </sql>
+
+    <!-- Insert Operation -->
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.MerchantSettleBatch">
+        INSERT INTO tb_merchant_settle_batch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="batchNo != null and batchNo != ''">batch_no,</if>
+            <if test="batchStatus != null">batch_status,</if>
+            <if test="merchantId != null">merchant_id,</if>
+            <if test="merchantName != null and merchantName != ''">merchant_name,</if>
+            <if test="providerId != null">provider_id,</if>
+            <if test="providerName != null and providerName != ''">provider_name,</if>
+            <if test="paymentId != null">payment_id,</if>
+            <if test="paymentMethod != null and paymentMethod != ''">payment_method,</if>
+            <if test="paymentMethodName != null and paymentMethodName != ''">payment_method_name,</if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">settlement_currency,</if>
+            <if test="settlementRange != null">settlement_range,</if>
+            <if test="settlementMethod != null">settlement_method,</if>
+            <if test="minSettlementAmount != null">min_settlement_amount,</if>
+            <if test="settlementExchangeMargin != null">settlement_exchange_margin,</if>
+            <if test="consumerExchangeMargin != null">consumer_exchange_margin,</if>
+            <if test="reconciliationDate != null">reconciliation_date,</if>
+            <if test="reconciliationStartTime != null">reconciliation_start_time,</if>
+            <if test="reconciliationEndTime != null">reconciliation_end_time,</if>
+            <if test="settlementDate != null">settlement_date,</if>
+            <if test="settlementActureDate != null">settlement_acture_date,</if>
+            <if test="settlementStartTime != null">settlement_start_time,</if>
+            <if test="settlementEndTime != null">settlement_end_time,</if>
+            <if test="settlementRemark != null and settlementRemark != ''">settlement_remark,</if>
+            <if test="revision != null">revision,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedBy != null">updated_by,</if>
+            <if test="updatedTime != null">updated_time</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="batchNo != null and batchNo != ''">#{batchNo},</if>
+            <if test="batchStatus != null">#{batchStatus},</if>
+            <if test="merchantId != null">#{merchantId},</if>
+            <if test="merchantName != null and merchantName != ''">#{merchantName},</if>
+            <if test="providerId != null">#{providerId},</if>
+            <if test="providerName != null and providerName != ''">#{providerName},</if>
+            <if test="paymentId != null">#{paymentId},</if>
+            <if test="paymentMethod != null and paymentMethod != ''">#{paymentMethod},</if>
+            <if test="paymentMethodName != null and paymentMethodName != ''">#{paymentMethodName},</if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">#{settlementCurrency},</if>
+            <if test="settlementRange != null">#{settlementRange},</if>
+            <if test="settlementMethod != null">#{settlementMethod},</if>
+            <if test="minSettlementAmount != null">#{minSettlementAmount},</if>
+            <if test="settlementExchangeMargin != null">#{settlementExchangeMargin},</if>
+            <if test="consumerExchangeMargin != null">#{consumerExchangeMargin},</if>
+            <if test="reconciliationDate != null">#{reconciliationDate},</if>
+            <if test="reconciliationStartTime != null">#{reconciliationStartTime},</if>
+            <if test="reconciliationEndTime != null">#{reconciliationEndTime},</if>
+            <if test="settlementDate != null">#{settlementDate},</if>
+            <if test="settlementActureDate != null">#{settlementActureDate},</if>
+            <if test="settlementStartTime != null">#{settlementStartTime},</if>
+            <if test="settlementEndTime != null">#{settlementEndTime},</if>
+            <if test="settlementRemark != null and settlementRemark != ''">#{settlementRemark},</if>
+            <if test="revision != null">#{revision},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedBy != null">#{updatedBy},</if>
+            <if test="updatedTime != null">#{updatedTime}</if>
+        </trim>
+    </insert>
+
+    <!-- Delete Operation -->
+    <delete id="deleteById">
+        DELETE FROM tb_merchant_settle_batch WHERE id = #{id}
+    </delete>
+
+    <!-- Update Operation -->
+    <update id="update" parameterType="com.futurebank.order.entity.MerchantSettleBatch">
+        UPDATE tb_merchant_settle_batch
+        <set>
+            <if test="batchNo != null and batchNo != ''">batch_no = #{batchNo},</if>
+            <if test="batchStatus != null">batch_status = #{batchStatus},</if>
+            <if test="merchantId != null">merchant_id = #{merchantId},</if>
+            <if test="merchantName != null and merchantName != ''">merchant_name = #{merchantName},</if>
+            <if test="providerId != null">provider_id = #{providerId},</if>
+            <if test="providerName != null and providerName != ''">provider_name = #{providerName},</if>
+            <if test="paymentId != null">payment_id = #{paymentId},</if>
+            <if test="paymentMethod != null and paymentMethod != ''">payment_method = #{paymentMethod},</if>
+            <if test="paymentMethodName != null and paymentMethodName != ''">payment_method_name = #{paymentMethodName},</if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">settlement_currency = #{settlementCurrency},</if>
+            <if test="settlementRange != null">settlement_range = #{settlementRange},</if>
+            <if test="settlementMethod != null">settlement_method = #{settlementMethod},</if>
+            <if test="minSettlementAmount != null">min_settlement_amount = #{minSettlementAmount},</if>
+            <if test="settlementExchangeMargin != null">settlement_exchange_margin = #{settlementExchangeMargin},</if>
+            <if test="consumerExchangeMargin != null">consumer_exchange_margin = #{consumerExchangeMargin},</if>
+            <if test="reconciliationDate != null">reconciliation_date = #{reconciliationDate},</if>
+            <if test="reconciliationStartTime != null">reconciliation_start_time = #{reconciliationStartTime},</if>
+            <if test="reconciliationEndTime != null">reconciliation_end_time = #{reconciliationEndTime},</if>
+            <if test="settlementDate != null">settlement_date = #{settlementDate},</if>
+            <if test="settlementActureDate != null">settlement_acture_date = #{settlementActureDate},</if>
+            <if test="settlementStartTime != null">settlement_start_time = #{settlementStartTime},</if>
+            <if test="settlementEndTime != null">settlement_end_time = #{settlementEndTime},</if>
+            <if test="settlementRemark != null and settlementRemark != ''">settlement_remark = #{settlementRemark},</if>
+            <if test="revision != null">revision = #{revision},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- Select Operations -->
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_settle_batch
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_settle_batch
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM tb_merchant_settle_batch
+    </select>
+
+    <select id="queryMerchantSettleConfigInfo" resultType="com.futurebank.order.entity.PaymentSettlementConfEntity">
+        SELECT
+            merchant_id ,
+            merchant_name ,
+            settlement_date ,
+            provider_id ,
+            provider_name ,
+            settlement_method ,
+            settlement_range   ,
+            settlement_currency ,
+            min_settlement_amount ,
+            consumer_exchange_margin ,
+            settlement_exchange_margin
+        FROM  tb_payment_settlement_conf
+        <where>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryMerchantSettleBatchInfo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_settle_batch
+        <where>
+            <if test="batchNo != null and batchNo != ''">and batch_no = #{batchNo}</if>
+            <if test="batchStatus != null">and batch_status = #{batchStatus}</if>
+            <if test="merchantId != null">and merchant_id = #{merchantId}</if>
+            <if test="merchantName != null and merchantName != ''">and merchant_name = #{merchantName}</if>
+            <if test="providerId != null">and provider_id = #{providerId}</if>
+            <if test="providerName != null and providerName != ''">and provider_name = #{providerName}</if>
+            <if test="paymentId != null">and payment_id = #{paymentId}</if>
+            <if test="paymentMethod != null and paymentMethod != ''">and payment_method = #{paymentMethod}</if>
+            <if test="paymentMethodName != null and paymentMethodName != ''">and payment_method_name = #{paymentMethodName}</if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">and settlement_currency = #{settlementCurrency}</if>
+            <if test="settlementRange != null">and settlement_range = #{settlementRange}</if>
+            <if test="settlementMethod != null">and settlement_method = #{settlementMethod}</if>
+            <if test="minSettlementAmount != null">and min_settlement_amount = #{minSettlementAmount}</if>
+            <if test="settlementExchangeMargin != null">and settlement_exchange_margin = #{settlementExchangeMargin}</if>
+            <if test="consumerExchangeMargin != null">and consumer_exchange_margin = #{consumerExchangeMargin}</if>
+            <if test="reconciliationDate != null">and reconciliation_date = #{reconciliationDate}</if>
+            <if test="reconciliationStartTime != null">and reconciliation_start_time = #{reconciliationStartTime}</if>
+            <if test="reconciliationEndTime != null">and reconciliation_end_time = #{reconciliationEndTime}</if>
+            <if test="settlementDate != null">and settlement_date = #{settlementDate}</if>
+            <if test="settlementActureDate != null">and settlement_acture_date = #{settlementActureDate}</if>
+            <if test="settlementStartTime != null">and settlement_start_time = #{settlementStartTime}</if>
+            <if test="settlementEndTime != null">and settlement_end_time = #{settlementEndTime}</if>
+            <if test="settlementRemark != null and settlementRemark != ''">and settlement_remark = #{settlementRemark}</if>
+            <if test="revision != null">and revision = #{revision}</if>
+            <if test="createdBy != null">and created_by = #{createdBy}</if>
+            <if test="createdTime != null">and created_time = #{createdTime}</if>
+            <if test="updatedBy != null">and updated_by = #{updatedBy}</if>
+            <if test="updatedTime != null">and updated_time = #{updatedTime}</if>
+        </where>
+        order by id desc
+    </select>
+
+</mapper>

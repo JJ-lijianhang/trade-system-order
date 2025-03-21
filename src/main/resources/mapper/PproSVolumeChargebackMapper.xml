@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproSVolumeChargebackMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproSVolumeChargebackEntity" id="PproSVolumeChargebackMap">
+        <result property="id" column="id"/>
+        <result property="merchantTxId" column="MERCHANT_TX_ID"/>
+        <result property="cbId" column="CB_ID"/>
+        <result property="eventTimestamp" column="EVENT_TIMESTAMP"/>
+        <result property="merchantId" column="MERCHANT_ID"/>
+        <result property="paymentMethod" column="PAYMENT_METHOD"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="country" column="COUNTRY"/>
+        <result property="referenceTxId" column="REFERENCE_TX_ID"/>
+        <result property="chargebackReason" column="CHARGEBACK_REASON"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="settlementDate" column="SETTLEMENT_DATE"/>
+        <result property="recordCount" column="RECORD_COUNT"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproSVolumeChargebackMap">
+        select id,
+               MERCHANT_TX_ID,
+               CB_ID,
+               EVENT_TIMESTAMP,
+               MERCHANT_ID,
+               PAYMENT_METHOD,
+               AMOUNT,
+               CURRENCY,
+               COUNTRY,
+               REFERENCE_TX_ID,
+               CHARGEBACK_REASON,
+               created_time,
+               update_time,
+               file_name,
+               SETTLEMENT_DATE,
+               RECORD_COUNT,
+               is_processed
+        from tb_ppro_s_volume_chargeback
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproSVolumeChargebackMap">
+        select
+        id, MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD, AMOUNT, CURRENCY, COUNTRY,
+        REFERENCE_TX_ID, CHARGEBACK_REASON, created_time, update_time, file_name, SETTLEMENT_DATE, RECORD_COUNT,
+        is_processed
+        from tb_ppro_s_volume_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="cbId != null and cbId != ''">
+                and CB_ID = #{cbId}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="chargebackReason != null and chargebackReason != ''">
+                and CHARGEBACK_REASON = #{chargebackReason}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproSVolumeChargebackMap">
+        select
+        id, MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD, AMOUNT, CURRENCY, COUNTRY,
+        REFERENCE_TX_ID, CHARGEBACK_REASON, created_time, update_time, file_name, SETTLEMENT_DATE, RECORD_COUNT,
+        is_processed
+        from tb_ppro_s_volume_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="cbId != null and cbId != ''">
+                and CB_ID = #{cbId}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="chargebackReason != null and chargebackReason != ''">
+                and CHARGEBACK_REASON = #{chargebackReason}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproSVolumeChargebackMap">
+        select
+        id, MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD, AMOUNT, CURRENCY, COUNTRY,
+        REFERENCE_TX_ID, CHARGEBACK_REASON, created_time, update_time, file_name, SETTLEMENT_DATE, RECORD_COUNT,
+        is_processed
+        from tb_ppro_s_volume_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="cbId != null and cbId != ''">
+                and CB_ID = #{cbId}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="chargebackReason != null and chargebackReason != ''">
+                and CHARGEBACK_REASON = #{chargebackReason}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_s_volume_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="cbId != null and cbId != ''">
+                and CB_ID = #{cbId}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="chargebackReason != null and chargebackReason != ''">
+                and CHARGEBACK_REASON = #{chargebackReason}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_volume_chargeback(MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+                                                AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, CHARGEBACK_REASON,
+                                                created_time, update_time, file_name, SETTLEMENT_DATE, RECORD_COUNT,
+                                                is_processed)
+        values (#{merchantTxId}, #{cbId}, #{eventTimestamp}, #{merchantId}, #{paymentMethod}, #{amount}, #{currency},
+                #{country}, #{referenceTxId}, #{chargebackReason}, #{createdTime}, #{updateTime}, #{fileName},
+                #{settlementDate}, #{recordCount}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_volume_chargeback(MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+        AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, CHARGEBACK_REASON, created_time, update_time, file_name,
+        SETTLEMENT_DATE, RECORD_COUNT, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantTxId}, #{entity.cbId}, #{entity.eventTimestamp}, #{entity.merchantId},
+            #{entity.paymentMethod}, #{entity.amount}, #{entity.currency}, #{entity.country}, #{entity.referenceTxId},
+            #{entity.chargebackReason}, #{entity.createdTime}, #{entity.updateTime}, #{entity.fileName},
+            #{entity.settlementDate}, #{entity.recordCount}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_volume_chargeback(MERCHANT_TX_ID, CB_ID, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+        AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, CHARGEBACK_REASON, created_time, update_time, file_name,
+        SETTLEMENT_DATE, RECORD_COUNT, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantTxId}, #{entity.cbId}, #{entity.eventTimestamp}, #{entity.merchantId},
+            #{entity.paymentMethod}, #{entity.amount}, #{entity.currency}, #{entity.country}, #{entity.referenceTxId},
+            #{entity.chargebackReason}, #{entity.createdTime}, #{entity.updateTime}, #{entity.fileName},
+            #{entity.settlementDate}, #{entity.recordCount}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        MERCHANT_TX_ID = values(MERCHANT_TX_ID),
+        CB_ID = values(CB_ID),
+        EVENT_TIMESTAMP = values(EVENT_TIMESTAMP),
+        MERCHANT_ID = values(MERCHANT_ID),
+        PAYMENT_METHOD = values(PAYMENT_METHOD),
+        AMOUNT = values(AMOUNT),
+        CURRENCY = values(CURRENCY),
+        COUNTRY = values(COUNTRY),
+        REFERENCE_TX_ID = values(REFERENCE_TX_ID),
+        CHARGEBACK_REASON = values(CHARGEBACK_REASON),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        file_name = values(file_name),
+        SETTLEMENT_DATE = values(SETTLEMENT_DATE),
+        RECORD_COUNT = values(RECORD_COUNT),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_s_volume_chargeback
+        <set>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                MERCHANT_TX_ID = #{merchantTxId},
+            </if>
+            <if test="cbId != null and cbId != ''">
+                CB_ID = #{cbId},
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                EVENT_TIMESTAMP = #{eventTimestamp},
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                MERCHANT_ID = #{merchantId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                PAYMENT_METHOD = #{paymentMethod},
+            </if>
+            <if test="amount != null and amount != ''">
+                AMOUNT = #{amount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="country != null and country != ''">
+                COUNTRY = #{country},
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                REFERENCE_TX_ID = #{referenceTxId},
+            </if>
+            <if test="chargebackReason != null and chargebackReason != ''">
+                CHARGEBACK_REASON = #{chargebackReason},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                SETTLEMENT_DATE = #{settlementDate},
+            </if>
+            <if test="recordCount != null">
+                RECORD_COUNT = #{recordCount},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_s_volume_chargeback
+        where id = #{id}
+    </delete>
+
+</mapper>
+

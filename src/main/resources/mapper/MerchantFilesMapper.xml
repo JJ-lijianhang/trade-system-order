@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantFilesMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantFilesEntity" id="MerchantFilesMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="fileType" column="file_type"/>
+        <result property="fileName" column="file_name"/>
+        <result property="filePath" column="file_path"/>
+        <result property="fileSize" column="file_size"/>
+        <result property="period" column="period"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantFilesMap">
+        select id,
+               provider_id,
+               provider_name,
+               merchant_id,
+               file_type,
+               file_name,
+               file_path,
+               file_size,
+               period,
+               created_at,
+               update_at
+        from tb_merchant_files
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantFilesMap">
+        select
+        id, provider_id,provider_name,merchant_id, file_type, file_name, file_path, file_size, period, created_at, update_at
+        from tb_merchant_files
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="fileSize != null">
+                and file_size = #{fileSize}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantFilesMap">
+        select
+        id,provider_id,provider_name, merchant_id, file_type, file_name, file_path, file_size, period, created_at, update_at
+        from tb_merchant_files
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="fileSize != null">
+                and file_size = #{fileSize}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantFilesMap">
+        select
+        id,provider_id,provider_name, merchant_id, file_type, file_name, file_path, file_size, period, created_at, update_at
+        from tb_merchant_files
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="fileSize != null">
+                and file_size = #{fileSize}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_files
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="fileSize != null">
+                and file_size = #{fileSize}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_files(provider_id,provider_name,merchant_id, file_type, file_name, file_path, file_size, period, created_at,
+                                      update_at)
+        values (#{providerId},#{providerName},#{merchantId}, #{fileType}, #{fileName}, #{filePath}, #{fileSize}, #{period}, #{createdAt}, #{updateAt})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_files(provider_id,provider_name,merchant_id, file_type, file_name, file_path, file_size, period, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{providerId},#{providerName},#{entity.merchantId}, #{entity.fileType}, #{entity.fileName}, #{entity.filePath}, #{entity.fileSize},
+            #{entity.period}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_files(provider_id,provider_name,merchant_id, file_type, file_name, file_path, file_size, period, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.merchantId}, #{entity.fileType}, #{entity.fileName}, #{entity.filePath}, #{entity.fileSize},
+            #{entity.period}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+        on duplicate key update
+        provider_id = values(provider_id),
+        provider_name = values(provider_name),
+        merchant_id = values(merchant_id),
+        file_type = values(file_type),
+        file_name = values(file_name),
+        file_path = values(file_path),
+        file_size = values(file_size),
+        period = values(period),
+        created_at = values(created_at),
+        update_at = values(update_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_files
+        <set>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="providerName != null and providerName != ''">
+                provider_name = #{providerName},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="fileType != null and fileType != ''">
+                file_type = #{fileType},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="filePath != null and filePath != ''">
+                file_path = #{filePath},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize},
+            </if>
+            <if test="period != null and period != ''">
+                period = #{period},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_files
+        where id = #{id}
+    </delete>
+
+</mapper>
+

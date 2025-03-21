@@ -1,0 +1,1338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PaymentBillMapper">
+
+    <resultMap type="com.futurebank.order.entity.PaymentBillEntity" id="PaymentBillMap">
+        <result property="billId" column="bill_id"/>
+        <result property="referenceOrderNo" column="reference_order_no"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelRatesId" column="channel_rates_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productChannelId" column="product_channel_id"/>
+        <result property="billNo" column="bill_no"/>
+        <result property="platformOrderNo" column="platform_order_no"/>
+        <result property="downstreamOrderNo" column="downstream_order_no"/>
+        <result property="upstreamOrderNo" column="upstream_order_no"/>
+        <result property="billDate" column="bill_date"/>
+        <result property="billPeriodStart" column="bill_period_start"/>
+        <result property="billPeriodEnd" column="bill_period_end"/>
+        <result property="currency" column="currency"/>
+        <result property="orderAmount" column="order_amount"/>
+        <result property="billType" column="bill_type"/>
+        <result property="paymentStatus" column="payment_status"/>
+        <result property="transactionType" column="transaction_type"/>
+        <result property="transactionDate" column="transaction_date"/>
+        <result property="transactionLocation" column="transaction_location"/>
+        <result property="settlementAmount" column="settlement_amount"/>
+        <result property="settlementCurrency" column="settlement_currency"/>
+        <result property="settlementCycle" column="settlement_cycle"/>
+        <result property="settlementDate" column="settlement_date"/>
+        <result property="billRemarks" column="bill_remarks"/>
+        <result property="billGeneratedAt" column="bill_generated_at"/>
+        <result property="actualDeduction" column="actual_deduction"/>
+        <result property="merchantFixedFee" column="merchant_fixed_fee"/>
+        <result property="merchantTxRate" column="merchant_tx_rate"/>
+        <result property="merchantTotalFee" column="merchant_total_fee"/>
+        <result property="merchantSettlementAmount" column="merchant_settlement_amount"/>
+        <result property="agentFixedFee" column="agent_fixed_fee"/>
+        <result property="agentTxRate" column="agent_tx_rate"/>
+        <result property="agentTotalFee" column="agent_total_fee"/>
+        <result property="agentSettlementAmount" column="agent_settlement_amount"/>
+        <result property="agentProfit" column="agent_profit"/>
+        <result property="channelFixedFee" column="channel_fixed_fee"/>
+        <result property="channelTxRate" column="channel_tx_rate"/>
+        <result property="channelTotalFee" column="channel_total_fee"/>
+        <result property="channelSettlementAmount" column="channel_settlement_amount"/>
+        <result property="profit" column="profit"/>
+        <result property="reconciliationStatus" column="reconciliation_status"/>
+        <result property="settlementStatus" column="settlement_status"/>
+        <result property="paymentCompleteTime" column="payment_complete_time"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="agentName" column="agent_name"/>
+        <result property="orderType" column="order_type"/>
+        <result property="acquiringMode" column="acquiring_mode"/>
+        <result property="country" column="country"/>
+        <result property="paymentExchange" column="payment_exchange"/>
+        <result property="paymentExchangeRate" column="payment_exchange_rate"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="merchantCurrency" column="merchant_currency"/>
+        <result property="merchantOrderAmount" column="merchant_order_amount"/>
+        <result property="channelFee" column="channel_fee"/>
+        <result property="channelReconciliationDate" column="channel_reconciliation_date"/>
+        <result property="channelSettlementDate" column="channel_settlement_date"/>
+        <result property="channelSettlementStatus" column="channel_settlement_status"/>
+        <result property="channelReconciliationStatus" column="channel_reconciliation_status"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PaymentBillMap">
+        select bill_id,
+               reference_order_no,
+               merchant_id,
+               merchant_name,
+               provider_id,
+               channel_id,
+               channel_rates_id,
+               product_id,
+               product_channel_id,
+               bill_no,
+               platform_order_no,
+               downstream_order_no,
+               upstream_order_no,
+               bill_date,
+               bill_period_start,
+               bill_period_end,
+               currency,
+               order_amount,
+               bill_type,
+               payment_status,
+               transaction_type,
+               transaction_date,
+               transaction_location,
+               settlement_amount,
+               settlement_currency,
+               settlement_cycle,
+               settlement_date,
+               bill_remarks,
+               bill_generated_at,
+               actual_deduction,
+               merchant_fixed_fee,
+               merchant_tx_rate,
+               merchant_total_fee,
+               merchant_settlement_amount,
+               agent_fixed_fee,
+               agent_tx_rate,
+               agent_total_fee,
+               agent_settlement_amount,
+               agent_profit,
+               channel_fixed_fee,
+               channel_tx_rate,
+               channel_total_fee,
+               channel_settlement_amount,
+               profit,
+               reconciliation_status,
+               settlement_status,
+               payment_complete_time,
+               platform_id,
+               agent_id,
+               agent_name,
+               order_type,
+               acquiring_mode,
+               country,
+               payment_exchange,
+               payment_exchange_rate,
+               payment_method,
+               merchant_currency,
+               merchant_order_amount,
+               channel_fee,
+               channel_reconciliation_date,
+               channel_settlement_date,
+               channel_settlement_status,
+               channel_reconciliation_status
+        from tb_payment_bill
+        where bill_id = #{billId}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PaymentBillMap">
+        select
+        bill_id, reference_order_no, merchant_id, merchant_name, provider_id, channel_id, channel_rates_id, product_id,
+        product_channel_id, bill_no, platform_order_no, downstream_order_no, upstream_order_no, bill_date,
+        bill_period_start, bill_period_end, currency, order_amount, bill_type, payment_status, transaction_type,
+        transaction_date, transaction_location, settlement_amount, settlement_currency, settlement_cycle,
+        settlement_date, bill_remarks, bill_generated_at, actual_deduction, merchant_fixed_fee, merchant_tx_rate,
+        merchant_total_fee, merchant_settlement_amount, agent_fixed_fee, agent_tx_rate, agent_total_fee,
+        agent_settlement_amount, agent_profit, channel_fixed_fee, channel_tx_rate, channel_total_fee,
+        channel_settlement_amount, profit, reconciliation_status, settlement_status, payment_complete_time, platform_id,
+        agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange, payment_exchange_rate,
+        payment_method, merchant_currency, merchant_order_amount, channel_fee, channel_reconciliation_date,
+        channel_settlement_date, channel_settlement_status, channel_reconciliation_status
+        from tb_payment_bill
+        <where>
+            <if test="billId != null">
+                and bill_id = #{billId}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelRatesId != null">
+                and channel_rates_id = #{channelRatesId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="productChannelId != null">
+                and product_channel_id = #{productChannelId}
+            </if>
+            <if test="billNo != null and billNo != ''">
+                and bill_no = #{billNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="billDate != null">
+                and bill_date = #{billDate}
+            </if>
+            <if test="billPeriodStart != null">
+                and bill_period_start = #{billPeriodStart}
+            </if>
+            <if test="billPeriodEnd != null">
+                and bill_period_end = #{billPeriodEnd}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="billType != null and billType != ''">
+                and bill_type = #{billType}
+            </if>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                and payment_status = #{paymentStatus}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="transactionDate != null">
+                and transaction_date = #{transactionDate}
+            </if>
+            <if test="transactionLocation != null and transactionLocation != ''">
+                and transaction_location = #{transactionLocation}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="billRemarks != null and billRemarks != ''">
+                and bill_remarks = #{billRemarks}
+            </if>
+            <if test="billGeneratedAt != null">
+                and bill_generated_at = #{billGeneratedAt}
+            </if>
+            <if test="actualDeduction != null">
+                and actual_deduction = #{actualDeduction}
+            </if>
+            <if test="merchantFixedFee != null and merchantFixedFee != ''">
+                and merchant_fixed_fee = #{merchantFixedFee}
+            </if>
+            <if test="merchantTxRate != null and merchantTxRate != ''">
+                and merchant_tx_rate = #{merchantTxRate}
+            </if>
+            <if test="merchantTotalFee != null">
+                and merchant_total_fee = #{merchantTotalFee}
+            </if>
+            <if test="merchantSettlementAmount != null">
+                and merchant_settlement_amount = #{merchantSettlementAmount}
+            </if>
+            <if test="agentFixedFee != null and agentFixedFee != ''">
+                and agent_fixed_fee = #{agentFixedFee}
+            </if>
+            <if test="agentTxRate != null">
+                and agent_tx_rate = #{agentTxRate}
+            </if>
+            <if test="agentTotalFee != null">
+                and agent_total_fee = #{agentTotalFee}
+            </if>
+            <if test="agentSettlementAmount != null">
+                and agent_settlement_amount = #{agentSettlementAmount}
+            </if>
+            <if test="agentProfit != null">
+                and agent_profit = #{agentProfit}
+            </if>
+            <if test="channelFixedFee != null and channelFixedFee != ''">
+                and channel_fixed_fee = #{channelFixedFee}
+            </if>
+            <if test="channelTxRate != null and channelTxRate != ''">
+                and channel_tx_rate = #{channelTxRate}
+            </if>
+            <if test="channelTotalFee != null">
+                and channel_total_fee = #{channelTotalFee}
+            </if>
+            <if test="channelSettlementAmount != null">
+                and channel_settlement_amount = #{channelSettlementAmount}
+            </if>
+            <if test="profit != null">
+                and profit = #{profit}
+            </if>
+            <if test="reconciliationStatus != null">
+                and reconciliation_status = #{reconciliationStatus}
+            </if>
+            <if test="settlementStatus != null">
+                and settlement_status = #{settlementStatus}
+            </if>
+            <if test="paymentCompleteTime != null">
+                and payment_complete_time = #{paymentCompleteTime}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="agentName != null and agentName != ''">
+                and agent_name = #{agentName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="paymentExchange != null">
+                and payment_exchange = #{paymentExchange}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="channelFee != null and channelFee != ''">
+                and channel_fee = #{channelFee}
+            </if>
+            <if test="channelReconciliationDate != null">
+                and channel_reconciliation_date = #{channelReconciliationDate}
+            </if>
+            <if test="channelSettlementDate != null">
+                and channel_settlement_date = #{channelSettlementDate}
+            </if>
+            <if test="channelSettlementStatus != null">
+                and channel_settlement_status = #{channelSettlementStatus}
+            </if>
+            <if test="channelReconciliationStatus != null">
+                and channel_reconciliation_status = #{channelReconciliationStatus}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PaymentBillMap">
+        select
+        bill_id, reference_order_no, merchant_id, merchant_name, provider_id, channel_id, channel_rates_id, product_id,
+        product_channel_id, bill_no, platform_order_no, downstream_order_no, upstream_order_no, bill_date,
+        bill_period_start, bill_period_end, currency, order_amount, bill_type, payment_status, transaction_type,
+        transaction_date, transaction_location, settlement_amount, settlement_currency, settlement_cycle,
+        settlement_date, bill_remarks, bill_generated_at, actual_deduction, merchant_fixed_fee, merchant_tx_rate,
+        merchant_total_fee, merchant_settlement_amount, agent_fixed_fee, agent_tx_rate, agent_total_fee,
+        agent_settlement_amount, agent_profit, channel_fixed_fee, channel_tx_rate, channel_total_fee,
+        channel_settlement_amount, profit, reconciliation_status, settlement_status, payment_complete_time, platform_id,
+        agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange, payment_exchange_rate,
+        payment_method, merchant_currency, merchant_order_amount, channel_fee, channel_reconciliation_date,
+        channel_settlement_date, channel_settlement_status, channel_reconciliation_status
+        from tb_payment_bill
+        <where>
+            <if test="billId != null">
+                and bill_id = #{billId}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelRatesId != null">
+                and channel_rates_id = #{channelRatesId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="productChannelId != null">
+                and product_channel_id = #{productChannelId}
+            </if>
+            <if test="billNo != null and billNo != ''">
+                and bill_no = #{billNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="billDate != null">
+                and bill_date = #{billDate}
+            </if>
+            <if test="billPeriodStart != null">
+                and bill_period_start = #{billPeriodStart}
+            </if>
+            <if test="billPeriodEnd != null">
+                and bill_period_end = #{billPeriodEnd}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="billType != null and billType != ''">
+                and bill_type = #{billType}
+            </if>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                and payment_status = #{paymentStatus}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="transactionDate != null">
+                and transaction_date = #{transactionDate}
+            </if>
+            <if test="transactionLocation != null and transactionLocation != ''">
+                and transaction_location = #{transactionLocation}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="billRemarks != null and billRemarks != ''">
+                and bill_remarks = #{billRemarks}
+            </if>
+            <if test="billGeneratedAt != null">
+                and bill_generated_at = #{billGeneratedAt}
+            </if>
+            <if test="actualDeduction != null">
+                and actual_deduction = #{actualDeduction}
+            </if>
+            <if test="merchantFixedFee != null and merchantFixedFee != ''">
+                and merchant_fixed_fee = #{merchantFixedFee}
+            </if>
+            <if test="merchantTxRate != null and merchantTxRate != ''">
+                and merchant_tx_rate = #{merchantTxRate}
+            </if>
+            <if test="merchantTotalFee != null">
+                and merchant_total_fee = #{merchantTotalFee}
+            </if>
+            <if test="merchantSettlementAmount != null">
+                and merchant_settlement_amount = #{merchantSettlementAmount}
+            </if>
+            <if test="agentFixedFee != null and agentFixedFee != ''">
+                and agent_fixed_fee = #{agentFixedFee}
+            </if>
+            <if test="agentTxRate != null">
+                and agent_tx_rate = #{agentTxRate}
+            </if>
+            <if test="agentTotalFee != null">
+                and agent_total_fee = #{agentTotalFee}
+            </if>
+            <if test="agentSettlementAmount != null">
+                and agent_settlement_amount = #{agentSettlementAmount}
+            </if>
+            <if test="agentProfit != null">
+                and agent_profit = #{agentProfit}
+            </if>
+            <if test="channelFixedFee != null and channelFixedFee != ''">
+                and channel_fixed_fee = #{channelFixedFee}
+            </if>
+            <if test="channelTxRate != null and channelTxRate != ''">
+                and channel_tx_rate = #{channelTxRate}
+            </if>
+            <if test="channelTotalFee != null">
+                and channel_total_fee = #{channelTotalFee}
+            </if>
+            <if test="channelSettlementAmount != null">
+                and channel_settlement_amount = #{channelSettlementAmount}
+            </if>
+            <if test="profit != null">
+                and profit = #{profit}
+            </if>
+            <if test="reconciliationStatus != null">
+                and reconciliation_status = #{reconciliationStatus}
+            </if>
+            <if test="settlementStatus != null">
+                and settlement_status = #{settlementStatus}
+            </if>
+            <if test="paymentCompleteTime != null">
+                and payment_complete_time = #{paymentCompleteTime}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="agentName != null and agentName != ''">
+                and agent_name = #{agentName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="paymentExchange != null">
+                and payment_exchange = #{paymentExchange}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="channelFee != null and channelFee != ''">
+                and channel_fee = #{channelFee}
+            </if>
+            <if test="channelReconciliationDate != null">
+                and channel_reconciliation_date = #{channelReconciliationDate}
+            </if>
+            <if test="channelSettlementDate != null">
+                and channel_settlement_date = #{channelSettlementDate}
+            </if>
+            <if test="channelSettlementStatus != null">
+                and channel_settlement_status = #{channelSettlementStatus}
+            </if>
+            <if test="channelReconciliationStatus != null">
+                and channel_reconciliation_status = #{channelReconciliationStatus}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PaymentBillMap">
+        select
+        bill_id, reference_order_no, merchant_id, merchant_name, provider_id, channel_id, channel_rates_id, product_id,
+        product_channel_id, bill_no, platform_order_no, downstream_order_no, upstream_order_no, bill_date,
+        bill_period_start, bill_period_end, currency, order_amount, bill_type, payment_status, transaction_type,
+        transaction_date, transaction_location, settlement_amount, settlement_currency, settlement_cycle,
+        settlement_date, bill_remarks, bill_generated_at, actual_deduction, merchant_fixed_fee, merchant_tx_rate,
+        merchant_total_fee, merchant_settlement_amount, agent_fixed_fee, agent_tx_rate, agent_total_fee,
+        agent_settlement_amount, agent_profit, channel_fixed_fee, channel_tx_rate, channel_total_fee,
+        channel_settlement_amount, profit, reconciliation_status, settlement_status, payment_complete_time, platform_id,
+        agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange, payment_exchange_rate,
+        payment_method, merchant_currency, merchant_order_amount, channel_fee, channel_reconciliation_date,
+        channel_settlement_date, channel_settlement_status, channel_reconciliation_status
+        from tb_payment_bill
+        <where>
+            <if test="billId != null">
+                and bill_id = #{billId}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelRatesId != null">
+                and channel_rates_id = #{channelRatesId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="productChannelId != null">
+                and product_channel_id = #{productChannelId}
+            </if>
+            <if test="billNo != null and billNo != ''">
+                and bill_no = #{billNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="billDate != null">
+                and bill_date = #{billDate}
+            </if>
+            <if test="billPeriodStart != null">
+                and bill_period_start = #{billPeriodStart}
+            </if>
+            <if test="billPeriodEnd != null">
+                and bill_period_end = #{billPeriodEnd}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="billType != null and billType != ''">
+                and bill_type = #{billType}
+            </if>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                and payment_status = #{paymentStatus}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="transactionDate != null">
+                and transaction_date = #{transactionDate}
+            </if>
+            <if test="transactionLocation != null and transactionLocation != ''">
+                and transaction_location = #{transactionLocation}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="billRemarks != null and billRemarks != ''">
+                and bill_remarks = #{billRemarks}
+            </if>
+            <if test="billGeneratedAt != null">
+                and bill_generated_at = #{billGeneratedAt}
+            </if>
+            <if test="actualDeduction != null">
+                and actual_deduction = #{actualDeduction}
+            </if>
+            <if test="merchantFixedFee != null and merchantFixedFee != ''">
+                and merchant_fixed_fee = #{merchantFixedFee}
+            </if>
+            <if test="merchantTxRate != null and merchantTxRate != ''">
+                and merchant_tx_rate = #{merchantTxRate}
+            </if>
+            <if test="merchantTotalFee != null">
+                and merchant_total_fee = #{merchantTotalFee}
+            </if>
+            <if test="merchantSettlementAmount != null">
+                and merchant_settlement_amount = #{merchantSettlementAmount}
+            </if>
+            <if test="agentFixedFee != null and agentFixedFee != ''">
+                and agent_fixed_fee = #{agentFixedFee}
+            </if>
+            <if test="agentTxRate != null">
+                and agent_tx_rate = #{agentTxRate}
+            </if>
+            <if test="agentTotalFee != null">
+                and agent_total_fee = #{agentTotalFee}
+            </if>
+            <if test="agentSettlementAmount != null">
+                and agent_settlement_amount = #{agentSettlementAmount}
+            </if>
+            <if test="agentProfit != null">
+                and agent_profit = #{agentProfit}
+            </if>
+            <if test="channelFixedFee != null and channelFixedFee != ''">
+                and channel_fixed_fee = #{channelFixedFee}
+            </if>
+            <if test="channelTxRate != null and channelTxRate != ''">
+                and channel_tx_rate = #{channelTxRate}
+            </if>
+            <if test="channelTotalFee != null">
+                and channel_total_fee = #{channelTotalFee}
+            </if>
+            <if test="channelSettlementAmount != null">
+                and channel_settlement_amount = #{channelSettlementAmount}
+            </if>
+            <if test="profit != null">
+                and profit = #{profit}
+            </if>
+            <if test="reconciliationStatus != null">
+                and reconciliation_status = #{reconciliationStatus}
+            </if>
+            <if test="settlementStatus != null">
+                and settlement_status = #{settlementStatus}
+            </if>
+            <if test="paymentCompleteTime != null">
+                and payment_complete_time = #{paymentCompleteTime}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="agentName != null and agentName != ''">
+                and agent_name = #{agentName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="paymentExchange != null">
+                and payment_exchange = #{paymentExchange}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="channelFee != null and channelFee != ''">
+                and channel_fee = #{channelFee}
+            </if>
+            <if test="channelReconciliationDate != null">
+                and channel_reconciliation_date = #{channelReconciliationDate}
+            </if>
+            <if test="channelSettlementDate != null">
+                and channel_settlement_date = #{channelSettlementDate}
+            </if>
+            <if test="channelSettlementStatus != null">
+                and channel_settlement_status = #{channelSettlementStatus}
+            </if>
+            <if test="channelReconciliationStatus != null">
+                and channel_reconciliation_status = #{channelReconciliationStatus}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_payment_bill
+        <where>
+            <if test="billId != null">
+                and bill_id = #{billId}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelRatesId != null">
+                and channel_rates_id = #{channelRatesId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="productChannelId != null">
+                and product_channel_id = #{productChannelId}
+            </if>
+            <if test="billNo != null and billNo != ''">
+                and bill_no = #{billNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="billDate != null">
+                and bill_date = #{billDate}
+            </if>
+            <if test="billPeriodStart != null">
+                and bill_period_start = #{billPeriodStart}
+            </if>
+            <if test="billPeriodEnd != null">
+                and bill_period_end = #{billPeriodEnd}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="billType != null and billType != ''">
+                and bill_type = #{billType}
+            </if>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                and payment_status = #{paymentStatus}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="transactionDate != null">
+                and transaction_date = #{transactionDate}
+            </if>
+            <if test="transactionLocation != null and transactionLocation != ''">
+                and transaction_location = #{transactionLocation}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="billRemarks != null and billRemarks != ''">
+                and bill_remarks = #{billRemarks}
+            </if>
+            <if test="billGeneratedAt != null">
+                and bill_generated_at = #{billGeneratedAt}
+            </if>
+            <if test="actualDeduction != null">
+                and actual_deduction = #{actualDeduction}
+            </if>
+            <if test="merchantFixedFee != null and merchantFixedFee != ''">
+                and merchant_fixed_fee = #{merchantFixedFee}
+            </if>
+            <if test="merchantTxRate != null and merchantTxRate != ''">
+                and merchant_tx_rate = #{merchantTxRate}
+            </if>
+            <if test="merchantTotalFee != null">
+                and merchant_total_fee = #{merchantTotalFee}
+            </if>
+            <if test="merchantSettlementAmount != null">
+                and merchant_settlement_amount = #{merchantSettlementAmount}
+            </if>
+            <if test="agentFixedFee != null and agentFixedFee != ''">
+                and agent_fixed_fee = #{agentFixedFee}
+            </if>
+            <if test="agentTxRate != null">
+                and agent_tx_rate = #{agentTxRate}
+            </if>
+            <if test="agentTotalFee != null">
+                and agent_total_fee = #{agentTotalFee}
+            </if>
+            <if test="agentSettlementAmount != null">
+                and agent_settlement_amount = #{agentSettlementAmount}
+            </if>
+            <if test="agentProfit != null">
+                and agent_profit = #{agentProfit}
+            </if>
+            <if test="channelFixedFee != null and channelFixedFee != ''">
+                and channel_fixed_fee = #{channelFixedFee}
+            </if>
+            <if test="channelTxRate != null and channelTxRate != ''">
+                and channel_tx_rate = #{channelTxRate}
+            </if>
+            <if test="channelTotalFee != null">
+                and channel_total_fee = #{channelTotalFee}
+            </if>
+            <if test="channelSettlementAmount != null">
+                and channel_settlement_amount = #{channelSettlementAmount}
+            </if>
+            <if test="profit != null">
+                and profit = #{profit}
+            </if>
+            <if test="reconciliationStatus != null">
+                and reconciliation_status = #{reconciliationStatus}
+            </if>
+            <if test="settlementStatus != null">
+                and settlement_status = #{settlementStatus}
+            </if>
+            <if test="paymentCompleteTime != null">
+                and payment_complete_time = #{paymentCompleteTime}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="agentName != null and agentName != ''">
+                and agent_name = #{agentName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="paymentExchange != null">
+                and payment_exchange = #{paymentExchange}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="channelFee != null and channelFee != ''">
+                and channel_fee = #{channelFee}
+            </if>
+            <if test="channelReconciliationDate != null">
+                and channel_reconciliation_date = #{channelReconciliationDate}
+            </if>
+            <if test="channelSettlementDate != null">
+                and channel_settlement_date = #{channelSettlementDate}
+            </if>
+            <if test="channelSettlementStatus != null">
+                and channel_settlement_status = #{channelSettlementStatus}
+            </if>
+            <if test="channelReconciliationStatus != null">
+                and channel_reconciliation_status = #{channelReconciliationStatus}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="billId" useGeneratedKeys="true">
+        insert into tb_payment_bill(reference_order_no, merchant_id, merchant_name, provider_id, channel_id,
+                                    channel_rates_id, product_id, product_channel_id, bill_no, platform_order_no,
+                                    downstream_order_no, upstream_order_no, bill_date, bill_period_start,
+                                    bill_period_end, currency, order_amount, bill_type, payment_status,
+                                    transaction_type, transaction_date, transaction_location, settlement_amount,
+                                    settlement_currency, settlement_cycle, settlement_date, bill_remarks,
+                                    bill_generated_at, actual_deduction, merchant_fixed_fee, merchant_tx_rate,
+                                    merchant_total_fee, merchant_settlement_amount, agent_fixed_fee, agent_tx_rate,
+                                    agent_total_fee, agent_settlement_amount, agent_profit, channel_fixed_fee,
+                                    channel_tx_rate, channel_total_fee, channel_settlement_amount, profit,
+                                    reconciliation_status, settlement_status, payment_complete_time, platform_id,
+                                    agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange,
+                                    payment_exchange_rate, payment_method, merchant_currency, merchant_order_amount,
+                                    channel_fee, channel_reconciliation_date, channel_settlement_date,
+                                    channel_settlement_status, channel_reconciliation_status)
+        values (#{referenceOrderNo}, #{merchantId}, #{merchantName}, #{providerId}, #{channelId}, #{channelRatesId},
+                #{productId}, #{productChannelId}, #{billNo}, #{platformOrderNo}, #{downstreamOrderNo},
+                #{upstreamOrderNo}, #{billDate}, #{billPeriodStart}, #{billPeriodEnd}, #{currency}, #{orderAmount},
+                #{billType}, #{paymentStatus}, #{transactionType}, #{transactionDate}, #{transactionLocation},
+                #{settlementAmount}, #{settlementCurrency}, #{settlementCycle}, #{settlementDate}, #{billRemarks},
+                #{billGeneratedAt}, #{actualDeduction}, #{merchantFixedFee}, #{merchantTxRate}, #{merchantTotalFee},
+                #{merchantSettlementAmount}, #{agentFixedFee}, #{agentTxRate}, #{agentTotalFee},
+                #{agentSettlementAmount}, #{agentProfit}, #{channelFixedFee}, #{channelTxRate}, #{channelTotalFee},
+                #{channelSettlementAmount}, #{profit}, #{reconciliationStatus}, #{settlementStatus},
+                #{paymentCompleteTime}, #{platformId}, #{agentId}, #{agentName}, #{orderType}, #{acquiringMode},
+                #{country}, #{paymentExchange}, #{paymentExchangeRate}, #{paymentMethod}, #{merchantCurrency},
+                #{merchantOrderAmount}, #{channelFee}, #{channelReconciliationDate}, #{channelSettlementDate},
+                #{channelSettlementStatus}, #{channelReconciliationStatus})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="billId" useGeneratedKeys="true">
+        insert into tb_payment_bill(reference_order_no, merchant_id, merchant_name, provider_id, channel_id,
+        channel_rates_id, product_id, product_channel_id, bill_no, platform_order_no, downstream_order_no,
+        upstream_order_no, bill_date, bill_period_start, bill_period_end, currency, order_amount, bill_type,
+        payment_status, transaction_type, transaction_date, transaction_location, settlement_amount,
+        settlement_currency, settlement_cycle, settlement_date, bill_remarks, bill_generated_at, actual_deduction,
+        merchant_fixed_fee, merchant_tx_rate, merchant_total_fee, merchant_settlement_amount, agent_fixed_fee,
+        agent_tx_rate, agent_total_fee, agent_settlement_amount, agent_profit, channel_fixed_fee, channel_tx_rate,
+        channel_total_fee, channel_settlement_amount, profit, reconciliation_status, settlement_status,
+        payment_complete_time, platform_id, agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange,
+        payment_exchange_rate, payment_method, merchant_currency, merchant_order_amount, channel_fee,
+        channel_reconciliation_date, channel_settlement_date, channel_settlement_status, channel_reconciliation_status)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.referenceOrderNo}, #{entity.merchantId}, #{entity.merchantName}, #{entity.providerId},
+            #{entity.channelId}, #{entity.channelRatesId}, #{entity.productId}, #{entity.productChannelId},
+            #{entity.billNo}, #{entity.platformOrderNo}, #{entity.downstreamOrderNo}, #{entity.upstreamOrderNo},
+            #{entity.billDate}, #{entity.billPeriodStart}, #{entity.billPeriodEnd}, #{entity.currency},
+            #{entity.orderAmount}, #{entity.billType}, #{entity.paymentStatus}, #{entity.transactionType},
+            #{entity.transactionDate}, #{entity.transactionLocation}, #{entity.settlementAmount},
+            #{entity.settlementCurrency}, #{entity.settlementCycle}, #{entity.settlementDate}, #{entity.billRemarks},
+            #{entity.billGeneratedAt}, #{entity.actualDeduction}, #{entity.merchantFixedFee}, #{entity.merchantTxRate},
+            #{entity.merchantTotalFee}, #{entity.merchantSettlementAmount}, #{entity.agentFixedFee},
+            #{entity.agentTxRate}, #{entity.agentTotalFee}, #{entity.agentSettlementAmount}, #{entity.agentProfit},
+            #{entity.channelFixedFee}, #{entity.channelTxRate}, #{entity.channelTotalFee},
+            #{entity.channelSettlementAmount}, #{entity.profit}, #{entity.reconciliationStatus},
+            #{entity.settlementStatus}, #{entity.paymentCompleteTime}, #{entity.platformId}, #{entity.agentId},
+            #{entity.agentName}, #{entity.orderType}, #{entity.acquiringMode}, #{entity.country},
+            #{entity.paymentExchange}, #{entity.paymentExchangeRate}, #{entity.paymentMethod},
+            #{entity.merchantCurrency}, #{entity.merchantOrderAmount}, #{entity.channelFee},
+            #{entity.channelReconciliationDate}, #{entity.channelSettlementDate}, #{entity.channelSettlementStatus},
+            #{entity.channelReconciliationStatus})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="billId" useGeneratedKeys="true">
+        insert into tb_payment_bill(reference_order_no, merchant_id, merchant_name, provider_id, channel_id,
+        channel_rates_id, product_id, product_channel_id, bill_no, platform_order_no, downstream_order_no,
+        upstream_order_no, bill_date, bill_period_start, bill_period_end, currency, order_amount, bill_type,
+        payment_status, transaction_type, transaction_date, transaction_location, settlement_amount,
+        settlement_currency, settlement_cycle, settlement_date, bill_remarks, bill_generated_at, actual_deduction,
+        merchant_fixed_fee, merchant_tx_rate, merchant_total_fee, merchant_settlement_amount, agent_fixed_fee,
+        agent_tx_rate, agent_total_fee, agent_settlement_amount, agent_profit, channel_fixed_fee, channel_tx_rate,
+        channel_total_fee, channel_settlement_amount, profit, reconciliation_status, settlement_status,
+        payment_complete_time, platform_id, agent_id, agent_name, order_type, acquiring_mode, country, payment_exchange,
+        payment_exchange_rate, payment_method, merchant_currency, merchant_order_amount, channel_fee,
+        channel_reconciliation_date, channel_settlement_date, channel_settlement_status, channel_reconciliation_status)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.referenceOrderNo}, #{entity.merchantId}, #{entity.merchantName}, #{entity.providerId},
+            #{entity.channelId}, #{entity.channelRatesId}, #{entity.productId}, #{entity.productChannelId},
+            #{entity.billNo}, #{entity.platformOrderNo}, #{entity.downstreamOrderNo}, #{entity.upstreamOrderNo},
+            #{entity.billDate}, #{entity.billPeriodStart}, #{entity.billPeriodEnd}, #{entity.currency},
+            #{entity.orderAmount}, #{entity.billType}, #{entity.paymentStatus}, #{entity.transactionType},
+            #{entity.transactionDate}, #{entity.transactionLocation}, #{entity.settlementAmount},
+            #{entity.settlementCurrency}, #{entity.settlementCycle}, #{entity.settlementDate}, #{entity.billRemarks},
+            #{entity.billGeneratedAt}, #{entity.actualDeduction}, #{entity.merchantFixedFee}, #{entity.merchantTxRate},
+            #{entity.merchantTotalFee}, #{entity.merchantSettlementAmount}, #{entity.agentFixedFee},
+            #{entity.agentTxRate}, #{entity.agentTotalFee}, #{entity.agentSettlementAmount}, #{entity.agentProfit},
+            #{entity.channelFixedFee}, #{entity.channelTxRate}, #{entity.channelTotalFee},
+            #{entity.channelSettlementAmount}, #{entity.profit}, #{entity.reconciliationStatus},
+            #{entity.settlementStatus}, #{entity.paymentCompleteTime}, #{entity.platformId}, #{entity.agentId},
+            #{entity.agentName}, #{entity.orderType}, #{entity.acquiringMode}, #{entity.country},
+            #{entity.paymentExchange}, #{entity.paymentExchangeRate}, #{entity.paymentMethod},
+            #{entity.merchantCurrency}, #{entity.merchantOrderAmount}, #{entity.channelFee},
+            #{entity.channelReconciliationDate}, #{entity.channelSettlementDate}, #{entity.channelSettlementStatus},
+            #{entity.channelReconciliationStatus})
+        </foreach>
+        on duplicate key update
+        reference_order_no = values(reference_order_no),
+        merchant_id = values(merchant_id),
+        merchant_name = values(merchant_name),
+        provider_id = values(provider_id),
+        channel_id = values(channel_id),
+        channel_rates_id = values(channel_rates_id),
+        product_id = values(product_id),
+        product_channel_id = values(product_channel_id),
+        bill_no = values(bill_no),
+        platform_order_no = values(platform_order_no),
+        downstream_order_no = values(downstream_order_no),
+        upstream_order_no = values(upstream_order_no),
+        bill_date = values(bill_date),
+        bill_period_start = values(bill_period_start),
+        bill_period_end = values(bill_period_end),
+        currency = values(currency),
+        order_amount = values(order_amount),
+        bill_type = values(bill_type),
+        payment_status = values(payment_status),
+        transaction_type = values(transaction_type),
+        transaction_date = values(transaction_date),
+        transaction_location = values(transaction_location),
+        settlement_amount = values(settlement_amount),
+        settlement_currency = values(settlement_currency),
+        settlement_cycle = values(settlement_cycle),
+        settlement_date = values(settlement_date),
+        bill_remarks = values(bill_remarks),
+        bill_generated_at = values(bill_generated_at),
+        actual_deduction = values(actual_deduction),
+        merchant_fixed_fee = values(merchant_fixed_fee),
+        merchant_tx_rate = values(merchant_tx_rate),
+        merchant_total_fee = values(merchant_total_fee),
+        merchant_settlement_amount = values(merchant_settlement_amount),
+        agent_fixed_fee = values(agent_fixed_fee),
+        agent_tx_rate = values(agent_tx_rate),
+        agent_total_fee = values(agent_total_fee),
+        agent_settlement_amount = values(agent_settlement_amount),
+        agent_profit = values(agent_profit),
+        channel_fixed_fee = values(channel_fixed_fee),
+        channel_tx_rate = values(channel_tx_rate),
+        channel_total_fee = values(channel_total_fee),
+        channel_settlement_amount = values(channel_settlement_amount),
+        profit = values(profit),
+        reconciliation_status = values(reconciliation_status),
+        settlement_status = values(settlement_status),
+        payment_complete_time = values(payment_complete_time),
+        platform_id = values(platform_id),
+        agent_id = values(agent_id),
+        agent_name = values(agent_name),
+        order_type = values(order_type),
+        acquiring_mode = values(acquiring_mode),
+        country = values(country),
+        payment_exchange = values(payment_exchange),
+        payment_exchange_rate = values(payment_exchange_rate),
+        payment_method = values(payment_method),
+        merchant_currency = values(merchant_currency),
+        merchant_order_amount = values(merchant_order_amount),
+        channel_fee = values(channel_fee),
+        channel_reconciliation_date = values(channel_reconciliation_date),
+        channel_settlement_date = values(channel_settlement_date),
+        channel_settlement_status = values(channel_settlement_status),
+        channel_reconciliation_status = values(channel_reconciliation_status)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_payment_bill
+        <set>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="channelRatesId != null">
+                channel_rates_id = #{channelRatesId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productChannelId != null">
+                product_channel_id = #{productChannelId},
+            </if>
+            <if test="billNo != null and billNo != ''">
+                bill_no = #{billNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+            <if test="billDate != null">
+                bill_date = #{billDate},
+            </if>
+            <if test="billPeriodStart != null">
+                bill_period_start = #{billPeriodStart},
+            </if>
+            <if test="billPeriodEnd != null">
+                bill_period_end = #{billPeriodEnd},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="billType != null and billType != ''">
+                bill_type = #{billType},
+            </if>
+            <if test="paymentStatus != null and paymentStatus != ''">
+                payment_status = #{paymentStatus},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="transactionDate != null">
+                transaction_date = #{transactionDate},
+            </if>
+            <if test="transactionLocation != null and transactionLocation != ''">
+                transaction_location = #{transactionLocation},
+            </if>
+            <if test="settlementAmount != null">
+                settlement_amount = #{settlementAmount},
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                settlement_currency = #{settlementCurrency},
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                settlement_cycle = #{settlementCycle},
+            </if>
+            <if test="settlementDate != null">
+                settlement_date = #{settlementDate},
+            </if>
+            <if test="billRemarks != null and billRemarks != ''">
+                bill_remarks = #{billRemarks},
+            </if>
+            <if test="billGeneratedAt != null">
+                bill_generated_at = #{billGeneratedAt},
+            </if>
+            <if test="actualDeduction != null">
+                actual_deduction = #{actualDeduction},
+            </if>
+            <if test="merchantFixedFee != null and merchantFixedFee != ''">
+                merchant_fixed_fee = #{merchantFixedFee},
+            </if>
+            <if test="merchantTxRate != null and merchantTxRate != ''">
+                merchant_tx_rate = #{merchantTxRate},
+            </if>
+            <if test="merchantTotalFee != null">
+                merchant_total_fee = #{merchantTotalFee},
+            </if>
+            <if test="merchantSettlementAmount != null">
+                merchant_settlement_amount = #{merchantSettlementAmount},
+            </if>
+            <if test="agentFixedFee != null and agentFixedFee != ''">
+                agent_fixed_fee = #{agentFixedFee},
+            </if>
+            <if test="agentTxRate != null">
+                agent_tx_rate = #{agentTxRate},
+            </if>
+            <if test="agentTotalFee != null">
+                agent_total_fee = #{agentTotalFee},
+            </if>
+            <if test="agentSettlementAmount != null">
+                agent_settlement_amount = #{agentSettlementAmount},
+            </if>
+            <if test="agentProfit != null">
+                agent_profit = #{agentProfit},
+            </if>
+            <if test="channelFixedFee != null and channelFixedFee != ''">
+                channel_fixed_fee = #{channelFixedFee},
+            </if>
+            <if test="channelTxRate != null and channelTxRate != ''">
+                channel_tx_rate = #{channelTxRate},
+            </if>
+            <if test="channelTotalFee != null">
+                channel_total_fee = #{channelTotalFee},
+            </if>
+            <if test="channelSettlementAmount != null">
+                channel_settlement_amount = #{channelSettlementAmount},
+            </if>
+            <if test="profit != null">
+                profit = #{profit},
+            </if>
+            <if test="reconciliationStatus != null">
+                reconciliation_status = #{reconciliationStatus},
+            </if>
+            <if test="settlementStatus != null">
+                settlement_status = #{settlementStatus},
+            </if>
+            <if test="paymentCompleteTime != null">
+                payment_complete_time = #{paymentCompleteTime},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="agentName != null and agentName != ''">
+                agent_name = #{agentName},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                acquiring_mode = #{acquiringMode},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="paymentExchange != null">
+                payment_exchange = #{paymentExchange},
+            </if>
+            <if test="paymentExchangeRate != null">
+                payment_exchange_rate = #{paymentExchangeRate},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="merchantOrderAmount != null">
+                merchant_order_amount = #{merchantOrderAmount},
+            </if>
+            <if test="channelFee != null and channelFee != ''">
+                channel_fee = #{channelFee},
+            </if>
+            <if test="channelReconciliationDate != null">
+                channel_reconciliation_date = #{channelReconciliationDate},
+            </if>
+            <if test="channelSettlementDate != null">
+                channel_settlement_date = #{channelSettlementDate},
+            </if>
+            <if test="channelSettlementStatus != null">
+                channel_settlement_status = #{channelSettlementStatus},
+            </if>
+            <if test="channelReconciliationStatus != null">
+                channel_reconciliation_status = #{channelReconciliationStatus},
+            </if>
+        </set>
+        where bill_id = #{billId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_payment_bill
+        where bill_id = #{billId}
+    </delete>
+
+</mapper>
+

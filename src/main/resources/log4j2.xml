@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" charset="UTF-8" packages="">
+
+    <properties>
+        <!-- 日志打印级别 -->
+        <property name="LOG_LEVEL">INFO</property>
+        <!-- APP名称 -->
+        <property name="APP_NAME" value="order"/>
+        <!-- 日志文件存储路径 -->
+        <property name="LOG_HOME">${sys:LOG_PATH:-./logs/}</property>
+        <!-- 存储天数 -->
+        <property name="LOG_MAX_HISTORY" value="7d"/>
+        <!-- 单个日志文件最大值, 单位 = KB, MB, GB -->
+        <property name="LOG_MAX_FILE_SIZE" value="20MB"/>
+        <!-- 每天每个日志级别产生的文件最大数量 -->
+        <property name="LOG_TOTAL_NUMBER_DAILY" value="100"/>
+        <!-- 压缩文件的类型,支持zip和gz,建议Linux用gz,Windows用zip -->
+        <property name="ARCHIVE_FILE_SUFFIX" value="zip"/>
+        <!-- 日志文件名 -->
+        <property name="LOG_FILE_HOME" value="${LOG_HOME}/${APP_NAME}"/>
+
+        <property name="FILE_NAME_PATTERN" value="${LOG_HOME}%d{yyyy-MM-dd}"/>
+
+        <!-- 读取 SPRING_PROFILES_ACTIVE 环境变量，默认是 dev -->
+        <Property name="env">${env:SPRING_PROFILES_ACTIVE:-dev}</Property>
+
+        <!-- %d: 日期  %-5level: 日志级别，显示时占5个字符不足 [%t]: 线程名 %c{1.}: 显示调用者，只显示包名最后一截及方法名，前面的只取首字母 .%M(代码行号%L): %msg%n": 需要打印的日志信息,换行:INFO>[MsgToMP:99] Bright: 加粗 -->
+        <!--日志输出格式-文件-->
+        <property name="ENCODER_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %X{X-B3-TraceId} %X{traceId} %-5level %5pid
+            [%15.15t] %c{1.} [%L] : %m%n
+        </property>
+        <!--日志输出格式-控制台彩色打印-->
+        <property name="DEFAULT_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %X{X-B3-TraceId} %X{traceId} %highlight{%-5level} %style{%5pid}{bright,magenta} --- [%15.15t] %cyan{%c{1.} [%L]} : %m%n
+        </property>
+    </properties>
+
+    <Appenders>
+        <!-- 控制台的输出配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout pattern="${DEFAULT_PATTERN}"/>
+        </Console>
+
+        <!-- 打印出所有的info及以下级别的信息，每次大小超过size进行压缩，作为存档-->
+        <RollingFile name="RollingFileAll" fileName="${LOG_FILE_HOME}/info.log"
+                     filePattern="${LOG_FILE_HOME}/%d{yyyy-MM-dd}/info.log.%i.gz">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="${LOG_LEVEL}" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--输出日志的格式-->
+            <PatternLayout pattern="${ENCODER_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_FILE_SIZE}"/>
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="9" max="${LOG_TOTAL_NUMBER_DAILY}">
+                <Delete basePath="${LOG_FILE_HOME}" maxDepth="1">
+                    <IfFileName glob="info.log.*.gz"/>
+                    <IfLastModified age="${LOG_MAX_HISTORY}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="RollingFileDebug" fileName="${LOG_FILE_HOME}/debug.log"
+                     filePattern="${LOG_FILE_HOME}/%d{yyyy-MM-dd}/debug.log.%i.gz">
+            <Filters>
+                <ThresholdFilter level="DEBUG"/>
+                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="${ENCODER_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_FILE_SIZE}"/>
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="9" max="${LOG_TOTAL_NUMBER_DAILY}">
+                <Delete basePath="${LOG_HOME}" maxDepth="1">
+                    <IfFileName glob="debug.log.*.gz"/>
+                    <IfLastModified age="${LOG_MAX_HISTORY}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="RollingFileWarn" fileName="${LOG_FILE_HOME}/warn.log"
+                     filePattern="${LOG_FILE_HOME}/%d{yyyy-MM-dd}/warn.log.%i.gz">
+            <Filters>
+                <ThresholdFilter level="WARN"/>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="${ENCODER_PATTERN}"/>
+            <Policies>
+                <!-- 归档每天的文件 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 限制单个文件大小 -->
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_FILE_SIZE}"/>
+            </Policies>
+            <!-- 限制每天文件个数 -->
+            <DefaultRolloverStrategy compressionLevel="9" max="${LOG_TOTAL_NUMBER_DAILY}">
+                <Delete basePath="${LOG_HOME}" maxDepth="1">
+                    <IfFileName glob="*.warn.log.*.gz"/>
+                    <IfLastModified age="${LOG_MAX_HISTORY}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError"
+                     fileName="${LOG_FILE_HOME}/error.log"
+                     filePattern="${LOG_FILE_HOME}/%d{yyyy-MM-dd}/error.log.%i.gz">
+            <Filters>
+                <ThresholdFilter level="ERROR"/>
+            </Filters>
+            <PatternLayout pattern="${ENCODER_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_FILE_SIZE}"/>
+            </Policies>
+            <DefaultRolloverStrategy compressionLevel="9" max="${LOG_TOTAL_NUMBER_DAILY}">
+                <Delete basePath="${LOG_HOME}" maxDepth="1">
+                    <IfFileName glob="*.error.log.*.gz"/>
+                    <IfLastModified age="${LOG_MAX_HISTORY}"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 这里控制 INFO 级别日志不输出到 Console -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFileAll"/>
+            <AppenderRef ref="RollingFileWarn"/>
+            <AppenderRef ref="RollingFileError"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

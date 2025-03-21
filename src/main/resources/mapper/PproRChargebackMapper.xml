@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproRChargebackMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproRChargebackEntity" id="PproRChargebackMap">
+        <result property="id" column="id"/>
+        <result property="cbid" column="CBID"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="accountholder" column="ACCOUNTHOLDER"/>
+        <result property="paymentpurpose" column="PAYMENTPURPOSE"/>
+        <result property="txid" column="TXID"/>
+        <result property="merchanttxid" column="MERCHANTTXID"/>
+        <result property="mcontract" column="MCONTRACT"/>
+        <result property="chargebackts" column="CHARGEBACKTS"/>
+        <result property="importedts" column="IMPORTEDTS"/>
+        <result property="addJson" column="ADD_JSON"/>
+        <result property="outJson" column="OUT_JSON"/>
+        <result property="reconciliationDate" column="reconciliation_date"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproRChargebackMap">
+        select id,
+               CBID,
+               AMOUNT,
+               CURRENCY,
+               ACCOUNTHOLDER,
+               PAYMENTPURPOSE,
+               TXID,
+               MERCHANTTXID,
+               MCONTRACT,
+               CHARGEBACKTS,
+               IMPORTEDTS,
+               ADD_JSON,
+               OUT_JSON,
+               reconciliation_date,
+               created_time,
+               update_time,
+               file_name,
+               is_processed
+        from tb_ppro_r_chargeback
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproRChargebackMap">
+        select
+        id, CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID, MCONTRACT, CHARGEBACKTS,
+        IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="cbid != null and cbid != ''">
+                and CBID = #{cbid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="paymentpurpose != null and paymentpurpose != ''">
+                and PAYMENTPURPOSE = #{paymentpurpose}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="chargebackts != null and chargebackts != ''">
+                and CHARGEBACKTS = #{chargebackts}
+            </if>
+            <if test="importedts != null and importedts != ''">
+                and IMPORTEDTS = #{importedts}
+            </if>
+            <if test="addJson != null and addJson != ''">
+                and ADD_JSON = #{addJson}
+            </if>
+            <if test="outJson != null and outJson != ''">
+                and OUT_JSON = #{outJson}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproRChargebackMap">
+        select
+        id, CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID, MCONTRACT, CHARGEBACKTS,
+        IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="cbid != null and cbid != ''">
+                and CBID = #{cbid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="paymentpurpose != null and paymentpurpose != ''">
+                and PAYMENTPURPOSE = #{paymentpurpose}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="chargebackts != null and chargebackts != ''">
+                and CHARGEBACKTS = #{chargebackts}
+            </if>
+            <if test="importedts != null and importedts != ''">
+                and IMPORTEDTS = #{importedts}
+            </if>
+            <if test="addJson != null and addJson != ''">
+                and ADD_JSON = #{addJson}
+            </if>
+            <if test="outJson != null and outJson != ''">
+                and OUT_JSON = #{outJson}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproRChargebackMap">
+        select
+        id, CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID, MCONTRACT, CHARGEBACKTS,
+        IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="cbid != null and cbid != ''">
+                and CBID = #{cbid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="paymentpurpose != null and paymentpurpose != ''">
+                and PAYMENTPURPOSE = #{paymentpurpose}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="chargebackts != null and chargebackts != ''">
+                and CHARGEBACKTS = #{chargebackts}
+            </if>
+            <if test="importedts != null and importedts != ''">
+                and IMPORTEDTS = #{importedts}
+            </if>
+            <if test="addJson != null and addJson != ''">
+                and ADD_JSON = #{addJson}
+            </if>
+            <if test="outJson != null and outJson != ''">
+                and OUT_JSON = #{outJson}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_r_chargeback
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="cbid != null and cbid != ''">
+                and CBID = #{cbid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="paymentpurpose != null and paymentpurpose != ''">
+                and PAYMENTPURPOSE = #{paymentpurpose}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="chargebackts != null and chargebackts != ''">
+                and CHARGEBACKTS = #{chargebackts}
+            </if>
+            <if test="importedts != null and importedts != ''">
+                and IMPORTEDTS = #{importedts}
+            </if>
+            <if test="addJson != null and addJson != ''">
+                and ADD_JSON = #{addJson}
+            </if>
+            <if test="outJson != null and outJson != ''">
+                and OUT_JSON = #{outJson}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_chargeback(CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID,
+                                         MCONTRACT, CHARGEBACKTS, IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date,
+                                         created_time, update_time, file_name, is_processed)
+        values (#{cbid}, #{amount}, #{currency}, #{accountholder}, #{paymentpurpose}, #{txid}, #{merchanttxid},
+                #{mcontract}, #{chargebackts}, #{importedts}, #{addJson}, #{outJson}, #{reconciliationDate},
+                #{createdTime}, #{updateTime}, #{fileName}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_chargeback(CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID,
+        MCONTRACT, CHARGEBACKTS, IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date, created_time, update_time,
+        file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.cbid}, #{entity.amount}, #{entity.currency}, #{entity.accountholder}, #{entity.paymentpurpose},
+            #{entity.txid}, #{entity.merchanttxid}, #{entity.mcontract}, #{entity.chargebackts}, #{entity.importedts},
+            #{entity.addJson}, #{entity.outJson}, #{entity.reconciliationDate}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_chargeback(CBID, AMOUNT, CURRENCY, ACCOUNTHOLDER, PAYMENTPURPOSE, TXID, MERCHANTTXID,
+        MCONTRACT, CHARGEBACKTS, IMPORTEDTS, ADD_JSON, OUT_JSON, reconciliation_date, created_time, update_time,
+        file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.cbid}, #{entity.amount}, #{entity.currency}, #{entity.accountholder}, #{entity.paymentpurpose},
+            #{entity.txid}, #{entity.merchanttxid}, #{entity.mcontract}, #{entity.chargebackts}, #{entity.importedts},
+            #{entity.addJson}, #{entity.outJson}, #{entity.reconciliationDate}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        CBID = values(CBID),
+        AMOUNT = values(AMOUNT),
+        CURRENCY = values(CURRENCY),
+        ACCOUNTHOLDER = values(ACCOUNTHOLDER),
+        PAYMENTPURPOSE = values(PAYMENTPURPOSE),
+        TXID = values(TXID),
+        MERCHANTTXID = values(MERCHANTTXID),
+        MCONTRACT = values(MCONTRACT),
+        CHARGEBACKTS = values(CHARGEBACKTS),
+        IMPORTEDTS = values(IMPORTEDTS),
+        ADD_JSON = values(ADD_JSON),
+        OUT_JSON = values(OUT_JSON),
+        reconciliation_date = values(reconciliation_date),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        file_name = values(file_name),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_r_chargeback
+        <set>
+            <if test="cbid != null and cbid != ''">
+                CBID = #{cbid},
+            </if>
+            <if test="amount != null and amount != ''">
+                AMOUNT = #{amount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                ACCOUNTHOLDER = #{accountholder},
+            </if>
+            <if test="paymentpurpose != null and paymentpurpose != ''">
+                PAYMENTPURPOSE = #{paymentpurpose},
+            </if>
+            <if test="txid != null and txid != ''">
+                TXID = #{txid},
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                MERCHANTTXID = #{merchanttxid},
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                MCONTRACT = #{mcontract},
+            </if>
+            <if test="chargebackts != null and chargebackts != ''">
+                CHARGEBACKTS = #{chargebackts},
+            </if>
+            <if test="importedts != null and importedts != ''">
+                IMPORTEDTS = #{importedts},
+            </if>
+            <if test="addJson != null and addJson != ''">
+                ADD_JSON = #{addJson},
+            </if>
+            <if test="outJson != null and outJson != ''">
+                OUT_JSON = #{outJson},
+            </if>
+            <if test="reconciliationDate != null">
+                reconciliation_date = #{reconciliationDate},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_r_chargeback
+        where id = #{id}
+    </delete>
+
+</mapper>
+

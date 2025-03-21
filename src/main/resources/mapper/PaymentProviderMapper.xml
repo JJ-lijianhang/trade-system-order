@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PaymentProviderMapper">
+
+    <resultMap type="com.futurebank.order.entity.PaymentProviderEntity" id="PaymentProviderMap">
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="providerRename" column="provider_rename"/>
+        <result property="productCapability" column="product_capability"/>
+        <result property="creditMid" column="credit_mid"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="providerDesc" column="provider_desc"/>
+        <result property="payinConfig" column="payin_config"/>
+        <result property="payoutConfig" column="payout_config"/>
+        <result property="serviceFee" column="service_fee"/>
+        <result property="istate" column="istate"/>
+        <result property="activeTime" column="active_time"/>
+        <result property="payinService" column="payin_service"/>
+        <result property="payoutService" column="payout_service"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="sortIndex" column="sort_index"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="operator" column="operator"/>
+        <result property="supportApis" column="support_apis"/>
+        <result property="supportGateway" column="support_gateway"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PaymentProviderMap">
+        select provider_id,
+               provider_name,
+               provider_rename,
+               product_capability,
+               credit_mid,
+               merchant_id,
+               provider_desc,
+               payin_config,
+               payout_config,
+               service_fee,
+               istate,
+               active_time,
+               payin_service,
+               payout_service,
+               created_time,
+               update_time,
+               sort_index,
+               is_deleted,
+               operator,
+               support_apis,
+               support_gateway
+        from tb_payment_provider
+        where provider_id = #{providerId}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PaymentProviderMap">
+        select
+        provider_id, provider_name, provider_rename, product_capability, credit_mid, merchant_id, provider_desc,
+        payin_config, payout_config, service_fee, istate, active_time, payin_service, payout_service, created_time,
+        update_time, sort_index, is_deleted, operator, support_apis, support_gateway
+        from tb_payment_provider
+        <where>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="providerRename != null and providerRename != ''">
+                and provider_rename = #{providerRename}
+            </if>
+            <if test="productCapability != null and productCapability != ''">
+                and product_capability = #{productCapability}
+            </if>
+            <if test="creditMid != null and creditMid != ''">
+                and credit_mid = #{creditMid}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="providerDesc != null and providerDesc != ''">
+                and provider_desc = #{providerDesc}
+            </if>
+            <if test="payinConfig != null and payinConfig != ''">
+                and payin_config = #{payinConfig}
+            </if>
+            <if test="payoutConfig != null and payoutConfig != ''">
+                and payout_config = #{payoutConfig}
+            </if>
+            <if test="serviceFee != null and serviceFee != ''">
+                and service_fee = #{serviceFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="activeTime != null">
+                and active_time = #{activeTime}
+            </if>
+            <if test="payinService != null and payinService != ''">
+                and payin_service = #{payinService}
+            </if>
+            <if test="payoutService != null and payoutService != ''">
+                and payout_service = #{payoutService}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="sortIndex != null">
+                and sort_index = #{sortIndex}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="supportApis != null">
+                and support_apis = #{supportApis}
+            </if>
+            <if test="supportGateway != null">
+                and support_gateway = #{supportGateway}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PaymentProviderMap">
+        select
+        provider_id, provider_name, provider_rename, product_capability, credit_mid, merchant_id, provider_desc,
+        payin_config, payout_config, service_fee, istate, active_time, payin_service, payout_service, created_time,
+        update_time, sort_index, is_deleted, operator, support_apis, support_gateway
+        from tb_payment_provider
+        <where>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="providerRename != null and providerRename != ''">
+                and provider_rename = #{providerRename}
+            </if>
+            <if test="productCapability != null and productCapability != ''">
+                and product_capability = #{productCapability}
+            </if>
+            <if test="creditMid != null and creditMid != ''">
+                and credit_mid = #{creditMid}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="providerDesc != null and providerDesc != ''">
+                and provider_desc = #{providerDesc}
+            </if>
+            <if test="payinConfig != null and payinConfig != ''">
+                and payin_config = #{payinConfig}
+            </if>
+            <if test="payoutConfig != null and payoutConfig != ''">
+                and payout_config = #{payoutConfig}
+            </if>
+            <if test="serviceFee != null and serviceFee != ''">
+                and service_fee = #{serviceFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="activeTime != null">
+                and active_time = #{activeTime}
+            </if>
+            <if test="payinService != null and payinService != ''">
+                and payin_service = #{payinService}
+            </if>
+            <if test="payoutService != null and payoutService != ''">
+                and payout_service = #{payoutService}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="sortIndex != null">
+                and sort_index = #{sortIndex}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="supportApis != null">
+                and support_apis = #{supportApis}
+            </if>
+            <if test="supportGateway != null">
+                and support_gateway = #{supportGateway}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PaymentProviderMap">
+        select
+        provider_id, provider_name, provider_rename, product_capability, credit_mid, merchant_id, provider_desc,
+        payin_config, payout_config, service_fee, istate, active_time, payin_service, payout_service, created_time,
+        update_time, sort_index, is_deleted, operator, support_apis, support_gateway
+        from tb_payment_provider
+        <where>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="providerRename != null and providerRename != ''">
+                and provider_rename = #{providerRename}
+            </if>
+            <if test="productCapability != null and productCapability != ''">
+                and product_capability = #{productCapability}
+            </if>
+            <if test="creditMid != null and creditMid != ''">
+                and credit_mid = #{creditMid}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="providerDesc != null and providerDesc != ''">
+                and provider_desc = #{providerDesc}
+            </if>
+            <if test="payinConfig != null and payinConfig != ''">
+                and payin_config = #{payinConfig}
+            </if>
+            <if test="payoutConfig != null and payoutConfig != ''">
+                and payout_config = #{payoutConfig}
+            </if>
+            <if test="serviceFee != null and serviceFee != ''">
+                and service_fee = #{serviceFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="activeTime != null">
+                and active_time = #{activeTime}
+            </if>
+            <if test="payinService != null and payinService != ''">
+                and payin_service = #{payinService}
+            </if>
+            <if test="payoutService != null and payoutService != ''">
+                and payout_service = #{payoutService}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="sortIndex != null">
+                and sort_index = #{sortIndex}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="supportApis != null">
+                and support_apis = #{supportApis}
+            </if>
+            <if test="supportGateway != null">
+                and support_gateway = #{supportGateway}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_payment_provider
+        <where>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="providerRename != null and providerRename != ''">
+                and provider_rename = #{providerRename}
+            </if>
+            <if test="productCapability != null and productCapability != ''">
+                and product_capability = #{productCapability}
+            </if>
+            <if test="creditMid != null and creditMid != ''">
+                and credit_mid = #{creditMid}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="providerDesc != null and providerDesc != ''">
+                and provider_desc = #{providerDesc}
+            </if>
+            <if test="payinConfig != null and payinConfig != ''">
+                and payin_config = #{payinConfig}
+            </if>
+            <if test="payoutConfig != null and payoutConfig != ''">
+                and payout_config = #{payoutConfig}
+            </if>
+            <if test="serviceFee != null and serviceFee != ''">
+                and service_fee = #{serviceFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="activeTime != null">
+                and active_time = #{activeTime}
+            </if>
+            <if test="payinService != null and payinService != ''">
+                and payin_service = #{payinService}
+            </if>
+            <if test="payoutService != null and payoutService != ''">
+                and payout_service = #{payoutService}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="sortIndex != null">
+                and sort_index = #{sortIndex}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="supportApis != null">
+                and support_apis = #{supportApis}
+            </if>
+            <if test="supportGateway != null">
+                and support_gateway = #{supportGateway}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="providerId" useGeneratedKeys="true">
+        insert into tb_payment_provider(provider_name, provider_rename, product_capability, credit_mid, merchant_id,
+                                        provider_desc, payin_config, payout_config, service_fee, istate, active_time,
+                                        payin_service, payout_service, created_time, update_time, sort_index,
+                                        is_deleted, operator, support_apis, support_gateway)
+        values (#{providerName}, #{providerRename}, #{productCapability}, #{creditMid}, #{merchantId}, #{providerDesc},
+                #{payinConfig}, #{payoutConfig}, #{serviceFee}, #{istate}, #{activeTime}, #{payinService},
+                #{payoutService}, #{createdTime}, #{updateTime}, #{sortIndex}, #{isDeleted}, #{operator},
+                #{supportApis}, #{supportGateway})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="providerId" useGeneratedKeys="true">
+        insert into tb_payment_provider(provider_name, provider_rename, product_capability, credit_mid, merchant_id,
+        provider_desc, payin_config, payout_config, service_fee, istate, active_time, payin_service, payout_service,
+        created_time, update_time, sort_index, is_deleted, operator, support_apis, support_gateway)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerName}, #{entity.providerRename}, #{entity.productCapability}, #{entity.creditMid},
+            #{entity.merchantId}, #{entity.providerDesc}, #{entity.payinConfig}, #{entity.payoutConfig},
+            #{entity.serviceFee}, #{entity.istate}, #{entity.activeTime}, #{entity.payinService},
+            #{entity.payoutService}, #{entity.createdTime}, #{entity.updateTime}, #{entity.sortIndex},
+            #{entity.isDeleted}, #{entity.operator}, #{entity.supportApis}, #{entity.supportGateway})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="providerId" useGeneratedKeys="true">
+        insert into tb_payment_provider(provider_name, provider_rename, product_capability, credit_mid, merchant_id,
+        provider_desc, payin_config, payout_config, service_fee, istate, active_time, payin_service, payout_service,
+        created_time, update_time, sort_index, is_deleted, operator, support_apis, support_gateway)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerName}, #{entity.providerRename}, #{entity.productCapability}, #{entity.creditMid},
+            #{entity.merchantId}, #{entity.providerDesc}, #{entity.payinConfig}, #{entity.payoutConfig},
+            #{entity.serviceFee}, #{entity.istate}, #{entity.activeTime}, #{entity.payinService},
+            #{entity.payoutService}, #{entity.createdTime}, #{entity.updateTime}, #{entity.sortIndex},
+            #{entity.isDeleted}, #{entity.operator}, #{entity.supportApis}, #{entity.supportGateway})
+        </foreach>
+        on duplicate key update
+        provider_name = values(provider_name),
+        provider_rename = values(provider_rename),
+        product_capability = values(product_capability),
+        credit_mid = values(credit_mid),
+        merchant_id = values(merchant_id),
+        provider_desc = values(provider_desc),
+        payin_config = values(payin_config),
+        payout_config = values(payout_config),
+        service_fee = values(service_fee),
+        istate = values(istate),
+        active_time = values(active_time),
+        payin_service = values(payin_service),
+        payout_service = values(payout_service),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        sort_index = values(sort_index),
+        is_deleted = values(is_deleted),
+        operator = values(operator),
+        support_apis = values(support_apis),
+        support_gateway = values(support_gateway)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_payment_provider
+        <set>
+            <if test="providerName != null and providerName != ''">
+                provider_name = #{providerName},
+            </if>
+            <if test="providerRename != null and providerRename != ''">
+                provider_rename = #{providerRename},
+            </if>
+            <if test="productCapability != null and productCapability != ''">
+                product_capability = #{productCapability},
+            </if>
+            <if test="creditMid != null and creditMid != ''">
+                credit_mid = #{creditMid},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="providerDesc != null and providerDesc != ''">
+                provider_desc = #{providerDesc},
+            </if>
+            <if test="payinConfig != null and payinConfig != ''">
+                payin_config = #{payinConfig},
+            </if>
+            <if test="payoutConfig != null and payoutConfig != ''">
+                payout_config = #{payoutConfig},
+            </if>
+            <if test="serviceFee != null and serviceFee != ''">
+                service_fee = #{serviceFee},
+            </if>
+            <if test="istate != null">
+                istate = #{istate},
+            </if>
+            <if test="activeTime != null">
+                active_time = #{activeTime},
+            </if>
+            <if test="payinService != null and payinService != ''">
+                payin_service = #{payinService},
+            </if>
+            <if test="payoutService != null and payoutService != ''">
+                payout_service = #{payoutService},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="sortIndex != null">
+                sort_index = #{sortIndex},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="operator != null">
+                operator = #{operator},
+            </if>
+            <if test="supportApis != null">
+                support_apis = #{supportApis},
+            </if>
+            <if test="supportGateway != null">
+                support_gateway = #{supportGateway},
+            </if>
+        </set>
+        where provider_id = #{providerId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_payment_provider
+        where provider_id = #{providerId}
+    </delete>
+
+</mapper>
+

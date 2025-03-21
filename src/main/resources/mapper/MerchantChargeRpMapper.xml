@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantChargeRpMapper">
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_charge_rp(provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method,
+                                       period, trade_no, reference_no,biz_code, charge_type, service_type, wallet_type,
+                                       charge_event_type, charge_event_name, currency, ioldmoneytotal, ioldmoney,
+                                       imoney, ibalance, ibalancetotal, cmemo, cadddate,biz_timestamp)
+        values (#{providerId}, #{platformId}, #{agentId}, #{merchantId}, #{consumerId}, #{paymentMethod}, #{period},
+                #{tradeNo}, #{referenceNo}, #{bizCode},#{chargeType}, #{serviceType}, #{walletType}, #{chargeEventType},
+                #{chargeEventName}, #{currency}, #{ioldmoneytotal}, #{ioldmoney}, #{imoney}, #{ibalance},
+                #{ibalancetotal}, #{cmemo}, #{cadddate},#{bizTimestamp})
+
+    </insert>
+
+</mapper>

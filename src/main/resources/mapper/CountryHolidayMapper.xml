@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.CountryHolidayMapper">
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.CountryHoliday" >
+        <result column="id" property="id" />
+        <result column="year" property="year" />
+        <result column="country" property="country" />
+        <result column="country_code" property="countryCode" />
+        <result column="language" property="language" />
+        <result column="name" property="name" />
+        <result column="date" property="date" />
+        <result column="observed" property="observed" />
+        <result column="is_public" property="isPublic" />
+        <result column="weekday_name" property="weekdayName" />
+        <result column="weekday_numeric" property="weekdayNumeric" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `id`,
+        `year`,
+        `country`,
+        `country_code`,
+        `language`,
+        `name`,
+        `date`,
+        `observed`,
+        `is_public`,
+        `weekday_name`,
+        `weekday_numeric`,
+        `revision`,
+        `created_by`,
+        `created_time`,
+        `updated_by`,
+        `updated_time`
+    </sql>
+
+    <select id="query" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from tb_country_holiday
+        <where>
+            <if test="null != year">and year = #{year}</if>
+            <if test="null != country and '' != country">and country = #{country}</if>
+            <if test="null != countryCode and '' != countryCode">and country_code = #{countryCode}</if>
+            <if test="null != language and '' != language">and language = #{language}</if>
+            <if test="null != name and '' != name">and name = #{name}</if>
+            <if test="null != date ">and `date` = #{date}</if>
+            <if test="null != observed ">and observed = #{observed}</if>
+            <if test="null != isPublic">and is_public = #{isPublic}</if>
+            <if test="null != weekdayName and '' != weekdayName">and weekday_name = #{weekdayName}</if>
+            <if test="null != weekdayNumeric and '' != weekdayNumeric">and weekday_numeric = #{weekdayNumeric}</if>
+            <if test="null != revision">and revision = #{revision}</if>
+            <if test="null != createdBy">and created_by = #{createdBy}</if>
+            <if test="null != createdTime ">and created_time = #{createdTime}</if>
+            <if test="null != updatedBy">and updated_by = #{updatedBy}</if>
+            <if test="null != updatedTime">and updated_time = #{updatedTime}</if>
+        </where>
+    </select>
+
+    <delete id="deleteByYearAndCountry" parameterType="com.futurebank.order.entity.CountryHoliday">
+        DELETE FROM tb_country_holiday WHERE year = #{year} and country_code = #{countryCode}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.CountryHoliday">
+        INSERT INTO tb_country_holiday
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != year">
+                year,
+            </if>
+            <if test="null != country and '' != country">
+                country,
+            </if>
+            <if test="null != countryCode and '' != countryCode">
+                country_code,
+            </if>
+            <if test="null != language and '' != language">
+                language,
+            </if>
+            <if test="null != name and '' != name">
+                name,
+            </if>
+            <if test="null != date ">
+                date,
+            </if>
+            <if test="null != observed">
+                observed,
+            </if>
+            <if test="null != isPublic and '' != isPublic">
+                is_public,
+            </if>
+            <if test="null != weekdayName and '' != weekdayName">
+                weekday_name,
+            </if>
+            <if test="null != weekdayNumeric and '' != weekdayNumeric">
+                weekday_numeric,
+            </if>
+            <if test="null != revision and '' != revision">
+                revision,
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                created_by,
+            </if>
+            <if test="null != createdTime">
+                created_time,
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                updated_by,
+            </if>
+            <if test="null != updatedTime">
+                updated_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != year">
+                #{year},
+            </if>
+            <if test="null != country and '' != country">
+                #{country},
+            </if>
+            <if test="null != countryCode and '' != countryCode">
+                #{countryCode},
+            </if>
+            <if test="null != language and '' != language">
+                #{language},
+            </if>
+            <if test="null != name and '' != name">
+                #{name},
+            </if>
+            <if test="null != date">
+                #{date},
+            </if>
+            <if test="null != observed">
+                #{observed},
+            </if>
+            <if test="null != isPublic and '' != isPublic">
+                #{isPublic},
+            </if>
+            <if test="null != weekdayName and '' != weekdayName">
+                #{weekdayName},
+            </if>
+            <if test="null != weekdayNumeric and '' != weekdayNumeric">
+                #{weekdayNumeric},
+            </if>
+            <if test="null != revision and '' != revision">
+                #{revision},
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                #{createdBy},
+            </if>
+            <if test="null != createdTime">
+                #{createdTime},
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                #{updatedBy},
+            </if>
+            <if test="null != updatedTime">
+                #{updatedTime}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM tb_country_holiday
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.futurebank.order.entity.CountryHoliday">
+        UPDATE tb_country_holiday
+        <set>
+            <if test="null != year">year = #{year},</if>
+            <if test="null != country and '' != country">country = #{country},</if>
+            <if test="null != countryCode and '' != countryCode">country_code = #{countryCode},</if>
+            <if test="null != language and '' != language">language = #{language},</if>
+            <if test="null != name and '' != name">name = #{name},</if>
+            <if test="null != date ">date = #{date},</if>
+            <if test="null != observed ">observed = #{observed},</if>
+            <if test="null != isPublic and '' != isPublic">is_public = #{isPublic},</if>
+            <if test="null != weekdayName and '' != weekdayName">weekday_name = #{weekdayName},</if>
+            <if test="null != weekdayNumeric and '' != weekdayNumeric">weekday_numeric = #{weekdayNumeric},</if>
+            <if test="null != revision and '' != revision">revision = #{revision},</if>
+            <if test="null != createdBy and '' != createdBy">created_by = #{createdBy},</if>
+            <if test="null != createdTime ">created_time = #{createdTime},</if>
+            <if test="null != updatedBy and '' != updatedBy">updated_by = #{updatedBy},</if>
+            <if test="null != updatedTime">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_country_holiday
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_country_holiday
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_country_holiday
+    </select>
+
+
+</mapper>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproRRefundFailedMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproRRefundFailedEntity" id="PproRRefundFailedMap">
+        <result property="id" column="id"/>
+        <result property="refundid" column="REFUNDID"/>
+        <result property="refundstate" column="REFUNDSTATE"/>
+        <result property="failtype" column="FAILTYPE"/>
+        <result property="fundsstate" column="FUNDSSTATE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="reftxid" column="REFTXID"/>
+        <result property="merchantrefundid" column="MERCHANTREFUNDID"/>
+        <result property="mcontract" column="MCONTRACT"/>
+        <result property="initts" column="INITTS"/>
+        <result property="succeededts" column="SUCCEEDEDTS"/>
+        <result property="failedts" column="FAILEDTS"/>
+        <result property="fundssentts" column="FUNDSSENTTS"/>
+        <result property="fundsrejectedts" column="FUNDSREJECTEDTS"/>
+        <result property="errortext" column="ERRORTEXT"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproRRefundFailedMap">
+        select id,
+               REFUNDID,
+               REFUNDSTATE,
+               FAILTYPE,
+               FUNDSSTATE,
+               AMOUNT,
+               CURRENCY,
+               REFTXID,
+               MERCHANTREFUNDID,
+               MCONTRACT,
+               INITTS,
+               SUCCEEDEDTS,
+               FAILEDTS,
+               FUNDSSENTTS,
+               FUNDSREJECTEDTS,
+               ERRORTEXT,
+               created_time,
+               update_time,
+               file_name,
+               is_processed
+        from tb_ppro_r_refund_failed
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproRRefundFailedMap">
+        select
+        id, REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID, MERCHANTREFUNDID, MCONTRACT, INITTS,
+        SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS, FUNDSREJECTEDTS, ERRORTEXT, created_time, update_time, file_name,
+        is_processed
+        from tb_ppro_r_refund_failed
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="refundid != null and refundid != ''">
+                and REFUNDID = #{refundid}
+            </if>
+            <if test="refundstate != null and refundstate != ''">
+                and REFUNDSTATE = #{refundstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="reftxid != null and reftxid != ''">
+                and REFTXID = #{reftxid}
+            </if>
+            <if test="merchantrefundid != null and merchantrefundid != ''">
+                and MERCHANTREFUNDID = #{merchantrefundid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="fundssentts != null and fundssentts != ''">
+                and FUNDSSENTTS = #{fundssentts}
+            </if>
+            <if test="fundsrejectedts != null and fundsrejectedts != ''">
+                and FUNDSREJECTEDTS = #{fundsrejectedts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproRRefundFailedMap">
+        select
+        id, REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID, MERCHANTREFUNDID, MCONTRACT, INITTS,
+        SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS, FUNDSREJECTEDTS, ERRORTEXT, created_time, update_time, file_name,
+        is_processed
+        from tb_ppro_r_refund_failed
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="refundid != null and refundid != ''">
+                and REFUNDID = #{refundid}
+            </if>
+            <if test="refundstate != null and refundstate != ''">
+                and REFUNDSTATE = #{refundstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="reftxid != null and reftxid != ''">
+                and REFTXID = #{reftxid}
+            </if>
+            <if test="merchantrefundid != null and merchantrefundid != ''">
+                and MERCHANTREFUNDID = #{merchantrefundid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="fundssentts != null and fundssentts != ''">
+                and FUNDSSENTTS = #{fundssentts}
+            </if>
+            <if test="fundsrejectedts != null and fundsrejectedts != ''">
+                and FUNDSREJECTEDTS = #{fundsrejectedts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproRRefundFailedMap">
+        select
+        id, REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID, MERCHANTREFUNDID, MCONTRACT, INITTS,
+        SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS, FUNDSREJECTEDTS, ERRORTEXT, created_time, update_time, file_name,
+        is_processed
+        from tb_ppro_r_refund_failed
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="refundid != null and refundid != ''">
+                and REFUNDID = #{refundid}
+            </if>
+            <if test="refundstate != null and refundstate != ''">
+                and REFUNDSTATE = #{refundstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="reftxid != null and reftxid != ''">
+                and REFTXID = #{reftxid}
+            </if>
+            <if test="merchantrefundid != null and merchantrefundid != ''">
+                and MERCHANTREFUNDID = #{merchantrefundid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="fundssentts != null and fundssentts != ''">
+                and FUNDSSENTTS = #{fundssentts}
+            </if>
+            <if test="fundsrejectedts != null and fundsrejectedts != ''">
+                and FUNDSREJECTEDTS = #{fundsrejectedts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_r_refund_failed
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="refundid != null and refundid != ''">
+                and REFUNDID = #{refundid}
+            </if>
+            <if test="refundstate != null and refundstate != ''">
+                and REFUNDSTATE = #{refundstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="reftxid != null and reftxid != ''">
+                and REFTXID = #{reftxid}
+            </if>
+            <if test="merchantrefundid != null and merchantrefundid != ''">
+                and MERCHANTREFUNDID = #{merchantrefundid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="fundssentts != null and fundssentts != ''">
+                and FUNDSSENTTS = #{fundssentts}
+            </if>
+            <if test="fundsrejectedts != null and fundsrejectedts != ''">
+                and FUNDSREJECTEDTS = #{fundsrejectedts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_refund_failed(REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID,
+                                            MERCHANTREFUNDID, MCONTRACT, INITTS, SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS,
+                                            FUNDSREJECTEDTS, ERRORTEXT, created_time, update_time, file_name,
+                                            is_processed)
+        values (#{refundid}, #{refundstate}, #{failtype}, #{fundsstate}, #{amount}, #{currency}, #{reftxid},
+                #{merchantrefundid}, #{mcontract}, #{initts}, #{succeededts}, #{failedts}, #{fundssentts},
+                #{fundsrejectedts}, #{errortext}, #{createdTime}, #{updateTime}, #{fileName}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_refund_failed(REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID,
+        MERCHANTREFUNDID, MCONTRACT, INITTS, SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS, FUNDSREJECTEDTS, ERRORTEXT,
+        created_time, update_time, file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.refundid}, #{entity.refundstate}, #{entity.failtype}, #{entity.fundsstate}, #{entity.amount},
+            #{entity.currency}, #{entity.reftxid}, #{entity.merchantrefundid}, #{entity.mcontract}, #{entity.initts},
+            #{entity.succeededts}, #{entity.failedts}, #{entity.fundssentts}, #{entity.fundsrejectedts},
+            #{entity.errortext}, #{entity.createdTime}, #{entity.updateTime}, #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_refund_failed(REFUNDID, REFUNDSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, REFTXID,
+        MERCHANTREFUNDID, MCONTRACT, INITTS, SUCCEEDEDTS, FAILEDTS, FUNDSSENTTS, FUNDSREJECTEDTS, ERRORTEXT,
+        created_time, update_time, file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.refundid}, #{entity.refundstate}, #{entity.failtype}, #{entity.fundsstate}, #{entity.amount},
+            #{entity.currency}, #{entity.reftxid}, #{entity.merchantrefundid}, #{entity.mcontract}, #{entity.initts},
+            #{entity.succeededts}, #{entity.failedts}, #{entity.fundssentts}, #{entity.fundsrejectedts},
+            #{entity.errortext}, #{entity.createdTime}, #{entity.updateTime}, #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        REFUNDID = values(REFUNDID),
+        REFUNDSTATE = values(REFUNDSTATE),
+        FAILTYPE = values(FAILTYPE),
+        FUNDSSTATE = values(FUNDSSTATE),
+        AMOUNT = values(AMOUNT),
+        CURRENCY = values(CURRENCY),
+        REFTXID = values(REFTXID),
+        MERCHANTREFUNDID = values(MERCHANTREFUNDID),
+        MCONTRACT = values(MCONTRACT),
+        INITTS = values(INITTS),
+        SUCCEEDEDTS = values(SUCCEEDEDTS),
+        FAILEDTS = values(FAILEDTS),
+        FUNDSSENTTS = values(FUNDSSENTTS),
+        FUNDSREJECTEDTS = values(FUNDSREJECTEDTS),
+        ERRORTEXT = values(ERRORTEXT),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        file_name = values(file_name),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_r_refund_failed
+        <set>
+            <if test="refundid != null and refundid != ''">
+                REFUNDID = #{refundid},
+            </if>
+            <if test="refundstate != null and refundstate != ''">
+                REFUNDSTATE = #{refundstate},
+            </if>
+            <if test="failtype != null and failtype != ''">
+                FAILTYPE = #{failtype},
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                FUNDSSTATE = #{fundsstate},
+            </if>
+            <if test="amount != null and amount != ''">
+                AMOUNT = #{amount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="reftxid != null and reftxid != ''">
+                REFTXID = #{reftxid},
+            </if>
+            <if test="merchantrefundid != null and merchantrefundid != ''">
+                MERCHANTREFUNDID = #{merchantrefundid},
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                MCONTRACT = #{mcontract},
+            </if>
+            <if test="initts != null and initts != ''">
+                INITTS = #{initts},
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                SUCCEEDEDTS = #{succeededts},
+            </if>
+            <if test="failedts != null and failedts != ''">
+                FAILEDTS = #{failedts},
+            </if>
+            <if test="fundssentts != null and fundssentts != ''">
+                FUNDSSENTTS = #{fundssentts},
+            </if>
+            <if test="fundsrejectedts != null and fundsrejectedts != ''">
+                FUNDSREJECTEDTS = #{fundsrejectedts},
+            </if>
+            <if test="errortext != null and errortext != ''">
+                ERRORTEXT = #{errortext},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_r_refund_failed
+        where id = #{id}
+    </delete>
+
+</mapper>
+

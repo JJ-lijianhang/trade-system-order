@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantChargeMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantChargeEntity" id="MerchantChargeMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="consumerId" column="consumer_id"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="period" column="period"/>
+        <result property="tradeNo" column="trade_no"/>
+        <result property="referenceNo" column="reference_no"/>
+        <result property="bizCode" column="biz_code"/>
+        <result property="chargeType" column="charge_type"/>
+        <result property="serviceType" column="service_type"/>
+        <result property="walletType" column="wallet_type"/>
+        <result property="chargeEventType" column="charge_event_type"/>
+        <result property="chargeEventName" column="charge_event_name"/>
+        <result property="currency" column="currency"/>
+        <result property="ioldmoneytotal" column="ioldmoneytotal"/>
+        <result property="ioldmoney" column="ioldmoney"/>
+        <result property="imoney" column="imoney"/>
+        <result property="ibalance" column="ibalance"/>
+        <result property="ibalancetotal" column="ibalancetotal"/>
+        <result property="cmemo" column="cmemo"/>
+        <result property="cadddate" column="cadddate"/>
+        <result property="bizTimestamp" column="biz_timestamp"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantChargeMap">
+        select id,
+               provider_id,
+               platform_id,
+               agent_id,
+               merchant_id,
+               consumer_id,
+               payment_method,
+               period,
+               trade_no,
+               reference_no,
+               biz_code,
+               charge_type,
+               service_type,
+               wallet_type,
+               charge_event_type,
+               charge_event_name,
+               currency,
+               ioldmoneytotal,
+               ioldmoney,
+               imoney,
+               ibalance,
+               ibalancetotal,
+               cmemo,
+               cadddate
+        from tb_merchant_charge
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantChargeMap">
+        select
+        id, provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method, period, trade_no,biz_code,
+        reference_no, charge_type, service_type, wallet_type, charge_event_type, charge_event_name, currency,
+        ioldmoneytotal, ioldmoney, imoney, ibalance, ibalancetotal, cmemo, cadddate
+        from tb_merchant_charge
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                and consumer_id = #{consumerId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no = #{tradeNo}
+            </if>
+            <if test="referenceNo != null and referenceNo != ''">
+                and reference_no = #{referenceNo}
+            </if>
+            <if test="chargeType != null">
+                and charge_type = #{chargeType}
+            </if>
+            <if test="serviceType != null and serviceType != ''">
+                and service_type = #{serviceType}
+            </if>
+            <if test="walletType != null">
+                and wallet_type = #{walletType}
+            </if>
+            <if test="chargeEventType != null">
+                and charge_event_type = #{chargeEventType}
+            </if>
+            <if test="chargeEventName != null and chargeEventName != ''">
+                and charge_event_name = #{chargeEventName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="ioldmoneytotal != null">
+                and ioldmoneytotal = #{ioldmoneytotal}
+            </if>
+            <if test="ioldmoney != null">
+                and ioldmoney = #{ioldmoney}
+            </if>
+            <if test="imoney != null">
+                and imoney = #{imoney}
+            </if>
+            <if test="ibalance != null">
+                and ibalance = #{ibalance}
+            </if>
+            <if test="ibalancetotal != null">
+                and ibalancetotal = #{ibalancetotal}
+            </if>
+            <if test="cmemo != null and cmemo != ''">
+                and cmemo = #{cmemo}
+            </if>
+            <if test="cadddate != null">
+                and cadddate = #{cadddate}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantChargeMap">
+        select
+        id, provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method, period, trade_no,biz_code,
+        reference_no, charge_type, service_type, wallet_type, charge_event_type, charge_event_name, currency,
+        ioldmoneytotal, ioldmoney, imoney, ibalance, ibalancetotal, cmemo, cadddate
+        from tb_merchant_charge
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                and consumer_id = #{consumerId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no = #{tradeNo}
+            </if>
+            <if test="referenceNo != null and referenceNo != ''">
+                and reference_no = #{referenceNo}
+            </if>
+            <if test="chargeType != null">
+                and charge_type = #{chargeType}
+            </if>
+            <if test="serviceType != null and serviceType != ''">
+                and service_type = #{serviceType}
+            </if>
+            <if test="walletType != null">
+                and wallet_type = #{walletType}
+            </if>
+            <if test="chargeEventType != null">
+                and charge_event_type = #{chargeEventType}
+            </if>
+            <if test="chargeEventName != null and chargeEventName != ''">
+                and charge_event_name = #{chargeEventName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="ioldmoneytotal != null">
+                and ioldmoneytotal = #{ioldmoneytotal}
+            </if>
+            <if test="ioldmoney != null">
+                and ioldmoney = #{ioldmoney}
+            </if>
+            <if test="imoney != null">
+                and imoney = #{imoney}
+            </if>
+            <if test="ibalance != null">
+                and ibalance = #{ibalance}
+            </if>
+            <if test="ibalancetotal != null">
+                and ibalancetotal = #{ibalancetotal}
+            </if>
+            <if test="cmemo != null and cmemo != ''">
+                and cmemo = #{cmemo}
+            </if>
+            <if test="cadddate != null">
+                and cadddate = #{cadddate}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantChargeMap">
+        select
+        id, provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method, period, trade_no,biz_code,
+        reference_no, charge_type, service_type, wallet_type, charge_event_type, charge_event_name, currency,
+        ioldmoneytotal, ioldmoney, imoney, ibalance, ibalancetotal, cmemo, cadddate
+        from tb_merchant_charge
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                and consumer_id = #{consumerId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no = #{tradeNo}
+            </if>
+            <if test="referenceNo != null and referenceNo != ''">
+                and reference_no = #{referenceNo}
+            </if>
+            <if test="chargeType != null">
+                and charge_type = #{chargeType}
+            </if>
+            <if test="serviceType != null and serviceType != ''">
+                and service_type = #{serviceType}
+            </if>
+            <if test="walletType != null">
+                and wallet_type = #{walletType}
+            </if>
+            <if test="chargeEventType != null">
+                and charge_event_type = #{chargeEventType}
+            </if>
+            <if test="chargeEventName != null and chargeEventName != ''">
+                and charge_event_name = #{chargeEventName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="ioldmoneytotal != null">
+                and ioldmoneytotal = #{ioldmoneytotal}
+            </if>
+            <if test="ioldmoney != null">
+                and ioldmoney = #{ioldmoney}
+            </if>
+            <if test="imoney != null">
+                and imoney = #{imoney}
+            </if>
+            <if test="ibalance != null">
+                and ibalance = #{ibalance}
+            </if>
+            <if test="ibalancetotal != null">
+                and ibalancetotal = #{ibalancetotal}
+            </if>
+            <if test="cmemo != null and cmemo != ''">
+                and cmemo = #{cmemo}
+            </if>
+            <if test="cadddate != null">
+                and cadddate = #{cadddate}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_charge
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                and consumer_id = #{consumerId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="period != null and period != ''">
+                and period = #{period}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no = #{tradeNo}
+            </if>
+            <if test="referenceNo != null and referenceNo != ''">
+                and reference_no = #{referenceNo}
+            </if>
+            <if test="chargeType != null">
+                and charge_type = #{chargeType}
+            </if>
+            <if test="serviceType != null and serviceType != ''">
+                and service_type = #{serviceType}
+            </if>
+            <if test="walletType != null">
+                and wallet_type = #{walletType}
+            </if>
+            <if test="chargeEventType != null">
+                and charge_event_type = #{chargeEventType}
+            </if>
+            <if test="chargeEventName != null and chargeEventName != ''">
+                and charge_event_name = #{chargeEventName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="ioldmoneytotal != null">
+                and ioldmoneytotal = #{ioldmoneytotal}
+            </if>
+            <if test="ioldmoney != null">
+                and ioldmoney = #{ioldmoney}
+            </if>
+            <if test="imoney != null">
+                and imoney = #{imoney}
+            </if>
+            <if test="ibalance != null">
+                and ibalance = #{ibalance}
+            </if>
+            <if test="ibalancetotal != null">
+                and ibalancetotal = #{ibalancetotal}
+            </if>
+            <if test="cmemo != null and cmemo != ''">
+                and cmemo = #{cmemo}
+            </if>
+            <if test="cadddate != null">
+                and cadddate = #{cadddate}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_charge(provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method,
+                                       period, trade_no, reference_no,biz_code, charge_type, service_type, wallet_type,
+                                       charge_event_type, charge_event_name, currency, ioldmoneytotal, ioldmoney,
+                                       imoney, ibalance, ibalancetotal, cmemo, cadddate,biz_timestamp)
+        values (#{providerId}, #{platformId}, #{agentId}, #{merchantId}, #{consumerId}, #{paymentMethod}, #{period},
+                #{tradeNo}, #{referenceNo}, #{bizCode},#{chargeType}, #{serviceType}, #{walletType}, #{chargeEventType},
+                #{chargeEventName}, #{currency}, #{ioldmoneytotal}, #{ioldmoney}, #{imoney}, #{ibalance},
+                #{ibalancetotal}, #{cmemo}, #{cadddate}, #{bizTimestamp})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_charge(provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method,
+        period, trade_no, reference_no,biz_code, charge_type, service_type, wallet_type, charge_event_type, charge_event_name,
+        currency, ioldmoneytotal, ioldmoney, imoney, ibalance, ibalancetotal, cmemo, cadddate,biz_timestamp)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId}, #{entity.platformId}, #{entity.agentId}, #{entity.merchantId}, #{entity.consumerId},
+            #{entity.paymentMethod}, #{entity.period}, #{entity.tradeNo}, #{entity.referenceNo},#{entity.bizCode}, #{entity.chargeType},
+            #{entity.serviceType}, #{entity.walletType}, #{entity.chargeEventType}, #{entity.chargeEventName},
+            #{entity.currency}, #{entity.ioldmoneytotal}, #{entity.ioldmoney}, #{entity.imoney}, #{entity.ibalance},
+            #{entity.ibalancetotal}, #{entity.cmemo}, #{entity.cadddate}, #{entity.bizTimestamp})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_charge(provider_id, platform_id, agent_id, merchant_id, consumer_id, payment_method,
+        period, trade_no, reference_no,biz_code, charge_type, service_type, wallet_type, charge_event_type, charge_event_name,
+        currency, ioldmoneytotal, ioldmoney, imoney, ibalance, ibalancetotal, cmemo, cadddate,biz_timestamp)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId}, #{entity.platformId}, #{entity.agentId}, #{entity.merchantId}, #{entity.consumerId},
+            #{entity.paymentMethod}, #{entity.period}, #{entity.tradeNo}, #{entity.referenceNo},#{entity.bizCode}, #{entity.chargeType},
+            #{entity.serviceType}, #{entity.walletType}, #{entity.chargeEventType}, #{entity.chargeEventName},
+            #{entity.currency}, #{entity.ioldmoneytotal}, #{entity.ioldmoney}, #{entity.imoney}, #{entity.ibalance},
+            #{entity.ibalancetotal}, #{entity.cmemo}, #{entity.cadddate}, #{entity.bizTimestamp})
+        </foreach>
+        on duplicate key update
+        provider_id = values(provider_id),
+        platform_id = values(platform_id),
+        agent_id = values(agent_id),
+        merchant_id = values(merchant_id),
+        consumer_id = values(consumer_id),
+        payment_method = values(payment_method),
+        period = values(period),
+        trade_no = values(trade_no),
+        reference_no = values(reference_no),
+        charge_type = values(charge_type),
+        service_type = values(service_type),
+        wallet_type = values(wallet_type),
+        charge_event_type = values(charge_event_type),
+        charge_event_name = values(charge_event_name),
+        currency = values(currency),
+        ioldmoneytotal = values(ioldmoneytotal),
+        ioldmoney = values(ioldmoney),
+        imoney = values(imoney),
+        ibalance = values(ibalance),
+        ibalancetotal = values(ibalancetotal),
+        cmemo = values(cmemo),
+        cadddate = values(cadddate)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_charge
+        <set>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                consumer_id = #{consumerId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="period != null and period != ''">
+                period = #{period},
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                trade_no = #{tradeNo},
+            </if>
+            <if test="referenceNo != null and referenceNo != ''">
+                reference_no = #{referenceNo},
+            </if>
+            <if test="chargeType != null">
+                charge_type = #{chargeType},
+            </if>
+            <if test="serviceType != null and serviceType != ''">
+                service_type = #{serviceType},
+            </if>
+            <if test="walletType != null">
+                wallet_type = #{walletType},
+            </if>
+            <if test="chargeEventType != null">
+                charge_event_type = #{chargeEventType},
+            </if>
+            <if test="chargeEventName != null and chargeEventName != ''">
+                charge_event_name = #{chargeEventName},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="ioldmoneytotal != null">
+                ioldmoneytotal = #{ioldmoneytotal},
+            </if>
+            <if test="ioldmoney != null">
+                ioldmoney = #{ioldmoney},
+            </if>
+            <if test="imoney != null">
+                imoney = #{imoney},
+            </if>
+            <if test="ibalance != null">
+                ibalance = #{ibalance},
+            </if>
+            <if test="ibalancetotal != null">
+                ibalancetotal = #{ibalancetotal},
+            </if>
+            <if test="cmemo != null and cmemo != ''">
+                cmemo = #{cmemo},
+            </if>
+            <if test="cadddate != null">
+                cadddate = #{cadddate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_charge
+        where id = #{id}
+    </delete>
+
+</mapper>
+

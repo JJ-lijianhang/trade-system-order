@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantEntity" id="MerchantMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="countryCode" column="country_code"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="merchantAlias" column="merchant_alias"/>
+        <result property="accountName" column="account_name"/>
+        <result property="accountBank" column="account_bank"/>
+        <result property="account" column="account"/>
+        <result property="curBalance" column="cur_balance"/>
+        <result property="freezeBalance" column="freeze_balance"/>
+        <result property="pendingBalance" column="pending_balance"/>
+        <result property="verifyGoogle" column="verify_google"/>
+        <result property="payinIp" column="payin_ip"/>
+        <result property="payoutIp" column="payout_ip"/>
+        <result property="payinSecurityKey" column="payin_security_key"/>
+        <result property="payoutSecurityKey" column="payout_security_key"/>
+        <result property="webhookUrl" column="webhook_url"/>
+        <result property="istate" column="istate"/>
+        <result property="isDefault" column="is_default"/>
+        <result property="introduce" column="introduce"/>
+        <result property="remark" column="remark"/>
+        <result property="merchantReference" column="merchant_reference"/>
+        <result property="parentState" column="parent_state"/>
+        <result property="childState" column="child_state"/>
+        <result property="reviewCount" column="review_count"/>
+        <result property="referenceId" column="reference_id"/>
+        <result property="referenceName" column="reference_name"/>
+        <result property="salesName" column="sales_name"/>
+        <result property="screenState" column="screen_state"/>
+        <result property="checkIn" column="check_in"/>
+        <result property="activatedTime" column="activated_time"/>
+        <result property="lastCheckIn" column="last_check_in"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="payinIpFlag" column="payin_ip_flag"/>
+        <result property="payoutIpFlag" column="payout_ip_flag"/>
+        <result property="payinKeyName" column="payin_key_name"/>
+        <result property="payoutKeyName" column="payout_key_name"/>
+        <result property="payinKeyCreatedTime" column="payin_key_created_time"/>
+        <result property="payoutKeyCreatedTime" column="payout_key_created_time"/>
+        <result property="payinValidityPeriod" column="payin_validity_period"/>
+        <result property="payoutValidityPeriod" column="payout_validity_period"/>
+        <result property="reconciliationDate" column="reconciliation_date"/>
+        <result property="settlementDate" column="settlement_date"/>
+        <result property="settlementCycle" column="settlement_cycle"/>
+        <result property="minSettleAmount" column="min_settle_amount"/>
+        <result property="minSettleCcy" column="min_settle_ccy"/>
+        <result property="activeStatus" column="active_status"/>
+        <result property="rcrrRiskLevel" column="rcrr_risk_level"/>
+        <result property="operator" column="operator"/>
+        <result property="registerStatus" column="register_status"/>
+        <result property="regularReviewDate" column="regular_review_date"/>
+        <result property="regularReviewStage" column="regular_review_stage"/>
+        <result property="kgpPartnerMerchantId" column="kgp_partner_merchant_id"/>
+        <result property="kgpPartnerShopId" column="kgp_partner_shop_id"/>
+        <result property="screenDecision" column="screen_decision"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantMap">
+        select id,
+               user_id,
+               agent_id,
+               country_code,
+               merchant_name,
+               merchant_alias,
+               account_name,
+               account_bank,
+               account,
+               cur_balance,
+               freeze_balance,
+               pending_balance,
+               verify_google,
+               payin_ip,
+               payout_ip,
+               payin_security_key,
+               payout_security_key,
+               webhook_url,
+               istate,
+               is_default,
+               introduce,
+               remark,
+               merchant_reference,
+               parent_state,
+               child_state,
+               review_count,
+               reference_id,
+               reference_name,
+               sales_name,
+               screen_state,
+               check_in,
+               activated_time,
+               last_check_in,
+               created_time,
+               update_time,
+               payin_ip_flag,
+               payout_ip_flag,
+               payin_key_name,
+               payout_key_name,
+               payin_key_created_time,
+               payout_key_created_time,
+               payin_validity_period,
+               payout_validity_period,
+               reconciliation_date,
+               settlement_date,
+               settlement_cycle,
+               min_settle_amount,
+               min_settle_ccy,
+               active_status,
+               rcrr_risk_level,
+               operator,
+               register_status,
+               regular_review_date,
+               regular_review_stage,
+               kgp_partner_merchant_id,
+               kgp_partner_shop_id,
+               screen_decision
+        from tb_merchant
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantMap">
+        select
+        id, user_id, agent_id, country_code, merchant_name, merchant_alias, account_name, account_bank, account,
+        cur_balance, freeze_balance, pending_balance, verify_google, payin_ip, payout_ip, payin_security_key,
+        payout_security_key, webhook_url, istate, is_default, introduce, remark, merchant_reference, parent_state,
+        child_state, review_count, reference_id, reference_name, sales_name, screen_state, check_in, activated_time,
+        last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag, payin_key_name, payout_key_name,
+        payin_key_created_time, payout_key_created_time, payin_validity_period, payout_validity_period,
+        reconciliation_date, settlement_date, settlement_cycle, min_settle_amount, min_settle_ccy, active_status,
+        rcrr_risk_level, operator, register_status, regular_review_date, regular_review_stage, kgp_partner_merchant_id,
+        kgp_partner_shop_id, screen_decision
+        from tb_merchant
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="countryCode != null and countryCode != ''">
+                and country_code = #{countryCode}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="merchantAlias != null and merchantAlias != ''">
+                and merchant_alias = #{merchantAlias}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name = #{accountName}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                and account_bank = #{accountBank}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="curBalance != null">
+                and cur_balance = #{curBalance}
+            </if>
+            <if test="freezeBalance != null">
+                and freeze_balance = #{freezeBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="verifyGoogle != null and verifyGoogle != ''">
+                and verify_google = #{verifyGoogle}
+            </if>
+            <if test="payinIp != null and payinIp != ''">
+                and payin_ip = #{payinIp}
+            </if>
+            <if test="payoutIp != null and payoutIp != ''">
+                and payout_ip = #{payoutIp}
+            </if>
+            <if test="payinSecurityKey != null and payinSecurityKey != ''">
+                and payin_security_key = #{payinSecurityKey}
+            </if>
+            <if test="payoutSecurityKey != null and payoutSecurityKey != ''">
+                and payout_security_key = #{payoutSecurityKey}
+            </if>
+            <if test="webhookUrl != null and webhookUrl != ''">
+                and webhook_url = #{webhookUrl}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="isDefault != null">
+                and is_default = #{isDefault}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="merchantReference != null">
+                and merchant_reference = #{merchantReference}
+            </if>
+            <if test="parentState != null">
+                and parent_state = #{parentState}
+            </if>
+            <if test="childState != null">
+                and child_state = #{childState}
+            </if>
+            <if test="reviewCount != null">
+                and review_count = #{reviewCount}
+            </if>
+            <if test="referenceId != null">
+                and reference_id = #{referenceId}
+            </if>
+            <if test="referenceName != null and referenceName != ''">
+                and reference_name = #{referenceName}
+            </if>
+            <if test="salesName != null and salesName != ''">
+                and sales_name = #{salesName}
+            </if>
+            <if test="screenState != null and screenState != ''">
+                and screen_state = #{screenState}
+            </if>
+            <if test="checkIn != null and checkIn != ''">
+                and check_in = #{checkIn}
+            </if>
+            <if test="activatedTime != null">
+                and activated_time = #{activatedTime}
+            </if>
+            <if test="lastCheckIn != null and lastCheckIn != ''">
+                and last_check_in = #{lastCheckIn}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="payinIpFlag != null">
+                and payin_ip_flag = #{payinIpFlag}
+            </if>
+            <if test="payoutIpFlag != null">
+                and payout_ip_flag = #{payoutIpFlag}
+            </if>
+            <if test="payinKeyName != null and payinKeyName != ''">
+                and payin_key_name = #{payinKeyName}
+            </if>
+            <if test="payoutKeyName != null and payoutKeyName != ''">
+                and payout_key_name = #{payoutKeyName}
+            </if>
+            <if test="payinKeyCreatedTime != null">
+                and payin_key_created_time = #{payinKeyCreatedTime}
+            </if>
+            <if test="payoutKeyCreatedTime != null">
+                and payout_key_created_time = #{payoutKeyCreatedTime}
+            </if>
+            <if test="payinValidityPeriod != null">
+                and payin_validity_period = #{payinValidityPeriod}
+            </if>
+            <if test="payoutValidityPeriod != null">
+                and payout_validity_period = #{payoutValidityPeriod}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="settlementCycle != null">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="minSettleAmount != null">
+                and min_settle_amount = #{minSettleAmount}
+            </if>
+            <if test="minSettleCcy != null and minSettleCcy != ''">
+                and min_settle_ccy = #{minSettleCcy}
+            </if>
+            <if test="activeStatus != null and activeStatus != ''">
+                and active_status = #{activeStatus}
+            </if>
+            <if test="rcrrRiskLevel != null and rcrrRiskLevel != ''">
+                and rcrr_risk_level = #{rcrrRiskLevel}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="registerStatus != null and registerStatus != ''">
+                and register_status = #{registerStatus}
+            </if>
+            <if test="regularReviewDate != null">
+                and regular_review_date = #{regularReviewDate}
+            </if>
+            <if test="regularReviewStage != null and regularReviewStage != ''">
+                and regular_review_stage = #{regularReviewStage}
+            </if>
+            <if test="kgpPartnerMerchantId != null and kgpPartnerMerchantId != ''">
+                and kgp_partner_merchant_id = #{kgpPartnerMerchantId}
+            </if>
+            <if test="kgpPartnerShopId != null and kgpPartnerShopId != ''">
+                and kgp_partner_shop_id = #{kgpPartnerShopId}
+            </if>
+            <if test="screenDecision != null and screenDecision != ''">
+                and screen_decision = #{screenDecision}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantMap">
+        select
+        id, user_id, agent_id, country_code, merchant_name, merchant_alias, account_name, account_bank, account,
+        cur_balance, freeze_balance, pending_balance, verify_google, payin_ip, payout_ip, payin_security_key,
+        payout_security_key, webhook_url, istate, is_default, introduce, remark, merchant_reference, parent_state,
+        child_state, review_count, reference_id, reference_name, sales_name, screen_state, check_in, activated_time,
+        last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag, payin_key_name, payout_key_name,
+        payin_key_created_time, payout_key_created_time, payin_validity_period, payout_validity_period,
+        reconciliation_date, settlement_date, settlement_cycle, min_settle_amount, min_settle_ccy, active_status,
+        rcrr_risk_level, operator, register_status, regular_review_date, regular_review_stage, kgp_partner_merchant_id,
+        kgp_partner_shop_id, screen_decision
+        from tb_merchant
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="countryCode != null and countryCode != ''">
+                and country_code = #{countryCode}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="merchantAlias != null and merchantAlias != ''">
+                and merchant_alias = #{merchantAlias}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name = #{accountName}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                and account_bank = #{accountBank}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="curBalance != null">
+                and cur_balance = #{curBalance}
+            </if>
+            <if test="freezeBalance != null">
+                and freeze_balance = #{freezeBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="verifyGoogle != null and verifyGoogle != ''">
+                and verify_google = #{verifyGoogle}
+            </if>
+            <if test="payinIp != null and payinIp != ''">
+                and payin_ip = #{payinIp}
+            </if>
+            <if test="payoutIp != null and payoutIp != ''">
+                and payout_ip = #{payoutIp}
+            </if>
+            <if test="payinSecurityKey != null and payinSecurityKey != ''">
+                and payin_security_key = #{payinSecurityKey}
+            </if>
+            <if test="payoutSecurityKey != null and payoutSecurityKey != ''">
+                and payout_security_key = #{payoutSecurityKey}
+            </if>
+            <if test="webhookUrl != null and webhookUrl != ''">
+                and webhook_url = #{webhookUrl}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="isDefault != null">
+                and is_default = #{isDefault}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="merchantReference != null">
+                and merchant_reference = #{merchantReference}
+            </if>
+            <if test="parentState != null">
+                and parent_state = #{parentState}
+            </if>
+            <if test="childState != null">
+                and child_state = #{childState}
+            </if>
+            <if test="reviewCount != null">
+                and review_count = #{reviewCount}
+            </if>
+            <if test="referenceId != null">
+                and reference_id = #{referenceId}
+            </if>
+            <if test="referenceName != null and referenceName != ''">
+                and reference_name = #{referenceName}
+            </if>
+            <if test="salesName != null and salesName != ''">
+                and sales_name = #{salesName}
+            </if>
+            <if test="screenState != null and screenState != ''">
+                and screen_state = #{screenState}
+            </if>
+            <if test="checkIn != null and checkIn != ''">
+                and check_in = #{checkIn}
+            </if>
+            <if test="activatedTime != null">
+                and activated_time = #{activatedTime}
+            </if>
+            <if test="lastCheckIn != null and lastCheckIn != ''">
+                and last_check_in = #{lastCheckIn}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="payinIpFlag != null">
+                and payin_ip_flag = #{payinIpFlag}
+            </if>
+            <if test="payoutIpFlag != null">
+                and payout_ip_flag = #{payoutIpFlag}
+            </if>
+            <if test="payinKeyName != null and payinKeyName != ''">
+                and payin_key_name = #{payinKeyName}
+            </if>
+            <if test="payoutKeyName != null and payoutKeyName != ''">
+                and payout_key_name = #{payoutKeyName}
+            </if>
+            <if test="payinKeyCreatedTime != null">
+                and payin_key_created_time = #{payinKeyCreatedTime}
+            </if>
+            <if test="payoutKeyCreatedTime != null">
+                and payout_key_created_time = #{payoutKeyCreatedTime}
+            </if>
+            <if test="payinValidityPeriod != null">
+                and payin_validity_period = #{payinValidityPeriod}
+            </if>
+            <if test="payoutValidityPeriod != null">
+                and payout_validity_period = #{payoutValidityPeriod}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="settlementCycle != null">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="minSettleAmount != null">
+                and min_settle_amount = #{minSettleAmount}
+            </if>
+            <if test="minSettleCcy != null and minSettleCcy != ''">
+                and min_settle_ccy = #{minSettleCcy}
+            </if>
+            <if test="activeStatus != null and activeStatus != ''">
+                and active_status = #{activeStatus}
+            </if>
+            <if test="rcrrRiskLevel != null and rcrrRiskLevel != ''">
+                and rcrr_risk_level = #{rcrrRiskLevel}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="registerStatus != null and registerStatus != ''">
+                and register_status = #{registerStatus}
+            </if>
+            <if test="regularReviewDate != null">
+                and regular_review_date = #{regularReviewDate}
+            </if>
+            <if test="regularReviewStage != null and regularReviewStage != ''">
+                and regular_review_stage = #{regularReviewStage}
+            </if>
+            <if test="kgpPartnerMerchantId != null and kgpPartnerMerchantId != ''">
+                and kgp_partner_merchant_id = #{kgpPartnerMerchantId}
+            </if>
+            <if test="kgpPartnerShopId != null and kgpPartnerShopId != ''">
+                and kgp_partner_shop_id = #{kgpPartnerShopId}
+            </if>
+            <if test="screenDecision != null and screenDecision != ''">
+                and screen_decision = #{screenDecision}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantMap">
+        select
+        id, user_id, agent_id, country_code, merchant_name, merchant_alias, account_name, account_bank, account,
+        cur_balance, freeze_balance, pending_balance, verify_google, payin_ip, payout_ip, payin_security_key,
+        payout_security_key, webhook_url, istate, is_default, introduce, remark, merchant_reference, parent_state,
+        child_state, review_count, reference_id, reference_name, sales_name, screen_state, check_in, activated_time,
+        last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag, payin_key_name, payout_key_name,
+        payin_key_created_time, payout_key_created_time, payin_validity_period, payout_validity_period,
+        reconciliation_date, settlement_date, settlement_cycle, min_settle_amount, min_settle_ccy, active_status,
+        rcrr_risk_level, operator, register_status, regular_review_date, regular_review_stage, kgp_partner_merchant_id,
+        kgp_partner_shop_id, screen_decision
+        from tb_merchant
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="countryCode != null and countryCode != ''">
+                and country_code = #{countryCode}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="merchantAlias != null and merchantAlias != ''">
+                and merchant_alias = #{merchantAlias}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name = #{accountName}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                and account_bank = #{accountBank}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="curBalance != null">
+                and cur_balance = #{curBalance}
+            </if>
+            <if test="freezeBalance != null">
+                and freeze_balance = #{freezeBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="verifyGoogle != null and verifyGoogle != ''">
+                and verify_google = #{verifyGoogle}
+            </if>
+            <if test="payinIp != null and payinIp != ''">
+                and payin_ip = #{payinIp}
+            </if>
+            <if test="payoutIp != null and payoutIp != ''">
+                and payout_ip = #{payoutIp}
+            </if>
+            <if test="payinSecurityKey != null and payinSecurityKey != ''">
+                and payin_security_key = #{payinSecurityKey}
+            </if>
+            <if test="payoutSecurityKey != null and payoutSecurityKey != ''">
+                and payout_security_key = #{payoutSecurityKey}
+            </if>
+            <if test="webhookUrl != null and webhookUrl != ''">
+                and webhook_url = #{webhookUrl}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="isDefault != null">
+                and is_default = #{isDefault}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="merchantReference != null">
+                and merchant_reference = #{merchantReference}
+            </if>
+            <if test="parentState != null">
+                and parent_state = #{parentState}
+            </if>
+            <if test="childState != null">
+                and child_state = #{childState}
+            </if>
+            <if test="reviewCount != null">
+                and review_count = #{reviewCount}
+            </if>
+            <if test="referenceId != null">
+                and reference_id = #{referenceId}
+            </if>
+            <if test="referenceName != null and referenceName != ''">
+                and reference_name = #{referenceName}
+            </if>
+            <if test="salesName != null and salesName != ''">
+                and sales_name = #{salesName}
+            </if>
+            <if test="screenState != null and screenState != ''">
+                and screen_state = #{screenState}
+            </if>
+            <if test="checkIn != null and checkIn != ''">
+                and check_in = #{checkIn}
+            </if>
+            <if test="activatedTime != null">
+                and activated_time = #{activatedTime}
+            </if>
+            <if test="lastCheckIn != null and lastCheckIn != ''">
+                and last_check_in = #{lastCheckIn}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="payinIpFlag != null">
+                and payin_ip_flag = #{payinIpFlag}
+            </if>
+            <if test="payoutIpFlag != null">
+                and payout_ip_flag = #{payoutIpFlag}
+            </if>
+            <if test="payinKeyName != null and payinKeyName != ''">
+                and payin_key_name = #{payinKeyName}
+            </if>
+            <if test="payoutKeyName != null and payoutKeyName != ''">
+                and payout_key_name = #{payoutKeyName}
+            </if>
+            <if test="payinKeyCreatedTime != null">
+                and payin_key_created_time = #{payinKeyCreatedTime}
+            </if>
+            <if test="payoutKeyCreatedTime != null">
+                and payout_key_created_time = #{payoutKeyCreatedTime}
+            </if>
+            <if test="payinValidityPeriod != null">
+                and payin_validity_period = #{payinValidityPeriod}
+            </if>
+            <if test="payoutValidityPeriod != null">
+                and payout_validity_period = #{payoutValidityPeriod}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="settlementCycle != null">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="minSettleAmount != null">
+                and min_settle_amount = #{minSettleAmount}
+            </if>
+            <if test="minSettleCcy != null and minSettleCcy != ''">
+                and min_settle_ccy = #{minSettleCcy}
+            </if>
+            <if test="activeStatus != null and activeStatus != ''">
+                and active_status = #{activeStatus}
+            </if>
+            <if test="rcrrRiskLevel != null and rcrrRiskLevel != ''">
+                and rcrr_risk_level = #{rcrrRiskLevel}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="registerStatus != null and registerStatus != ''">
+                and register_status = #{registerStatus}
+            </if>
+            <if test="regularReviewDate != null">
+                and regular_review_date = #{regularReviewDate}
+            </if>
+            <if test="regularReviewStage != null and regularReviewStage != ''">
+                and regular_review_stage = #{regularReviewStage}
+            </if>
+            <if test="kgpPartnerMerchantId != null and kgpPartnerMerchantId != ''">
+                and kgp_partner_merchant_id = #{kgpPartnerMerchantId}
+            </if>
+            <if test="kgpPartnerShopId != null and kgpPartnerShopId != ''">
+                and kgp_partner_shop_id = #{kgpPartnerShopId}
+            </if>
+            <if test="screenDecision != null and screenDecision != ''">
+                and screen_decision = #{screenDecision}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="countryCode != null and countryCode != ''">
+                and country_code = #{countryCode}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="merchantAlias != null and merchantAlias != ''">
+                and merchant_alias = #{merchantAlias}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name = #{accountName}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                and account_bank = #{accountBank}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="curBalance != null">
+                and cur_balance = #{curBalance}
+            </if>
+            <if test="freezeBalance != null">
+                and freeze_balance = #{freezeBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="verifyGoogle != null and verifyGoogle != ''">
+                and verify_google = #{verifyGoogle}
+            </if>
+            <if test="payinIp != null and payinIp != ''">
+                and payin_ip = #{payinIp}
+            </if>
+            <if test="payoutIp != null and payoutIp != ''">
+                and payout_ip = #{payoutIp}
+            </if>
+            <if test="payinSecurityKey != null and payinSecurityKey != ''">
+                and payin_security_key = #{payinSecurityKey}
+            </if>
+            <if test="payoutSecurityKey != null and payoutSecurityKey != ''">
+                and payout_security_key = #{payoutSecurityKey}
+            </if>
+            <if test="webhookUrl != null and webhookUrl != ''">
+                and webhook_url = #{webhookUrl}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="isDefault != null">
+                and is_default = #{isDefault}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="merchantReference != null">
+                and merchant_reference = #{merchantReference}
+            </if>
+            <if test="parentState != null">
+                and parent_state = #{parentState}
+            </if>
+            <if test="childState != null">
+                and child_state = #{childState}
+            </if>
+            <if test="reviewCount != null">
+                and review_count = #{reviewCount}
+            </if>
+            <if test="referenceId != null">
+                and reference_id = #{referenceId}
+            </if>
+            <if test="referenceName != null and referenceName != ''">
+                and reference_name = #{referenceName}
+            </if>
+            <if test="salesName != null and salesName != ''">
+                and sales_name = #{salesName}
+            </if>
+            <if test="screenState != null and screenState != ''">
+                and screen_state = #{screenState}
+            </if>
+            <if test="checkIn != null and checkIn != ''">
+                and check_in = #{checkIn}
+            </if>
+            <if test="activatedTime != null">
+                and activated_time = #{activatedTime}
+            </if>
+            <if test="lastCheckIn != null and lastCheckIn != ''">
+                and last_check_in = #{lastCheckIn}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="payinIpFlag != null">
+                and payin_ip_flag = #{payinIpFlag}
+            </if>
+            <if test="payoutIpFlag != null">
+                and payout_ip_flag = #{payoutIpFlag}
+            </if>
+            <if test="payinKeyName != null and payinKeyName != ''">
+                and payin_key_name = #{payinKeyName}
+            </if>
+            <if test="payoutKeyName != null and payoutKeyName != ''">
+                and payout_key_name = #{payoutKeyName}
+            </if>
+            <if test="payinKeyCreatedTime != null">
+                and payin_key_created_time = #{payinKeyCreatedTime}
+            </if>
+            <if test="payoutKeyCreatedTime != null">
+                and payout_key_created_time = #{payoutKeyCreatedTime}
+            </if>
+            <if test="payinValidityPeriod != null">
+                and payin_validity_period = #{payinValidityPeriod}
+            </if>
+            <if test="payoutValidityPeriod != null">
+                and payout_validity_period = #{payoutValidityPeriod}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="settlementCycle != null">
+                and settlement_cycle = #{settlementCycle}
+            </if>
+            <if test="minSettleAmount != null">
+                and min_settle_amount = #{minSettleAmount}
+            </if>
+            <if test="minSettleCcy != null and minSettleCcy != ''">
+                and min_settle_ccy = #{minSettleCcy}
+            </if>
+            <if test="activeStatus != null and activeStatus != ''">
+                and active_status = #{activeStatus}
+            </if>
+            <if test="rcrrRiskLevel != null and rcrrRiskLevel != ''">
+                and rcrr_risk_level = #{rcrrRiskLevel}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="registerStatus != null and registerStatus != ''">
+                and register_status = #{registerStatus}
+            </if>
+            <if test="regularReviewDate != null">
+                and regular_review_date = #{regularReviewDate}
+            </if>
+            <if test="regularReviewStage != null and regularReviewStage != ''">
+                and regular_review_stage = #{regularReviewStage}
+            </if>
+            <if test="kgpPartnerMerchantId != null and kgpPartnerMerchantId != ''">
+                and kgp_partner_merchant_id = #{kgpPartnerMerchantId}
+            </if>
+            <if test="kgpPartnerShopId != null and kgpPartnerShopId != ''">
+                and kgp_partner_shop_id = #{kgpPartnerShopId}
+            </if>
+            <if test="screenDecision != null and screenDecision != ''">
+                and screen_decision = #{screenDecision}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant(user_id, agent_id, country_code, merchant_name, merchant_alias, account_name,
+                                account_bank, account, cur_balance, freeze_balance, pending_balance, verify_google,
+                                payin_ip, payout_ip, payin_security_key, payout_security_key, webhook_url, istate,
+                                is_default, introduce, remark, merchant_reference, parent_state, child_state,
+                                review_count, reference_id, reference_name, sales_name, screen_state, check_in,
+                                activated_time, last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag,
+                                payin_key_name, payout_key_name, payin_key_created_time, payout_key_created_time,
+                                payin_validity_period, payout_validity_period, reconciliation_date, settlement_date,
+                                settlement_cycle, min_settle_amount, min_settle_ccy, active_status, rcrr_risk_level,
+                                operator, register_status, regular_review_date, regular_review_stage,
+                                kgp_partner_merchant_id, kgp_partner_shop_id, screen_decision)
+        values (#{userId}, #{agentId}, #{countryCode}, #{merchantName}, #{merchantAlias}, #{accountName},
+                #{accountBank}, #{account}, #{curBalance}, #{freezeBalance}, #{pendingBalance}, #{verifyGoogle},
+                #{payinIp}, #{payoutIp}, #{payinSecurityKey}, #{payoutSecurityKey}, #{webhookUrl}, #{istate},
+                #{isDefault}, #{introduce}, #{remark}, #{merchantReference}, #{parentState}, #{childState},
+                #{reviewCount}, #{referenceId}, #{referenceName}, #{salesName}, #{screenState}, #{checkIn},
+                #{activatedTime}, #{lastCheckIn}, #{createdTime}, #{updateTime}, #{payinIpFlag}, #{payoutIpFlag},
+                #{payinKeyName}, #{payoutKeyName}, #{payinKeyCreatedTime}, #{payoutKeyCreatedTime},
+                #{payinValidityPeriod}, #{payoutValidityPeriod}, #{reconciliationDate}, #{settlementDate},
+                #{settlementCycle}, #{minSettleAmount}, #{minSettleCcy}, #{activeStatus}, #{rcrrRiskLevel}, #{operator},
+                #{registerStatus}, #{regularReviewDate}, #{regularReviewStage}, #{kgpPartnerMerchantId},
+                #{kgpPartnerShopId}, #{screenDecision})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant(user_id, agent_id, country_code, merchant_name, merchant_alias, account_name,
+        account_bank, account, cur_balance, freeze_balance, pending_balance, verify_google, payin_ip, payout_ip,
+        payin_security_key, payout_security_key, webhook_url, istate, is_default, introduce, remark, merchant_reference,
+        parent_state, child_state, review_count, reference_id, reference_name, sales_name, screen_state, check_in,
+        activated_time, last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag, payin_key_name,
+        payout_key_name, payin_key_created_time, payout_key_created_time, payin_validity_period, payout_validity_period,
+        reconciliation_date, settlement_date, settlement_cycle, min_settle_amount, min_settle_ccy, active_status,
+        rcrr_risk_level, operator, register_status, regular_review_date, regular_review_stage, kgp_partner_merchant_id,
+        kgp_partner_shop_id, screen_decision)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.userId}, #{entity.agentId}, #{entity.countryCode}, #{entity.merchantName},
+            #{entity.merchantAlias}, #{entity.accountName}, #{entity.accountBank}, #{entity.account},
+            #{entity.curBalance}, #{entity.freezeBalance}, #{entity.pendingBalance}, #{entity.verifyGoogle},
+            #{entity.payinIp}, #{entity.payoutIp}, #{entity.payinSecurityKey}, #{entity.payoutSecurityKey},
+            #{entity.webhookUrl}, #{entity.istate}, #{entity.isDefault}, #{entity.introduce}, #{entity.remark},
+            #{entity.merchantReference}, #{entity.parentState}, #{entity.childState}, #{entity.reviewCount},
+            #{entity.referenceId}, #{entity.referenceName}, #{entity.salesName}, #{entity.screenState},
+            #{entity.checkIn}, #{entity.activatedTime}, #{entity.lastCheckIn}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.payinIpFlag}, #{entity.payoutIpFlag}, #{entity.payinKeyName},
+            #{entity.payoutKeyName}, #{entity.payinKeyCreatedTime}, #{entity.payoutKeyCreatedTime},
+            #{entity.payinValidityPeriod}, #{entity.payoutValidityPeriod}, #{entity.reconciliationDate},
+            #{entity.settlementDate}, #{entity.settlementCycle}, #{entity.minSettleAmount}, #{entity.minSettleCcy},
+            #{entity.activeStatus}, #{entity.rcrrRiskLevel}, #{entity.operator}, #{entity.registerStatus},
+            #{entity.regularReviewDate}, #{entity.regularReviewStage}, #{entity.kgpPartnerMerchantId},
+            #{entity.kgpPartnerShopId}, #{entity.screenDecision})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant(user_id, agent_id, country_code, merchant_name, merchant_alias, account_name,
+        account_bank, account, cur_balance, freeze_balance, pending_balance, verify_google, payin_ip, payout_ip,
+        payin_security_key, payout_security_key, webhook_url, istate, is_default, introduce, remark, merchant_reference,
+        parent_state, child_state, review_count, reference_id, reference_name, sales_name, screen_state, check_in,
+        activated_time, last_check_in, created_time, update_time, payin_ip_flag, payout_ip_flag, payin_key_name,
+        payout_key_name, payin_key_created_time, payout_key_created_time, payin_validity_period, payout_validity_period,
+        reconciliation_date, settlement_date, settlement_cycle, min_settle_amount, min_settle_ccy, active_status,
+        rcrr_risk_level, operator, register_status, regular_review_date, regular_review_stage, kgp_partner_merchant_id,
+        kgp_partner_shop_id, screen_decision)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.userId}, #{entity.agentId}, #{entity.countryCode}, #{entity.merchantName},
+            #{entity.merchantAlias}, #{entity.accountName}, #{entity.accountBank}, #{entity.account},
+            #{entity.curBalance}, #{entity.freezeBalance}, #{entity.pendingBalance}, #{entity.verifyGoogle},
+            #{entity.payinIp}, #{entity.payoutIp}, #{entity.payinSecurityKey}, #{entity.payoutSecurityKey},
+            #{entity.webhookUrl}, #{entity.istate}, #{entity.isDefault}, #{entity.introduce}, #{entity.remark},
+            #{entity.merchantReference}, #{entity.parentState}, #{entity.childState}, #{entity.reviewCount},
+            #{entity.referenceId}, #{entity.referenceName}, #{entity.salesName}, #{entity.screenState},
+            #{entity.checkIn}, #{entity.activatedTime}, #{entity.lastCheckIn}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.payinIpFlag}, #{entity.payoutIpFlag}, #{entity.payinKeyName},
+            #{entity.payoutKeyName}, #{entity.payinKeyCreatedTime}, #{entity.payoutKeyCreatedTime},
+            #{entity.payinValidityPeriod}, #{entity.payoutValidityPeriod}, #{entity.reconciliationDate},
+            #{entity.settlementDate}, #{entity.settlementCycle}, #{entity.minSettleAmount}, #{entity.minSettleCcy},
+            #{entity.activeStatus}, #{entity.rcrrRiskLevel}, #{entity.operator}, #{entity.registerStatus},
+            #{entity.regularReviewDate}, #{entity.regularReviewStage}, #{entity.kgpPartnerMerchantId},
+            #{entity.kgpPartnerShopId}, #{entity.screenDecision})
+        </foreach>
+        on duplicate key update
+        user_id = values(user_id),
+        agent_id = values(agent_id),
+        country_code = values(country_code),
+        merchant_name = values(merchant_name),
+        merchant_alias = values(merchant_alias),
+        account_name = values(account_name),
+        account_bank = values(account_bank),
+        account = values(account),
+        cur_balance = values(cur_balance),
+        freeze_balance = values(freeze_balance),
+        pending_balance = values(pending_balance),
+        verify_google = values(verify_google),
+        payin_ip = values(payin_ip),
+        payout_ip = values(payout_ip),
+        payin_security_key = values(payin_security_key),
+        payout_security_key = values(payout_security_key),
+        webhook_url = values(webhook_url),
+        istate = values(istate),
+        is_default = values(is_default),
+        introduce = values(introduce),
+        remark = values(remark),
+        merchant_reference = values(merchant_reference),
+        parent_state = values(parent_state),
+        child_state = values(child_state),
+        review_count = values(review_count),
+        reference_id = values(reference_id),
+        reference_name = values(reference_name),
+        sales_name = values(sales_name),
+        screen_state = values(screen_state),
+        check_in = values(check_in),
+        activated_time = values(activated_time),
+        last_check_in = values(last_check_in),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        payin_ip_flag = values(payin_ip_flag),
+        payout_ip_flag = values(payout_ip_flag),
+        payin_key_name = values(payin_key_name),
+        payout_key_name = values(payout_key_name),
+        payin_key_created_time = values(payin_key_created_time),
+        payout_key_created_time = values(payout_key_created_time),
+        payin_validity_period = values(payin_validity_period),
+        payout_validity_period = values(payout_validity_period),
+        reconciliation_date = values(reconciliation_date),
+        settlement_date = values(settlement_date),
+        settlement_cycle = values(settlement_cycle),
+        min_settle_amount = values(min_settle_amount),
+        min_settle_ccy = values(min_settle_ccy),
+        active_status = values(active_status),
+        rcrr_risk_level = values(rcrr_risk_level),
+        operator = values(operator),
+        register_status = values(register_status),
+        regular_review_date = values(regular_review_date),
+        regular_review_stage = values(regular_review_stage),
+        kgp_partner_merchant_id = values(kgp_partner_merchant_id),
+        kgp_partner_shop_id = values(kgp_partner_shop_id),
+        screen_decision = values(screen_decision)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="countryCode != null and countryCode != ''">
+                country_code = #{countryCode},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="merchantAlias != null and merchantAlias != ''">
+                merchant_alias = #{merchantAlias},
+            </if>
+            <if test="accountName != null and accountName != ''">
+                account_name = #{accountName},
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                account_bank = #{accountBank},
+            </if>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="curBalance != null">
+                cur_balance = #{curBalance},
+            </if>
+            <if test="freezeBalance != null">
+                freeze_balance = #{freezeBalance},
+            </if>
+            <if test="pendingBalance != null">
+                pending_balance = #{pendingBalance},
+            </if>
+            <if test="verifyGoogle != null and verifyGoogle != ''">
+                verify_google = #{verifyGoogle},
+            </if>
+            <if test="payinIp != null and payinIp != ''">
+                payin_ip = #{payinIp},
+            </if>
+            <if test="payoutIp != null and payoutIp != ''">
+                payout_ip = #{payoutIp},
+            </if>
+            <if test="payinSecurityKey != null and payinSecurityKey != ''">
+                payin_security_key = #{payinSecurityKey},
+            </if>
+            <if test="payoutSecurityKey != null and payoutSecurityKey != ''">
+                payout_security_key = #{payoutSecurityKey},
+            </if>
+            <if test="webhookUrl != null and webhookUrl != ''">
+                webhook_url = #{webhookUrl},
+            </if>
+            <if test="istate != null">
+                istate = #{istate},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault},
+            </if>
+            <if test="introduce != null and introduce != ''">
+                introduce = #{introduce},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="merchantReference != null">
+                merchant_reference = #{merchantReference},
+            </if>
+            <if test="parentState != null">
+                parent_state = #{parentState},
+            </if>
+            <if test="childState != null">
+                child_state = #{childState},
+            </if>
+            <if test="reviewCount != null">
+                review_count = #{reviewCount},
+            </if>
+            <if test="referenceId != null">
+                reference_id = #{referenceId},
+            </if>
+            <if test="referenceName != null and referenceName != ''">
+                reference_name = #{referenceName},
+            </if>
+            <if test="salesName != null and salesName != ''">
+                sales_name = #{salesName},
+            </if>
+            <if test="screenState != null and screenState != ''">
+                screen_state = #{screenState},
+            </if>
+            <if test="checkIn != null and checkIn != ''">
+                check_in = #{checkIn},
+            </if>
+            <if test="activatedTime != null">
+                activated_time = #{activatedTime},
+            </if>
+            <if test="lastCheckIn != null and lastCheckIn != ''">
+                last_check_in = #{lastCheckIn},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="payinIpFlag != null">
+                payin_ip_flag = #{payinIpFlag},
+            </if>
+            <if test="payoutIpFlag != null">
+                payout_ip_flag = #{payoutIpFlag},
+            </if>
+            <if test="payinKeyName != null and payinKeyName != ''">
+                payin_key_name = #{payinKeyName},
+            </if>
+            <if test="payoutKeyName != null and payoutKeyName != ''">
+                payout_key_name = #{payoutKeyName},
+            </if>
+            <if test="payinKeyCreatedTime != null">
+                payin_key_created_time = #{payinKeyCreatedTime},
+            </if>
+            <if test="payoutKeyCreatedTime != null">
+                payout_key_created_time = #{payoutKeyCreatedTime},
+            </if>
+            <if test="payinValidityPeriod != null">
+                payin_validity_period = #{payinValidityPeriod},
+            </if>
+            <if test="payoutValidityPeriod != null">
+                payout_validity_period = #{payoutValidityPeriod},
+            </if>
+            <if test="reconciliationDate != null">
+                reconciliation_date = #{reconciliationDate},
+            </if>
+            <if test="settlementDate != null">
+                settlement_date = #{settlementDate},
+            </if>
+            <if test="settlementCycle != null">
+                settlement_cycle = #{settlementCycle},
+            </if>
+            <if test="minSettleAmount != null">
+                min_settle_amount = #{minSettleAmount},
+            </if>
+            <if test="minSettleCcy != null and minSettleCcy != ''">
+                min_settle_ccy = #{minSettleCcy},
+            </if>
+            <if test="activeStatus != null and activeStatus != ''">
+                active_status = #{activeStatus},
+            </if>
+            <if test="rcrrRiskLevel != null and rcrrRiskLevel != ''">
+                rcrr_risk_level = #{rcrrRiskLevel},
+            </if>
+            <if test="operator != null and operator != ''">
+                operator = #{operator},
+            </if>
+            <if test="registerStatus != null and registerStatus != ''">
+                register_status = #{registerStatus},
+            </if>
+            <if test="regularReviewDate != null">
+                regular_review_date = #{regularReviewDate},
+            </if>
+            <if test="regularReviewStage != null and regularReviewStage != ''">
+                regular_review_stage = #{regularReviewStage},
+            </if>
+            <if test="kgpPartnerMerchantId != null and kgpPartnerMerchantId != ''">
+                kgp_partner_merchant_id = #{kgpPartnerMerchantId},
+            </if>
+            <if test="kgpPartnerShopId != null and kgpPartnerShopId != ''">
+                kgp_partner_shop_id = #{kgpPartnerShopId},
+            </if>
+            <if test="screenDecision != null and screenDecision != ''">
+                screen_decision = #{screenDecision},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant
+        where id = #{id}
+    </delete>
+
+
+    <select id="queryMerchantBizInfo" resultType="com.futurebank.order.vo.Invoice.MerchantBizInfoVo">
+        SELECT
+          bz.merchant_id merchantId,bz.register_country_code registerCountryCode, bz.register_name_en registerNameEn, mc.ci_code ciCode
+        FROM tb_merchant_basic bz
+        LEFT JOIN tb_merchant_mat_ci mc ON bz.merchant_id = mc.merchant_id
+        where bz.merchant_id = #{merchantId}
+        limit 1
+    </select>
+
+</mapper>
+

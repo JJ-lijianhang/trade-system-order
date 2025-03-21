@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantReconMapper">
+
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.MerchantReconciliationCalendarEntity" >
+        <result column="provider_id" property="providerId" />
+        <result column="provider_name" property="providerName" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="currency" property="currency" />
+        <result column="estimated_settlement_date" property="estimatedSettlementDate" />
+        <result column="recon_date" property="reconDate" />
+        <result column="payment_method" property="paymentMethod" />
+        <result column="transaction_amount" property="transactionAmount" />
+        <result column="transaction_count" property="transactionCount" />
+        <result column="success_amount" property="successAmount" />
+        <result column="success_count" property="successCount" />
+        <result column="refund_amount" property="refundAmount" />
+        <result column="refund_count" property="refundCount" />
+        <result column="rejected_amount" property="rejectedAmount" />
+        <result column="rejected_count" property="rejectedCount" />
+        <result column="network_fee" property="networkFee" />
+        <result column="network_fee_ccy" property="networkFeeCcy" />
+        <result column="fixed_fee" property="fixedFee" />
+        <result column="fixed_fee_ccy" property="fixedFeeCcy" />
+        <result column="percentage_fee" property="percentageFee" />
+        <result column="percentage_fee_ccy" property="percentageFeeCcy" />
+        <result column="refund_fee" property="refundFee" />
+        <result column="refund_fee_ccy" property="refundFeeCcy" />
+        <result column="rejected_fee" property="rejectedFee" />
+        <result column="rejected_fee_ccy" property="rejectedFeeCcy" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        provider_id,
+        provider_name,
+        merchant_id,
+        currency,
+        estimated_settlement_date,
+        recon_date,
+        payment_method,
+        transaction_amount,
+        transaction_count,
+        success_amount,
+        success_count,
+        refund_amount,
+        refund_count,
+        rejected_amount,
+        rejected_count,
+        network_fee,
+        network_fee_ccy,
+        fixed_fee,
+        fixed_fee_ccy,
+        percentage_fee,
+        percentage_fee_ccy,
+        refund_fee,
+        refund_fee_ccy,
+        rejected_fee,
+        rejected_fee_ccy,
+        revision,
+        created_by,
+        created_time,
+        updated_by,
+        updated_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.MerchantReconciliationCalendarEntity">
+        INSERT INTO tb_merchant_reconciliation_calendar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != providerId ">
+                provider_id,
+            </if>
+            <if test="null != providerName and '' != providerName">
+                provider_name,
+            </if>
+            <if test="null != merchantId ">
+                merchant_id,
+            </if>
+            <if test="null != currency and '' != currency">
+                currency,
+            </if>
+            <if test="null != estimatedSettlementDate ">
+                estimated_settlement_date,
+            </if>
+            <if test="null != reconDate ">
+                recon_date,
+            </if>
+            <if test="null != paymentMethod and '' != paymentMethod">
+                payment_method,
+            </if>
+            <if test="null != transactionAmount ">
+                transaction_amount,
+            </if>
+            <if test="null != transactionCount ">
+                transaction_count,
+            </if>
+            <if test="null != successAmount ">
+                success_amount,
+            </if>
+            <if test="null != successCount ">
+                success_count,
+            </if>
+            <if test="null != refundAmount ">
+                refund_amount,
+            </if>
+            <if test="null != refundCount ">
+                refund_count,
+            </if>
+            <if test="null != rejectedAmount ">
+                rejected_amount,
+            </if>
+            <if test="null != rejectedCount ">
+                rejected_count,
+            </if>
+            <if test="null != networkFee ">
+                network_fee,
+            </if>
+            <if test="null != networkFeeCcy ">
+                network_fee_ccy,
+            </if>
+            <if test="null != fixedFee ">
+                fixed_fee,
+            </if>
+            <if test="null != fixedFeeCcy ">
+                fixed_fee_ccy,
+            </if>
+            <if test="null != percentageFee ">
+                percentage_fee,
+            </if>
+            <if test="null != percentageFeeCcy ">
+                percentage_fee_ccy,
+            </if>
+            <if test="null != refundFee ">
+                refund_fee,
+            </if>
+            <if test="null != refundFeeCcy ">
+                refund_fee_ccy,
+            </if>
+            <if test="null != rejectedFee ">
+                rejected_fee,
+            </if>
+            <if test="null != rejectedFeeCcy ">
+                rejected_fee_ccy,
+            </if>
+            <if test="null != revision ">
+                revision,
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                created_by,
+            </if>
+            <if test="null != createdTime ">
+                created_time,
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                updated_by,
+            </if>
+            <if test="null != updatedTime ">
+                updated_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != providerId ">
+                #{providerId},
+            </if>
+            <if test="null != providerName and '' != providerName">
+                #{providerName},
+            </if>
+            <if test="null != merchantId ">
+                #{merchantId},
+            </if>
+            <if test="null != currency and '' != currency">
+                #{currency},
+            </if>
+            <if test="null != estimatedSettlementDate and '' != estimatedSettlementDate">
+                #{estimatedSettlementDate},
+            </if>
+            <if test="null != reconDate and '' != reconDate">
+                #{reconDate},
+            </if>
+            <if test="null != paymentMethod and '' != paymentMethod">
+                #{paymentMethod},
+            </if>
+            <if test="null != transactionAmount ">
+                #{transactionAmount},
+            </if>
+            <if test="null != transactionCount ">
+                #{transactionCount},
+            </if>
+            <if test="null != successAmount ">
+                #{successAmount},
+            </if>
+            <if test="null != successCount ">
+                #{successCount},
+            </if>
+            <if test="null != refundAmount ">
+                #{refundAmount},
+            </if>
+            <if test="null != refundCount ">
+                #{refundCount},
+            </if>
+            <if test="null != rejectedAmount ">
+                #{rejectedAmount},
+            </if>
+            <if test="null != rejectedCount ">
+                #{rejectedCount},
+            </if>
+            <if test="null != networkFee ">
+                #{networkFee},
+            </if>
+            <if test="null != networkFeeCcy ">
+                #{networkFeeCcy},
+            </if>
+            <if test="null != fixedFee ">
+                #{fixedFee},
+            </if>
+            <if test="null != fixedFeeCcy ">
+                #{fixedFeeCcy},
+            </if>
+            <if test="null != percentageFee ">
+                #{percentageFee},
+            </if>
+            <if test="null != percentageFeeCcy ">
+                #{percentageFeeCcy},
+            </if>
+            <if test="null != refundFee ">
+                #{refundFee},
+            </if>
+            <if test="null != refundFeeCcy ">
+                #{refundFeeCcy},
+            </if>
+            <if test="null != rejectedFee ">
+                #{rejectedFee},
+            </if>
+            <if test="null != rejectedFeeCcy ">
+                #{rejectedFeeCcy},
+            </if>
+            <if test="null != revision ">
+                #{revision},
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                #{createdBy},
+            </if>
+            <if test="null != createdTime ">
+                #{createdTime},
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                #{updatedBy},
+            </if>
+            <if test="null != updatedTime ">
+                #{updatedTime}
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="getMerchantReconciliation" resultType="com.futurebank.order.entity.PaymentOrderEntity">
+        select
+            merchant_id,platform_order_no,downstream_order_no, provider_id,order_type,order_status,transaction_type,acquiring_mode,country,payment_method,merchant_currency,currency,
+            merchant_order_amount,order_amount,downstream_order_no ,platform_order_no ,order_create_time ,order_complete_time ,
+            downstream_fixed_fee ,downstream_tx_rate ,downstream_fee,downstream_fee_c,settlement_cycle,downstream_gateway_fee,upstream_gateway_fee
+        FROM tb_payment_order
+        where order_status IN ( 'FAILED' , 'SUCCEED')
+          AND merchant_id = #{merchantId}
+          AND provider_id  = #{providerId}
+          AND payment_method = #{paymentMethod}
+          AND order_complete_time  BETWEEN #{createTimeB} AND #{createTimeE}
+    </select>
+
+
+    <select id="querySummaryByReconDate" resultType="com.futurebank.order.vo.SummaryReconVo">
+        SELECT
+            recon_date as reconDate,
+            provider_id as providerId,
+            provider_name as providerName,
+            merchant_id as merchantId,
+            payment_method as paymentMethod,
+            currency,
+            SUM(transaction_amount - refund_amount - rejected_amount - percentage_fee  - fixed_fee - network_fee) as totalAmount
+        FROM tb_merchant_reconciliation_calendar
+        WHERE recon_date = #{reconDate} AND merchant_id = #{merchantId} AND provider_id = #{providerId}
+        GROUP BY provider_name,payment_method,currency
+    </select>
+
+    <select id="queryList" resultType="com.futurebank.order.entity.MerchantReconciliationCalendarEntity">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_reconciliation_calendar
+        WHERE merchant_id = #{merchantId} AND recon_date = #{reconDate}
+    </select>
+
+    <delete id="deleteByMerchantIdAndReconDate">
+        DELETE FROM tb_merchant_reconciliation_calendar
+        WHERE merchant_id = #{merchantId} AND recon_date = #{reconDate}
+    </delete>
+
+
+    <delete id="delete" >
+        DELETE FROM tb_merchant_reconciliation_calendar
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.futurebank.order.entity.MerchantReconciliationCalendarEntity">
+        UPDATE tb_merchant_reconciliation_calendar
+        <set>
+            <if test="null != providerId ">provider_id = #{providerId},</if>
+            <if test="null != providerName and '' != providerName">provider_name = #{providerName},</if>
+            <if test="null != merchantId ">merchant_id = #{merchantId},</if>
+            <if test="null != currency and '' != currency">currency = #{currency},</if>
+            <if test="null != estimatedSettlementDate ">estimated_settlement_date = #{estimatedSettlementDate},</if>
+            <if test="null != reconDate ">recon_date = #{reconDate},</if>
+            <if test="null != paymentMethod and '' != paymentMethod">payment_method = #{paymentMethod},</if>
+            <if test="null != transactionAmount ">transaction_amount = #{transactionAmount},</if>
+            <if test="null != transactionCount ">transaction_count = #{transactionCount},</if>
+            <if test="null != successAmount ">success_amount = #{successAmount},</if>
+            <if test="null != successCount ">success_count = #{successCount},</if>
+            <if test="null != refundAmount ">refund_amount = #{refundAmount},</if>
+            <if test="null != refundCount ">refund_count = #{refundCount},</if>
+            <if test="null != rejectedAmount ">rejected_amount = #{rejectedAmount},</if>
+            <if test="null != rejectedCount ">rejected_count = #{rejectedCount},</if>
+            <if test="null != networkFee ">network_fee = #{networkFee},</if>
+            <if test="null != fixedFee ">fixed_fee = #{fixedFee},</if>
+            <if test="null != percentageFee ">percentage_fee = #{percentageFee},</if>
+            <if test="null != refundFee ">refund_fee = #{refundFee},</if>
+            <if test="null != rejectedFee ">rejected_fee = #{rejectedFee},</if>
+            <if test="null != revision ">revision = #{revision},</if>
+            <if test="null != createdBy and '' != createdBy">created_by = #{createdBy},</if>
+            <if test="null != createdTime ">created_time = #{createdTime},</if>
+            <if test="null != updatedBy and '' != updatedBy">updated_by = #{updatedBy},</if>
+            <if test="null != updatedTime ">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_reconciliation_calendar
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_merchant_reconciliation_calendar
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_merchant_reconciliation_calendar
+    </select>
+
+</mapper>

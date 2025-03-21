@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.GepCurrencyMapper">
+
+    <resultMap type="com.futurebank.order.entity.GepCurrencyEntity" id="GepCurrencyMap">
+            <result property="id" column="id" />
+            <result property="currency" column="currency" />
+            <result property="iso3" column="iso3" />
+            <result property="countryEn" column="country_en" />
+            <result property="country" column="country" />
+            <result property="isExchange" column="is_exchange" />
+            <result property="isPayee" column="is_payee" />
+            <result property="isPayment" column="is_payment" />
+            <result property="channelId" column="channel_id" />
+            <result property="isSwift" column="is_swift" />
+            <result property="isLocal" column="is_local" />
+    </resultMap>
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="GepCurrencyMap">
+        select
+            id, currency, iso3, country_en, country, is_exchange, is_payee, is_payment, channel_id, is_swift, is_local
+        from tb_gep_currency
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="iso3 != null and iso3 != ''">
+                and iso3 = #{iso3}
+            </if>
+            <if test="countryEn != null and countryEn != ''">
+                and country_en = #{countryEn}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="isExchange != null">
+                and is_exchange = #{isExchange}
+            </if>
+            <if test="isPayee != null">
+                and is_payee = #{isPayee}
+            </if>
+            <if test="isPayment != null">
+                and is_payment = #{isPayment}
+            </if>
+            <if test="channelId != null and channelId != ''">
+                and channel_id = #{channelId}
+            </if>
+            <if test="isSwift != null">
+                and is_swift = #{isSwift}
+            </if>
+            <if test="isLocal != null">
+                and is_local = #{isLocal}
+            </if>
+        </where>
+    </select>
+
+</mapper>
+

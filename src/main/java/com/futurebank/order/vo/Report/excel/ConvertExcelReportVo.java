@@ -1,0 +1,59 @@
+package com.futurebank.order.vo.Report.excel;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ConvertExcelReportVo {
+    /**
+     * 引用号
+     */
+    private String reference;
+
+    /**
+     * 创建日期
+     */
+    private String createdDate;
+
+    /**
+     * 完成日期
+     */
+    private String completedDate;
+
+    /**
+     * 状态 订单状态0-待生效，10-处理中，2000-成功，3000-失败，4000-取消）
+     * 订单状态 0：待生成 10：处理中，20 失败待确认, 30 失败待复核，40 成功待复核，2000：成功，2500：失败，3000：取消
+     */
+    private String status;
+
+    /**
+     * 卖出金额
+     */
+    private String sold;
+
+    /**
+     * 卖出货币
+     */
+    private String soldCurrency;
+
+    /**
+     * 买入金额
+     */
+    private String bought;
+
+    /**
+     * 买入货币
+     */
+    private String boughtCurrency;
+
+    /**
+     * 汇率
+     */
+    private String rate;
+
+    /**
+     * 类型 交割方式 1 实时 2委托
+     */
+    private String type;
+}

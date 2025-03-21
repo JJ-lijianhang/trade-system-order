@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantSettlementMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantSettlementEntity" id="MerchantSettlementMap">
+        <result property="id" column="id"/>
+        <result property="settleId" column="settle_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="currency" column="currency"/>
+        <result property="tiggerCurrency" column="tigger_currency"/>
+        <result property="exchange" column="exchange"/>
+        <result property="exchangeAmount" column="exchange_amount"/>
+        <result property="markup" column="markup"/>
+        <result property="markFee" column="mark_fee"/>
+        <result property="settlementAmount" column="settlement_amount"/>
+        <result property="transactionAmount" column="transaction_amount"/>
+        <result property="rateFee" column="rate_fee"/>
+        <result property="fixFee" column="fix_fee"/>
+        <result property="percentageFee" column="percentage_fee"/>
+        <result property="settleTimeBegin" column="settle_time_begin"/>
+        <result property="settleTimeEnd" column="settle_tIme_end"/>
+        <result property="settleStatus" column="settle_status"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="publishOper" column="publish_oper"/>
+        <result property="confirmOper" column="confirm_oper"/>
+        <result property="confirmTime" column="confirm_time"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantSettlementMap">
+        select id,
+               provider_id,
+               provider_name,
+               settle_id,
+               merchant_id,
+               currency,
+               tigger_currency,
+               exchange,
+               exchange_amount,
+               markup,
+               mark_fee,
+               settlement_amount,
+               transaction_amount,
+               rate_fee,
+               fix_fee,
+               percentage_fee,
+               settle_time_begin,
+               settle_tIme_end,
+               settle_status,
+               created_time,
+               publish_time,
+               publish_oper,
+               confirm_oper,
+               confirm_time,
+               payment_time,
+               remark
+        from tb_merchant_settlement
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount, markup, mark_fee,
+        settlement_amount, transaction_amount, rate_fee, fix_fee, percentage_fee, settle_time_begin, settle_tIme_end,
+        settle_status, created_time, publish_time, publish_oper, confirm_oper, confirm_time, payment_time, remark
+        from tb_merchant_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markFee != null">
+                and mark_fee = #{markFee}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and confirm_time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount, markup, mark_fee,
+        settlement_amount, transaction_amount, rate_fee, fix_fee, percentage_fee, settle_time_begin, settle_tIme_end,
+        settle_status, created_time, publish_time, publish_oper, confirm_oper, confirm_time, payment_time, remark
+        from tb_merchant_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markFee != null">
+                and mark_fee = #{markFee}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and confirm_time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount, markup, mark_fee,
+        settlement_amount, transaction_amount, rate_fee, fix_fee, percentage_fee, settle_time_begin, settle_tIme_end,
+        settle_status, created_time, publish_time, publish_oper, confirm_oper, confirm_time, payment_time, remark
+        from tb_merchant_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markFee != null">
+                and mark_fee = #{markFee}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and confirm_time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markFee != null">
+                and mark_fee = #{markFee}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and confirm_time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount,
+                                           markup, mark_fee, settlement_amount, transaction_amount, rate_fee, fix_fee,
+                                           percentage_fee, settle_time_begin, settle_tIme_end, settle_status,
+                                           created_time, publish_time, publish_oper, confirm_oper, confirm_time,
+                                           payment_time, remark)
+        values (#{providerId},#{providerName},#{settleId},#{merchantId}, #{currency}, #{tiggerCurrency}, #{exchange}, #{exchangeAmount}, #{markup},
+                #{markFee}, #{settlementAmount}, #{transactionAmount}, #{rateFee}, #{fixFee}, #{percentageFee},
+                #{settleTimeBegin}, #{settleTimeEnd}, #{settleStatus}, #{createdTime}, #{publishTime}, #{publishOper},
+                #{confirmOper}, #{confirmTime}, #{paymentTime}, #{remark})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount,
+        markup, mark_fee, settlement_amount, transaction_amount, rate_fee, fix_fee, percentage_fee, settle_time_begin,
+        settle_tIme_end, settle_status, created_time, publish_time, publish_oper, confirm_oper, confirm_time,
+        payment_time, remark)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settleId}, #{entity.merchantId}, #{entity.currency}, #{entity.tiggerCurrency}, #{entity.exchange},
+            #{entity.exchangeAmount}, #{entity.markup}, #{entity.markFee}, #{entity.settlementAmount},
+            #{entity.transactionAmount}, #{entity.rateFee}, #{entity.fixFee}, #{entity.percentageFee},
+            #{entity.settleTimeBegin}, #{entity.settleTimeEnd}, #{entity.settleStatus}, #{entity.createdTime},
+            #{entity.publishTime}, #{entity.publishOper}, #{entity.confirmOper}, #{entity.confirmTime},
+            #{entity.paymentTime}, #{entity.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tigger_currency, exchange, exchange_amount,
+        markup, mark_fee, settlement_amount, transaction_amount, rate_fee, fix_fee, percentage_fee, settle_time_begin,
+        settle_tIme_end, settle_status, created_time, publish_time, publish_oper, confirm_oper, confirm_time,
+        payment_time, remark)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settleId}, #{entity.merchantId}, #{entity.currency}, #{entity.tiggerCurrency}, #{entity.exchange},
+            #{entity.exchangeAmount}, #{entity.markup}, #{entity.markFee}, #{entity.settlementAmount},
+            #{entity.transactionAmount}, #{entity.rateFee}, #{entity.fixFee}, #{entity.percentageFee},
+            #{entity.settleTimeBegin}, #{entity.settleTimeEnd}, #{entity.settleStatus}, #{entity.createdTime},
+            #{entity.publishTime}, #{entity.publishOper}, #{entity.confirmOper}, #{entity.confirmTime},
+            #{entity.paymentTime}, #{entity.remark})
+        </foreach>
+        on duplicate key update
+        settle_id = values(settle_id),
+        merchant_id = values(merchant_id),
+        currency = values(currency),
+        tigger_currency = values(tigger_currency),
+        exchange = values(exchange),
+        exchange_amount = values(exchange_amount),
+        markup = values(markup),
+        mark_fee = values(mark_fee),
+        settlement_amount = values(settlement_amount),
+        transaction_amount = values(transaction_amount),
+        rate_fee = values(rate_fee),
+        fix_fee = values(fix_fee),
+        percentage_fee = values(percentage_fee),
+        settle_time_begin = values(settle_time_begin),
+        settle_tIme_end = values(settle_tIme_end),
+        settle_status = values(settle_status),
+        created_time = values(created_time),
+        publish_time = values(publish_time),
+        publish_oper = values(publish_oper),
+        confirm_oper = values(confirm_oper),
+        confirm_time = values(confirm_time),
+        payment_time = values(payment_time),
+        remark = values(remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_settlement
+        <set>
+            <if test="settleId != null and settleId != ''">
+                settle_id = #{settleId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                tigger_currency = #{tiggerCurrency},
+            </if>
+            <if test="exchange != null">
+                exchange = #{exchange},
+            </if>
+            <if test="exchangeAmount != null">
+                exchange_amount = #{exchangeAmount},
+            </if>
+            <if test="markup != null">
+                markup = #{markup},
+            </if>
+            <if test="markFee != null">
+                mark_fee = #{markFee},
+            </if>
+            <if test="settlementAmount != null">
+                settlement_amount = #{settlementAmount},
+            </if>
+            <if test="transactionAmount != null">
+                transaction_amount = #{transactionAmount},
+            </if>
+            <if test="rateFee != null">
+                rate_fee = #{rateFee},
+            </if>
+            <if test="fixFee != null">
+                fix_fee = #{fixFee},
+            </if>
+            <if test="percentageFee != null">
+                percentage_fee = #{percentageFee},
+            </if>
+            <if test="settleTimeBegin != null">
+                settle_time_begin = #{settleTimeBegin},
+            </if>
+            <if test="settleTimeEnd != null">
+                settle_tIme_end = #{settleTimeEnd},
+            </if>
+            <if test="settleStatus != null">
+                settle_status = #{settleStatus},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="publishTime != null">
+                publish_time = #{publishTime},
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                publish_oper = #{publishOper},
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                confirm_oper = #{confirmOper},
+            </if>
+            <if test="confirmTime != null">
+                confirm_time = #{confirmTime},
+            </if>
+            <if test="paymentTime != null">
+                payment_time = #{paymentTime},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_settlement
+        where id = #{id}
+    </delete>
+
+</mapper>
+

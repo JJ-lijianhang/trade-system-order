@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.FileHandleLogMapper">
+
+    <resultMap type="com.futurebank.order.entity.FileHandleLogEntity" id="FileHandleLogMap">
+        <result property="id" column="id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="fileType" column="file_type"/>
+        <result property="fileName" column="file_name"/>
+        <result property="orderType" column="order_type"/>
+        <result property="upstreamOrderNo" column="upstream_order_no"/>
+        <result property="referenceOrderNo" column="reference_order_no"/>
+        <result property="handleLog" column="handle_log"/>
+        <result property="periods" column="periods"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FileHandleLogMap">
+        select id,
+               provider_name,
+               file_type,
+               file_name,
+               order_type,
+               upstream_order_no,
+               reference_order_no,
+               handle_log,
+               periods,
+               created_time,
+               update_time
+        from tb_file_handle_log
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="FileHandleLogMap">
+        select
+        id, provider_name, file_type, file_name, order_type, upstream_order_no, reference_order_no, handle_log, periods,
+        created_time, update_time
+        from tb_file_handle_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="handleLog != null and handleLog != ''">
+                and handle_log = #{handleLog}
+            </if>
+            <if test="periods != null and periods != ''">
+                and periods = #{periods}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="FileHandleLogMap">
+        select
+        id, provider_name, file_type, file_name, order_type, upstream_order_no, reference_order_no, handle_log, periods,
+        created_time, update_time
+        from tb_file_handle_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="handleLog != null and handleLog != ''">
+                and handle_log = #{handleLog}
+            </if>
+            <if test="periods != null and periods != ''">
+                and periods = #{periods}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="FileHandleLogMap">
+        select
+        id, provider_name, file_type, file_name, order_type, upstream_order_no, reference_order_no, handle_log, periods,
+        created_time, update_time
+        from tb_file_handle_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="handleLog != null and handleLog != ''">
+                and handle_log = #{handleLog}
+            </if>
+            <if test="periods != null and periods != ''">
+                and periods = #{periods}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_file_handle_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="handleLog != null and handleLog != ''">
+                and handle_log = #{handleLog}
+            </if>
+            <if test="periods != null and periods != ''">
+                and periods = #{periods}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle_log(provider_name, file_type, file_name, order_type, upstream_order_no,
+                                       reference_order_no, handle_log, periods, created_time, update_time)
+        values (#{providerName}, #{fileType}, #{fileName}, #{orderType}, #{upstreamOrderNo}, #{referenceOrderNo},
+                #{handleLog}, #{periods}, #{createdTime}, #{updateTime})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle_log(provider_name, file_type, file_name, order_type, upstream_order_no,
+        reference_order_no, handle_log, periods, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerName}, #{entity.fileType}, #{entity.fileName}, #{entity.orderType},
+            #{entity.upstreamOrderNo}, #{entity.referenceOrderNo}, #{entity.handleLog}, #{entity.periods},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle_log(provider_name, file_type, file_name, order_type, upstream_order_no,
+        reference_order_no, handle_log, periods, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerName}, #{entity.fileType}, #{entity.fileName}, #{entity.orderType},
+            #{entity.upstreamOrderNo}, #{entity.referenceOrderNo}, #{entity.handleLog}, #{entity.periods},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        provider_name = values(provider_name),
+        file_type = values(file_type),
+        file_name = values(file_name),
+        order_type = values(order_type),
+        upstream_order_no = values(upstream_order_no),
+        reference_order_no = values(reference_order_no),
+        handle_log = values(handle_log),
+        periods = values(periods),
+        created_time = values(created_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_file_handle_log
+        <set>
+            <if test="providerName != null and providerName != ''">
+                provider_name = #{providerName},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="handleLog != null and handleLog != ''">
+                handle_log = #{handleLog},
+            </if>
+            <if test="periods != null and periods != ''">
+                periods = #{periods},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_file_handle_log
+        where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantWalletMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantWalletEntity" id="MerchantWalletMap">
+        <result property="id" column="id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="currency" column="currency"/>
+        <result property="balance" column="balance"/>
+        <result property="rechargeBalance" column="recharge_balance"/>
+        <result property="acquiringBalance" column="acquiring_balance"/>
+        <result property="collectionBalance" column="collection_balance"/>
+        <result property="pendingBalance" column="pending_balance"/>
+        <result property="freezeAmount" column="freeze_amount"/>
+        <result property="withdrawalAmount" column="withdrawal_amount"/>
+        <result property="version" column="version"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantWalletMap">
+        select id,
+               merchant_id,
+               agent_id,
+               platform_id,
+               provider_id,
+               currency,
+               balance,
+               recharge_balance,
+               acquiring_balance,
+               collection_balance,
+               pending_balance,
+               freeze_amount,
+               withdrawal_amount,
+               version,
+               created_time,
+               update_time
+        from tb_merchant_wallet
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantWalletMap">
+        select
+        id, merchant_id, agent_id, platform_id, provider_id, currency, balance, recharge_balance, acquiring_balance,
+        collection_balance, pending_balance, freeze_amount, withdrawal_amount, version, created_time, update_time
+        from tb_merchant_wallet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="balance != null">
+                and balance = #{balance}
+            </if>
+            <if test="rechargeBalance != null">
+                and recharge_balance = #{rechargeBalance}
+            </if>
+            <if test="acquiringBalance != null">
+                and acquiring_balance = #{acquiringBalance}
+            </if>
+            <if test="collectionBalance != null">
+                and collection_balance = #{collectionBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="freezeAmount != null">
+                and freeze_amount = #{freezeAmount}
+            </if>
+            <if test="withdrawalAmount != null">
+                and withdrawal_amount = #{withdrawalAmount}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantWalletMap">
+        select
+        id, merchant_id, agent_id, platform_id, provider_id, currency, balance, recharge_balance, acquiring_balance,
+        collection_balance, pending_balance, freeze_amount, withdrawal_amount, version, created_time, update_time
+        from tb_merchant_wallet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="balance != null">
+                and balance = #{balance}
+            </if>
+            <if test="rechargeBalance != null">
+                and recharge_balance = #{rechargeBalance}
+            </if>
+            <if test="acquiringBalance != null">
+                and acquiring_balance = #{acquiringBalance}
+            </if>
+            <if test="collectionBalance != null">
+                and collection_balance = #{collectionBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="freezeAmount != null">
+                and freeze_amount = #{freezeAmount}
+            </if>
+            <if test="withdrawalAmount != null">
+                and withdrawal_amount = #{withdrawalAmount}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantWalletMap">
+        select
+        id, merchant_id, agent_id, platform_id, provider_id, currency, balance, recharge_balance, acquiring_balance,
+        collection_balance, pending_balance, freeze_amount, withdrawal_amount, version, created_time, update_time
+        from tb_merchant_wallet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="balance != null">
+                and balance = #{balance}
+            </if>
+            <if test="rechargeBalance != null">
+                and recharge_balance = #{rechargeBalance}
+            </if>
+            <if test="acquiringBalance != null">
+                and acquiring_balance = #{acquiringBalance}
+            </if>
+            <if test="collectionBalance != null">
+                and collection_balance = #{collectionBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="freezeAmount != null">
+                and freeze_amount = #{freezeAmount}
+            </if>
+            <if test="withdrawalAmount != null">
+                and withdrawal_amount = #{withdrawalAmount}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_wallet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="balance != null">
+                and balance = #{balance}
+            </if>
+            <if test="rechargeBalance != null">
+                and recharge_balance = #{rechargeBalance}
+            </if>
+            <if test="acquiringBalance != null">
+                and acquiring_balance = #{acquiringBalance}
+            </if>
+            <if test="collectionBalance != null">
+                and collection_balance = #{collectionBalance}
+            </if>
+            <if test="pendingBalance != null">
+                and pending_balance = #{pendingBalance}
+            </if>
+            <if test="freezeAmount != null">
+                and freeze_amount = #{freezeAmount}
+            </if>
+            <if test="withdrawalAmount != null">
+                and withdrawal_amount = #{withdrawalAmount}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_wallet(merchant_id, agent_id, platform_id, provider_id, currency, balance,
+                                       recharge_balance, acquiring_balance, collection_balance, pending_balance,
+                                       freeze_amount, withdrawal_amount, version, created_time, update_time)
+        values (#{merchantId}, #{agentId}, #{platformId}, #{providerId}, #{currency}, #{balance}, #{rechargeBalance},
+                #{acquiringBalance}, #{collectionBalance}, #{pendingBalance}, #{freezeAmount}, #{withdrawalAmount},
+                #{version}, #{createdTime}, #{updateTime})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_wallet(merchant_id, agent_id, platform_id, provider_id, currency, balance,
+        recharge_balance, acquiring_balance, collection_balance, pending_balance, freeze_amount, withdrawal_amount,
+        version, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.agentId}, #{entity.platformId}, #{entity.providerId}, #{entity.currency},
+            #{entity.balance}, #{entity.rechargeBalance}, #{entity.acquiringBalance}, #{entity.collectionBalance},
+            #{entity.pendingBalance}, #{entity.freezeAmount}, #{entity.withdrawalAmount}, #{entity.version},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_wallet(merchant_id, agent_id, platform_id, provider_id, currency, balance,
+        recharge_balance, acquiring_balance, collection_balance, pending_balance, freeze_amount, withdrawal_amount,
+        version, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.agentId}, #{entity.platformId}, #{entity.providerId}, #{entity.currency},
+            #{entity.balance}, #{entity.rechargeBalance}, #{entity.acquiringBalance}, #{entity.collectionBalance},
+            #{entity.pendingBalance}, #{entity.freezeAmount}, #{entity.withdrawalAmount}, #{entity.version},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        merchant_id = values(merchant_id),
+        agent_id = values(agent_id),
+        platform_id = values(platform_id),
+        provider_id = values(provider_id),
+        currency = values(currency),
+        balance = values(balance),
+        recharge_balance = values(recharge_balance),
+        acquiring_balance = values(acquiring_balance),
+        collection_balance = values(collection_balance),
+        pending_balance = values(pending_balance),
+        freeze_amount = values(freeze_amount),
+        withdrawal_amount = values(withdrawal_amount),
+        version = values(version),
+        created_time = values(created_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_wallet
+        <set>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="balance != null">
+                balance = #{balance},
+            </if>
+            <if test="rechargeBalance != null">
+                recharge_balance = #{rechargeBalance},
+            </if>
+            <if test="acquiringBalance != null">
+                acquiring_balance = #{acquiringBalance},
+            </if>
+            <if test="collectionBalance != null">
+                collection_balance = #{collectionBalance},
+            </if>
+            <if test="pendingBalance != null">
+                pending_balance = #{pendingBalance},
+            </if>
+            <if test="freezeAmount != null">
+                freeze_amount = #{freezeAmount},
+            </if>
+            <if test="withdrawalAmount != null">
+                withdrawal_amount = #{withdrawalAmount},
+            </if>
+            <if test="version != null">
+                version = #{version},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_wallet
+        where id = #{id}
+    </delete>
+
+
+    <select id="getMerchantWalletByMerchantIdAndCurrency" resultType="com.futurebank.order.entity.MerchantWalletEntity" flushCache="true">
+        SELECT
+            `id`, `merchant_id`, `agent_id`, `platform_id`, `provider_id`, `currency`, `balance`, `recharge_balance`, `acquiring_balance`,
+            `collection_balance`, `pending_balance`, `freeze_amount`, `withdrawal_amount`, `istate`, `version`, `created_time`, `update_time`
+        FROM
+            tb_merchant_wallet
+        WHERE merchant_id = #{merchantId} and currency = #{currency}
+    </select>
+
+
+    <update id="updateWalletPendingBalance">
+        update tb_merchant_wallet_sub
+        set  balance = balance + #{money} , revision = revision + 1
+        where merchant_id = #{merchantId} and wallet_code = #{walletCode} and currency = #{currency} and revision = #{version}
+    </update>
+
+
+    <select id="queryPendingWalletByMerchantIdAndCurrency" resultType="com.futurebank.order.entity.MerchantWalletSubEntity">
+         SELECT
+             `id`, `merchant_id`, `agent_id`, `platform_id`, `provider_id`, `wallet_name`, `wallet_type`, `wallet_code`,
+             `currency`,`balance`, `desc`, `revision`, `created_by`, `created_time`, `updated_by`, `updated_time`
+         FROM
+             tb_merchant_wallet_sub
+         WHERE merchant_id = #{merchantId} and wallet_code = #{walletCode} and currency = #{currency}
+    </select>
+
+    <insert id="addMerchantPendingWallet" keyProperty="id" useGeneratedKeys="true">
+            insert into tb_merchant_wallet_sub(
+                                               merchant_id, agent_id, platform_id, provider_id, wallet_name, wallet_type, wallet_code,
+                                               currency, balance, `desc`, revision, created_by, created_time, updated_by, updated_time
+            )
+            values (
+                    #{merchantId}, #{agentId}, #{platformId}, #{providerId}, #{walletName}, #{walletType}, #{walletCode},
+                    #{currency}, #{balance}, #{desc}, #{revision}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime})
+    </insert>
+
+    <select id="queryBalance" resultType="com.futurebank.order.vo.AccountBalanceVo">
+        SELECT
+            m.merchant_id,
+            m.agent_id,
+            m.platform_id,
+            m.provider_id,
+            m.currency,
+            m.balance,
+            m.collection_balance + m.acquiring_balance availableBalance,
+            m.recharge_balance,
+            m.acquiring_balance,
+            m.collection_balance,
+            m.freeze_amount,
+            m.withdrawal_amount,
+            m.istate,
+            s.wallet_code pendingWalletCode,
+            s.wallet_name pendingWalletName,
+            s.balance pendingWalletBalance
+        FROM
+            tb_merchant_wallet m
+        LEFT JOIN
+            tb_merchant_wallet_sub s
+        ON
+            m.merchant_id = s.merchant_id AND m.currency = s.currency
+        <where>
+            <if test="merchantId != null">
+                and m.merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != '' ">
+                and m.currency = #{currency}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>
+

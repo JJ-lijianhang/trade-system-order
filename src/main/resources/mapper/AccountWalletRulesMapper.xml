@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.AccountWalletRulesMapper">
+
+
+    <select id="queryAccountWalletRulesList" resultType="com.futurebank.order.vo.AccountWalletRulesVo">
+        SELECT
+            ty.trade_code,ty.trade_name,tr.index,tr.title,tr.wallet_code,tr.opt_type,
+            tr.calculation_rules,tr.remark_rules,
+            ts.code as subject_code,ts.type as subject_type,ts.enum as subject_enum,
+            ts.name as subject_name,ts.desc as subject_desc
+        FROM tb_account_biz_trade_type ty
+                 LEFT JOIN tb_account_wallet_rules tr ON ty.trade_code = tr.trade_type_code
+                 LEFT JOIN tb_account_subject ts ON tr.subject_code = ts.code
+        WHERE ty.trade_code = #{tradeType}
+        ORDER BY trade_code, tr.index
+    </select>
+
+    <select id="queryAll" resultType="com.futurebank.order.vo.AccountWalletRulesVo">
+        SELECT
+            ts.code as subjectEnum,ts.name as subjectName
+        FROM tb_account_biz_trade_type ty
+                 LEFT JOIN tb_account_wallet_rules tr ON ty.trade_code = tr.trade_type_code
+                 LEFT JOIN tb_account_subject ts ON tr.subject_code = ts.code
+        WHERE ts.name is not null
+    </select>
+
+
+
+    <select id="queryAccountSubject" resultType="com.futurebank.order.vo.AccountWalletRulesVo">
+        SELECT c.dict_key subjectCode,c.dict_name subjectName
+        FROM tb_sys_dict c LEFT JOIN tb_sys_dict p ON c.dict_parent_id = p.id
+        WHERE c.locale_code = #{language} AND p.dict_key ='RP001'
+    </select>
+
+
+</mapper>

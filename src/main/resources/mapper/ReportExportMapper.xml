@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.ReportExportMapper">
+
+
+    <select id="queryTableHeader" resultType="com.futurebank.order.vo.Report.TableHeaderVo">
+        SELECT
+            bz.merchant_id merchantId,
+            bz.register_country_code registerCountryCode,
+            bz.register_name_en legalEntityName,
+            mc.ci_code ciCode
+        FROM tb_merchant_basic bz
+                 LEFT JOIN tb_merchant_mat_ci mc ON bz.merchant_id = mc.merchant_id
+        where bz.merchant_id = #{merchantId}
+        limit 1
+    </select>
+
+
+
+    <select id="queryBalanceChargeHistory" resultType="com.futurebank.order.vo.Report.BalanceReportVo">
+        SELECT
+            charge.merchant_id,
+            charge.trade_no,
+            charge.reference_no reference,
+            charge.charge_type type,
+            charge.service_type serviceType,
+            charge.wallet_type walletType,
+            charge.charge_event_type chargeEventType,
+            charge.charge_event_name chargeEventName,
+            charge.currency,
+            CASE WHEN charge.charge_type = 1 THEN charge.imoney * -1 ELSE 0 END debit,
+            CASE WHEN charge.charge_type = 0 THEN charge.imoney ELSE 0 END credit,
+            charge.imoney,
+            charge.ibalance,
+            charge.ibalancetotal balance,
+            charge.cadddate createdDate,
+            charge.cadddate completedDate
+        FROM tb_merchant_charge charge
+        WHERE charge.merchant_id = #{merchantId} AND <![CDATA[ charge.wallet_type < 7 AND charge.imoney != 0 ]]>
+        AND service_type != 'acquiring  service'
+        AND charge.currency IN
+        <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="startTime != null and endTime != null">
+            AND charge.cadddate  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY charge.cadddate DESC , charge.charge_event_type DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryPlatTransferOrder" resultType="com.futurebank.order.vo.Report.MerchantPaymentOrderVo">
+        SELECT
+            'transaction_records' as orderType, merchant_id merchantId,user_req_no tradeNo,entry_type tradeNoType
+        FROM  tb_transaction_records
+        WHERE entry_type  = 2
+          AND user_req_no IN
+            <foreach item="item" index="index" collection="orderList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+
+
+    <select id="queryPlatPaymentOrder" resultType="com.futurebank.order.vo.Report.MerchantPaymentOrderVo">
+        SELECT
+        'payment_records' as orderType, merchant_id merchantId, trade_no tradeNo,payment_type_id tradeNoType
+        FROM tb_merchant_payment_order
+        WHERE payment_type_id  = 100000
+          AND trade_no IN
+        <foreach item="item" index="index" collection="orderList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+<!-- remit_acc_address 这个字段
+     DEV 没有
+     UAT 环境有
+
+     arrival_time  createdDate
+-->
+    <select id="queryCollectionReport" resultType="com.futurebank.order.vo.Report.CollectionReportVo">
+        SELECT
+            user_req_no reference,
+            CASE WHEN status = 40 THEN update_time ELSE arrival_time END createdDate,
+            CASE WHEN status = 40 THEN arrival_time ELSE null END completedDate,
+            status,
+            business_id as type ,
+            trade_total_amount receivedAmount,
+            ccy receivedCurrency,
+            exchange_rate rate,
+            amount netAmount,
+            ccy netAmountCurrency,
+            platform_fee fee,
+            fee_ccy feeCurrency,
+            remit_acc_name AS payer,
+            remit_acc_no accountNoOrIBAN,
+            payer_bank_name bankName,
+            payer_bank_address AS bankAddress,
+            payer_swift_code swiftCode,
+            payer_aba_no abaRoutingNumber,
+            transaction_remark noteToSelf
+        FROM  tb_transaction_records
+        WHERE  merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND arrival_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY arrival_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryPaymentReport" resultType="com.futurebank.order.vo.Report.PaymentReportVo">
+        SELECT
+            trade_no reference,
+            apply_date createdDate,
+            finally_date completedDate,
+            status status,
+            payment_amount deductionAmount,
+            payment_ccy deductionCurrency,
+            payee_amount paymentAmount,
+            payee_ccy paymentCurrency,
+            fixed_fee fee,
+            percent_fee ,
+            fixed_fee_currency feeCurrency,
+            percent_fee_currency,
+            fee_rate rate,
+            payment_type paymentMethod,
+            payment_type_id paymentTypeId,
+            payee_id payeeId,
+            payer_name payer,
+            payee_account_no accountNoOrIBAN,
+            payee_id beneficiaryName,
+            payment_purpose paymentReason,
+            payment_reference noteToSelf
+        FROM  tb_merchant_payment_order
+        WHERE  merchant_id = #{merchantId} AND payment_type_id != 100000
+        <if test="startTime != null and endTime != null">
+            AND apply_date  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY apply_date DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryConvertReport" resultType="com.futurebank.order.vo.Report.ConvertReportVo">
+        SELECT
+            trade_no reference,
+            create_time createdDate,
+            CASE WHEN status = 2000 THEN update_time ELSE null END completedDate,
+            status,
+            sell_amount sold,
+            sell_ccy soldCurrency,
+            buy_amount bought,
+            buy_ccy boughtCurrency,
+            rate,
+            delivery_type  type
+        FROM tb_exchange_orders
+        WHERE  merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY create_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryTransferReportReceived" resultType="com.futurebank.order.vo.Report.TransferReportVo">
+        SELECT
+            trade_no reference,
+            create_time createdDate,
+            arrival_time completedDate,
+            status,
+            'Received' type,
+            merchant_id,
+            remit_acc_name targetAccount,
+            trade_total_amount transferAmount,
+            ccy transferCurrency,
+            platform_fee feeAmount,
+            fee_ccy feeCurrency,
+            exchange_rate rate
+        FROM  tb_transaction_records
+        WHERE entry_type  = 2
+        AND merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY create_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+
+    <select id="queryTransferReportSend" resultType="com.futurebank.order.vo.Report.TransferReportVo">
+        SELECT
+            trade_no reference,
+            apply_date createdDate,
+            finally_date completedDate,
+            status ,
+            'Sended' type,
+            payee_name targetAccount,
+            merchant_id ,
+            payment_amount transferAmount,
+            payment_ccy transferCurrency,
+            fixed_fee + percent_fee as feeAmount,
+            fixed_fee_currency feeCurrency,
+            percent_fee percentFee,
+            percent_fee_currency percentFeeCcy,
+            trade_rate rate
+        FROM tb_merchant_payment_order
+        WHERE payment_type_id  = 100000
+        AND merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND apply_date  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY apply_date DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryAcquiringTransactionReport" resultType="com.futurebank.order.vo.Report.AcquiringTransactionReportVo">
+        SELECT
+            provider_id providerId,
+            downstream_order_no reference,
+            order_create_time createdDate,
+            order_complete_time completedDate,
+            order_notify_time notifyDate,
+            order_status status,
+            order_type orderType,
+            review_status fundStatus,
+            payment_method paymentMethod,
+            acquiring_mode as paymentType,
+            country countryOrRegion,
+            merchant_order_amount `transaction`,
+            merchant_currency transactionCurrency,
+            downstream_gateway_fee gatewayFeeStr,
+            downstream_fixed_fee fixedFeeStr,
+            downstream_tx_rate discountFeeStr,
+            downstream_fee_c downstreamFeeC,
+            '' estimatedSettlementDate,
+            error_msg errorDescription
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'transaction'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY order_create_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryAcquiringRefundReport" resultType="com.futurebank.order.vo.Report.AcquiringRefundReportVo">
+        SELECT
+        platform_order_no reference,
+        reference_order_no sourceReference,
+        order_create_time createdDate,
+        order_complete_time completedDate,
+        order_notify_time notifyDate,
+        order_status status,
+        order_type orderType,
+        review_status fundStatus,
+        payment_method paymentMethod,
+        acquiring_mode as paymentType,
+        country countryOrRegion,
+        order_amount `transaction`,
+        currency transactionCurrency,
+        downstream_gateway_fee gatewayFeeStr,
+        '' gatewayCurrency,
+        downstream_fixed_fee fixedFeeStr,
+        '' fixedFeeCurrency,
+        downstream_tx_rate discountFeeStr,
+        downstream_fee_c downstreamFeeC,
+        '' discountFeeCurrency,
+        '' estimatedSettlementDate,
+        error_msg errorDescription
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'refund'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY order_create_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <select id="queryAcquiringChargebackReport" resultType="com.futurebank.order.vo.Report.AcquiringChargebackReportVo">
+        SELECT
+        platform_order_no reference,
+        reference_order_no sourceReference,
+        order_create_time createdDate,
+        order_complete_time completedDate,
+        order_notify_time notifyDate,
+        order_status status,
+        order_type orderType,
+        review_status fundStatus,
+        payment_method paymentMethod,
+        acquiring_mode as paymentType,
+        country countryOrRegion,
+        order_amount `transaction`,
+        currency transactionCurrency,
+        downstream_gateway_fee gatewayFeeStr,
+        '' gatewayCurrency,
+        downstream_fixed_fee fixedFeeStr,
+        '' fixedFeeCurrency,
+        downstream_tx_rate discountFeeStr,
+        downstream_fee_c downstreamFeeC,
+        '' discountFeeCurrency,
+        '' estimatedSettlementDate,
+        error_msg errorDescription
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'chanrgbank'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+        ORDER BY order_create_time DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{offset},#{limit}
+        </if>
+    </select>
+
+    <insert id="insertReportRecord" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_report_record(id, merchant_id, file_name, file_type, file_url, report_type, fields, start_time, end_time, created_time)
+        values ( #{id}, #{merchantId}, #{fileName}, #{fileType}, #{fileUrl}, #{reportType}, #{fields}, #{startTime}, #{endTime}, #{createdTime})
+    </insert>
+
+    <select id="queryMerchantInfoById" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tm.id merchantId,
+            tm.merchant_name merchantName,
+            tm.reconciliation_date reconciliationDate,
+            tm.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM tb_merchant tm
+                 LEFT JOIN tb_payment_settlement_conf tpsc ON tm.id  = tpsc.merchant_id
+        where tm.id  = #{merchantId}
+    </select>
+
+    <select id="queryBusinessType" resultType="com.futurebank.order.vo.Report.BusinessTypeVo">
+        SELECT id ,name, payment_currency FROM tb_business_type
+    </select>
+    
+    <select id="queryPaymentMethodType" resultType="com.futurebank.order.vo.Report.PaymentMethodTypeVo">
+        SELECT id,payment_type,children_payment_type FROM tb_payment_method_config
+    </select>
+
+    
+    <select id="queryDownstreamOrderNO" resultType="com.futurebank.order.vo.Report.OrderNoChangeVo">
+            SELECT
+                platform_order_no sourcePlatOrderNo,
+                downstream_order_no downstreamOrderNo
+            FROM tb_payment_order
+            WHERE
+                platform_order_no IN
+                <foreach item="item" index="index" collection="orderList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+    </select>
+
+    <select id="queryPlatNameByMethod" resultType="com.futurebank.order.vo.Report.PaymentMethodChangeVo">
+        SELECT
+        platform_name platformName,
+        payment_method paymentMethod
+        FROM tb_payment_platform
+        WHERE
+         payment_method IN
+        <foreach item="item" index="index" collection="methodList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="queryAccountSubject" resultType="com.futurebank.order.vo.Report.AccountSubjectChangeVo">
+        SELECT c.dict_key code,c.dict_name name FROM tb_sys_dict c LEFT JOIN tb_sys_dict p ON c.dict_parent_id = p.id
+        WHERE c.locale_code = 'en-US' AND p.dict_key ='RP001'
+    </select>
+
+    <select id="queryPayeeInfoById" resultType="com.futurebank.order.vo.Report.PayeeInfoVo">
+        SELECT
+            id payeeId,
+            acc_type accType,
+            account_name accountName,
+            card_no cardNo,
+            bank_name bankName,
+            bank_code bankCode,
+            swift_code swiftCode,
+            country_code countryCode,
+            bank_address  bankAddress,
+            payee_address  payeeAddress
+        FROM tb_payee
+        WHERE id IN
+              <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                #{item}
+              </foreach>
+    </select>
+
+    <select id="queryPayeeAddressById" resultType="com.futurebank.order.vo.Report.PayeeInfoVo">
+        SELECT relationship_id payeeId, field_value payee_address
+        FROM tb_account_item
+        WHERE item_type = 2 and field_name = 'payee_detail_address'
+          AND relationship_id  IN
+            <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+
+    <select id="queryPayeeRoutingCodeById" resultType="com.futurebank.order.vo.Report.PayeeInfoVo">
+        SELECT relationship_id payeeId, field_value routingCode
+        FROM tb_account_item
+        WHERE item_type = 2 and field_name = 'routing_code'
+        AND relationship_id  IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <!--查询所有的付款目的数据 -->
+    <select id="queryAllPaymentPurposeInfo" resultType="com.futurebank.order.vo.Report.PaymentPurposeVo">
+        SELECT
+               translations,
+               code
+        FROM tb_payment_purpose
+        WHERE is_deleted = 0
+        AND code  IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="queryTransferReportSendCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_merchant_payment_order
+        WHERE payment_type_id  = 100000
+        AND merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND apply_date  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryTransferReportReceivedCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM  tb_transaction_records
+        WHERE entry_type  = 2
+        AND merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryPaymentReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM  tb_merchant_payment_order
+        WHERE  merchant_id = #{merchantId} AND payment_type_id != 100000
+        <if test="startTime != null and endTime != null">
+            AND apply_date  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryConvertReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_exchange_orders
+        WHERE  merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+
+    <select id="queryCollectionReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM  tb_transaction_records
+        WHERE  merchant_id = #{merchantId}
+        <if test="startTime != null and endTime != null">
+            AND arrival_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryBalanceChargeHistoryCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_merchant_charge charge
+        WHERE charge.merchant_id = #{merchantId} AND <![CDATA[ charge.wallet_type < 7 AND charge.imoney != 0 ]]>
+        AND service_type != 'acquiring  service'
+        AND charge.currency IN
+        <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="startTime != null and endTime != null">
+            AND charge.cadddate  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryAcquiringTransactionReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'transaction'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryAcquiringRefundReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'refund'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+    <select id="queryAcquiringChargebackReportCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM tb_payment_order
+        WHERE merchant_id = #{merchantId} AND order_type = 'chanrgbank'
+        <if test="startTime != null and endTime != null">
+            AND order_create_time  BETWEEN #{startTime} AND #{endTime}
+        </if>
+    </select>
+
+
+</mapper>
