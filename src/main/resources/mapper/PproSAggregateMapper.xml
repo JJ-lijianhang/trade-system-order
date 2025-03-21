@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproSAggregateMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproSAggregateEntity" id="PproSAggregateMap">
+        <result property="id" column="id"/>
+        <result property="merchantId" column="MERCHANT_ID"/>
+        <result property="paymentMethod" column="PAYMENT_METHOD"/>
+        <result property="eventType" column="EVENT_TYPE"/>
+        <result property="eventCount" column="EVENT_COUNT"/>
+        <result property="aggregateAmount" column="AGGREGATE_AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="settlementDate" column="SETTLEMENT_DATE"/>
+        <result property="recordCount" column="RECORD_COUNT"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproSAggregateMap">
+        select id,
+               MERCHANT_ID,
+               PAYMENT_METHOD,
+               EVENT_TYPE,
+               EVENT_COUNT,
+               AGGREGATE_AMOUNT,
+               CURRENCY,
+               SETTLEMENT_DATE,
+               RECORD_COUNT,
+               FILE_NAME,
+               created_time,
+               update_time,
+               is_processed
+        from tb_ppro_s_aggregate
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproSAggregateMap">
+        select
+        id, MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT, CURRENCY, SETTLEMENT_DATE,
+        RECORD_COUNT, FILE_NAME, created_time, update_time, is_processed
+        from tb_ppro_s_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventCount != null and eventCount != ''">
+                and EVENT_COUNT = #{eventCount}
+            </if>
+            <if test="aggregateAmount != null and aggregateAmount != ''">
+                and AGGREGATE_AMOUNT = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null and recordCount != ''">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and FILE_NAME = #{fileName}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproSAggregateMap">
+        select
+        id, MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT, CURRENCY, SETTLEMENT_DATE,
+        RECORD_COUNT, FILE_NAME, created_time, update_time, is_processed
+        from tb_ppro_s_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventCount != null and eventCount != ''">
+                and EVENT_COUNT = #{eventCount}
+            </if>
+            <if test="aggregateAmount != null and aggregateAmount != ''">
+                and AGGREGATE_AMOUNT = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null and recordCount != ''">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and FILE_NAME = #{fileName}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproSAggregateMap">
+        select
+        id, MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT, CURRENCY, SETTLEMENT_DATE,
+        RECORD_COUNT, FILE_NAME, created_time, update_time, is_processed
+        from tb_ppro_s_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventCount != null and eventCount != ''">
+                and EVENT_COUNT = #{eventCount}
+            </if>
+            <if test="aggregateAmount != null and aggregateAmount != ''">
+                and AGGREGATE_AMOUNT = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null and recordCount != ''">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and FILE_NAME = #{fileName}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_s_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventCount != null and eventCount != ''">
+                and EVENT_COUNT = #{eventCount}
+            </if>
+            <if test="aggregateAmount != null and aggregateAmount != ''">
+                and AGGREGATE_AMOUNT = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null and recordCount != ''">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and FILE_NAME = #{fileName}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_aggregate(MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT,
+                                        CURRENCY, SETTLEMENT_DATE, RECORD_COUNT, FILE_NAME, created_time, update_time,
+                                        is_processed)
+        values (#{merchantId}, #{paymentMethod}, #{eventType}, #{eventCount}, #{aggregateAmount}, #{currency},
+                #{settlementDate}, #{recordCount}, #{fileName}, #{createdTime}, #{updateTime}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_aggregate(MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT,
+        CURRENCY, SETTLEMENT_DATE, RECORD_COUNT, FILE_NAME, created_time, update_time, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.paymentMethod}, #{entity.eventType}, #{entity.eventCount},
+            #{entity.aggregateAmount}, #{entity.currency}, #{entity.settlementDate}, #{entity.recordCount},
+            #{entity.fileName}, #{entity.createdTime}, #{entity.updateTime}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_aggregate(MERCHANT_ID, PAYMENT_METHOD, EVENT_TYPE, EVENT_COUNT, AGGREGATE_AMOUNT,
+        CURRENCY, SETTLEMENT_DATE, RECORD_COUNT, FILE_NAME, created_time, update_time, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.paymentMethod}, #{entity.eventType}, #{entity.eventCount},
+            #{entity.aggregateAmount}, #{entity.currency}, #{entity.settlementDate}, #{entity.recordCount},
+            #{entity.fileName}, #{entity.createdTime}, #{entity.updateTime}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        MERCHANT_ID = values(MERCHANT_ID),
+        PAYMENT_METHOD = values(PAYMENT_METHOD),
+        EVENT_TYPE = values(EVENT_TYPE),
+        EVENT_COUNT = values(EVENT_COUNT),
+        AGGREGATE_AMOUNT = values(AGGREGATE_AMOUNT),
+        CURRENCY = values(CURRENCY),
+        SETTLEMENT_DATE = values(SETTLEMENT_DATE),
+        RECORD_COUNT = values(RECORD_COUNT),
+        FILE_NAME = values(FILE_NAME),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_s_aggregate
+        <set>
+            <if test="merchantId != null and merchantId != ''">
+                MERCHANT_ID = #{merchantId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                PAYMENT_METHOD = #{paymentMethod},
+            </if>
+            <if test="eventType != null and eventType != ''">
+                EVENT_TYPE = #{eventType},
+            </if>
+            <if test="eventCount != null and eventCount != ''">
+                EVENT_COUNT = #{eventCount},
+            </if>
+            <if test="aggregateAmount != null and aggregateAmount != ''">
+                AGGREGATE_AMOUNT = #{aggregateAmount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                SETTLEMENT_DATE = #{settlementDate},
+            </if>
+            <if test="recordCount != null and recordCount != ''">
+                RECORD_COUNT = #{recordCount},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                FILE_NAME = #{fileName},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_s_aggregate
+        where id = #{id}
+    </delete>
+
+</mapper>
+

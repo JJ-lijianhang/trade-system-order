@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MsConfigMapper">
+
+    <resultMap type="com.futurebank.order.entity.MsConfigEntity" id="MsConfigMap">
+        <result property="id" column="id"/>
+        <result property="msName" column="ms_name"/>
+        <result property="msIps" column="ms_ips"/>
+        <result property="msDesc" column="ms_desc"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MsConfigMap">
+        select id,
+               ms_name,
+               ms_ips,
+               ms_desc,
+               created_time,
+               update_time
+        from tb_ms_config
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MsConfigMap">
+        select
+        id, ms_name, ms_ips, ms_desc, created_time, update_time
+        from tb_ms_config
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="msName != null and msName != ''">
+                and ms_name = #{msName}
+            </if>
+            <if test="msIps != null and msIps != ''">
+                and ms_ips = #{msIps}
+            </if>
+            <if test="msDesc != null and msDesc != ''">
+                and ms_desc = #{msDesc}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MsConfigMap">
+        select
+        id, ms_name, ms_ips, ms_desc, created_time, update_time
+        from tb_ms_config
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="msName != null and msName != ''">
+                and ms_name = #{msName}
+            </if>
+            <if test="msIps != null and msIps != ''">
+                and ms_ips = #{msIps}
+            </if>
+            <if test="msDesc != null and msDesc != ''">
+                and ms_desc = #{msDesc}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MsConfigMap">
+        select
+        id, ms_name, ms_ips, ms_desc, created_time, update_time
+        from tb_ms_config
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="msName != null and msName != ''">
+                and ms_name = #{msName}
+            </if>
+            <if test="msIps != null and msIps != ''">
+                and ms_ips = #{msIps}
+            </if>
+            <if test="msDesc != null and msDesc != ''">
+                and ms_desc = #{msDesc}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ms_config
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="msName != null and msName != ''">
+                and ms_name = #{msName}
+            </if>
+            <if test="msIps != null and msIps != ''">
+                and ms_ips = #{msIps}
+            </if>
+            <if test="msDesc != null and msDesc != ''">
+                and ms_desc = #{msDesc}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ms_config(ms_name, ms_ips, ms_desc, created_time, update_time)
+        values (#{msName}, #{msIps}, #{msDesc}, #{createdTime}, #{updateTime})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ms_config(ms_name, ms_ips, ms_desc, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.msName}, #{entity.msIps}, #{entity.msDesc}, #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ms_config(ms_name, ms_ips, ms_desc, created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.msName}, #{entity.msIps}, #{entity.msDesc}, #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        ms_name = values(ms_name),
+        ms_ips = values(ms_ips),
+        ms_desc = values(ms_desc),
+        created_time = values(created_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ms_config
+        <set>
+            <if test="msName != null and msName != ''">
+                ms_name = #{msName},
+            </if>
+            <if test="msIps != null and msIps != ''">
+                ms_ips = #{msIps},
+            </if>
+            <if test="msDesc != null and msDesc != ''">
+                ms_desc = #{msDesc},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ms_config
+        where id = #{id}
+    </delete>
+
+</mapper>
+

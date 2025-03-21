@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantSettmMapper">
+
+    <resultMap type="com.futurebank.order.entity.PaymentBillingEntity" id="PaymentBillingMap">
+        <result property="billId" column="bill_id"/>
+        <result property="billNo" column="bill_no"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelRatesId" column="channel_rates_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productChannelId" column="product_channel_id"/>
+        <result property="orderType" column="order_type"/>
+        <result property="transactionType" column="transaction_type"/>
+        <result property="acquiringMode" column="acquiring_mode"/>
+        <result property="country" column="country"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="currency" column="currency"/>
+        <result property="settlementCurrency" column="settlement_currency"/>
+        <result property="orderAmount" column="order_amount"/>
+        <result property="merchantCurrency" column="merchant_currency"/>
+        <result property="merchantOrderAmount" column="merchant_order_amount"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="upstreamStatus" column="upstream_status"/>
+        <result property="referenceOrderNo" column="reference_order_no"/>
+        <result property="downstreamOrderNo" column="downstream_order_no"/>
+        <result property="platformOrderNo" column="platform_order_no"/>
+        <result property="upstreamOrderNo" column="upstream_order_no"/>
+        <result property="orderCreateTime" column="order_create_time"/>
+        <result property="orderCompleteTime" column="order_complete_time"/>
+        <result property="orderNotifyTime" column="order_notify_time"/>
+        <result property="estimatedAmount" column="estimated_amount"/>
+        <result property="estimatedExchangeRate" column="estimated_exchange_rate"/>
+        <result property="downstreamFixedFee" column="downstream_fixed_fee"/>
+        <result property="downstreamTxRate" column="downstream_tx_rate"/>
+        <result property="downstreamFee" column="downstream_fee"/>
+        <result property="downstreamFeeC" column="downstream_fee_c"/>
+        <result property="downstreamEstimatedAmount" column="downstream_estimated_amount"/>
+        <result property="downstreamEstimatedFee" column="downstream_estimated_fee"/>
+        <result property="downstreamEstimatedExchange" column="downstream_estimated_exchange"/>
+        <result property="downstreamEstimatedExchangeRate" column="downstream_estimated_exchange_rate"/>
+        <result property="downstreamReconciliationStatus" column="downstream_reconciliation_status"/>
+        <result property="downstreamReconciliationDate" column="downstream_reconciliation_date"/>
+        <result property="downstreamSettlementStatus" column="downstream_settlement_status"/>
+        <result property="settlementCycle" column="settlement_cycle"/>
+        <result property="downstreamSettlementDate" column="downstream_settlement_date"/>
+        <result property="downstreamSettlementAmount" column="downstream_settlement_amount"/>
+        <result property="downstreamTotalFee" column="downstream_total_fee"/>
+        <result property="upstreamFixedFee" column="upstream_fixed_fee"/>
+        <result property="upstreamTxRate" column="upstream_tx_rate"/>
+        <result property="upstreamFee" column="upstream_fee"/>
+        <result property="upstreamActualFee" column="upstream_actual_fee"/>
+        <result property="upstreamEstimatedAmount" column="upstream_estimated_amount"/>
+        <result property="upstreamEstimatedFee" column="upstream_estimated_fee"/>
+        <result property="upstreamActualExchange" column="upstream_actual_exchange"/>
+        <result property="upstreamActualExchangeRate" column="upstream_actual_exchange_rate"/>
+        <result property="upstreamActualExchangeFee" column="upstream_actual_exchange_fee"/>
+        <result property="upstreamReconciliationStatus" column="upstream_reconciliation_status"/>
+        <result property="upstreamReconciliationDate" column="upstream_reconciliation_date"/>
+        <result property="upstreamSettlementStatus" column="upstream_settlement_status"/>
+        <result property="upstreamSettlementDate" column="upstream_settlement_date"/>
+        <result property="upstreamTotalFee" column="upstream_total_fee"/>
+        <result property="upstreamSettlementAmount" column="upstream_settlement_amount"/>
+        <result property="paymentExchange" column="payment_exchange"/>
+        <result property="paymentExchangeRate" column="payment_exchange_rate"/>
+        <result property="paymentTxMarkup" column="payment_tx_markup"/>
+        <result property="profit" column="profit"/>
+        <result property="repairStatus" column="repair_status"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="downstreamOrderNoOrigin" column="downstream_order_no_origin"/>
+        <result property="paymentTxMarkupUsd" column="payment_tx_markup_usd"/>
+        <result property="downstreamFixedFeeUsd" column="downstream_fixed_fee_usd"/>
+        <result property="upstreamVat" column="upstream_vat"/>
+        <result property="downstreamVat" column="downstream_vat"/>
+        <result property="estimatedUpstreamVatFee" column="estimated_upstream_vat_fee"/>
+        <result property="estimatedDownstreamVatFee" column="estimated_downstream_vat_fee"/>
+        <result property="downstreamGatewayFee" column="downstream_gateway_fee"/>
+        <result property="upstreamGatewayFee" column="upstream_gateway_fee"/>
+    </resultMap>
+
+
+    <select id="querySettlementProvider" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT DISTINCT provider_id,settle_status FROM tb_merchant_settlement WHERE  merchant_id = #{merchantId}  AND settle_id = #{period}
+    </select>
+
+
+    <select id="summarySettledPendingAmount" resultType="com.futurebank.order.vo.SummarySettledVo">
+        SELECT SUM(total) as totalSettlementMoney
+        FROM (
+            SELECT
+             CASE WHEN currency != 'USD' THEN exchange_amount + markup_fee ELSE aggregate_amount END as total
+            FROM tb_merchant_settlement_aggregate
+            WHERE merchant_id = #{merchantId}
+            AND settlement_id = #{settlementDate}
+            AND payment_method IS NOT NULL
+            <if test="providerIds != null and providerIds.size() > 0">
+                AND provider_id IN
+                <foreach item="providerId" index="index" collection="providerIds" open="(" separator="," close=")">
+                    #{providerId}
+                </foreach>
+            </if>
+        ) tmp
+    </select>
+
+
+
+    <select id="queryTotalVolume" resultType="com.futurebank.order.entity.MerchantSettmEntity">
+        SELECT fee_type,currency , SUM(aggregate_amount) AS total_volume
+        FROM tb_merchant_settlement_aggregate
+        where merchant_id = #{merchantId} and settlement_id = #{period} AND payment_method is not null
+        <if test="providerIds != null and providerIds.size() > 0">
+            AND provider_id IN
+            <foreach item="providerId" index="index" collection="providerIds" open="(" separator="," close=")">
+                #{providerId}
+            </foreach>
+        </if>
+        GROUP BY fee_type,currency
+    </select>
+
+    <select id="queryTotalFxFEEVolume" resultType="com.futurebank.order.entity.MerchantSettmEntity">
+        SELECT fee_type,currency , SUM(aggregate_amount) AS total_volume
+        FROM tb_merchant_settlement_aggregate
+        where merchant_id =  #{merchantId} and settlement_id = #{period} AND fee_type = 'FX_FEE'
+        GROUP BY fee_type,currency
+    </select>
+
+
+    <select id="queryExchangeVolume" resultType="com.futurebank.order.entity.MerchantSettmEntity">
+        SELECT currency,tigger_currency,exchange exchangeRate,markup markupRate,SUM(aggregate_amount) totalDueVolume, SUM(exchange_amount) totalVolume , SUM(markup_fee) markupFee FROM tb_merchant_settlement_aggregate
+        where currency= #{currency} AND merchant_id = #{merchantId} and settlement_id = #{period} and fee_type IN ('TRANSACTION','ACQUIRING_FEE' , 'DISCOUNT_FEE','GATEWAY_FEE')
+        GROUP BY currency,tigger_currency,exchange,markup
+    </select>
+
+    <select id="queryTotalVolumeByPayment" resultType="com.futurebank.order.entity.MerchantSettmEntity">
+        SELECT  period,feeType,paymentMethod,currency,countryCode,downstreamFixedFee,downstreamTxRate,SUM(totalVolume) as totalVolume,count(1) as eventCount
+        FROM (
+                 SELECT
+                     d.settlement_id as period,
+                     CASE WHEN (order_type = 'refund' and fee_type = 'ACQUIRING_FEE') THEN 'REFUND_FEE'  ELSE d.fee_type  END  as feeType,
+                     d.payment_method as paymentMethod,
+                     d.merchant_currency currency,
+                     d.country countryCode,
+                     d.merchant_order_amount totalVolume,
+                     d.downstream_fixed_fee downstreamFixedFee,
+                     d.downstream_tx_rate downstreamTxRate
+                 FROM tb_merchant_settment_details d
+                 where
+                     d.settlement_id = #{period}
+                   and d.merchant_id = #{merchantId}
+             ) temp
+        group by period,feeType,paymentMethod,currency,countryCode,downstreamFixedFee,downstreamTxRate
+    </select>
+
+
+    <select id="queryTotalRefundVolumeByPayment">
+        select
+            settlement_id as period,
+            merchant_id ,
+            payment_method ,
+            merchant_currency ,
+            country as countryCode,
+            fee_type ,
+            count(1) as eventCount,
+            sum(merchant_order_amount) as totalVolume
+        from tb_merchant_settment_details where
+            order_status = 'SUCCEED'
+            and fee_type in ('refund','chargeback')
+            and merchant_id=  #{merchantId}
+            and settlement_id = #{period}
+        group by payment_method,country,fee_type,merchant_currency
+    </select>
+
+<!-- TODO  -->
+    <select id="queryMerchantInfo" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        select
+            merchant_id merchantId, merchant_name  merchantName, provider_id,
+            provider_name,settlement_method,settlement_range,
+            settlement_currency as currency,min_settlement_amount  as minNumSettlementMoney
+        FROM tb_payment_settlement_conf
+        WHERE merchant_id = #{merchantId}
+        LIMIT 1
+    </select>
+
+    <select id="queryMerchantInfoByProvider" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        select
+            merchant_id merchantId, merchant_name  merchantName, provider_id,
+            provider_name,settlement_method,settlement_range,
+            settlement_currency as currency,min_settlement_amount  as minNumSettlementMoney,
+            settlement_exchange_margin settlementExchangeMargin
+        FROM tb_payment_settlement_conf
+        WHERE merchant_id = #{merchantId} AND provider_id = #{providerId}
+        LIMIT 1
+    </select>
+
+
+    <select id="queryMerchantFileInfoFormInvoice" resultType="com.futurebank.order.entity.MerchantFilesEntity">
+        SELECT
+            merchant_id,file_type,file_name
+        FROM tb_merchant_files
+        WHERE merchant_id = #{merchantId} AND file_type = #{fileType} AND file_name like concat('INV-',#{fileNameLikeStr},'%')
+    </select>
+
+
+
+    <insert id="insertReportRecord" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_report_record(id, merchant_id, file_name, file_type, file_url, report_type, fields, start_time, end_time, created_time)
+        values ( #{id}, #{merchantId}, #{fileName}, #{fileType}, #{fileUrl}, #{reportType}, #{fields}, #{startTime}, #{endTime}, #{createdTime})
+    </insert>
+
+    <select id="queryReportRecordInfo" resultType="com.futurebank.order.entity.MerchantReportRecordEntity">
+        SELECT
+            id, merchant_id, file_name, file_type, file_url, report_type, fields, start_time, end_time, created_time
+        FROM tb_merchant_report_record
+        WHERE merchant_id = #{merchantId} AND file_name = #{fileName} AND report_type = #{reportType}
+    </select>
+
+    <delete id="deleteReportRecordInfo">
+        DELETE FROM tb_merchant_report_record WHERE merchant_id = #{merchantId} AND file_name = #{fileName} AND report_type = #{reportType}
+    </delete>
+
+    <select id="queryMerchantSettleInfo" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tm.id merchantId,
+            tm.merchant_name merchantName,
+            tm.reconciliation_date reconciliationDate,
+            tpsc.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM tb_merchant tm
+                 LEFT JOIN tb_payment_settlement_conf tpsc ON tm.id  = tpsc.merchant_id
+        where datediff( #{settlementDate} , tpsc.settlement_date) >= tpsc.settlement_method
+        AND provider_id is not null
+    </select>
+
+
+    <select id="queryMerchantSettleInfoRec" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tpsc.merchant_id merchantId,
+            tpsc.merchant_name merchantName,
+            tpsc.reconciliation_date reconciliationDate,
+            tpsc.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM  tb_payment_settlement_conf tpsc
+        where
+            datediff( DATE_FORMAT( #{reconDate}, '%Y-%m-%d') , tpsc.reconciliation_date) = 1 AND provider_id is not null
+    </select>
+
+
+
+
+    <select id="queryMerchantRecInfo" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tm.id merchantId,
+            tm.merchant_name merchantName,
+            tm.reconciliation_date reconciliationDate,
+            tpsc.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM tb_merchant tm
+                 LEFT JOIN tb_payment_settlement_conf tpsc ON tm.id  = tpsc.merchant_id
+        WHERE provider_id is not null
+    </select>
+
+    <select id="queryMerchantInfoById" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tm.id merchantId,
+            tm.merchant_name merchantName,
+            tm.reconciliation_date reconciliationDate,
+            tpsc.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM tb_merchant tm
+                 LEFT JOIN tb_payment_settlement_conf tpsc ON tm.id  = tpsc.merchant_id
+        where tm.id  = #{merchantId} AND provider_id is not null
+        Limit 1
+    </select>
+
+<!--    AND <![CDATA[ order_create_time  < #{createTimeE} ]]>-->
+    <select id="querySettlementBillingsByCycle" resultType="com.futurebank.order.entity.PaymentBillingEntity">
+        SELECT
+            bill_id, bill_no, merchant_id, merchant_name, provider_id, platform_id, channel_id, channel_rates_id, product_id, product_channel_id, order_type,
+            transaction_type, acquiring_mode, country, payment_method, currency, settlement_currency, order_amount, merchant_currency, merchant_order_amount,
+            order_status, upstream_status, reference_order_no, downstream_order_no, platform_order_no, upstream_order_no, order_create_time, order_complete_time,
+            order_notify_time, estimated_amount, estimated_exchange_rate, downstream_fixed_fee, downstream_tx_rate, downstream_fee, downstream_fee_c,
+            downstream_estimated_amount, downstream_estimated_fee, downstream_estimated_exchange, downstream_estimated_exchange_rate, downstream_reconciliation_status,
+            downstream_reconciliation_date, downstream_settlement_status, settlement_cycle, downstream_settlement_date, downstream_settlement_amount, downstream_total_fee,
+            upstream_fixed_fee, upstream_tx_rate, upstream_fee, upstream_actual_fee, upstream_estimated_amount, upstream_estimated_fee, upstream_actual_exchange,
+            upstream_actual_exchange_rate, upstream_actual_exchange_fee, upstream_reconciliation_status, upstream_reconciliation_date, upstream_settlement_status,
+            upstream_settlement_date, upstream_total_fee, upstream_settlement_amount, payment_exchange, payment_exchange_rate, payment_tx_markup, profit, repair_status,
+            created_time, update_time, downstream_order_no_origin, payment_tx_markup_usd, downstream_fixed_fee_usd, upstream_vat, downstream_vat,
+            estimated_upstream_vat_fee, estimated_downstream_vat_fee, downstream_gateway_fee, upstream_gateway_fee
+        FROM tb_payment_billing
+        where merchant_id = #{merchantId} AND provider_id = #{providerId}
+          AND order_complete_time  between #{createTimeB} and #{createTimeE}
+          AND (downstream_settlement_status=0 or downstream_settlement_status is null) and upstream_settlement_status = 1
+    </select>
+
+
+    <select id="querySettlementDiffBillings" resultType="com.futurebank.order.entity.PaymentBillingEntity">
+        SELECT
+            bill_id, bill_no, merchant_id, merchant_name, provider_id, platform_id, channel_id, channel_rates_id, product_id, product_channel_id, order_type,
+            transaction_type, acquiring_mode, country, payment_method, currency, settlement_currency, order_amount, merchant_currency, merchant_order_amount,
+            order_status, upstream_status, reference_order_no, downstream_order_no, platform_order_no, upstream_order_no, order_create_time, order_complete_time,
+            order_notify_time, estimated_amount, estimated_exchange_rate, downstream_fixed_fee, downstream_tx_rate, downstream_fee, downstream_fee_c,
+            downstream_estimated_amount, downstream_estimated_fee, downstream_estimated_exchange, downstream_estimated_exchange_rate, downstream_reconciliation_status,
+            downstream_reconciliation_date, downstream_settlement_status, settlement_cycle, downstream_settlement_date, downstream_settlement_amount, downstream_total_fee,
+            upstream_fixed_fee, upstream_tx_rate, upstream_fee, upstream_actual_fee, upstream_estimated_amount, upstream_estimated_fee, upstream_actual_exchange,
+            upstream_actual_exchange_rate, upstream_actual_exchange_fee, upstream_reconciliation_status, upstream_reconciliation_date, upstream_settlement_status,
+            upstream_settlement_date, upstream_total_fee, upstream_settlement_amount, payment_exchange, payment_exchange_rate, payment_tx_markup, profit, repair_status,
+            created_time, update_time, downstream_order_no_origin, payment_tx_markup_usd, downstream_fixed_fee_usd, upstream_vat, downstream_vat,
+            estimated_upstream_vat_fee, estimated_downstream_vat_fee, downstream_gateway_fee, upstream_gateway_fee
+        FROM tb_payment_billing_diff
+        where merchant_id = #{merchantId} AND provider_id = #{providerId}
+          AND order_complete_time  between #{createTimeB} and #{createTimeE}
+          AND (downstream_settlement_status=0 or downstream_settlement_status is null) and upstream_settlement_status = 1
+    </select>
+
+    <!--通过主键修改数据-->
+    <update id="updateDiffBills">
+        update tb_payment_billing_diff
+        <set>
+            <if test="billNo != null and billNo != ''">
+                bill_no = #{billNo},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="channelRatesId != null">
+                channel_rates_id = #{channelRatesId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productChannelId != null">
+                product_channel_id = #{productChannelId},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                acquiring_mode = #{acquiringMode},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                settlement_currency = #{settlementCurrency},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="merchantOrderAmount != null">
+                merchant_order_amount = #{merchantOrderAmount},
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                order_status = #{orderStatus},
+            </if>
+            <if test="upstreamStatus != null and upstreamStatus != ''">
+                upstream_status = #{upstreamStatus},
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+            <if test="orderCreateTime != null">
+                order_create_time = #{orderCreateTime},
+            </if>
+            <if test="orderCompleteTime != null">
+                order_complete_time = #{orderCompleteTime},
+            </if>
+            <if test="orderNotifyTime != null">
+                order_notify_time = #{orderNotifyTime},
+            </if>
+            <if test="estimatedAmount != null">
+                estimated_amount = #{estimatedAmount},
+            </if>
+            <if test="estimatedExchangeRate != null and estimatedExchangeRate != ''">
+                estimated_exchange_rate = #{estimatedExchangeRate},
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                downstream_fixed_fee = #{downstreamFixedFee},
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                downstream_tx_rate = #{downstreamTxRate},
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                downstream_fee = #{downstreamFee},
+            </if>
+            <if test="downstreamFeeC != null and downstreamFeeC != ''">
+                downstream_fee_c = #{downstreamFeeC},
+            </if>
+            <if test="downstreamEstimatedAmount != null">
+                downstream_estimated_amount = #{downstreamEstimatedAmount},
+            </if>
+            <if test="downstreamEstimatedFee != null">
+                downstream_estimated_fee = #{downstreamEstimatedFee},
+            </if>
+            <if test="downstreamEstimatedExchange != null">
+                downstream_estimated_exchange = #{downstreamEstimatedExchange},
+            </if>
+            <if test="downstreamEstimatedExchangeRate != null">
+                downstream_estimated_exchange_rate = #{downstreamEstimatedExchangeRate},
+            </if>
+            <if test="downstreamReconciliationStatus != null">
+                downstream_reconciliation_status = #{downstreamReconciliationStatus},
+            </if>
+            <if test="downstreamReconciliationDate != null">
+                downstream_reconciliation_date = #{downstreamReconciliationDate},
+            </if>
+            <if test="downstreamSettlementStatus != null">
+                downstream_settlement_status = #{downstreamSettlementStatus},
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                settlement_cycle = #{settlementCycle},
+            </if>
+            <if test="downstreamSettlementDate != null">
+                downstream_settlement_date = #{downstreamSettlementDate},
+            </if>
+            <if test="downstreamSettlementAmount != null">
+                downstream_settlement_amount = #{downstreamSettlementAmount},
+            </if>
+            <if test="downstreamTotalFee != null">
+                downstream_total_fee = #{downstreamTotalFee},
+            </if>
+            <if test="upstreamFixedFee != null and upstreamFixedFee != ''">
+                upstream_fixed_fee = #{upstreamFixedFee},
+            </if>
+            <if test="upstreamTxRate != null and upstreamTxRate != ''">
+                upstream_tx_rate = #{upstreamTxRate},
+            </if>
+            <if test="upstreamFee != null and upstreamFee != ''">
+                upstream_fee = #{upstreamFee},
+            </if>
+            <if test="upstreamActualFee != null and upstreamActualFee != ''">
+                upstream_actual_fee = #{upstreamActualFee},
+            </if>
+            <if test="upstreamEstimatedAmount != null">
+                upstream_estimated_amount = #{upstreamEstimatedAmount},
+            </if>
+            <if test="upstreamEstimatedFee != null">
+                upstream_estimated_fee = #{upstreamEstimatedFee},
+            </if>
+            <if test="upstreamActualExchange != null and upstreamActualExchange != ''">
+                upstream_actual_exchange = #{upstreamActualExchange},
+            </if>
+            <if test="upstreamActualExchangeRate != null and upstreamActualExchangeRate != ''">
+                upstream_actual_exchange_rate = #{upstreamActualExchangeRate},
+            </if>
+            <if test="upstreamActualExchangeFee != null">
+                upstream_actual_exchange_fee = #{upstreamActualExchangeFee},
+            </if>
+            <if test="upstreamReconciliationStatus != null">
+                upstream_reconciliation_status = #{upstreamReconciliationStatus},
+            </if>
+            <if test="upstreamReconciliationDate != null">
+                upstream_reconciliation_date = #{upstreamReconciliationDate},
+            </if>
+            <if test="upstreamSettlementStatus != null">
+                upstream_settlement_status = #{upstreamSettlementStatus},
+            </if>
+            <if test="upstreamSettlementDate != null">
+                upstream_settlement_date = #{upstreamSettlementDate},
+            </if>
+            <if test="upstreamTotalFee != null">
+                upstream_total_fee = #{upstreamTotalFee},
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                upstream_settlement_amount = #{upstreamSettlementAmount},
+            </if>
+            <if test="paymentExchange != null">
+                payment_exchange = #{paymentExchange},
+            </if>
+            <if test="paymentExchangeRate != null">
+                payment_exchange_rate = #{paymentExchangeRate},
+            </if>
+            <if test="paymentTxMarkup != null">
+                payment_tx_markup = #{paymentTxMarkup},
+            </if>
+            <if test="profit != null">
+                profit = #{profit},
+            </if>
+            <if test="repairStatus != null">
+                repair_status = #{repairStatus},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="downstreamOrderNoOrigin != null and downstreamOrderNoOrigin != ''">
+                downstream_order_no_origin = #{downstreamOrderNoOrigin},
+            </if>
+            <if test="paymentTxMarkupUsd != null">
+                payment_tx_markup_usd = #{paymentTxMarkupUsd},
+            </if>
+            <if test="downstreamFixedFeeUsd != null">
+                downstream_fixed_fee_usd = #{downstreamFixedFeeUsd},
+            </if>
+            <if test="upstreamVat != null">
+                upstream_vat = #{upstreamVat},
+            </if>
+            <if test="downstreamVat != null">
+                downstream_vat = #{downstreamVat},
+            </if>
+            <if test="estimatedUpstreamVatFee != null">
+                estimated_upstream_vat_fee = #{estimatedUpstreamVatFee},
+            </if>
+            <if test="estimatedDownstreamVatFee != null">
+                estimated_downstream_vat_fee = #{estimatedDownstreamVatFee},
+            </if>
+            <if test="downstreamGatewayFee != null and downstreamGatewayFee != ''">
+                downstream_gateway_fee = #{downstreamGatewayFee},
+            </if>
+            <if test="upstreamGatewayFee != null and upstreamGatewayFee != ''">
+                upstream_gateway_fee = #{upstreamGatewayFee},
+            </if>
+        </set>
+        where bill_id = #{billId}
+    </update>
+
+
+
+
+<!--    AND <![CDATA[ order_create_time  < #{createTimeE} ]]>-->
+    <select id="getMerchantReconciliation" resultType="com.futurebank.order.vo.ReconciliationVo">
+        select bill_id,
+               provider_id as providerId,
+               platform_order_no AS TXID,
+               order_status AS TXSTATE,
+               order_type AS ORDERTYPE,
+               country AS COUNTRYCODE,
+               merchant_order_amount AS AMOUNT,
+               merchant_currency AS CURRENCY,
+               payment_method AS TAG,
+               downstream_order_no AS MERCHANTTXID,
+               reference_order_no AS referenceTxId,
+               merchant_id AS MERCHANID,
+               order_create_time AS INITTS,
+               order_complete_time AS COMPLETETS
+        FROM tb_payment_billing
+        where merchant_id = #{merchantId}
+          AND provider_id  = #{providerId}
+          AND order_complete_time  between #{createTimeB} and #{createTimeE}
+    </select>
+
+
+    <select id="queryProviderInfoVO" resultType="com.futurebank.order.vo.ProviderInfoVO">
+        SELECT
+            provider_id providerId, provider_name providerName, provider_rename providerRename,
+            product_capability productCapability,support_apis supportApis, support_gateway supportGateway
+        FROM tb_payment_provider
+    </select>
+
+    <select id="getPublishSettlement" resultType="com.futurebank.order.vo.SettlementVo">
+        select
+            provider_id as providerId,
+            provider_name as providerName,
+            downstream_order_no as MERCHANTTXID,
+            platform_order_no as TXID,
+            reference_order_no as REFERENCETXID,
+            CASE WHEN order_status = 'SUCCEED' THEN 'SUCCEED' ELSE 'INITIALIZED' END  as TXSTATE,
+            payment_method as TAG,
+            order_type as ORDERTYPE,
+            country as COUNTRYCODE,
+            merchant_currency as CURRENCY,
+            fee_type as FEETYPE,
+            merchant_order_amount as AMOUNT,
+            merchant_id as MERCHANID,
+            order_complete_time as EVENTTIMESTAMP
+        from tb_merchant_settment_details
+        where  merchant_id = #{merchantId} and settlement_id =#{settlementDate}
+        ORDER BY order_complete_time DESC
+    </select>
+
+
+    <select id="getPublishSettlementAggergate" resultType="com.futurebank.order.vo.SettlementAggergateVo">
+        select
+            provider_id as providerId,
+            provider_name as providerName,
+            settlement_id as 'SETTLEMENTID',
+            merchant_id as 'MERCHANT_ID',
+            payment_method as 'PAYMENT_METHOD',
+            fee_type as 'EVENT_TYPE',
+            count(1) as 'EVENT_COUNT',
+            sum(merchant_order_amount) as 'AGGREGATE_AMOUNT',
+            merchant_currency as 'CURRENCY'
+        from tb_merchant_settment_details
+        where settlement_id =#{settlementDate} and merchant_id = #{merchantId}
+        group by provider_id,provider_name,payment_method,fee_type,merchant_currency
+    </select>
+
+
+
+    <select id="queryMerchantPaymentMethods" resultType="com.futurebank.order.vo.MerchantPaymentMethodVo">
+        SELECT DISTINCT
+            merchant_id merchantId,
+            provider_id providerId,
+            transaction_type transactionType,
+            payment_method paymentMethod
+        FROM  tb_product_channel
+        where merchant_id = #{merchantId} and provider_id = #{providerId}
+    </select>
+
+    <select id="aggregateMerchantSettlement" resultType="com.futurebank.order.vo.settlement.AggregateMerchantSettlementVo">
+        SELECT
+            provider_id AS providerId,
+            merchant_id AS merchantId,
+            merchant_currency AS merchantCurrency,
+            COALESCE(SUM(merchant_order_amount), 0) AS realAmount,
+            COALESCE(SUM(CASE WHEN fee_type IN ('transaction', 'chargeback', 'refund') AND order_status = 'SUCCEED' THEN merchant_order_amount ELSE 0 END), 0) AS transactionAmount,
+            COALESCE(SUM(CASE WHEN fee_type NOT IN ('transaction', 'chargeback', 'refund') THEN merchant_order_amount ELSE 0 END), 0) AS rateFee
+        FROM
+            tb_merchant_settment_details
+        WHERE
+            settlement_id = #{settlementDate} AND merchant_id = #{merchantId} AND provider_id = #{providerId} AND order_complete_time between #{start} and #{end}
+        GROUP BY merchant_currency,provider_id
+    </select>
+
+    <select id="querySettledMerchantInfo" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT DISTINCT provider_id ,settle_id,merchant_id,settle_status,settle_time_begin,settle_time_end FROM  tb_merchant_settlement
+        where settle_id = #{settlementDate} and settle_status = 4
+    </select>
+
+
+    <select id="queryPendingMerchantInfo" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT DISTINCT provider_id ,settle_id,merchant_id,settle_status,settle_time_begin,settle_time_end FROM  tb_merchant_settlement
+        where settle_id = #{settlementDate} and settle_status = 2
+    </select>
+
+    <select id="summarySettledAmount" resultType="com.futurebank.order.vo.SummarySettledVo">
+        SELECT payment_method as paymentMethod,SUM(total) as totalSettlementMoney FROM (
+              SELECT
+                  payment_method,
+                  CASE WHEN  currency != 'USD' THEN exchange_amount + markup_fee ELSE aggregate_amount END  as total from tb_merchant_settlement_aggregate
+              where merchant_id = #{merchantId}  and settlement_id = #{settlementDate} and provider_id = #{providerId} and payment_method is not null
+        ) tmp
+        GROUP BY payment_method
+    </select>
+    
+
+    <insert id="summaryBatchInsert" parameterType="java.util.List">
+        INSERT INTO tb_merchant_settlement_calendar (
+        provider_id, provider_name, merchant_id, currency, settlement_date,
+        settlement_status, payment_method, transfer_amount, settlement_amount,start_datetime,end_datetime,
+        revision, created_by, created_time, updated_by, updated_time
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.providerId}, #{item.providerName}, #{item.merchantId}, #{item.currency}, #{item.settlementDate},
+            #{item.settlementStatus}, #{item.paymentMethod}, #{item.transferAmount}, #{item.settlementAmount},#{item.startDateTime},#{item.endDateTime},
+            #{item.revision}, #{item.createdBy}, #{item.createdTime}, #{item.updatedBy}, #{item.updatedTime}
+            )
+        </foreach>
+    </insert>
+    
+    <select id="querySummaryData" resultType="com.futurebank.order.entity.MerchantSettlementCalendarEntity">
+        SELECT DISTINCT settlement_date FROM tb_merchant_settlement_calendar where merchant_id = #{merchantId} AND settlement_date = #{settlementDate}
+    </select>
+
+    <delete id="deleteSummaryData">
+        DELETE FROM tb_merchant_settlement_calendar where merchant_id = #{merchantId} AND settlement_date = #{settlementDate}
+    </delete>
+
+
+    <select id="queryMerchantSettlementAmountInfo" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT
+            `id`, `provider_id`, `provider_name`, `settle_id`, `merchant_id`, `currency`, `tigger_currency`, `exchange`, `exchange_amount`, `markup`, `mark_fee`,
+            `settlement_amount`, `transaction_amount`, `rate_fee`, `fix_fee`, `percentage_fee`, `settle_time_begin`, `settle_tIme_end`, `settle_status`, `created_time`,
+            `publish_time`, `publish_oper`, `confirm_oper`, `confirm_time`, `payment_time`, `remark`
+        FROM tb_merchant_settlement
+        WHERE
+            merchant_id = #{merchantId}
+          AND settle_id = #{settlementDate}
+    </select>
+
+
+    <select id="queryPublishedMerchantInfoByProvider" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT DISTINCT settle_id,merchant_id,settle_status,provider_id FROM  tb_merchant_settlement
+        <where>
+            <if test="status != null ">
+                and settle_status = #{status}
+            </if>
+            <if test="settlementDate != null and settlementDate !=''">
+                and settle_id = #{settlementDate}
+            </if>
+            <if test="merchantId != null ">
+                and merchant_id = #{merchantId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPublishedMerchantInfo" resultType="com.futurebank.order.entity.MerchantSettlementEntity">
+        SELECT DISTINCT settle_id,merchant_id,settle_status FROM  tb_merchant_settlement
+        <where>
+            <if test="status != null ">
+                and settle_status = #{status}
+            </if>
+            <if test="settlementDate != null and settlementDate !=''">
+                and settle_id = #{settlementDate}
+            </if>
+            <if test="merchantId != null ">
+                and merchant_id = #{merchantId}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updatePublishedMerchantInfo">
+        UPDATE tb_merchant_settlement SET settle_status = #{status} where merchant_id = #{merchantId} and settle_id = #{settlementDate}
+    </update>
+
+
+    <update id="updatePublishedMerchantInfoByProvider">
+        UPDATE tb_merchant_settlement SET settle_status = #{status} where merchant_id = #{merchantId} and settle_id = #{settlementDate} AND provider_id = #{providerId}
+    </update>
+
+
+
+
+    <select id="queryReleasePendingAmount" resultType="com.futurebank.order.entity.AccountBizTradeDetailsEntity">
+        SELECT * FROM  tb_account_biz_trade_details WHERE biz_type = #{bizType} AND recv_customer_no = #{merchantId} AND remark = #{settlementDate}
+        LIMIT 1
+    </select>
+
+
+    <select id="queryMerchantReconInfo" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT
+            tm.id merchantId,
+            tm.merchant_name merchantName,
+            tm.reconciliation_date reconciliationDate,
+            tm.settlement_date currentSettDate,
+            tpsc.provider_id providerId,
+            tpsc.provider_name providerName,
+            tpsc.settlement_method settlementMethod,
+            tpsc.settlement_currency currency,
+            tpsc.min_settlement_amount minNumSettlementMoney,
+            tpsc.settlement_exchange_margin settlementExchangeMargin
+        FROM tb_merchant tm
+                 LEFT JOIN tb_payment_settlement_conf tpsc ON tm.id  = tpsc.merchant_id
+        where  provider_id is not null
+        <if test="merchantId != null ">
+            AND tm.id = #{merchantId}
+        </if>
+    </select>
+
+
+
+    <update id="updateSettlementDateByProvider">
+        UPDATE tb_payment_settlement_conf SET settlement_date = #{settlementDate} where merchant_id = #{merchantId} and provider_id = #{providerId}
+    </update>
+
+
+    <update id="updateReconDateByProvider">
+        UPDATE tb_payment_settlement_conf SET reconciliation_date = #{reconDate} where merchant_id = #{merchantId} and provider_id = #{providerId}
+    </update>
+
+
+    <update id="updateBillingReconDate">
+        UPDATE tb_payment_billing SET downstream_reconciliation_status = 1, downstream_reconciliation_date = #{reconDate} where bill_id = #{billId}
+    </update>
+
+
+
+
+    <!-- 自动清结算 -->
+
+    <select id="selectFileHandleLog" resultType="com.futurebank.order.entity.FileHandleEntity">
+        SELECT  `provider_id`, `provider_name`, `file_type`, `file_name`, `istate`, `file_path`, `icount`, `created_time`, `update_time`
+        FROM tb_file_handle
+        WHERE provider_id = #{providerId}
+          AND provider_name = #{providerName}
+          AND file_name like concat(#{fileName},'%')
+    </select>
+    <delete id="deleteFileHandleLog">
+        DELETE FROM tb_file_handle
+        WHERE provider_id = #{providerId}
+        AND provider_name = #{providerName}
+        AND file_name like concat(#{fileName},'%')
+    </delete>
+
+    <delete id="deleteMerchantFile" >
+        DELETE FROM  tb_merchant_files where file_name  like concat('%',#{fileName},'%')
+    </delete>
+
+    <delete id="deleteMerchantSettlementFile" >
+        DELETE FROM  tb_merchant_settlement where merchant_id  = #{merchantId}
+    </delete>
+
+    <update id="updateTbPPRORTransaction">
+        UPDATE tb_ppro_r_transaction SET `is_processed` = 0 WHERE `reconciliation_date` = #{reconciliationDate}
+    </update>
+
+
+    <update id="updateTbPPROVTransaction">
+        UPDATE tb_ppro_s_volume_transaction SET `is_processed` = 0 WHERE `SETTLEMENT_DATE` = #{settlementDate}
+    </update>
+
+    <update id="updateMerchantInfo">
+        UPDATE tb_merchant
+            <set>
+                <if test="reconciliationDate != null and reconciliationDate != ''">
+                    reconciliation_date = #{reconciliationDate},
+                </if>
+                <if test="settlementDate != null and settlementDate != ''">
+                    settlement_date = #{settlementDate},
+                </if>
+            </set>
+        WHERE id = #{merchantId}
+    </update>
+
+    <update id="updatePaymentBilling">
+        UPDATE
+            tb_payment_billing SET downstream_settlement_status = 0 ,upstream_settlement_status = 1
+        WHERE  merchant_id  = #{merchantId}  AND downstream_settlement_date = #{settlementDate}
+    </update>
+
+    <update id="updatePaymentBillingReconciliationStatus">
+        UPDATE
+            tb_payment_billing SET downstream_reconciliation_status = 0 , upstream_reconciliation_status = 1 , downstream_reconciliation_date = null
+        WHERE  merchant_id  = #{merchantId} AND downstream_reconciliation_date = #{reconciliationDate}
+    </update>
+
+    <delete id="dateMerchantSettlementDetailsAggregate">
+        DELETE  FROM tb_merchant_settlement_aggregate WHERE merchant_id = #{merchantId} AND settlement_id = #{settlementDate}
+    </delete>
+
+    <delete id="deleteMerchantSettlementDetails">
+        DELETE  FROM tb_merchant_settment_details WHERE merchant_id = #{merchantId} AND settlement_id = #{settlementDate}
+    </delete>
+
+
+<!--AND upstream_reconciliation_date =  #{reconciliationDate}-->
+
+
+    <select id="queryPaymentOrderByDate" resultType="com.futurebank.order.entity.PaymentOrderEntity">
+        SELECT * FROM tb_payment_order
+        WHERE merchant_id= #{merchantId}
+           AND downstream_order_no NOT IN
+               (
+                   SELECT downstream_order_no FROM tb_payment_billing WHERE merchant_id=  #{merchantId}
+               )
+        AND order_status IN ('FAILED')
+        AND order_create_time BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+
+</mapper>

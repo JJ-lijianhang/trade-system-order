@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproRTransactionFundsreceivedMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproRTransactionFundsreceivedEntity"
+               id="PproRTransactionFundsreceivedMap">
+        <result property="id" column="id"/>
+        <result property="txid" column="TXID"/>
+        <result property="txstate" column="TXSTATE"/>
+        <result property="failtype" column="FAILTYPE"/>
+        <result property="fundsstate" column="FUNDSSTATE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="accountholder" column="ACCOUNTHOLDER"/>
+        <result property="channel" column="CHANNEL"/>
+        <result property="tag" column="TAG"/>
+        <result property="merchanttxid" column="MERCHANTTXID"/>
+        <result property="mcontract" column="MCONTRACT"/>
+        <result property="countrycode" column="COUNTRYCODE"/>
+        <result property="sellingpoint" column="SELLINGPOINT"/>
+        <result property="soldservice" column="SOLDSERVICE"/>
+        <result property="initts" column="INITTS"/>
+        <result property="succeededts" column="SUCCEEDEDTS"/>
+        <result property="failedts" column="FAILEDTS"/>
+        <result property="indoubtts" column="INDOUBTTS"/>
+        <result property="fundsreceivedts" column="FUNDSRECEIVEDTS"/>
+        <result property="fundsmissingts" column="FUNDSMISSINGTS"/>
+        <result property="errortext" column="ERRORTEXT"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproRTransactionFundsreceivedMap">
+        select id,
+               TXID,
+               TXSTATE,
+               FAILTYPE,
+               FUNDSSTATE,
+               AMOUNT,
+               CURRENCY,
+               ACCOUNTHOLDER,
+               CHANNEL,
+               TAG,
+               MERCHANTTXID,
+               MCONTRACT,
+               COUNTRYCODE,
+               SELLINGPOINT,
+               SOLDSERVICE,
+               INITTS,
+               SUCCEEDEDTS,
+               FAILEDTS,
+               INDOUBTTS,
+               FUNDSRECEIVEDTS,
+               FUNDSMISSINGTS,
+               ERRORTEXT,
+               created_time,
+               update_time,
+               file_name,
+               is_processed
+        from tb_ppro_r_transaction_fundsreceived
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproRTransactionFundsreceivedMap">
+        select
+        id, TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT,
+        COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS, SUCCEEDEDTS, FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS,
+        FUNDSMISSINGTS, ERRORTEXT, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_transaction_fundsreceived
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="txstate != null and txstate != ''">
+                and TXSTATE = #{txstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="channel != null and channel != ''">
+                and CHANNEL = #{channel}
+            </if>
+            <if test="tag != null and tag != ''">
+                and TAG = #{tag}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                and COUNTRYCODE = #{countrycode}
+            </if>
+            <if test="sellingpoint != null and sellingpoint != ''">
+                and SELLINGPOINT = #{sellingpoint}
+            </if>
+            <if test="soldservice != null and soldservice != ''">
+                and SOLDSERVICE = #{soldservice}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="indoubtts != null and indoubtts != ''">
+                and INDOUBTTS = #{indoubtts}
+            </if>
+            <if test="fundsreceivedts != null and fundsreceivedts != ''">
+                and FUNDSRECEIVEDTS = #{fundsreceivedts}
+            </if>
+            <if test="fundsmissingts != null and fundsmissingts != ''">
+                and FUNDSMISSINGTS = #{fundsmissingts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproRTransactionFundsreceivedMap">
+        select
+        id, TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT,
+        COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS, SUCCEEDEDTS, FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS,
+        FUNDSMISSINGTS, ERRORTEXT, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_transaction_fundsreceived
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="txstate != null and txstate != ''">
+                and TXSTATE = #{txstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="channel != null and channel != ''">
+                and CHANNEL = #{channel}
+            </if>
+            <if test="tag != null and tag != ''">
+                and TAG = #{tag}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                and COUNTRYCODE = #{countrycode}
+            </if>
+            <if test="sellingpoint != null and sellingpoint != ''">
+                and SELLINGPOINT = #{sellingpoint}
+            </if>
+            <if test="soldservice != null and soldservice != ''">
+                and SOLDSERVICE = #{soldservice}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="indoubtts != null and indoubtts != ''">
+                and INDOUBTTS = #{indoubtts}
+            </if>
+            <if test="fundsreceivedts != null and fundsreceivedts != ''">
+                and FUNDSRECEIVEDTS = #{fundsreceivedts}
+            </if>
+            <if test="fundsmissingts != null and fundsmissingts != ''">
+                and FUNDSMISSINGTS = #{fundsmissingts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproRTransactionFundsreceivedMap">
+        select
+        id, TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY, ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT,
+        COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS, SUCCEEDEDTS, FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS,
+        FUNDSMISSINGTS, ERRORTEXT, created_time, update_time, file_name, is_processed
+        from tb_ppro_r_transaction_fundsreceived
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="txstate != null and txstate != ''">
+                and TXSTATE = #{txstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="channel != null and channel != ''">
+                and CHANNEL = #{channel}
+            </if>
+            <if test="tag != null and tag != ''">
+                and TAG = #{tag}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                and COUNTRYCODE = #{countrycode}
+            </if>
+            <if test="sellingpoint != null and sellingpoint != ''">
+                and SELLINGPOINT = #{sellingpoint}
+            </if>
+            <if test="soldservice != null and soldservice != ''">
+                and SOLDSERVICE = #{soldservice}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="indoubtts != null and indoubtts != ''">
+                and INDOUBTTS = #{indoubtts}
+            </if>
+            <if test="fundsreceivedts != null and fundsreceivedts != ''">
+                and FUNDSRECEIVEDTS = #{fundsreceivedts}
+            </if>
+            <if test="fundsmissingts != null and fundsmissingts != ''">
+                and FUNDSMISSINGTS = #{fundsmissingts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_r_transaction_fundsreceived
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="txid != null and txid != ''">
+                and TXID = #{txid}
+            </if>
+            <if test="txstate != null and txstate != ''">
+                and TXSTATE = #{txstate}
+            </if>
+            <if test="failtype != null and failtype != ''">
+                and FAILTYPE = #{failtype}
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                and FUNDSSTATE = #{fundsstate}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                and ACCOUNTHOLDER = #{accountholder}
+            </if>
+            <if test="channel != null and channel != ''">
+                and CHANNEL = #{channel}
+            </if>
+            <if test="tag != null and tag != ''">
+                and TAG = #{tag}
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                and MERCHANTTXID = #{merchanttxid}
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                and MCONTRACT = #{mcontract}
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                and COUNTRYCODE = #{countrycode}
+            </if>
+            <if test="sellingpoint != null and sellingpoint != ''">
+                and SELLINGPOINT = #{sellingpoint}
+            </if>
+            <if test="soldservice != null and soldservice != ''">
+                and SOLDSERVICE = #{soldservice}
+            </if>
+            <if test="initts != null and initts != ''">
+                and INITTS = #{initts}
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                and SUCCEEDEDTS = #{succeededts}
+            </if>
+            <if test="failedts != null and failedts != ''">
+                and FAILEDTS = #{failedts}
+            </if>
+            <if test="indoubtts != null and indoubtts != ''">
+                and INDOUBTTS = #{indoubtts}
+            </if>
+            <if test="fundsreceivedts != null and fundsreceivedts != ''">
+                and FUNDSRECEIVEDTS = #{fundsreceivedts}
+            </if>
+            <if test="fundsmissingts != null and fundsmissingts != ''">
+                and FUNDSMISSINGTS = #{fundsmissingts}
+            </if>
+            <if test="errortext != null and errortext != ''">
+                and ERRORTEXT = #{errortext}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_transaction_fundsreceived(TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY,
+                                                        ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT,
+                                                        COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS, SUCCEEDEDTS,
+                                                        FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS, FUNDSMISSINGTS, ERRORTEXT,
+                                                        created_time, update_time, file_name, is_processed)
+        values (#{txid}, #{txstate}, #{failtype}, #{fundsstate}, #{amount}, #{currency}, #{accountholder}, #{channel},
+                #{tag}, #{merchanttxid}, #{mcontract}, #{countrycode}, #{sellingpoint}, #{soldservice}, #{initts},
+                #{succeededts}, #{failedts}, #{indoubtts}, #{fundsreceivedts}, #{fundsmissingts}, #{errortext},
+                #{createdTime}, #{updateTime}, #{fileName}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_transaction_fundsreceived(TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY,
+        ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT, COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS,
+        SUCCEEDEDTS, FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS, FUNDSMISSINGTS, ERRORTEXT, created_time, update_time,
+        file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.txid}, #{entity.txstate}, #{entity.failtype}, #{entity.fundsstate}, #{entity.amount},
+            #{entity.currency}, #{entity.accountholder}, #{entity.channel}, #{entity.tag}, #{entity.merchanttxid},
+            #{entity.mcontract}, #{entity.countrycode}, #{entity.sellingpoint}, #{entity.soldservice}, #{entity.initts},
+            #{entity.succeededts}, #{entity.failedts}, #{entity.indoubtts}, #{entity.fundsreceivedts},
+            #{entity.fundsmissingts}, #{entity.errortext}, #{entity.createdTime}, #{entity.updateTime},
+            #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_r_transaction_fundsreceived(TXID, TXSTATE, FAILTYPE, FUNDSSTATE, AMOUNT, CURRENCY,
+        ACCOUNTHOLDER, CHANNEL, TAG, MERCHANTTXID, MCONTRACT, COUNTRYCODE, SELLINGPOINT, SOLDSERVICE, INITTS,
+        SUCCEEDEDTS, FAILEDTS, INDOUBTTS, FUNDSRECEIVEDTS, FUNDSMISSINGTS, ERRORTEXT, created_time, update_time,
+        file_name, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.txid}, #{entity.txstate}, #{entity.failtype}, #{entity.fundsstate}, #{entity.amount},
+            #{entity.currency}, #{entity.accountholder}, #{entity.channel}, #{entity.tag}, #{entity.merchanttxid},
+            #{entity.mcontract}, #{entity.countrycode}, #{entity.sellingpoint}, #{entity.soldservice}, #{entity.initts},
+            #{entity.succeededts}, #{entity.failedts}, #{entity.indoubtts}, #{entity.fundsreceivedts},
+            #{entity.fundsmissingts}, #{entity.errortext}, #{entity.createdTime}, #{entity.updateTime},
+            #{entity.fileName}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        TXID = values(TXID),
+        TXSTATE = values(TXSTATE),
+        FAILTYPE = values(FAILTYPE),
+        FUNDSSTATE = values(FUNDSSTATE),
+        AMOUNT = values(AMOUNT),
+        CURRENCY = values(CURRENCY),
+        ACCOUNTHOLDER = values(ACCOUNTHOLDER),
+        CHANNEL = values(CHANNEL),
+        TAG = values(TAG),
+        MERCHANTTXID = values(MERCHANTTXID),
+        MCONTRACT = values(MCONTRACT),
+        COUNTRYCODE = values(COUNTRYCODE),
+        SELLINGPOINT = values(SELLINGPOINT),
+        SOLDSERVICE = values(SOLDSERVICE),
+        INITTS = values(INITTS),
+        SUCCEEDEDTS = values(SUCCEEDEDTS),
+        FAILEDTS = values(FAILEDTS),
+        INDOUBTTS = values(INDOUBTTS),
+        FUNDSRECEIVEDTS = values(FUNDSRECEIVEDTS),
+        FUNDSMISSINGTS = values(FUNDSMISSINGTS),
+        ERRORTEXT = values(ERRORTEXT),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        file_name = values(file_name),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_r_transaction_fundsreceived
+        <set>
+            <if test="txid != null and txid != ''">
+                TXID = #{txid},
+            </if>
+            <if test="txstate != null and txstate != ''">
+                TXSTATE = #{txstate},
+            </if>
+            <if test="failtype != null and failtype != ''">
+                FAILTYPE = #{failtype},
+            </if>
+            <if test="fundsstate != null and fundsstate != ''">
+                FUNDSSTATE = #{fundsstate},
+            </if>
+            <if test="amount != null and amount != ''">
+                AMOUNT = #{amount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="accountholder != null and accountholder != ''">
+                ACCOUNTHOLDER = #{accountholder},
+            </if>
+            <if test="channel != null and channel != ''">
+                CHANNEL = #{channel},
+            </if>
+            <if test="tag != null and tag != ''">
+                TAG = #{tag},
+            </if>
+            <if test="merchanttxid != null and merchanttxid != ''">
+                MERCHANTTXID = #{merchanttxid},
+            </if>
+            <if test="mcontract != null and mcontract != ''">
+                MCONTRACT = #{mcontract},
+            </if>
+            <if test="countrycode != null and countrycode != ''">
+                COUNTRYCODE = #{countrycode},
+            </if>
+            <if test="sellingpoint != null and sellingpoint != ''">
+                SELLINGPOINT = #{sellingpoint},
+            </if>
+            <if test="soldservice != null and soldservice != ''">
+                SOLDSERVICE = #{soldservice},
+            </if>
+            <if test="initts != null and initts != ''">
+                INITTS = #{initts},
+            </if>
+            <if test="succeededts != null and succeededts != ''">
+                SUCCEEDEDTS = #{succeededts},
+            </if>
+            <if test="failedts != null and failedts != ''">
+                FAILEDTS = #{failedts},
+            </if>
+            <if test="indoubtts != null and indoubtts != ''">
+                INDOUBTTS = #{indoubtts},
+            </if>
+            <if test="fundsreceivedts != null and fundsreceivedts != ''">
+                FUNDSRECEIVEDTS = #{fundsreceivedts},
+            </if>
+            <if test="fundsmissingts != null and fundsmissingts != ''">
+                FUNDSMISSINGTS = #{fundsmissingts},
+            </if>
+            <if test="errortext != null and errortext != ''">
+                ERRORTEXT = #{errortext},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_r_transaction_fundsreceived
+        where id = #{id}
+    </delete>
+
+</mapper>
+

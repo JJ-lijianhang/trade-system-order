@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PaymentSettlementConfMapper">
+
+    <resultMap type="com.futurebank.order.entity.PaymentSettlementConfEntity" id="PaymentSettlementConfMap">
+        <result property="id" column="id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="settlementMethod" column="settlement_method"/>
+        <result property="settlementRange" column="settlement_range"/>
+        <result property="settlementCurrency" column="settlement_currency"/>
+        <result property="minSettlementAmount" column="min_settlement_amount"/>
+        <result property="minBalanceAmount" column="min_balance_amount"/>
+        <result property="settlementExchangeMargin" column="settlement_exchange_margin"/>
+        <result property="consumerExchangeMargin" column="consumer_exchange_margin"/>
+        <result property="consumerCurrency" column="consumer_currency"/>
+        <result property="consumerType" column="consumer_type"/>
+        <result property="merchantCurrency" column="merchant_currency"/>
+        <result property="merchantType" column="merchant_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="reconciliationDate" column="reconciliation_date"/>
+        <result property="settlementDate" column="settlement_date"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PaymentSettlementConfMap">
+        select id,
+               merchant_id,
+               merchant_name,
+               provider_id,
+               provider_name,
+               settlement_method,
+               settlement_range,
+               settlement_currency,
+               min_settlement_amount,
+               min_balance_amount,
+               settlement_exchange_margin,
+               consumer_exchange_margin,
+               consumer_currency,
+               consumer_type,
+               merchant_currency,
+               merchant_type,
+               create_time,
+               update_time,
+               reconciliation_date,
+               settlement_date
+        from tb_payment_settlement_conf
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PaymentSettlementConfMap">
+        select
+        id, merchant_id, merchant_name, provider_id, provider_name, settlement_method, settlement_range,
+        settlement_currency, min_settlement_amount, min_balance_amount, settlement_exchange_margin,
+        consumer_exchange_margin, consumer_currency, consumer_type, merchant_currency, merchant_type, create_time,
+        update_time, reconciliation_date, settlement_date
+        from tb_payment_settlement_conf
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="settlementMethod != null">
+                and settlement_method = #{settlementMethod}
+            </if>
+            <if test="settlementRange != null and settlementRange != ''">
+                and settlement_range = #{settlementRange}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="minSettlementAmount != null">
+                and min_settlement_amount = #{minSettlementAmount}
+            </if>
+            <if test="minBalanceAmount != null">
+                and min_balance_amount = #{minBalanceAmount}
+            </if>
+            <if test="settlementExchangeMargin != null">
+                and settlement_exchange_margin = #{settlementExchangeMargin}
+            </if>
+            <if test="consumerExchangeMargin != null">
+                and consumer_exchange_margin = #{consumerExchangeMargin}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+            <if test="consumerType != null and consumerType != ''">
+                and consumer_type = #{consumerType}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                and merchant_type = #{merchantType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PaymentSettlementConfMap">
+        select
+        id, merchant_id, merchant_name, provider_id, provider_name, settlement_method, settlement_range,
+        settlement_currency, min_settlement_amount, min_balance_amount, settlement_exchange_margin,
+        consumer_exchange_margin, consumer_currency, consumer_type, merchant_currency, merchant_type, create_time,
+        update_time, reconciliation_date, settlement_date
+        from tb_payment_settlement_conf
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="settlementMethod != null">
+                and settlement_method = #{settlementMethod}
+            </if>
+            <if test="settlementRange != null and settlementRange != ''">
+                and settlement_range = #{settlementRange}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="minSettlementAmount != null">
+                and min_settlement_amount = #{minSettlementAmount}
+            </if>
+            <if test="minBalanceAmount != null">
+                and min_balance_amount = #{minBalanceAmount}
+            </if>
+            <if test="settlementExchangeMargin != null">
+                and settlement_exchange_margin = #{settlementExchangeMargin}
+            </if>
+            <if test="consumerExchangeMargin != null">
+                and consumer_exchange_margin = #{consumerExchangeMargin}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+            <if test="consumerType != null and consumerType != ''">
+                and consumer_type = #{consumerType}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                and merchant_type = #{merchantType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PaymentSettlementConfMap">
+        select
+        id, merchant_id, merchant_name, provider_id, provider_name, settlement_method, settlement_range,
+        settlement_currency, min_settlement_amount, min_balance_amount, settlement_exchange_margin,
+        consumer_exchange_margin, consumer_currency, consumer_type, merchant_currency, merchant_type, create_time,
+        update_time, reconciliation_date, settlement_date
+        from tb_payment_settlement_conf
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="settlementMethod != null">
+                and settlement_method = #{settlementMethod}
+            </if>
+            <if test="settlementRange != null and settlementRange != ''">
+                and settlement_range = #{settlementRange}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="minSettlementAmount != null">
+                and min_settlement_amount = #{minSettlementAmount}
+            </if>
+            <if test="minBalanceAmount != null">
+                and min_balance_amount = #{minBalanceAmount}
+            </if>
+            <if test="settlementExchangeMargin != null">
+                and settlement_exchange_margin = #{settlementExchangeMargin}
+            </if>
+            <if test="consumerExchangeMargin != null">
+                and consumer_exchange_margin = #{consumerExchangeMargin}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+            <if test="consumerType != null and consumerType != ''">
+                and consumer_type = #{consumerType}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                and merchant_type = #{merchantType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_payment_settlement_conf
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="settlementMethod != null">
+                and settlement_method = #{settlementMethod}
+            </if>
+            <if test="settlementRange != null and settlementRange != ''">
+                and settlement_range = #{settlementRange}
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                and settlement_currency = #{settlementCurrency}
+            </if>
+            <if test="minSettlementAmount != null">
+                and min_settlement_amount = #{minSettlementAmount}
+            </if>
+            <if test="minBalanceAmount != null">
+                and min_balance_amount = #{minBalanceAmount}
+            </if>
+            <if test="settlementExchangeMargin != null">
+                and settlement_exchange_margin = #{settlementExchangeMargin}
+            </if>
+            <if test="consumerExchangeMargin != null">
+                and consumer_exchange_margin = #{consumerExchangeMargin}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+            <if test="consumerType != null and consumerType != ''">
+                and consumer_type = #{consumerType}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                and merchant_type = #{merchantType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="reconciliationDate != null">
+                and reconciliation_date = #{reconciliationDate}
+            </if>
+            <if test="settlementDate != null">
+                and settlement_date = #{settlementDate}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_settlement_conf(merchant_id, merchant_name, provider_id, provider_name,
+                                               settlement_method, settlement_range, settlement_currency,
+                                               min_settlement_amount, min_balance_amount, settlement_exchange_margin,
+                                               consumer_exchange_margin, consumer_currency, consumer_type,
+                                               merchant_currency, merchant_type, create_time, update_time,
+                                               reconciliation_date, settlement_date)
+        values (#{merchantId}, #{merchantName}, #{providerId}, #{providerName}, #{settlementMethod}, #{settlementRange},
+                #{settlementCurrency}, #{minSettlementAmount}, #{minBalanceAmount}, #{settlementExchangeMargin},
+                #{consumerExchangeMargin}, #{consumerCurrency}, #{consumerType}, #{merchantCurrency}, #{merchantType},
+                #{createTime}, #{updateTime}, #{reconciliationDate}, #{settlementDate})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_settlement_conf(merchant_id, merchant_name, provider_id, provider_name,
+        settlement_method, settlement_range, settlement_currency, min_settlement_amount, min_balance_amount,
+        settlement_exchange_margin, consumer_exchange_margin, consumer_currency, consumer_type, merchant_currency,
+        merchant_type, create_time, update_time, reconciliation_date, settlement_date)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.merchantName}, #{entity.providerId}, #{entity.providerName},
+            #{entity.settlementMethod}, #{entity.settlementRange}, #{entity.settlementCurrency},
+            #{entity.minSettlementAmount}, #{entity.minBalanceAmount}, #{entity.settlementExchangeMargin},
+            #{entity.consumerExchangeMargin}, #{entity.consumerCurrency}, #{entity.consumerType},
+            #{entity.merchantCurrency}, #{entity.merchantType}, #{entity.createTime}, #{entity.updateTime},
+            #{entity.reconciliationDate}, #{entity.settlementDate})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_settlement_conf(merchant_id, merchant_name, provider_id, provider_name,
+        settlement_method, settlement_range, settlement_currency, min_settlement_amount, min_balance_amount,
+        settlement_exchange_margin, consumer_exchange_margin, consumer_currency, consumer_type, merchant_currency,
+        merchant_type, create_time, update_time, reconciliation_date, settlement_date)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.merchantName}, #{entity.providerId}, #{entity.providerName},
+            #{entity.settlementMethod}, #{entity.settlementRange}, #{entity.settlementCurrency},
+            #{entity.minSettlementAmount}, #{entity.minBalanceAmount}, #{entity.settlementExchangeMargin},
+            #{entity.consumerExchangeMargin}, #{entity.consumerCurrency}, #{entity.consumerType},
+            #{entity.merchantCurrency}, #{entity.merchantType}, #{entity.createTime}, #{entity.updateTime},
+            #{entity.reconciliationDate}, #{entity.settlementDate})
+        </foreach>
+        on duplicate key update
+        merchant_id = values(merchant_id),
+        merchant_name = values(merchant_name),
+        provider_id = values(provider_id),
+        provider_name = values(provider_name),
+        settlement_method = values(settlement_method),
+        settlement_range = values(settlement_range),
+        settlement_currency = values(settlement_currency),
+        min_settlement_amount = values(min_settlement_amount),
+        min_balance_amount = values(min_balance_amount),
+        settlement_exchange_margin = values(settlement_exchange_margin),
+        consumer_exchange_margin = values(consumer_exchange_margin),
+        consumer_currency = values(consumer_currency),
+        consumer_type = values(consumer_type),
+        merchant_currency = values(merchant_currency),
+        merchant_type = values(merchant_type),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        reconciliation_date = values(reconciliation_date),
+        settlement_date = values(settlement_date)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_payment_settlement_conf
+        <set>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="providerName != null and providerName != ''">
+                provider_name = #{providerName},
+            </if>
+            <if test="settlementMethod != null">
+                settlement_method = #{settlementMethod},
+            </if>
+            <if test="settlementRange != null and settlementRange != ''">
+                settlement_range = #{settlementRange},
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                settlement_currency = #{settlementCurrency},
+            </if>
+            <if test="minSettlementAmount != null">
+                min_settlement_amount = #{minSettlementAmount},
+            </if>
+            <if test="minBalanceAmount != null">
+                min_balance_amount = #{minBalanceAmount},
+            </if>
+            <if test="settlementExchangeMargin != null">
+                settlement_exchange_margin = #{settlementExchangeMargin},
+            </if>
+            <if test="consumerExchangeMargin != null">
+                consumer_exchange_margin = #{consumerExchangeMargin},
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                consumer_currency = #{consumerCurrency},
+            </if>
+            <if test="consumerType != null and consumerType != ''">
+                consumer_type = #{consumerType},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                merchant_type = #{merchantType},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="reconciliationDate != null">
+                reconciliation_date = #{reconciliationDate},
+            </if>
+            <if test="settlementDate != null">
+                settlement_date = #{settlementDate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_payment_settlement_conf
+        where id = #{id}
+    </delete>
+
+</mapper>
+

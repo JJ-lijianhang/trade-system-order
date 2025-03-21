@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: trade-system-order
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  config:
+    import:
+      - "nacos:trade-system-order.yaml"
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:192.168.50.64:8848}
+        namespace: ${NACOS_NAMESPACE:0ae3e3c8-9620-4a2e-9854-074906bc883b}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USER_NAME:future-read-only}
+        password: ${NACOS_PASSWORD:TxxVZg9918iPAJzyKjaoWZR0mSnoGg68}
+      config:
+        server-addr: ${NACOS_ADDR:192.168.50.64:8848}
+        namespace: ${NACOS_NAMESPACE:0ae3e3c8-9620-4a2e-9854-074906bc883b}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USER_NAME:future-read-only}
+        password: ${NACOS_PASSWORD:TxxVZg9918iPAJzyKjaoWZR0mSnoGg68}
+        file-extension: yaml
+

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.KgpSettlementBillSummaryMapper">
+
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.KgpSettlementBillSummary" >
+        <result column="id" property="id" />
+        <result column="settlement_from" property="settlementFrom" />
+        <result column="settlement_to" property="settlementTo" />
+        <result column="settlement_date" property="settlementDate" />
+        <result column="settlement_time_zone" property="settlementTimeZone" />
+        <result column="payment_date_range" property="paymentDateRange" />
+        <result column="payment_date_start" property="paymentDateStart" />
+        <result column="payment_date_end" property="paymentDateEnd" />
+        <result column="currency" property="currency" />
+        <result column="exchange_rate" property="exchangeRate" />
+        <result column="currency_pair" property="currencyPair" />
+        <result column="payment_income_thb" property="paymentIncomeThb" />
+        <result column="payment_fee_thb" property="paymentFeeThb" />
+        <result column="manual_refund_thb" property="manualRefundThb" />
+        <result column="payout_fee_thb" property="payoutFeeThb" />
+        <result column="net_settlement_amount_thb" property="netSettlementAmountThb" />
+        <result column="payment_income_usd" property="paymentIncomeUsd" />
+        <result column="payment_fee_usd" property="paymentFeeUsd" />
+        <result column="manual_refund_usd" property="manualRefundUsd" />
+        <result column="payout_fee_usd" property="payoutFeeUsd" />
+        <result column="net_settlement_amount_usd" property="netSettlementAmountUsd" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+                settlement_from,
+                settlement_to,
+                settlement_date,
+                settlement_time_zone,
+                payment_date_range,
+                payment_date_start,
+                payment_date_end,
+                currency,
+                exchange_rate,
+                currency_pair,
+                payment_income_thb,
+                payment_fee_thb,
+                manual_refund_thb,
+                payout_fee_thb,
+                net_settlement_amount_thb,
+                payment_income_usd,
+                payment_fee_usd,
+                manual_refund_usd,
+                payout_fee_usd,
+                net_settlement_amount_usd,
+                revision,
+                created_by,
+                created_time,
+                updated_by,
+                updated_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.KgpSettlementBillSummary">
+        INSERT INTO tb_kgp_settlement_bill_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != settlementFrom and '' != settlementFrom">
+                settlement_from,
+            </if>
+            <if test="null != settlementTo and '' != settlementTo">
+                settlement_to,
+            </if>
+            <if test="null != settlementDate and '' != settlementDate">
+                settlement_date,
+            </if>
+            <if test="null != settlementTimeZone and '' != settlementTimeZone">
+                settlement_time_zone,
+            </if>
+            <if test="null != paymentDateRange and '' != paymentDateRange">
+                payment_date_range,
+            </if>
+            <if test="null != paymentDateStart">
+                payment_date_start,
+            </if>
+            <if test="null != paymentDateEnd">
+                payment_date_end,
+            </if>
+            <if test="null != currency and '' != currency">
+                currency,
+            </if>
+            <if test="null != exchangeRate">
+                exchange_rate,
+            </if>
+            <if test="null != currencyPair and '' != currencyPair">
+                currency_pair,
+            </if>
+            <if test="null != paymentIncomeThb">
+                payment_income_thb,
+            </if>
+            <if test="null != paymentFeeThb">
+                payment_fee_thb,
+            </if>
+            <if test="null != manualRefundThb">
+                manual_refund_thb,
+            </if>
+            <if test="null != payoutFeeThb">
+                payout_fee_thb,
+            </if>
+            <if test="null != netSettlementAmountThb">
+                net_settlement_amount_thb,
+            </if>
+            <if test="null != paymentIncomeUsd">
+                payment_income_usd,
+            </if>
+            <if test="null != paymentFeeUsd">
+                payment_fee_usd,
+            </if>
+            <if test="null != manualRefundUsd">
+                manual_refund_usd,
+            </if>
+            <if test="null != payoutFeeUsd">
+                payout_fee_usd,
+            </if>
+            <if test="null != netSettlementAmountUsd">
+                net_settlement_amount_usd,
+            </if>
+            <if test="null != revision and '' != revision">
+                revision,
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                created_by,
+            </if>
+            <if test="null != createdTime">
+                created_time,
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                updated_by,
+            </if>
+            <if test="null != updatedTime">
+                updated_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != settlementFrom and '' != settlementFrom">
+                #{settlementFrom},
+            </if>
+            <if test="null != settlementTo and '' != settlementTo">
+                #{settlementTo},
+            </if>
+            <if test="null != settlementDate and '' != settlementDate">
+                #{settlementDate},
+            </if>
+            <if test="null != settlementTimeZone and '' != settlementTimeZone">
+                #{settlementTimeZone},
+            </if>
+            <if test="null != paymentDateRange and '' != paymentDateRange">
+                #{paymentDateRange},
+            </if>
+            <if test="null != paymentDateStart ">
+                #{paymentDateStart},
+            </if>
+            <if test="null != paymentDateEnd ">
+                #{paymentDateEnd},
+            </if>
+            <if test="null != currency and '' != currency">
+                #{currency},
+            </if>
+            <if test="null != exchangeRate">
+                #{exchangeRate},
+            </if>
+            <if test="null != currencyPair and '' != currencyPair">
+                #{currencyPair},
+            </if>
+            <if test="null != paymentIncomeThb">
+                #{paymentIncomeThb},
+            </if>
+            <if test="null != paymentFeeThb">
+                #{paymentFeeThb},
+            </if>
+            <if test="null != manualRefundThb">
+                #{manualRefundThb},
+            </if>
+            <if test="null != payoutFeeThb">
+                #{payoutFeeThb},
+            </if>
+            <if test="null != netSettlementAmountThb">
+                #{netSettlementAmountThb},
+            </if>
+            <if test="null != paymentIncomeUsd">
+                #{paymentIncomeUsd},
+            </if>
+            <if test="null != paymentFeeUsd">
+                #{paymentFeeUsd},
+            </if>
+            <if test="null != manualRefundUsd">
+                #{manualRefundUsd},
+            </if>
+            <if test="null != payoutFeeUsd">
+                #{payoutFeeUsd},
+            </if>
+            <if test="null != netSettlementAmountUsd">
+                #{netSettlementAmountUsd},
+            </if>
+            <if test="null != revision and '' != revision">
+                #{revision},
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                #{createdBy},
+            </if>
+            <if test="null != createdTime">
+                #{createdTime},
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                #{updatedBy},
+            </if>
+            <if test="null != updatedTime">
+                #{updatedTime}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM tb_kgp_settlement_bill_summary
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.futurebank.order.entity.KgpSettlementBillSummary">
+        UPDATE tb_kgp_settlement_bill_summary
+        <set>
+            <if test="null != settlementFrom and '' != settlementFrom">settlement_from = #{settlementFrom},</if>
+            <if test="null != settlementTo and '' != settlementTo">settlement_to = #{settlementTo},</if>
+            <if test="null != settlementDate and '' != settlementDate">settlement_date = #{settlementDate},</if>
+            <if test="null != settlementTimeZone and '' != settlementTimeZone">settlement_time_zone = #{settlementTimeZone},</if>
+            <if test="null != paymentDateRange and '' != paymentDateRange">payment_date_range = #{paymentDateRange},</if>
+            <if test="null != paymentDateStart">payment_date_start = #{paymentDateStart},</if>
+            <if test="null != paymentDateEnd">payment_date_end = #{paymentDateEnd},</if>
+            <if test="null != currency and '' != currency">currency = #{currency},</if>
+            <if test="null != exchangeRate">exchange_rate = #{exchangeRate},</if>
+            <if test="null != currencyPair and '' != currencyPair">currency_pair = #{currencyPair},</if>
+            <if test="null != paymentIncomeThb ">payment_income_thb = #{paymentIncomeThb},</if>
+            <if test="null != paymentFeeThb ">payment_fee_thb = #{paymentFeeThb},</if>
+            <if test="null != manualRefundThb ">manual_refund_thb = #{manualRefundThb},</if>
+            <if test="null != payoutFeeThb ">payout_fee_thb = #{payoutFeeThb},</if>
+            <if test="null != netSettlementAmountThb ">net_settlement_amount_thb = #{netSettlementAmountThb},</if>
+            <if test="null != paymentIncomeUsd ">payment_income_usd = #{paymentIncomeUsd},</if>
+            <if test="null != paymentFeeUsd ">payment_fee_usd = #{paymentFeeUsd},</if>
+            <if test="null != manualRefundUsd ">manual_refund_usd = #{manualRefundUsd},</if>
+            <if test="null != payoutFeeUsd ">payout_fee_usd = #{payoutFeeUsd},</if>
+            <if test="null != netSettlementAmountUsd ">net_settlement_amount_usd = #{netSettlementAmountUsd},</if>
+            <if test="null != revision and '' != revision">revision = #{revision},</if>
+            <if test="null != createdBy and '' != createdBy">created_by = #{createdBy},</if>
+            <if test="null != createdTime ">created_time = #{createdTime},</if>
+            <if test="null != updatedBy and '' != updatedBy">updated_by = #{updatedBy},</if>
+            <if test="null != updatedTime ">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_kgp_settlement_bill_summary
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_kgp_settlement_bill_summary
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_kgp_settlement_bill_summary
+    </select>
+
+</mapper>

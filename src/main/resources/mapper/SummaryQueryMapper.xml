@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.SummaryQueryMapper">
+
+
+    <select id="queryReconCalendar" resultType="com.futurebank.order.entity.MerchantReconciliationCalendarEntity">
+        SELECT
+        `id`, `provider_id`, `provider_name`, `merchant_id`, `currency`, `estimated_settlement_date`, `recon_date`, `payment_method`, `transaction_amount`,
+        `transaction_count`, `success_amount`, `success_count`, `refund_amount`, `refund_count`, `rejected_amount`, `rejected_count`, `network_fee`, `network_fee_ccy`,
+        `fixed_fee`, `fixed_fee_ccy`, `percentage_fee`, `percentage_fee_ccy`, `refund_fee`, `refund_fee_ccy`, `rejected_fee`, `rejected_fee_ccy`, `revision`,
+        `created_by`, `created_time`, `updated_by`, `updated_time`
+        FROM
+            tb_merchant_reconciliation_calendar
+        WHERE merchant_id = #{merchantId}
+        <if test="reconStartTime != null and reconEndTime != null">
+            AND DATE(recon_date) BETWEEN #{reconStartTime} AND #{reconEndTime}
+        </if>
+        <if test="currencyList != null and !currencyList.isEmpty()">
+            AND currency IN
+            <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="paymentMethodList != null and !paymentMethodList.isEmpty()">
+            AND payment_method IN
+            <foreach item="item" index="index" collection="paymentMethodList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by DATE(recon_date) desc
+    </select>
+
+
+
+<!-- <if test="reconStartTime != null and reconEndTime != null">
+            AND created_at BETWEEN #{reconStartTime} AND #{reconEndTime}
+        </if> -->
+    <select id="queryReconFile" resultType="com.futurebank.order.entity.MerchantFilesEntity">
+        SELECT
+            `provider_id`, `provider_name`, `merchant_id`, `file_type`, `file_name`, `file_path`, `file_size`,
+            `money`, `currency`, `begin_time`, `end_time`, `period`, `remark`, `settlement_status`, `created_at`,
+            `update_at`, `is_show`, `operator`
+        FROM
+            tb_merchant_files
+        WHERE
+            merchant_id = #{merchantId} AND file_type IN ( 'reconciliation')
+        order by created_at desc
+    </select>
+
+
+    <select id="querySettleCalendar" resultType="com.futurebank.order.entity.MerchantSettlementCalendarEntity">
+        SELECT
+            `id`,`provider_id`, `provider_name`, `merchant_id`, `currency`,
+            DATE_FORMAT(STR_TO_DATE(settlement_date, '%Y%m%d'), '%Y-%m-%d') settlementDate,
+            `settlement_status`, `payment_method`,
+            `transfer_amount`, `settlement_amount`, `revision`, `created_by`, `created_time`, `updated_by`, `updated_time`
+        FROM
+            tb_merchant_settlement_calendar
+        WHERE merchant_id = #{merchantId}
+        <if test="settlementStartTime != null and settlementEndTime != null">
+            AND DATE(settlement_date) BETWEEN #{settlementStartTime} AND #{settlementEndTime}
+        </if>
+        <if test="currencyList != null and !currencyList.isEmpty()">
+            AND currency IN
+            <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="paymentMethodList != null and !paymentMethodList.isEmpty()">
+            AND payment_method IN
+            <foreach item="item" index="index" collection="paymentMethodList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by DATE(settlement_date) desc
+    </select>
+
+
+    <!--<if test="settlementStartTime != null and settlementEndTime != null">
+            AND created_at BETWEEN #{settlementStartTime} AND #{settlementEndTime}
+        </if>-->
+    <select id="querySettleFile" resultType="com.futurebank.order.entity.MerchantFilesEntity">
+        SELECT
+            `provider_id`, `provider_name`, `merchant_id`, `file_type`, `file_name`, `file_path`, `file_size`,
+            `money`, `currency`, `begin_time`, `end_time`, `period`, `remark`, `settlement_status`, `created_at`,
+            `update_at`, `is_show`, `operator`
+        FROM
+            tb_merchant_files
+        WHERE
+            merchant_id = #{merchantId} AND file_type IN ( 'settlement', 'aggregate', 'invoice')
+        order by created_at desc
+    </select>
+
+
+    <select id="queryReconSummary" resultType="com.futurebank.order.vo.recon.ReconSummaryVo">
+        SELECT currency ,
+               SUM(transaction_amount) as transactionAmount , SUM(transaction_count) as transactionCount,
+               SUM(success_amount) as success_amount , SUM(success_count) as success_count,
+               SUM(refund_amount) as refund_amount , SUM(refund_count) as refund_count,
+               SUM(rejected_amount) as rejected_amount , SUM(rejected_count) as rejected_count,
+               SUM(network_fee) as network_fee,
+               SUM(fixed_fee) as fixed_fee,
+               SUM(percentage_fee) as percentage_fee,
+               SUM(refund_fee) as refund_fee,
+               SUM(rejected_fee) as rejected_fee
+        FROM tb_merchant_reconciliation_calendar
+        WHERE merchant_id = #{merchantId}
+        <if test="reconStartTime != null and reconEndTime != null">
+            AND DATE(recon_date)  BETWEEN #{reconStartTime} AND #{reconEndTime}
+        </if>
+        <if test="currencyList != null and !currencyList.isEmpty()">
+            AND currency IN
+            <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="paymentMethodList != null and !paymentMethodList.isEmpty()">
+            AND payment_method IN
+            <foreach item="item" index="index" collection="paymentMethodList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        GROUP BY currency
+
+    </select>
+
+    <select id="querySettleSummary" resultType="com.futurebank.order.vo.settlement.SettleSummaryVo" >
+        SELECT currency , SUM(settlement_amount) transactionAmount
+        FROM tb_merchant_settlement_calendar
+        WHERE merchant_id = #{merchantId}
+        <if test="settlementStartTime != null and settlementEndTime != null">
+            AND DATE(settlement_date) BETWEEN #{settlementStartTime} AND #{settlementEndTime}
+        </if>
+        <if test="currencyList != null and !currencyList.isEmpty()">
+            AND currency IN
+            <foreach item="item" index="index" collection="currencyList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="paymentMethodList != null and !paymentMethodList.isEmpty()">
+            AND payment_method IN
+            <foreach item="item" index="index" collection="paymentMethodList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        GROUP BY currency
+    </select>
+    
+    <select id="queryReconCurrency" resultType="com.futurebank.order.vo.QueryVo">
+        SELECT DISTINCT currency FROM tb_merchant_reconciliation_calendar WHERE merchant_id = #{merchantId}
+    </select>
+    
+    <select id="queryReconPaymentMth" resultType="com.futurebank.order.vo.QueryVo">
+        SELECT DISTINCT payment_method paymentMethod FROM tb_merchant_reconciliation_calendar WHERE merchant_id = #{merchantId}
+    </select>
+
+    <select id="querySettleCurrency" resultType="com.futurebank.order.vo.QueryVo">
+        SELECT DISTINCT currency FROM tb_merchant_settlement_calendar WHERE merchant_id = #{merchantId}
+    </select>
+
+    <select id="querySettlePaymentMth" resultType="com.futurebank.order.vo.QueryVo">
+        SELECT DISTINCT payment_method paymentMethod FROM tb_merchant_settlement_calendar WHERE merchant_id = #{merchantId}
+    </select>
+
+    <select id="queryPlatNameByMethod" resultType="com.futurebank.order.vo.QueryVo">
+        SELECT
+        platform_name platformName,
+        payment_method paymentMethod
+        FROM tb_payment_platform
+        WHERE
+        payment_method IN
+        <foreach item="item" index="index" collection="methodList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

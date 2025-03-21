@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.AccountBizTradeDetailsMapper">
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.AccountBizTradeDetailsEntity" >
+        <result column="id" property="id" />
+        <result column="provider_id" property="providerId" />
+        <result column="platform_id" property="platformId" />
+        <result column="agent_id" property="agentId" />
+        <result column="biz_no" property="bizNo" />
+        <result column="biz_child_no" property="bizChildNo" />
+        <result column="biz_unify_no" property="bizUnifyNo" />
+        <result column="biz_type" property="bizType" />
+        <result column="from_system" property="fromSystem" />
+        <result column="payer_customer_no" property="payerCustomerNo" />
+        <result column="payer_currency" property="payerCurrency" />
+        <result column="payer_amount" property="payerAmount" />
+        <result column="payer_acquiring_fee" property="payerAcquiringFee" />
+        <result column="payer_discount_fee" property="payerDiscountFee" />
+        <result column="payer_fee_description" property="payerFeeDescription" />
+        <result column="recv_customer_no" property="recvCustomerNo" />
+        <result column="recv_currency" property="recvCurrency" />
+        <result column="recv_amount" property="recvAmount" />
+        <result column="recv_acquiring_fee" property="recvAcquiringFee" />
+        <result column="recv_discount_fee" property="recvDiscountFee" />
+        <result column="recv_fee_description" property="recvFeeDescription" />
+        <result column="three_customer_no" property="threeCustomerNo" />
+        <result column="three_currency" property="threeCurrency" />
+        <result column="three_amount" property="threeAmount" />
+        <result column="three_acquiring_fee" property="threeAcquiringFee" />
+        <result column="three_discount_fee" property="threeDiscountFee" />
+        <result column="three_fee_description" property="threeFeeDescription" />
+        <result column="pay_type" property="payType" />
+        <result column="channel_code" property="channelCode" />
+        <result column="period" property="period" />
+        <result column="voucher_no" property="voucherNo" />
+        <result column="reverse_flag" property="reverseFlag" />
+        <result column="reverse_time" property="reverseTime" />
+        <result column="remark" property="remark" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        provider_id,
+        platform_id,
+        agent_id,
+        biz_no,
+        biz_child_no,
+        biz_unify_no,
+        biz_type,
+        from_system,
+        payer_customer_no,
+        payer_currency,
+        payer_amount,
+        payer_acquiring_fee,
+        payer_discount_fee,
+        payer_fee_description,
+        recv_customer_no,
+        recv_currency,
+        recv_amount,
+        recv_acquiring_fee,
+        recv_discount_fee,
+        recv_gateway_fee,
+        recv_fee_description,
+        three_customer_no,
+        three_currency,
+        three_amount,
+        three_acquiring_fee,
+        three_discount_fee,
+        three_fee_description,
+        pay_type,
+        channel_code,
+        period,
+        settment_file_name,
+        settment_file_path,
+        settment_details_file_name,
+        settment_details_file_path,
+        voucher_no,
+        reverse_flag,
+        reverse_time,
+        remark,
+        revision,
+        created_by,
+        created_time,
+        updated_by,
+        updated_time
+    </sql>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.AccountBizTradeDetailsEntity">
+        INSERT INTO tb_account_biz_trade_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != providerId and '' != providerId">
+                provider_id,
+            </if>
+            <if test="null != platformId and '' != platformId">
+                platform_id,
+            </if>
+            <if test="null != agentId and '' != agentId">
+                agent_id,
+            </if>
+            <if test="null != bizNo and '' != bizNo">
+                biz_no,
+            </if>
+            <if test="null != bizChildNo and '' != bizChildNo">
+                biz_child_no,
+            </if>
+            <if test="null != bizUnifyNo and '' != bizUnifyNo">
+                biz_unify_no,
+            </if>
+            <if test="null != bizType and '' != bizType">
+                biz_type,
+            </if>
+            <if test="null != fromSystem and '' != fromSystem">
+                from_system,
+            </if>
+            <if test="null != payerCustomerNo and '' != payerCustomerNo">
+                payer_customer_no,
+            </if>
+            <if test="null != payerCurrency and '' != payerCurrency">
+                payer_currency,
+            </if>
+            <if test="null != payerAmount and '' != payerAmount">
+                payer_amount,
+            </if>
+            <if test="null != payerAcquiringFee and '' != payerAcquiringFee">
+                payer_acquiring_fee,
+            </if>
+            <if test="null != payerDiscountFee and '' != payerDiscountFee">
+                payer_discount_fee,
+            </if>
+            <if test="null != payerFeeDescription and '' != payerFeeDescription">
+                payer_fee_description,
+            </if>
+            <if test="null != recvCustomerNo and '' != recvCustomerNo">
+                recv_customer_no,
+            </if>
+            <if test="null != recvCurrency and '' != recvCurrency">
+                recv_currency,
+            </if>
+            <if test="null != recvAmount and '' != recvAmount">
+                recv_amount,
+            </if>
+            <if test="null != recvAcquiringFee and '' != recvAcquiringFee">
+                recv_acquiring_fee,
+            </if>
+            <if test="null != recvDiscountFee and '' != recvDiscountFee">
+                recv_discount_fee,
+            </if>
+            <if test="null != recvGatewayFee and '' != recvGatewayFee">
+                recv_gateway_fee,
+            </if>
+            <if test="null != recvFeeDescription and '' != recvFeeDescription">
+                recv_fee_description,
+            </if>
+            <if test="null != threeCustomerNo and '' != threeCustomerNo">
+                three_customer_no,
+            </if>
+            <if test="null != threeCurrency and '' != threeCurrency">
+                three_currency,
+            </if>
+            <if test="null != threeAmount and '' != threeAmount">
+                three_amount,
+            </if>
+            <if test="null != threeAcquiringFee and '' != threeAcquiringFee">
+                three_acquiring_fee,
+            </if>
+            <if test="null != threeDiscountFee and '' != threeDiscountFee">
+                three_discount_fee,
+            </if>
+            <if test="null != threeFeeDescription and '' != threeFeeDescription">
+                three_fee_description,
+            </if>
+            <if test="null != payType and '' != payType">
+                pay_type,
+            </if>
+            <if test="null != channelCode and '' != channelCode">
+                channel_code,
+            </if>
+            <if test="null != period and '' != period">
+                period,
+            </if>
+            <if test="null != period and '' != period">
+                settment_file_name,
+            </if>
+            <if test="null != period and '' != period">
+                settment_file_path,
+            </if>
+            <if test="null != period and '' != period">
+                settment_details_file_name,
+            </if>
+            <if test="null != period and '' != period">
+                settment_details_file_path,
+            </if>
+            <if test="null != voucherNo and '' != voucherNo">
+                voucher_no,
+            </if>
+            <if test="null != reverseFlag and '' != reverseFlag">
+                reverse_flag,
+            </if>
+            <if test="null != reverseTime and '' != reverseTime">
+                reverse_time,
+            </if>
+            <if test="null != remark and '' != remark">
+                remark,
+            </if>
+            <if test="null != revision and '' != revision">
+                revision,
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                created_by,
+            </if>
+            <if test="null != createdTime">
+                created_time,
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                updated_by,
+            </if>
+            <if test="null != updatedTime">
+                updated_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != providerId and '' != providerId">
+                #{providerId},
+            </if>
+            <if test="null != platformId and '' != platformId">
+                #{platformId},
+            </if>
+            <if test="null != agentId and '' != agentId">
+                #{agentId},
+            </if>
+            <if test="null != bizNo and '' != bizNo">
+                #{bizNo},
+            </if>
+            <if test="null != bizChildNo and '' != bizChildNo">
+                #{bizChildNo},
+            </if>
+            <if test="null != bizUnifyNo and '' != bizUnifyNo">
+                #{bizUnifyNo},
+            </if>
+            <if test="null != bizType and '' != bizType">
+                #{bizType},
+            </if>
+            <if test="null != fromSystem and '' != fromSystem">
+                #{fromSystem},
+            </if>
+            <if test="null != payerCustomerNo and '' != payerCustomerNo">
+                #{payerCustomerNo},
+            </if>
+            <if test="null != payerCurrency and '' != payerCurrency">
+                #{payerCurrency},
+            </if>
+            <if test="null != payerAmount and '' != payerAmount">
+                #{payerAmount},
+            </if>
+            <if test="null != payerAcquiringFee and '' != payerAcquiringFee">
+                #{payerAcquiringFee},
+            </if>
+            <if test="null != payerDiscountFee and '' != payerDiscountFee">
+                #{payerDiscountFee},
+            </if>
+            <if test="null != payerFeeDescription and '' != payerFeeDescription">
+                #{payerFeeDescription},
+            </if>
+            <if test="null != recvCustomerNo and '' != recvCustomerNo">
+                #{recvCustomerNo},
+            </if>
+            <if test="null != recvCurrency and '' != recvCurrency">
+                #{recvCurrency},
+            </if>
+            <if test="null != recvAmount and '' != recvAmount">
+                #{recvAmount},
+            </if>
+            <if test="null != recvAcquiringFee and '' != recvAcquiringFee">
+                #{recvAcquiringFee},
+            </if>
+            <if test="null != recvDiscountFee and '' != recvDiscountFee">
+                #{recvDiscountFee},
+            </if>
+            <if test="null != recvGatewayFee and '' != recvGatewayFee">
+                #{recvGatewayFee},
+            </if>
+            <if test="null != recvFeeDescription and '' != recvFeeDescription">
+                #{recvFeeDescription},
+            </if>
+            <if test="null != threeCustomerNo and '' != threeCustomerNo">
+                #{threeCustomerNo},
+            </if>
+            <if test="null != threeCurrency and '' != threeCurrency">
+                #{threeCurrency},
+            </if>
+            <if test="null != threeAmount and '' != threeAmount">
+                #{threeAmount},
+            </if>
+            <if test="null != threeAcquiringFee and '' != threeAcquiringFee">
+                #{threeAcquiringFee},
+            </if>
+            <if test="null != threeDiscountFee and '' != threeDiscountFee">
+                #{threeDiscountFee},
+            </if>
+            <if test="null != threeFeeDescription and '' != threeFeeDescription">
+                #{threeFeeDescription},
+            </if>
+            <if test="null != payType and '' != payType">
+                #{payType},
+            </if>
+            <if test="null != channelCode and '' != channelCode">
+                #{channelCode},
+            </if>
+            <if test="null != period and '' != period">
+                #{period},
+            </if>
+            <if test="null != settmentFileName and '' != settmentFileName">
+                #{settmentFileName},
+            </if>
+            <if test="null != settmentFilePath and '' != settmentFilePath">
+                #{settmentFilePath},
+            </if>
+            <if test="null != settmentDetailsFileName and '' != settmentDetailsFileName">
+                #{settmentDetailsFileName},
+            </if>
+            <if test="null != settmentDetailsFilePath and '' != settmentDetailsFilePath">
+                #{settmentDetailsFilePath},
+            </if>
+            <if test="null != voucherNo and '' != voucherNo">
+                #{voucherNo},
+            </if>
+            <if test="null != reverseFlag and '' != reverseFlag">
+                #{reverseFlag},
+            </if>
+            <if test="null != reverseTime and '' != reverseTime">
+                #{reverseTime},
+            </if>
+            <if test="null != remark and '' != remark">
+                #{remark},
+            </if>
+            <if test="null != revision and '' != revision">
+                #{revision},
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                #{createdBy},
+            </if>
+            <if test="null != createdTime">
+                #{createdTime},
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                #{updatedBy},
+            </if>
+            <if test="null != updatedTime">
+                #{updatedTime}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM tb_account_biz_trade_details
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.futurebank.order.entity.AccountBizTradeDetailsEntity">
+        UPDATE tb_account_biz_trade_details
+        <set>
+            <if test="null != providerId and '' != providerId">provider_id = #{providerId},</if>
+            <if test="null != platformId and '' != platformId">platform_id = #{platformId},</if>
+            <if test="null != agentId and '' != agentId">agent_id = #{agentId},</if>
+            <if test="null != currency and '' != currency">currency = #{currency},</if>
+            <if test="null != bizNo and '' != bizNo">biz_no = #{bizNo},</if>
+            <if test="null != bizChildNo and '' != bizChildNo">biz_child_no = #{bizChildNo},</if>
+            <if test="null != bizUnifyNo and '' != bizUnifyNo">biz_unify_no = #{bizUnifyNo},</if>
+            <if test="null != bizType and '' != bizType">biz_type = #{bizType},</if>
+            <if test="null != fromSystem and '' != fromSystem">from_system = #{fromSystem},</if>
+            <if test="null != payerCustomerNo and '' != payerCustomerNo">payer_customer_no = #{payerCustomerNo},</if>
+            <if test="null != payerCurrency and '' != payerCurrency">payer_currency = #{payerCurrency},</if>
+            <if test="null != payerAmount and '' != payerAmount">payer_amount = #{payerAmount},</if>
+            <if test="null != payerAcquiringFee and '' != payerAcquiringFee">payer_acquiring_fee = #{payerAcquiringFee},</if>
+            <if test="null != payerDiscountFee and '' != payerDiscountFee">payer_discount_fee = #{payerDiscountFee},</if>
+            <if test="null != payerExtFee1 and '' != payerExtFee1">payer_ext_fee_1 = #{payerExtFee1},</if>
+            <if test="null != payerExtFee2 and '' != payerExtFee2">payer_ext_fee_2 = #{payerExtFee2},</if>
+            <if test="null != payerExtFee3 and '' != payerExtFee3">payer_ext_fee_3 = #{payerExtFee3},</if>
+            <if test="null != recvCustomerNo and '' != recvCustomerNo">recv_customer_no = #{recvCustomerNo},</if>
+            <if test="null != recvCurrency and '' != recvCurrency">recv_currency = #{recvCurrency},</if>
+            <if test="null != recvAmount and '' != recvAmount">recv_amount = #{recvAmount},</if>
+            <if test="null != recvAcquiringFee and '' != recvAcquiringFee">recv_acquiring_fee = #{recvAcquiringFee},</if>
+            <if test="null != recvDiscountFee and '' != recvDiscountFee">recv_discount_fee = #{recvDiscountFee},</if>
+            <if test="null != recvExtFee1 and '' != recvExtFee1">recv_ext_fee_1 = #{recvExtFee1},</if>
+            <if test="null != recvExtFee2 and '' != recvExtFee2">recv_ext_fee_2 = #{recvExtFee2},</if>
+            <if test="null != recvExtFee3 and '' != recvExtFee3">recv_ext_fee_3 = #{recvExtFee3},</if>
+            <if test="null != threeCustomerNo and '' != threeCustomerNo">three_customer_no = #{threeCustomerNo},</if>
+            <if test="null != threeCurrency and '' != threeCurrency">three_currency = #{threeCurrency},</if>
+            <if test="null != threeAmount and '' != threeAmount">three_amount = #{threeAmount},</if>
+            <if test="null != threeAcquiringFee and '' != threeAcquiringFee">three_acquiring_fee = #{threeAcquiringFee},</if>
+            <if test="null != threeDiscountFee and '' != threeDiscountFee">three_discount_fee = #{threeDiscountFee},</if>
+            <if test="null != threeExtFee1 and '' != threeExtFee1">three_ext_fee_1 = #{threeExtFee1},</if>
+            <if test="null != threeExtFee2 and '' != threeExtFee2">three_ext_fee_2 = #{threeExtFee2},</if>
+            <if test="null != threeExtFee3 and '' != threeExtFee3">three_ext_fee_3 = #{threeExtFee3},</if>
+            <if test="null != payType and '' != payType">pay_type = #{payType},</if>
+            <if test="null != channelCode and '' != channelCode">channel_code = #{channelCode},</if>
+            <if test="null != period and '' != period">period = #{period},</if>
+            <if test="null != voucherNo and '' != voucherNo">voucher_no = #{voucherNo},</if>
+            <if test="null != reverseFlag and '' != reverseFlag">reverse_flag = #{reverseFlag},</if>
+            <if test="null != reverseTime and '' != reverseTime">reverse_time = #{reverseTime},</if>
+            <if test="null != remark and '' != remark">remark = #{remark},</if>
+            <if test="null != revision and '' != revision">revision = #{revision},</if>
+            <if test="null != createdBy and '' != createdBy">created_by = #{createdBy},</if>
+            <if test="null != createdTime and '' != createdTime">created_time = #{createdTime},</if>
+            <if test="null != updatedBy and '' != updatedBy">updated_by = #{updatedBy},</if>
+            <if test="null != updatedTime and '' != updatedTime">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_account_biz_trade_details
+        <where>
+            <if test="null != providerId and '' != providerId">AND provider_id = #{providerId}</if>
+            <if test="null != platformId and '' != platformId">AND platform_id = #{platformId}</if>
+            <if test="null != agentId and '' != agentId">AND agent_id = #{agentId}</if>
+            <if test="null != bizNo and '' != bizNo">AND biz_no = #{bizNo}</if>
+            <if test="null != bizChildNo and '' != bizChildNo">AND biz_child_no = #{bizChildNo}</if>
+            <if test="null != bizUnifyNo and '' != bizUnifyNo">AND biz_unify_no = #{bizUnifyNo}</if>
+            <if test="null != bizType and '' != bizType">AND biz_type = #{bizType}</if>
+            <if test="null != fromSystem and '' != fromSystem">AND from_system = #{fromSystem}</if>
+            <if test="null != payerCustomerNo and '' != payerCustomerNo">AND payer_customer_no = #{payerCustomerNo}</if>
+            <if test="null != payerCurrency and '' != payerCurrency">AND payer_currency = #{payerCurrency}</if>
+            <if test="null != recvCustomerNo and '' != recvCustomerNo">AND recv_customer_no = #{recvCustomerNo}</if>
+            <if test="null != recvCurrency and '' != recvCurrency">AND recv_currency = #{recvCurrency}</if>
+            <if test="null != threeCustomerNo and '' != threeCustomerNo">AND three_customer_no = #{threeCustomerNo}</if>
+            <if test="null != payType and '' != payType">AND pay_type = #{payType}</if>
+            <if test="null != channelCode and '' != channelCode">AND channel_code = #{channelCode}</if>
+            <if test="null != period and '' != period">AND period = #{period}</if>
+        </where>
+    </select>
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_account_biz_trade_details
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_account_biz_trade_details
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_account_biz_trade_details
+    </select>
+
+
+    <select id="queryBalanceDetails" resultType="com.futurebank.order.vo.BalanceDetailsVo">
+        SELECT
+            cadddate,biz_code bizType,charge_event_type chargeEventType,reference_no referenceNo,currency,imoney,ibalance,ibalancetotal,cmemo
+        FROM tb_merchant_charge
+        WHERE
+            merchant_id = #{merchantId}
+            AND <![CDATA[ wallet_type < 7 AND imoney != 0 ]]>
+            AND service_type != 'acquiring  service'
+        <if test="null != referenceNo and referenceNo != ''">AND reference_no LIKE CONCAT('%', #{referenceNo}, '%')</if>
+        <if test="null != currency and currency != ''">AND currency = #{currency}</if>
+        <if test="null != subjectCode and subjectCode != ''">AND charge_event_type = #{subjectCode}</if>
+        <if test="tradeStartTime != null and tradeEndTime != null">
+            AND cadddate BETWEEN #{tradeStartTime} AND #{tradeEndTime}
+        </if>
+        order by biz_timestamp DESC, charge_event_type desc
+    </select>
+
+
+</mapper>

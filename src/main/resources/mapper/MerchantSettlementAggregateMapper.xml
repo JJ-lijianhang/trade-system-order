@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantSettlementAggregateMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantSettlementAggregateEntity" id="MerchantSettlementAggregateMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="settlementId" column="settlement_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="feeType" column="fee_type"/>
+        <result property="feeCount" column="fee_count"/>
+        <result property="aggregateAmount" column="aggregate_amount"/>
+        <result property="currency" column="currency"/>
+        <result property="exchange" column="exchange"/>
+        <result property="exchangeAmount" column="exchange_amount"/>
+        <result property="markup" column="markup"/>
+        <result property="markupFee" column="markup_fee"/>
+        <result property="tiggerCurrency" column="tigger_currency"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantSettlementAggregateMap">
+        select id,
+               provider_id,
+               provider_name,
+               settlement_id,
+               merchant_id,
+               payment_method,
+               fee_type,
+               fee_count,
+               aggregate_amount,
+               currency,
+               exchange,
+               exchange_amount,
+               markup,
+               markup_fee,
+               tigger_currency,
+               created_time,
+               update_time
+        from tb_merchant_settlement_aggregate
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantSettlementAggregateMap">
+        select
+        id,provider_id,provider_name, settlement_id, merchant_id, payment_method, fee_type, fee_count, aggregate_amount, currency, exchange,
+        exchange_amount, markup, markup_fee, tigger_currency, created_time, update_time
+        from tb_merchant_settlement_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="feeCount != null">
+                and fee_count = #{feeCount}
+            </if>
+            <if test="aggregateAmount != null">
+                and aggregate_amount = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupFee != null">
+                and markup_fee = #{markupFee}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantSettlementAggregateMap">
+        select
+        id,provider_id,provider_name, settlement_id, merchant_id, payment_method, fee_type, fee_count, aggregate_amount, currency, exchange,
+        exchange_amount, markup, markup_fee, tigger_currency, created_time, update_time
+        from tb_merchant_settlement_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="feeCount != null">
+                and fee_count = #{feeCount}
+            </if>
+            <if test="aggregateAmount != null">
+                and aggregate_amount = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupFee != null">
+                and markup_fee = #{markupFee}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantSettlementAggregateMap">
+        select
+        id,provider_id,provider_name, settlement_id, merchant_id, payment_method, fee_type, fee_count, aggregate_amount, currency, exchange,
+        exchange_amount, markup, markup_fee, tigger_currency, created_time, update_time
+        from tb_merchant_settlement_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="feeCount != null">
+                and fee_count = #{feeCount}
+            </if>
+            <if test="aggregateAmount != null">
+                and aggregate_amount = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupFee != null">
+                and markup_fee = #{markupFee}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_settlement_aggregate
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="feeCount != null">
+                and fee_count = #{feeCount}
+            </if>
+            <if test="aggregateAmount != null">
+                and aggregate_amount = #{aggregateAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupFee != null">
+                and markup_fee = #{markupFee}
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                and tigger_currency = #{tiggerCurrency}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement_aggregate(provider_id,provider_name,settlement_id, merchant_id, payment_method, fee_type, fee_count,
+                                                     aggregate_amount, currency, exchange, exchange_amount, markup,
+                                                     markup_fee, tigger_currency, created_time, update_time)
+        values (#{providerId},#{providerName},#{settlementId}, #{merchantId}, #{paymentMethod}, #{feeType}, #{feeCount}, #{aggregateAmount},
+                #{currency}, #{exchange}, #{exchangeAmount}, #{markup}, #{markupFee}, #{tiggerCurrency}, #{createdTime},
+                #{updateTime})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement_aggregate(provider_id,provider_name,settlement_id, merchant_id, payment_method, fee_type, fee_count,
+        aggregate_amount, currency, exchange, exchange_amount, markup, markup_fee, tigger_currency, created_time,
+        update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settlementId}, #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType},
+            #{entity.feeCount}, #{entity.aggregateAmount}, #{entity.currency}, #{entity.exchange},
+            #{entity.exchangeAmount}, #{entity.markup}, #{entity.markupFee}, #{entity.tiggerCurrency},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settlement_aggregate(provider_id,provider_name,settlement_id, merchant_id, payment_method, fee_type, fee_count,
+        aggregate_amount, currency, exchange, exchange_amount, markup, markup_fee, tigger_currency, created_time,
+        update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settlementId}, #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType},
+            #{entity.feeCount}, #{entity.aggregateAmount}, #{entity.currency}, #{entity.exchange},
+            #{entity.exchangeAmount}, #{entity.markup}, #{entity.markupFee}, #{entity.tiggerCurrency},
+            #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        settlement_id = values(settlement_id),
+        merchant_id = values(merchant_id),
+        payment_method = values(payment_method),
+        fee_type = values(fee_type),
+        fee_count = values(fee_count),
+        aggregate_amount = values(aggregate_amount),
+        currency = values(currency),
+        exchange = values(exchange),
+        exchange_amount = values(exchange_amount),
+        markup = values(markup),
+        markup_fee = values(markup_fee),
+        tigger_currency = values(tigger_currency),
+        created_time = values(created_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_settlement_aggregate
+        <set>
+            <if test="settlementId != null and settlementId != ''">
+                settlement_id = #{settlementId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="feeType != null and feeType != ''">
+                fee_type = #{feeType},
+            </if>
+            <if test="feeCount != null">
+                fee_count = #{feeCount},
+            </if>
+            <if test="aggregateAmount != null">
+                aggregate_amount = #{aggregateAmount},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="exchange != null">
+                exchange = #{exchange},
+            </if>
+            <if test="exchangeAmount != null">
+                exchange_amount = #{exchangeAmount},
+            </if>
+            <if test="markup != null">
+                markup = #{markup},
+            </if>
+            <if test="markupFee != null">
+                markup_fee = #{markupFee},
+            </if>
+            <if test="tiggerCurrency != null and tiggerCurrency != ''">
+                tigger_currency = #{tiggerCurrency},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_settlement_aggregate
+        where id = #{id}
+    </delete>
+
+    <!-- TODO 目前统一转换成美元结算-->
+    <select id="queryTotalSettlementMoney" resultType="com.futurebank.order.vo.Invoice.MerchantInfoVo">
+        SELECT SUM(total) as totalSettlementMoney FROM (
+           SELECT
+               CASE WHEN  currency != 'USD' THEN exchange_amount + markup_fee ELSE aggregate_amount END  as total from tb_merchant_settlement_aggregate
+           where merchant_id = #{merchantId} and settlement_id = #{period} AND provider_id = #{providerId}  and payment_method is not null
+       ) tmp
+    </select>
+
+</mapper>
+

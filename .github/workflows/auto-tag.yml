@@ -1,0 +1,39 @@
+name: Auto Tag
+
+on:
+  push:
+    branches:
+      - master  # 触发条件：仅当 master 分支有代码变动时触发
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git user
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Debug Token
+        run: |
+          TOKEN=${{ secrets.WORKFLOW_TOKEN }}
+          echo "Token length: ${#TOKEN}"
+
+      - name: Create and Push Tag
+        env:
+          GITHUB_TOKEN: ${{secrets.WORKFLOW_TOKEN}}
+        run: |
+          # 获取当前时间生成版本号，也可以改为其他逻辑
+          TAG_NAME="v$(date +'%Y%m%d%H%M%S')"
+          git tag $TAG_NAME
+          # 获取标签对应的提交标记 ID
+          TAG_COMMIT_ID=$(git rev-list -n 1 $TAG_NAME)
+          git remote set-url origin https://wesealWei:${GITHUB_TOKEN}@github.com/FuturepayRepo/trade-system-task.git
+          git push origin $TAG_NAME

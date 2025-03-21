@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.ProductChannelMapper">
+
+    <resultMap type="com.futurebank.order.entity.ProductChannelEntity" id="ProductChannelMap">
+        <result property="id" column="id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="agentId" column="agent_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="platformId" column="platform_id"/>
+        <result property="supportedCards" column="supported_cards"/>
+        <result property="acquiringMode" column="acquiring_mode"/>
+        <result property="supportedConsumer" column="supported_consumer"/>
+        <result property="supportedMerchant" column="supported_merchant"/>
+        <result property="industries" column="industries"/>
+        <result property="processingCurrencies" column="processing_currencies"/>
+        <result property="settlementCurrencies" column="settlement_currencies"/>
+        <result property="transactionType" column="transaction_type"/>
+        <result property="consumerCurrencies" column="consumer_currencies"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="limitAmount" column="limit_amount"/>
+        <result property="limitCurrencies" column="limit_currencies"/>
+        <result property="paymentExchangeRate" column="payment_exchange_rate"/>
+        <result property="fixedFee" column="fixed_fee"/>
+        <result property="transactionRate" column="transaction_rate"/>
+        <result property="refundFee" column="refund_fee"/>
+        <result property="chargebankFee" column="chargebank_fee"/>
+        <result property="settlementFee" column="settlement_fee"/>
+        <result property="exchangeRate" column="exchange_rate"/>
+        <result property="marginRate" column="margin_rate"/>
+        <result property="provider" column="provider"/>
+        <result property="active" column="active"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="supportRecurring" column="support_recurring"/>
+        <result property="supportOneClick" column="support_one_click"/>
+        <result property="refundType" column="refund_type"/>
+        <result property="refundExpiryTime" column="refund_expiry_time"/>
+        <result property="supportChargeback" column="support_chargeback"/>
+        <result property="sessionTimeout" column="session_timeout"/>
+        <result property="currency" column="currency"/>
+        <result property="managementFee" column="management_fee"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="childrenPaymentType" column="children_payment_type"/>
+        <result property="paymentIdentification" column="payment_identification"/>
+        <result property="exchangeSourceCurrencies" column="exchange_source_currencies"/>
+        <result property="exchangeTargetCurrencies" column="exchange_target_currencies"/>
+        <result property="exchangeRateDifference" column="exchange_rate_difference"/>
+        <result property="operator" column="operator"/>
+        <result property="creator" column="creator"/>
+        <result property="requestFeeFlag" column="request_fee_flag"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="feeType" column="fee_type"/>
+        <result property="vat" column="vat"/>
+        <result property="gatewayFee" column="gateway_fee"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ProductChannelMap">
+        select id,
+               merchant_id,
+               merchant_name,
+               agent_id,
+               user_id,
+               product_id,
+               channel_id,
+               provider_id,
+               platform_id,
+               supported_cards,
+               acquiring_mode,
+               supported_consumer,
+               supported_merchant,
+               industries,
+               processing_currencies,
+               settlement_currencies,
+               transaction_type,
+               consumer_currencies,
+               payment_method,
+               limit_amount,
+               limit_currencies,
+               payment_exchange_rate,
+               fixed_fee,
+               transaction_rate,
+               refund_fee,
+               chargebank_fee,
+               settlement_fee,
+               exchange_rate,
+               margin_rate,
+               provider,
+               active,
+               is_deleted,
+               support_recurring,
+               support_one_click,
+               refund_type,
+               refund_expiry_time,
+               support_chargeback,
+               session_timeout,
+               currency,
+               management_fee,
+               payment_type,
+               children_payment_type,
+               payment_identification,
+               exchange_source_currencies,
+               exchange_target_currencies,
+               exchange_rate_difference,
+               operator,
+               creator,
+               request_fee_flag,
+               created_at,
+               updated_at,
+               fee_type,
+               vat,
+               gateway_fee
+        from tb_product_channel
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="ProductChannelMap">
+        select
+        id, merchant_id, merchant_name, agent_id, user_id, product_id, channel_id, provider_id, platform_id,
+        supported_cards, acquiring_mode, supported_consumer, supported_merchant, industries, processing_currencies,
+        settlement_currencies, transaction_type, consumer_currencies, payment_method, limit_amount, limit_currencies,
+        payment_exchange_rate, fixed_fee, transaction_rate, refund_fee, chargebank_fee, settlement_fee, exchange_rate,
+        margin_rate, provider, active, is_deleted, support_recurring, support_one_click, refund_type,
+        refund_expiry_time, support_chargeback, session_timeout, currency, management_fee, payment_type,
+        children_payment_type, payment_identification, exchange_source_currencies, exchange_target_currencies,
+        exchange_rate_difference, operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+        gateway_fee
+        from tb_product_channel
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="supportedCards != null and supportedCards != ''">
+                and supported_cards = #{supportedCards}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="supportedConsumer != null and supportedConsumer != ''">
+                and supported_consumer = #{supportedConsumer}
+            </if>
+            <if test="supportedMerchant != null and supportedMerchant != ''">
+                and supported_merchant = #{supportedMerchant}
+            </if>
+            <if test="industries != null and industries != ''">
+                and industries = #{industries}
+            </if>
+            <if test="processingCurrencies != null and processingCurrencies != ''">
+                and processing_currencies = #{processingCurrencies}
+            </if>
+            <if test="settlementCurrencies != null and settlementCurrencies != ''">
+                and settlement_currencies = #{settlementCurrencies}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="consumerCurrencies != null and consumerCurrencies != ''">
+                and consumer_currencies = #{consumerCurrencies}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="limitAmount != null and limitAmount != ''">
+                and limit_amount = #{limitAmount}
+            </if>
+            <if test="limitCurrencies != null and limitCurrencies != ''">
+                and limit_currencies = #{limitCurrencies}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="provider != null">
+                and provider = #{provider}
+            </if>
+            <if test="active != null">
+                and active = #{active}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="supportRecurring != null">
+                and support_recurring = #{supportRecurring}
+            </if>
+            <if test="supportOneClick != null">
+                and support_one_click = #{supportOneClick}
+            </if>
+            <if test="refundType != null and refundType != ''">
+                and refund_type = #{refundType}
+            </if>
+            <if test="refundExpiryTime != null">
+                and refund_expiry_time = #{refundExpiryTime}
+            </if>
+            <if test="supportChargeback != null">
+                and support_chargeback = #{supportChargeback}
+            </if>
+            <if test="sessionTimeout != null">
+                and session_timeout = #{sessionTimeout}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="exchangeSourceCurrencies != null and exchangeSourceCurrencies != ''">
+                and exchange_source_currencies = #{exchangeSourceCurrencies}
+            </if>
+            <if test="exchangeTargetCurrencies != null and exchangeTargetCurrencies != ''">
+                and exchange_target_currencies = #{exchangeTargetCurrencies}
+            </if>
+            <if test="exchangeRateDifference != null">
+                and exchange_rate_difference = #{exchangeRateDifference}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="requestFeeFlag != null and requestFeeFlag != ''">
+                and request_fee_flag = #{requestFeeFlag}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="feeType != null">
+                and fee_type = #{feeType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="ProductChannelMap">
+        select
+        id, merchant_id, merchant_name, agent_id, user_id, product_id, channel_id, provider_id, platform_id,
+        supported_cards, acquiring_mode, supported_consumer, supported_merchant, industries, processing_currencies,
+        settlement_currencies, transaction_type, consumer_currencies, payment_method, limit_amount, limit_currencies,
+        payment_exchange_rate, fixed_fee, transaction_rate, refund_fee, chargebank_fee, settlement_fee, exchange_rate,
+        margin_rate, provider, active, is_deleted, support_recurring, support_one_click, refund_type,
+        refund_expiry_time, support_chargeback, session_timeout, currency, management_fee, payment_type,
+        children_payment_type, payment_identification, exchange_source_currencies, exchange_target_currencies,
+        exchange_rate_difference, operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+        gateway_fee
+        from tb_product_channel
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="supportedCards != null and supportedCards != ''">
+                and supported_cards = #{supportedCards}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="supportedConsumer != null and supportedConsumer != ''">
+                and supported_consumer = #{supportedConsumer}
+            </if>
+            <if test="supportedMerchant != null and supportedMerchant != ''">
+                and supported_merchant = #{supportedMerchant}
+            </if>
+            <if test="industries != null and industries != ''">
+                and industries = #{industries}
+            </if>
+            <if test="processingCurrencies != null and processingCurrencies != ''">
+                and processing_currencies = #{processingCurrencies}
+            </if>
+            <if test="settlementCurrencies != null and settlementCurrencies != ''">
+                and settlement_currencies = #{settlementCurrencies}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="consumerCurrencies != null and consumerCurrencies != ''">
+                and consumer_currencies = #{consumerCurrencies}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="limitAmount != null and limitAmount != ''">
+                and limit_amount = #{limitAmount}
+            </if>
+            <if test="limitCurrencies != null and limitCurrencies != ''">
+                and limit_currencies = #{limitCurrencies}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="provider != null">
+                and provider = #{provider}
+            </if>
+            <if test="active != null">
+                and active = #{active}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="supportRecurring != null">
+                and support_recurring = #{supportRecurring}
+            </if>
+            <if test="supportOneClick != null">
+                and support_one_click = #{supportOneClick}
+            </if>
+            <if test="refundType != null and refundType != ''">
+                and refund_type = #{refundType}
+            </if>
+            <if test="refundExpiryTime != null">
+                and refund_expiry_time = #{refundExpiryTime}
+            </if>
+            <if test="supportChargeback != null">
+                and support_chargeback = #{supportChargeback}
+            </if>
+            <if test="sessionTimeout != null">
+                and session_timeout = #{sessionTimeout}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="exchangeSourceCurrencies != null and exchangeSourceCurrencies != ''">
+                and exchange_source_currencies = #{exchangeSourceCurrencies}
+            </if>
+            <if test="exchangeTargetCurrencies != null and exchangeTargetCurrencies != ''">
+                and exchange_target_currencies = #{exchangeTargetCurrencies}
+            </if>
+            <if test="exchangeRateDifference != null">
+                and exchange_rate_difference = #{exchangeRateDifference}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="requestFeeFlag != null and requestFeeFlag != ''">
+                and request_fee_flag = #{requestFeeFlag}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="feeType != null">
+                and fee_type = #{feeType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="ProductChannelMap">
+        select
+        id, merchant_id, merchant_name, agent_id, user_id, product_id, channel_id, provider_id, platform_id,
+        supported_cards, acquiring_mode, supported_consumer, supported_merchant, industries, processing_currencies,
+        settlement_currencies, transaction_type, consumer_currencies, payment_method, limit_amount, limit_currencies,
+        payment_exchange_rate, fixed_fee, transaction_rate, refund_fee, chargebank_fee, settlement_fee, exchange_rate,
+        margin_rate, provider, active, is_deleted, support_recurring, support_one_click, refund_type,
+        refund_expiry_time, support_chargeback, session_timeout, currency, management_fee, payment_type,
+        children_payment_type, payment_identification, exchange_source_currencies, exchange_target_currencies,
+        exchange_rate_difference, operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+        gateway_fee
+        from tb_product_channel
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="supportedCards != null and supportedCards != ''">
+                and supported_cards = #{supportedCards}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="supportedConsumer != null and supportedConsumer != ''">
+                and supported_consumer = #{supportedConsumer}
+            </if>
+            <if test="supportedMerchant != null and supportedMerchant != ''">
+                and supported_merchant = #{supportedMerchant}
+            </if>
+            <if test="industries != null and industries != ''">
+                and industries = #{industries}
+            </if>
+            <if test="processingCurrencies != null and processingCurrencies != ''">
+                and processing_currencies = #{processingCurrencies}
+            </if>
+            <if test="settlementCurrencies != null and settlementCurrencies != ''">
+                and settlement_currencies = #{settlementCurrencies}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="consumerCurrencies != null and consumerCurrencies != ''">
+                and consumer_currencies = #{consumerCurrencies}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="limitAmount != null and limitAmount != ''">
+                and limit_amount = #{limitAmount}
+            </if>
+            <if test="limitCurrencies != null and limitCurrencies != ''">
+                and limit_currencies = #{limitCurrencies}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="provider != null">
+                and provider = #{provider}
+            </if>
+            <if test="active != null">
+                and active = #{active}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="supportRecurring != null">
+                and support_recurring = #{supportRecurring}
+            </if>
+            <if test="supportOneClick != null">
+                and support_one_click = #{supportOneClick}
+            </if>
+            <if test="refundType != null and refundType != ''">
+                and refund_type = #{refundType}
+            </if>
+            <if test="refundExpiryTime != null">
+                and refund_expiry_time = #{refundExpiryTime}
+            </if>
+            <if test="supportChargeback != null">
+                and support_chargeback = #{supportChargeback}
+            </if>
+            <if test="sessionTimeout != null">
+                and session_timeout = #{sessionTimeout}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="exchangeSourceCurrencies != null and exchangeSourceCurrencies != ''">
+                and exchange_source_currencies = #{exchangeSourceCurrencies}
+            </if>
+            <if test="exchangeTargetCurrencies != null and exchangeTargetCurrencies != ''">
+                and exchange_target_currencies = #{exchangeTargetCurrencies}
+            </if>
+            <if test="exchangeRateDifference != null">
+                and exchange_rate_difference = #{exchangeRateDifference}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="requestFeeFlag != null and requestFeeFlag != ''">
+                and request_fee_flag = #{requestFeeFlag}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="feeType != null">
+                and fee_type = #{feeType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_product_channel
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                and merchant_name = #{merchantName}
+            </if>
+            <if test="agentId != null">
+                and agent_id = #{agentId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="platformId != null">
+                and platform_id = #{platformId}
+            </if>
+            <if test="supportedCards != null and supportedCards != ''">
+                and supported_cards = #{supportedCards}
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                and acquiring_mode = #{acquiringMode}
+            </if>
+            <if test="supportedConsumer != null and supportedConsumer != ''">
+                and supported_consumer = #{supportedConsumer}
+            </if>
+            <if test="supportedMerchant != null and supportedMerchant != ''">
+                and supported_merchant = #{supportedMerchant}
+            </if>
+            <if test="industries != null and industries != ''">
+                and industries = #{industries}
+            </if>
+            <if test="processingCurrencies != null and processingCurrencies != ''">
+                and processing_currencies = #{processingCurrencies}
+            </if>
+            <if test="settlementCurrencies != null and settlementCurrencies != ''">
+                and settlement_currencies = #{settlementCurrencies}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="consumerCurrencies != null and consumerCurrencies != ''">
+                and consumer_currencies = #{consumerCurrencies}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="limitAmount != null and limitAmount != ''">
+                and limit_amount = #{limitAmount}
+            </if>
+            <if test="limitCurrencies != null and limitCurrencies != ''">
+                and limit_currencies = #{limitCurrencies}
+            </if>
+            <if test="paymentExchangeRate != null">
+                and payment_exchange_rate = #{paymentExchangeRate}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="provider != null">
+                and provider = #{provider}
+            </if>
+            <if test="active != null">
+                and active = #{active}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="supportRecurring != null">
+                and support_recurring = #{supportRecurring}
+            </if>
+            <if test="supportOneClick != null">
+                and support_one_click = #{supportOneClick}
+            </if>
+            <if test="refundType != null and refundType != ''">
+                and refund_type = #{refundType}
+            </if>
+            <if test="refundExpiryTime != null">
+                and refund_expiry_time = #{refundExpiryTime}
+            </if>
+            <if test="supportChargeback != null">
+                and support_chargeback = #{supportChargeback}
+            </if>
+            <if test="sessionTimeout != null">
+                and session_timeout = #{sessionTimeout}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="exchangeSourceCurrencies != null and exchangeSourceCurrencies != ''">
+                and exchange_source_currencies = #{exchangeSourceCurrencies}
+            </if>
+            <if test="exchangeTargetCurrencies != null and exchangeTargetCurrencies != ''">
+                and exchange_target_currencies = #{exchangeTargetCurrencies}
+            </if>
+            <if test="exchangeRateDifference != null">
+                and exchange_rate_difference = #{exchangeRateDifference}
+            </if>
+            <if test="operator != null">
+                and operator = #{operator}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="requestFeeFlag != null and requestFeeFlag != ''">
+                and request_fee_flag = #{requestFeeFlag}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="feeType != null">
+                and fee_type = #{feeType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_product_channel(merchant_id, merchant_name, agent_id, user_id, product_id, channel_id,
+                                       provider_id, platform_id, supported_cards, acquiring_mode, supported_consumer,
+                                       supported_merchant, industries, processing_currencies, settlement_currencies,
+                                       transaction_type, consumer_currencies, payment_method, limit_amount,
+                                       limit_currencies, payment_exchange_rate, fixed_fee, transaction_rate, refund_fee,
+                                       chargebank_fee, settlement_fee, exchange_rate, margin_rate, provider, active,
+                                       is_deleted, support_recurring, support_one_click, refund_type,
+                                       refund_expiry_time, support_chargeback, session_timeout, currency,
+                                       management_fee, payment_type, children_payment_type, payment_identification,
+                                       exchange_source_currencies, exchange_target_currencies, exchange_rate_difference,
+                                       operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+                                       gateway_fee)
+        values (#{merchantId}, #{merchantName}, #{agentId}, #{userId}, #{productId}, #{channelId}, #{providerId},
+                #{platformId}, #{supportedCards}, #{acquiringMode}, #{supportedConsumer}, #{supportedMerchant},
+                #{industries}, #{processingCurrencies}, #{settlementCurrencies}, #{transactionType},
+                #{consumerCurrencies}, #{paymentMethod}, #{limitAmount}, #{limitCurrencies}, #{paymentExchangeRate},
+                #{fixedFee}, #{transactionRate}, #{refundFee}, #{chargebankFee}, #{settlementFee}, #{exchangeRate},
+                #{marginRate}, #{provider}, #{active}, #{isDeleted}, #{supportRecurring}, #{supportOneClick},
+                #{refundType}, #{refundExpiryTime}, #{supportChargeback}, #{sessionTimeout}, #{currency},
+                #{managementFee}, #{paymentType}, #{childrenPaymentType}, #{paymentIdentification},
+                #{exchangeSourceCurrencies}, #{exchangeTargetCurrencies}, #{exchangeRateDifference}, #{operator},
+                #{creator}, #{requestFeeFlag}, #{createdAt}, #{updatedAt}, #{feeType}, #{vat}, #{gatewayFee})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_product_channel(merchant_id, merchant_name, agent_id, user_id, product_id, channel_id,
+        provider_id, platform_id, supported_cards, acquiring_mode, supported_consumer, supported_merchant, industries,
+        processing_currencies, settlement_currencies, transaction_type, consumer_currencies, payment_method,
+        limit_amount, limit_currencies, payment_exchange_rate, fixed_fee, transaction_rate, refund_fee, chargebank_fee,
+        settlement_fee, exchange_rate, margin_rate, provider, active, is_deleted, support_recurring, support_one_click,
+        refund_type, refund_expiry_time, support_chargeback, session_timeout, currency, management_fee, payment_type,
+        children_payment_type, payment_identification, exchange_source_currencies, exchange_target_currencies,
+        exchange_rate_difference, operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+        gateway_fee)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.merchantName}, #{entity.agentId}, #{entity.userId}, #{entity.productId},
+            #{entity.channelId}, #{entity.providerId}, #{entity.platformId}, #{entity.supportedCards},
+            #{entity.acquiringMode}, #{entity.supportedConsumer}, #{entity.supportedMerchant}, #{entity.industries},
+            #{entity.processingCurrencies}, #{entity.settlementCurrencies}, #{entity.transactionType},
+            #{entity.consumerCurrencies}, #{entity.paymentMethod}, #{entity.limitAmount}, #{entity.limitCurrencies},
+            #{entity.paymentExchangeRate}, #{entity.fixedFee}, #{entity.transactionRate}, #{entity.refundFee},
+            #{entity.chargebankFee}, #{entity.settlementFee}, #{entity.exchangeRate}, #{entity.marginRate},
+            #{entity.provider}, #{entity.active}, #{entity.isDeleted}, #{entity.supportRecurring},
+            #{entity.supportOneClick}, #{entity.refundType}, #{entity.refundExpiryTime}, #{entity.supportChargeback},
+            #{entity.sessionTimeout}, #{entity.currency}, #{entity.managementFee}, #{entity.paymentType},
+            #{entity.childrenPaymentType}, #{entity.paymentIdentification}, #{entity.exchangeSourceCurrencies},
+            #{entity.exchangeTargetCurrencies}, #{entity.exchangeRateDifference}, #{entity.operator}, #{entity.creator},
+            #{entity.requestFeeFlag}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.feeType}, #{entity.vat},
+            #{entity.gatewayFee})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_product_channel(merchant_id, merchant_name, agent_id, user_id, product_id, channel_id,
+        provider_id, platform_id, supported_cards, acquiring_mode, supported_consumer, supported_merchant, industries,
+        processing_currencies, settlement_currencies, transaction_type, consumer_currencies, payment_method,
+        limit_amount, limit_currencies, payment_exchange_rate, fixed_fee, transaction_rate, refund_fee, chargebank_fee,
+        settlement_fee, exchange_rate, margin_rate, provider, active, is_deleted, support_recurring, support_one_click,
+        refund_type, refund_expiry_time, support_chargeback, session_timeout, currency, management_fee, payment_type,
+        children_payment_type, payment_identification, exchange_source_currencies, exchange_target_currencies,
+        exchange_rate_difference, operator, creator, request_fee_flag, created_at, updated_at, fee_type, vat,
+        gateway_fee)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantId}, #{entity.merchantName}, #{entity.agentId}, #{entity.userId}, #{entity.productId},
+            #{entity.channelId}, #{entity.providerId}, #{entity.platformId}, #{entity.supportedCards},
+            #{entity.acquiringMode}, #{entity.supportedConsumer}, #{entity.supportedMerchant}, #{entity.industries},
+            #{entity.processingCurrencies}, #{entity.settlementCurrencies}, #{entity.transactionType},
+            #{entity.consumerCurrencies}, #{entity.paymentMethod}, #{entity.limitAmount}, #{entity.limitCurrencies},
+            #{entity.paymentExchangeRate}, #{entity.fixedFee}, #{entity.transactionRate}, #{entity.refundFee},
+            #{entity.chargebankFee}, #{entity.settlementFee}, #{entity.exchangeRate}, #{entity.marginRate},
+            #{entity.provider}, #{entity.active}, #{entity.isDeleted}, #{entity.supportRecurring},
+            #{entity.supportOneClick}, #{entity.refundType}, #{entity.refundExpiryTime}, #{entity.supportChargeback},
+            #{entity.sessionTimeout}, #{entity.currency}, #{entity.managementFee}, #{entity.paymentType},
+            #{entity.childrenPaymentType}, #{entity.paymentIdentification}, #{entity.exchangeSourceCurrencies},
+            #{entity.exchangeTargetCurrencies}, #{entity.exchangeRateDifference}, #{entity.operator}, #{entity.creator},
+            #{entity.requestFeeFlag}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.feeType}, #{entity.vat},
+            #{entity.gatewayFee})
+        </foreach>
+        on duplicate key update
+        merchant_id = values(merchant_id),
+        merchant_name = values(merchant_name),
+        agent_id = values(agent_id),
+        user_id = values(user_id),
+        product_id = values(product_id),
+        channel_id = values(channel_id),
+        provider_id = values(provider_id),
+        platform_id = values(platform_id),
+        supported_cards = values(supported_cards),
+        acquiring_mode = values(acquiring_mode),
+        supported_consumer = values(supported_consumer),
+        supported_merchant = values(supported_merchant),
+        industries = values(industries),
+        processing_currencies = values(processing_currencies),
+        settlement_currencies = values(settlement_currencies),
+        transaction_type = values(transaction_type),
+        consumer_currencies = values(consumer_currencies),
+        payment_method = values(payment_method),
+        limit_amount = values(limit_amount),
+        limit_currencies = values(limit_currencies),
+        payment_exchange_rate = values(payment_exchange_rate),
+        fixed_fee = values(fixed_fee),
+        transaction_rate = values(transaction_rate),
+        refund_fee = values(refund_fee),
+        chargebank_fee = values(chargebank_fee),
+        settlement_fee = values(settlement_fee),
+        exchange_rate = values(exchange_rate),
+        margin_rate = values(margin_rate),
+        provider = values(provider),
+        active = values(active),
+        is_deleted = values(is_deleted),
+        support_recurring = values(support_recurring),
+        support_one_click = values(support_one_click),
+        refund_type = values(refund_type),
+        refund_expiry_time = values(refund_expiry_time),
+        support_chargeback = values(support_chargeback),
+        session_timeout = values(session_timeout),
+        currency = values(currency),
+        management_fee = values(management_fee),
+        payment_type = values(payment_type),
+        children_payment_type = values(children_payment_type),
+        payment_identification = values(payment_identification),
+        exchange_source_currencies = values(exchange_source_currencies),
+        exchange_target_currencies = values(exchange_target_currencies),
+        exchange_rate_difference = values(exchange_rate_difference),
+        operator = values(operator),
+        creator = values(creator),
+        request_fee_flag = values(request_fee_flag),
+        created_at = values(created_at),
+        updated_at = values(updated_at),
+        fee_type = values(fee_type),
+        vat = values(vat),
+        gateway_fee = values(gateway_fee)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_product_channel
+        <set>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="supportedCards != null and supportedCards != ''">
+                supported_cards = #{supportedCards},
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                acquiring_mode = #{acquiringMode},
+            </if>
+            <if test="supportedConsumer != null and supportedConsumer != ''">
+                supported_consumer = #{supportedConsumer},
+            </if>
+            <if test="supportedMerchant != null and supportedMerchant != ''">
+                supported_merchant = #{supportedMerchant},
+            </if>
+            <if test="industries != null and industries != ''">
+                industries = #{industries},
+            </if>
+            <if test="processingCurrencies != null and processingCurrencies != ''">
+                processing_currencies = #{processingCurrencies},
+            </if>
+            <if test="settlementCurrencies != null and settlementCurrencies != ''">
+                settlement_currencies = #{settlementCurrencies},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="consumerCurrencies != null and consumerCurrencies != ''">
+                consumer_currencies = #{consumerCurrencies},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="limitAmount != null and limitAmount != ''">
+                limit_amount = #{limitAmount},
+            </if>
+            <if test="limitCurrencies != null and limitCurrencies != ''">
+                limit_currencies = #{limitCurrencies},
+            </if>
+            <if test="paymentExchangeRate != null">
+                payment_exchange_rate = #{paymentExchangeRate},
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                fixed_fee = #{fixedFee},
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                transaction_rate = #{transactionRate},
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                refund_fee = #{refundFee},
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                chargebank_fee = #{chargebankFee},
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                settlement_fee = #{settlementFee},
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                exchange_rate = #{exchangeRate},
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                margin_rate = #{marginRate},
+            </if>
+            <if test="provider != null">
+                provider = #{provider},
+            </if>
+            <if test="active != null">
+                active = #{active},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="supportRecurring != null">
+                support_recurring = #{supportRecurring},
+            </if>
+            <if test="supportOneClick != null">
+                support_one_click = #{supportOneClick},
+            </if>
+            <if test="refundType != null and refundType != ''">
+                refund_type = #{refundType},
+            </if>
+            <if test="refundExpiryTime != null">
+                refund_expiry_time = #{refundExpiryTime},
+            </if>
+            <if test="supportChargeback != null">
+                support_chargeback = #{supportChargeback},
+            </if>
+            <if test="sessionTimeout != null">
+                session_timeout = #{sessionTimeout},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="managementFee != null">
+                management_fee = #{managementFee},
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                payment_type = #{paymentType},
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                children_payment_type = #{childrenPaymentType},
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                payment_identification = #{paymentIdentification},
+            </if>
+            <if test="exchangeSourceCurrencies != null and exchangeSourceCurrencies != ''">
+                exchange_source_currencies = #{exchangeSourceCurrencies},
+            </if>
+            <if test="exchangeTargetCurrencies != null and exchangeTargetCurrencies != ''">
+                exchange_target_currencies = #{exchangeTargetCurrencies},
+            </if>
+            <if test="exchangeRateDifference != null">
+                exchange_rate_difference = #{exchangeRateDifference},
+            </if>
+            <if test="operator != null">
+                operator = #{operator},
+            </if>
+            <if test="creator != null">
+                creator = #{creator},
+            </if>
+            <if test="requestFeeFlag != null and requestFeeFlag != ''">
+                request_fee_flag = #{requestFeeFlag},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="feeType != null">
+                fee_type = #{feeType},
+            </if>
+            <if test="vat != null">
+                vat = #{vat},
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                gateway_fee = #{gatewayFee},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_product_channel
+        where id = #{id}
+    </delete>
+
+</mapper>
+

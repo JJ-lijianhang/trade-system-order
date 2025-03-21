@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.ChannelRatesMapper">
+
+    <resultMap type="com.futurebank.order.entity.ChannelRatesEntity" id="ChannelRatesMap">
+        <result property="id" column="id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="channelName" column="channel_name"/>
+        <result property="currency" column="currency"/>
+        <result property="transactionType" column="transaction_type"/>
+        <result property="fixedFeeControl" column="fixed_fee_control"/>
+        <result property="transactionRateControl" column="transaction_rate_control"/>
+        <result property="fixedFee" column="fixed_fee"/>
+        <result property="transactionRate" column="transaction_rate"/>
+        <result property="managementFee" column="management_fee"/>
+        <result property="refundFee" column="refund_fee"/>
+        <result property="chargebankFee" column="chargebank_fee"/>
+        <result property="minSettlement" column="min_settlement"/>
+        <result property="settlementFee" column="settlement_fee"/>
+        <result property="exchangeRate" column="exchange_rate"/>
+        <result property="marginRate" column="margin_rate"/>
+        <result property="marginDays" column="margin_days"/>
+        <result property="minAmount" column="min_amount"/>
+        <result property="maxAmount" column="max_amount"/>
+        <result property="dailyLimit" column="daily_limit"/>
+        <result property="minTransactionFee" column="min_transaction_fee"/>
+        <result property="maxTransactionFee" column="max_transaction_fee"/>
+        <result property="istate" column="istate"/>
+        <result property="effectiveDate" column="effective_date"/>
+        <result property="expiryDate" column="expiry_date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="childrenPaymentType" column="children_payment_type"/>
+        <result property="paymentIdentification" column="payment_identification"/>
+        <result property="paymentType" column="payment_type"/>
+        <result property="vat" column="vat"/>
+        <result property="gatewayFee" column="gateway_fee"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ChannelRatesMap">
+        select id,
+               channel_id,
+               channel_name,
+               currency,
+               transaction_type,
+               fixed_fee_control,
+               transaction_rate_control,
+               fixed_fee,
+               transaction_rate,
+               management_fee,
+               refund_fee,
+               chargebank_fee,
+               min_settlement,
+               settlement_fee,
+               exchange_rate,
+               margin_rate,
+               margin_days,
+               min_amount,
+               max_amount,
+               daily_limit,
+               min_transaction_fee,
+               max_transaction_fee,
+               istate,
+               effective_date,
+               expiry_date,
+               is_deleted,
+               created_at,
+               updated_at,
+               children_payment_type,
+               payment_identification,
+               payment_type,
+               vat,
+               gateway_fee
+        from tb_channel_rates
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="ChannelRatesMap">
+        select
+        id, channel_id, channel_name, currency, transaction_type, fixed_fee_control, transaction_rate_control,
+        fixed_fee, transaction_rate, management_fee, refund_fee, chargebank_fee, min_settlement, settlement_fee,
+        exchange_rate, margin_rate, margin_days, min_amount, max_amount, daily_limit, min_transaction_fee,
+        max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at, updated_at,
+        children_payment_type, payment_identification, payment_type, vat, gateway_fee
+        from tb_channel_rates
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelName != null and channelName != ''">
+                and channel_name = #{channelName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="fixedFeeControl != null and fixedFeeControl != ''">
+                and fixed_fee_control = #{fixedFeeControl}
+            </if>
+            <if test="transactionRateControl != null and transactionRateControl != ''">
+                and transaction_rate_control = #{transactionRateControl}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="minSettlement != null">
+                and min_settlement = #{minSettlement}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="marginDays != null and marginDays != ''">
+                and margin_days = #{marginDays}
+            </if>
+            <if test="minAmount != null">
+                and min_amount = #{minAmount}
+            </if>
+            <if test="maxAmount != null">
+                and max_amount = #{maxAmount}
+            </if>
+            <if test="dailyLimit != null">
+                and daily_limit = #{dailyLimit}
+            </if>
+            <if test="minTransactionFee != null">
+                and min_transaction_fee = #{minTransactionFee}
+            </if>
+            <if test="maxTransactionFee != null">
+                and max_transaction_fee = #{maxTransactionFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="effectiveDate != null">
+                and effective_date = #{effectiveDate}
+            </if>
+            <if test="expiryDate != null">
+                and expiry_date = #{expiryDate}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="ChannelRatesMap">
+        select
+        id, channel_id, channel_name, currency, transaction_type, fixed_fee_control, transaction_rate_control,
+        fixed_fee, transaction_rate, management_fee, refund_fee, chargebank_fee, min_settlement, settlement_fee,
+        exchange_rate, margin_rate, margin_days, min_amount, max_amount, daily_limit, min_transaction_fee,
+        max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at, updated_at,
+        children_payment_type, payment_identification, payment_type, vat, gateway_fee
+        from tb_channel_rates
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelName != null and channelName != ''">
+                and channel_name = #{channelName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="fixedFeeControl != null and fixedFeeControl != ''">
+                and fixed_fee_control = #{fixedFeeControl}
+            </if>
+            <if test="transactionRateControl != null and transactionRateControl != ''">
+                and transaction_rate_control = #{transactionRateControl}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="minSettlement != null">
+                and min_settlement = #{minSettlement}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="marginDays != null and marginDays != ''">
+                and margin_days = #{marginDays}
+            </if>
+            <if test="minAmount != null">
+                and min_amount = #{minAmount}
+            </if>
+            <if test="maxAmount != null">
+                and max_amount = #{maxAmount}
+            </if>
+            <if test="dailyLimit != null">
+                and daily_limit = #{dailyLimit}
+            </if>
+            <if test="minTransactionFee != null">
+                and min_transaction_fee = #{minTransactionFee}
+            </if>
+            <if test="maxTransactionFee != null">
+                and max_transaction_fee = #{maxTransactionFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="effectiveDate != null">
+                and effective_date = #{effectiveDate}
+            </if>
+            <if test="expiryDate != null">
+                and expiry_date = #{expiryDate}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="ChannelRatesMap">
+        select
+        id, channel_id, channel_name, currency, transaction_type, fixed_fee_control, transaction_rate_control,
+        fixed_fee, transaction_rate, management_fee, refund_fee, chargebank_fee, min_settlement, settlement_fee,
+        exchange_rate, margin_rate, margin_days, min_amount, max_amount, daily_limit, min_transaction_fee,
+        max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at, updated_at,
+        children_payment_type, payment_identification, payment_type, vat, gateway_fee
+        from tb_channel_rates
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelName != null and channelName != ''">
+                and channel_name = #{channelName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="fixedFeeControl != null and fixedFeeControl != ''">
+                and fixed_fee_control = #{fixedFeeControl}
+            </if>
+            <if test="transactionRateControl != null and transactionRateControl != ''">
+                and transaction_rate_control = #{transactionRateControl}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="minSettlement != null">
+                and min_settlement = #{minSettlement}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="marginDays != null and marginDays != ''">
+                and margin_days = #{marginDays}
+            </if>
+            <if test="minAmount != null">
+                and min_amount = #{minAmount}
+            </if>
+            <if test="maxAmount != null">
+                and max_amount = #{maxAmount}
+            </if>
+            <if test="dailyLimit != null">
+                and daily_limit = #{dailyLimit}
+            </if>
+            <if test="minTransactionFee != null">
+                and min_transaction_fee = #{minTransactionFee}
+            </if>
+            <if test="maxTransactionFee != null">
+                and max_transaction_fee = #{maxTransactionFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="effectiveDate != null">
+                and effective_date = #{effectiveDate}
+            </if>
+            <if test="expiryDate != null">
+                and expiry_date = #{expiryDate}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_channel_rates
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="channelId != null">
+                and channel_id = #{channelId}
+            </if>
+            <if test="channelName != null and channelName != ''">
+                and channel_name = #{channelName}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                and transaction_type = #{transactionType}
+            </if>
+            <if test="fixedFeeControl != null and fixedFeeControl != ''">
+                and fixed_fee_control = #{fixedFeeControl}
+            </if>
+            <if test="transactionRateControl != null and transactionRateControl != ''">
+                and transaction_rate_control = #{transactionRateControl}
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                and fixed_fee = #{fixedFee}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="managementFee != null">
+                and management_fee = #{managementFee}
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                and refund_fee = #{refundFee}
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                and chargebank_fee = #{chargebankFee}
+            </if>
+            <if test="minSettlement != null">
+                and min_settlement = #{minSettlement}
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                and settlement_fee = #{settlementFee}
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                and exchange_rate = #{exchangeRate}
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                and margin_rate = #{marginRate}
+            </if>
+            <if test="marginDays != null and marginDays != ''">
+                and margin_days = #{marginDays}
+            </if>
+            <if test="minAmount != null">
+                and min_amount = #{minAmount}
+            </if>
+            <if test="maxAmount != null">
+                and max_amount = #{maxAmount}
+            </if>
+            <if test="dailyLimit != null">
+                and daily_limit = #{dailyLimit}
+            </if>
+            <if test="minTransactionFee != null">
+                and min_transaction_fee = #{minTransactionFee}
+            </if>
+            <if test="maxTransactionFee != null">
+                and max_transaction_fee = #{maxTransactionFee}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="effectiveDate != null">
+                and effective_date = #{effectiveDate}
+            </if>
+            <if test="expiryDate != null">
+                and expiry_date = #{expiryDate}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                and children_payment_type = #{childrenPaymentType}
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                and payment_identification = #{paymentIdentification}
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                and payment_type = #{paymentType}
+            </if>
+            <if test="vat != null">
+                and vat = #{vat}
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                and gateway_fee = #{gatewayFee}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_channel_rates(channel_id, channel_name, currency, transaction_type, fixed_fee_control,
+                                     transaction_rate_control, fixed_fee, transaction_rate, management_fee, refund_fee,
+                                     chargebank_fee, min_settlement, settlement_fee, exchange_rate, margin_rate,
+                                     margin_days, min_amount, max_amount, daily_limit, min_transaction_fee,
+                                     max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at,
+                                     updated_at, children_payment_type, payment_identification, payment_type, vat,
+                                     gateway_fee)
+        values (#{channelId}, #{channelName}, #{currency}, #{transactionType}, #{fixedFeeControl},
+                #{transactionRateControl}, #{fixedFee}, #{transactionRate}, #{managementFee}, #{refundFee},
+                #{chargebankFee}, #{minSettlement}, #{settlementFee}, #{exchangeRate}, #{marginRate}, #{marginDays},
+                #{minAmount}, #{maxAmount}, #{dailyLimit}, #{minTransactionFee}, #{maxTransactionFee}, #{istate},
+                #{effectiveDate}, #{expiryDate}, #{isDeleted}, #{createdAt}, #{updatedAt}, #{childrenPaymentType},
+                #{paymentIdentification}, #{paymentType}, #{vat}, #{gatewayFee})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_channel_rates(channel_id, channel_name, currency, transaction_type, fixed_fee_control,
+        transaction_rate_control, fixed_fee, transaction_rate, management_fee, refund_fee, chargebank_fee,
+        min_settlement, settlement_fee, exchange_rate, margin_rate, margin_days, min_amount, max_amount, daily_limit,
+        min_transaction_fee, max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at,
+        updated_at, children_payment_type, payment_identification, payment_type, vat, gateway_fee)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.channelId}, #{entity.channelName}, #{entity.currency}, #{entity.transactionType},
+            #{entity.fixedFeeControl}, #{entity.transactionRateControl}, #{entity.fixedFee}, #{entity.transactionRate},
+            #{entity.managementFee}, #{entity.refundFee}, #{entity.chargebankFee}, #{entity.minSettlement},
+            #{entity.settlementFee}, #{entity.exchangeRate}, #{entity.marginRate}, #{entity.marginDays},
+            #{entity.minAmount}, #{entity.maxAmount}, #{entity.dailyLimit}, #{entity.minTransactionFee},
+            #{entity.maxTransactionFee}, #{entity.istate}, #{entity.effectiveDate}, #{entity.expiryDate},
+            #{entity.isDeleted}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.childrenPaymentType},
+            #{entity.paymentIdentification}, #{entity.paymentType}, #{entity.vat}, #{entity.gatewayFee})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_channel_rates(channel_id, channel_name, currency, transaction_type, fixed_fee_control,
+        transaction_rate_control, fixed_fee, transaction_rate, management_fee, refund_fee, chargebank_fee,
+        min_settlement, settlement_fee, exchange_rate, margin_rate, margin_days, min_amount, max_amount, daily_limit,
+        min_transaction_fee, max_transaction_fee, istate, effective_date, expiry_date, is_deleted, created_at,
+        updated_at, children_payment_type, payment_identification, payment_type, vat, gateway_fee)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.channelId}, #{entity.channelName}, #{entity.currency}, #{entity.transactionType},
+            #{entity.fixedFeeControl}, #{entity.transactionRateControl}, #{entity.fixedFee}, #{entity.transactionRate},
+            #{entity.managementFee}, #{entity.refundFee}, #{entity.chargebankFee}, #{entity.minSettlement},
+            #{entity.settlementFee}, #{entity.exchangeRate}, #{entity.marginRate}, #{entity.marginDays},
+            #{entity.minAmount}, #{entity.maxAmount}, #{entity.dailyLimit}, #{entity.minTransactionFee},
+            #{entity.maxTransactionFee}, #{entity.istate}, #{entity.effectiveDate}, #{entity.expiryDate},
+            #{entity.isDeleted}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.childrenPaymentType},
+            #{entity.paymentIdentification}, #{entity.paymentType}, #{entity.vat}, #{entity.gatewayFee})
+        </foreach>
+        on duplicate key update
+        channel_id = values(channel_id),
+        channel_name = values(channel_name),
+        currency = values(currency),
+        transaction_type = values(transaction_type),
+        fixed_fee_control = values(fixed_fee_control),
+        transaction_rate_control = values(transaction_rate_control),
+        fixed_fee = values(fixed_fee),
+        transaction_rate = values(transaction_rate),
+        management_fee = values(management_fee),
+        refund_fee = values(refund_fee),
+        chargebank_fee = values(chargebank_fee),
+        min_settlement = values(min_settlement),
+        settlement_fee = values(settlement_fee),
+        exchange_rate = values(exchange_rate),
+        margin_rate = values(margin_rate),
+        margin_days = values(margin_days),
+        min_amount = values(min_amount),
+        max_amount = values(max_amount),
+        daily_limit = values(daily_limit),
+        min_transaction_fee = values(min_transaction_fee),
+        max_transaction_fee = values(max_transaction_fee),
+        istate = values(istate),
+        effective_date = values(effective_date),
+        expiry_date = values(expiry_date),
+        is_deleted = values(is_deleted),
+        created_at = values(created_at),
+        updated_at = values(updated_at),
+        children_payment_type = values(children_payment_type),
+        payment_identification = values(payment_identification),
+        payment_type = values(payment_type),
+        vat = values(vat),
+        gateway_fee = values(gateway_fee)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_channel_rates
+        <set>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="channelName != null and channelName != ''">
+                channel_name = #{channelName},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="fixedFeeControl != null and fixedFeeControl != ''">
+                fixed_fee_control = #{fixedFeeControl},
+            </if>
+            <if test="transactionRateControl != null and transactionRateControl != ''">
+                transaction_rate_control = #{transactionRateControl},
+            </if>
+            <if test="fixedFee != null and fixedFee != ''">
+                fixed_fee = #{fixedFee},
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                transaction_rate = #{transactionRate},
+            </if>
+            <if test="managementFee != null">
+                management_fee = #{managementFee},
+            </if>
+            <if test="refundFee != null and refundFee != ''">
+                refund_fee = #{refundFee},
+            </if>
+            <if test="chargebankFee != null and chargebankFee != ''">
+                chargebank_fee = #{chargebankFee},
+            </if>
+            <if test="minSettlement != null">
+                min_settlement = #{minSettlement},
+            </if>
+            <if test="settlementFee != null and settlementFee != ''">
+                settlement_fee = #{settlementFee},
+            </if>
+            <if test="exchangeRate != null and exchangeRate != ''">
+                exchange_rate = #{exchangeRate},
+            </if>
+            <if test="marginRate != null and marginRate != ''">
+                margin_rate = #{marginRate},
+            </if>
+            <if test="marginDays != null and marginDays != ''">
+                margin_days = #{marginDays},
+            </if>
+            <if test="minAmount != null">
+                min_amount = #{minAmount},
+            </if>
+            <if test="maxAmount != null">
+                max_amount = #{maxAmount},
+            </if>
+            <if test="dailyLimit != null">
+                daily_limit = #{dailyLimit},
+            </if>
+            <if test="minTransactionFee != null">
+                min_transaction_fee = #{minTransactionFee},
+            </if>
+            <if test="maxTransactionFee != null">
+                max_transaction_fee = #{maxTransactionFee},
+            </if>
+            <if test="istate != null">
+                istate = #{istate},
+            </if>
+            <if test="effectiveDate != null">
+                effective_date = #{effectiveDate},
+            </if>
+            <if test="expiryDate != null">
+                expiry_date = #{expiryDate},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="childrenPaymentType != null and childrenPaymentType != ''">
+                children_payment_type = #{childrenPaymentType},
+            </if>
+            <if test="paymentIdentification != null and paymentIdentification != ''">
+                payment_identification = #{paymentIdentification},
+            </if>
+            <if test="paymentType != null and paymentType != ''">
+                payment_type = #{paymentType},
+            </if>
+            <if test="vat != null">
+                vat = #{vat},
+            </if>
+            <if test="gatewayFee != null and gatewayFee != ''">
+                gateway_fee = #{gatewayFee},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_channel_rates
+        where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PaymentOrderUpstreamMapper">
+
+    <resultMap type="com.futurebank.order.entity.PaymentOrderUpstreamEntity" id="PaymentOrderUpstreamMap">
+        <result property="id" column="id"/>
+        <result property="upstreamRequestUrl" column="upstream_request_url"/>
+        <result property="platformNotifyUrl" column="platform_notify_url"/>
+        <result property="platformRedirectUrl" column="platform_redirect_url"/>
+        <result property="upstrameHeader" column="upstrame_header"/>
+        <result property="upstreamRequestTime" column="upstream_request_time"/>
+        <result property="upstreamSuccessTime" column="upstream_success_time"/>
+        <result property="upstreamNotifyTime" column="upstream_notify_time"/>
+        <result property="upstreamNotifyStatus" column="upstream_notify_status"/>
+        <result property="upstreamRequestMessage" column="upstream_request_message"/>
+        <result property="upstreamResponseMessage" column="upstream_response_message"/>
+        <result property="upstreamNotifyContent" column="upstream_notify_content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="downstreamOrderNo" column="downstream_order_no"/>
+        <result property="platformOrderNo" column="platform_order_no"/>
+        <result property="upstreamOrderNo" column="upstream_order_no"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PaymentOrderUpstreamMap">
+        select
+          id, upstream_request_url, platform_notify_url, platform_redirect_url, upstrame_header, upstream_request_time, upstream_success_time, upstream_notify_time, upstream_notify_status, upstream_request_message, upstream_response_message, upstream_notify_content, created_at, updated_at, downstream_order_no, platform_order_no, upstream_order_no    
+        from tb_payment_order_upstream
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PaymentOrderUpstreamMap">
+        select
+        id, upstream_request_url, platform_notify_url, platform_redirect_url, upstrame_header, upstream_request_time,
+        upstream_success_time, upstream_notify_time, upstream_notify_status, upstream_request_message,
+        upstream_response_message, upstream_notify_content, created_at, updated_at, downstream_order_no,
+        platform_order_no, upstream_order_no
+        from tb_payment_order_upstream
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="upstreamRequestUrl != null and upstreamRequestUrl != ''">
+                and upstream_request_url = #{upstreamRequestUrl}
+            </if>
+            <if test="platformNotifyUrl != null and platformNotifyUrl != ''">
+                and platform_notify_url = #{platformNotifyUrl}
+            </if>
+            <if test="platformRedirectUrl != null and platformRedirectUrl != ''">
+                and platform_redirect_url = #{platformRedirectUrl}
+            </if>
+            <if test="upstrameHeader != null and upstrameHeader != ''">
+                and upstrame_header = #{upstrameHeader}
+            </if>
+            <if test="upstreamRequestTime != null">
+                and upstream_request_time = #{upstreamRequestTime}
+            </if>
+            <if test="upstreamSuccessTime != null">
+                and upstream_success_time = #{upstreamSuccessTime}
+            </if>
+            <if test="upstreamNotifyTime != null">
+                and upstream_notify_time = #{upstreamNotifyTime}
+            </if>
+            <if test="upstreamNotifyStatus != null and upstreamNotifyStatus != ''">
+                and upstream_notify_status = #{upstreamNotifyStatus}
+            </if>
+            <if test="upstreamRequestMessage != null and upstreamRequestMessage != ''">
+                and upstream_request_message = #{upstreamRequestMessage}
+            </if>
+            <if test="upstreamResponseMessage != null and upstreamResponseMessage != ''">
+                and upstream_response_message = #{upstreamResponseMessage}
+            </if>
+            <if test="upstreamNotifyContent != null and upstreamNotifyContent != ''">
+                and upstream_notify_content = #{upstreamNotifyContent}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PaymentOrderUpstreamMap">
+        select
+        id, upstream_request_url, platform_notify_url, platform_redirect_url, upstrame_header, upstream_request_time,
+        upstream_success_time, upstream_notify_time, upstream_notify_status, upstream_request_message,
+        upstream_response_message, upstream_notify_content, created_at, updated_at, downstream_order_no,
+        platform_order_no, upstream_order_no
+        from tb_payment_order_upstream
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="upstreamRequestUrl != null and upstreamRequestUrl != ''">
+                and upstream_request_url = #{upstreamRequestUrl}
+            </if>
+            <if test="platformNotifyUrl != null and platformNotifyUrl != ''">
+                and platform_notify_url = #{platformNotifyUrl}
+            </if>
+            <if test="platformRedirectUrl != null and platformRedirectUrl != ''">
+                and platform_redirect_url = #{platformRedirectUrl}
+            </if>
+            <if test="upstrameHeader != null and upstrameHeader != ''">
+                and upstrame_header = #{upstrameHeader}
+            </if>
+            <if test="upstreamRequestTime != null">
+                and upstream_request_time = #{upstreamRequestTime}
+            </if>
+            <if test="upstreamSuccessTime != null">
+                and upstream_success_time = #{upstreamSuccessTime}
+            </if>
+            <if test="upstreamNotifyTime != null">
+                and upstream_notify_time = #{upstreamNotifyTime}
+            </if>
+            <if test="upstreamNotifyStatus != null and upstreamNotifyStatus != ''">
+                and upstream_notify_status = #{upstreamNotifyStatus}
+            </if>
+            <if test="upstreamRequestMessage != null and upstreamRequestMessage != ''">
+                and upstream_request_message = #{upstreamRequestMessage}
+            </if>
+            <if test="upstreamResponseMessage != null and upstreamResponseMessage != ''">
+                and upstream_response_message = #{upstreamResponseMessage}
+            </if>
+            <if test="upstreamNotifyContent != null and upstreamNotifyContent != ''">
+                and upstream_notify_content = #{upstreamNotifyContent}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PaymentOrderUpstreamMap">
+        select
+        id, upstream_request_url, platform_notify_url, platform_redirect_url, upstrame_header, upstream_request_time,
+        upstream_success_time, upstream_notify_time, upstream_notify_status, upstream_request_message,
+        upstream_response_message, upstream_notify_content, created_at, updated_at, downstream_order_no,
+        platform_order_no, upstream_order_no
+        from tb_payment_order_upstream
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="upstreamRequestUrl != null and upstreamRequestUrl != ''">
+                and upstream_request_url = #{upstreamRequestUrl}
+            </if>
+            <if test="platformNotifyUrl != null and platformNotifyUrl != ''">
+                and platform_notify_url = #{platformNotifyUrl}
+            </if>
+            <if test="platformRedirectUrl != null and platformRedirectUrl != ''">
+                and platform_redirect_url = #{platformRedirectUrl}
+            </if>
+            <if test="upstrameHeader != null and upstrameHeader != ''">
+                and upstrame_header = #{upstrameHeader}
+            </if>
+            <if test="upstreamRequestTime != null">
+                and upstream_request_time = #{upstreamRequestTime}
+            </if>
+            <if test="upstreamSuccessTime != null">
+                and upstream_success_time = #{upstreamSuccessTime}
+            </if>
+            <if test="upstreamNotifyTime != null">
+                and upstream_notify_time = #{upstreamNotifyTime}
+            </if>
+            <if test="upstreamNotifyStatus != null and upstreamNotifyStatus != ''">
+                and upstream_notify_status = #{upstreamNotifyStatus}
+            </if>
+            <if test="upstreamRequestMessage != null and upstreamRequestMessage != ''">
+                and upstream_request_message = #{upstreamRequestMessage}
+            </if>
+            <if test="upstreamResponseMessage != null and upstreamResponseMessage != ''">
+                and upstream_response_message = #{upstreamResponseMessage}
+            </if>
+            <if test="upstreamNotifyContent != null and upstreamNotifyContent != ''">
+                and upstream_notify_content = #{upstreamNotifyContent}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_payment_order_upstream
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="upstreamRequestUrl != null and upstreamRequestUrl != ''">
+                and upstream_request_url = #{upstreamRequestUrl}
+            </if>
+            <if test="platformNotifyUrl != null and platformNotifyUrl != ''">
+                and platform_notify_url = #{platformNotifyUrl}
+            </if>
+            <if test="platformRedirectUrl != null and platformRedirectUrl != ''">
+                and platform_redirect_url = #{platformRedirectUrl}
+            </if>
+            <if test="upstrameHeader != null and upstrameHeader != ''">
+                and upstrame_header = #{upstrameHeader}
+            </if>
+            <if test="upstreamRequestTime != null">
+                and upstream_request_time = #{upstreamRequestTime}
+            </if>
+            <if test="upstreamSuccessTime != null">
+                and upstream_success_time = #{upstreamSuccessTime}
+            </if>
+            <if test="upstreamNotifyTime != null">
+                and upstream_notify_time = #{upstreamNotifyTime}
+            </if>
+            <if test="upstreamNotifyStatus != null and upstreamNotifyStatus != ''">
+                and upstream_notify_status = #{upstreamNotifyStatus}
+            </if>
+            <if test="upstreamRequestMessage != null and upstreamRequestMessage != ''">
+                and upstream_request_message = #{upstreamRequestMessage}
+            </if>
+            <if test="upstreamResponseMessage != null and upstreamResponseMessage != ''">
+                and upstream_response_message = #{upstreamResponseMessage}
+            </if>
+            <if test="upstreamNotifyContent != null and upstreamNotifyContent != ''">
+                and upstream_notify_content = #{upstreamNotifyContent}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                and upstream_order_no = #{upstreamOrderNo}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_order_upstream(upstream_request_url, platform_notify_url, platform_redirect_url, upstrame_header, upstream_request_time, upstream_success_time, upstream_notify_time, upstream_notify_status, upstream_request_message, upstream_response_message, upstream_notify_content, created_at, updated_at, downstream_order_no, platform_order_no, upstream_order_no)
+        values (#{upstreamRequestUrl}, #{platformNotifyUrl}, #{platformRedirectUrl}, #{upstrameHeader}, #{upstreamRequestTime}, #{upstreamSuccessTime}, #{upstreamNotifyTime}, #{upstreamNotifyStatus}, #{upstreamRequestMessage}, #{upstreamResponseMessage}, #{upstreamNotifyContent}, #{createdAt}, #{updatedAt}, #{downstreamOrderNo}, #{platformOrderNo}, #{upstreamOrderNo})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_order_upstream(upstream_request_url, platform_notify_url, platform_redirect_url,
+        upstrame_header, upstream_request_time, upstream_success_time, upstream_notify_time, upstream_notify_status,
+        upstream_request_message, upstream_response_message, upstream_notify_content, created_at, updated_at,
+        downstream_order_no, platform_order_no, upstream_order_no)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.upstreamRequestUrl}, #{entity.platformNotifyUrl}, #{entity.platformRedirectUrl},
+            #{entity.upstrameHeader}, #{entity.upstreamRequestTime}, #{entity.upstreamSuccessTime},
+            #{entity.upstreamNotifyTime}, #{entity.upstreamNotifyStatus}, #{entity.upstreamRequestMessage},
+            #{entity.upstreamResponseMessage}, #{entity.upstreamNotifyContent}, #{entity.createdAt},
+            #{entity.updatedAt}, #{entity.downstreamOrderNo}, #{entity.platformOrderNo}, #{entity.upstreamOrderNo})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_payment_order_upstream(upstream_request_url, platform_notify_url, platform_redirect_url,
+        upstrame_header, upstream_request_time, upstream_success_time, upstream_notify_time, upstream_notify_status,
+        upstream_request_message, upstream_response_message, upstream_notify_content, created_at, updated_at,
+        downstream_order_no, platform_order_no, upstream_order_no)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.upstreamRequestUrl}, #{entity.platformNotifyUrl}, #{entity.platformRedirectUrl},
+            #{entity.upstrameHeader}, #{entity.upstreamRequestTime}, #{entity.upstreamSuccessTime},
+            #{entity.upstreamNotifyTime}, #{entity.upstreamNotifyStatus}, #{entity.upstreamRequestMessage},
+            #{entity.upstreamResponseMessage}, #{entity.upstreamNotifyContent}, #{entity.createdAt},
+            #{entity.updatedAt}, #{entity.downstreamOrderNo}, #{entity.platformOrderNo}, #{entity.upstreamOrderNo})
+        </foreach>
+        on duplicate key update
+        upstream_request_url = values(upstream_request_url),
+        platform_notify_url = values(platform_notify_url),
+        platform_redirect_url = values(platform_redirect_url),
+        upstrame_header = values(upstrame_header),
+        upstream_request_time = values(upstream_request_time),
+        upstream_success_time = values(upstream_success_time),
+        upstream_notify_time = values(upstream_notify_time),
+        upstream_notify_status = values(upstream_notify_status),
+        upstream_request_message = values(upstream_request_message),
+        upstream_response_message = values(upstream_response_message),
+        upstream_notify_content = values(upstream_notify_content),
+        created_at = values(created_at),
+        updated_at = values(updated_at),
+        downstream_order_no = values(downstream_order_no),
+        platform_order_no = values(platform_order_no),
+        upstream_order_no = values(upstream_order_no)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_payment_order_upstream
+        <set>
+            <if test="upstreamRequestUrl != null and upstreamRequestUrl != ''">
+                upstream_request_url = #{upstreamRequestUrl},
+            </if>
+            <if test="platformNotifyUrl != null and platformNotifyUrl != ''">
+                platform_notify_url = #{platformNotifyUrl},
+            </if>
+            <if test="platformRedirectUrl != null and platformRedirectUrl != ''">
+                platform_redirect_url = #{platformRedirectUrl},
+            </if>
+            <if test="upstrameHeader != null and upstrameHeader != ''">
+                upstrame_header = #{upstrameHeader},
+            </if>
+            <if test="upstreamRequestTime != null">
+                upstream_request_time = #{upstreamRequestTime},
+            </if>
+            <if test="upstreamSuccessTime != null">
+                upstream_success_time = #{upstreamSuccessTime},
+            </if>
+            <if test="upstreamNotifyTime != null">
+                upstream_notify_time = #{upstreamNotifyTime},
+            </if>
+            <if test="upstreamNotifyStatus != null and upstreamNotifyStatus != ''">
+                upstream_notify_status = #{upstreamNotifyStatus},
+            </if>
+            <if test="upstreamRequestMessage != null and upstreamRequestMessage != ''">
+                upstream_request_message = #{upstreamRequestMessage},
+            </if>
+            <if test="upstreamResponseMessage != null and upstreamResponseMessage != ''">
+                upstream_response_message = #{upstreamResponseMessage},
+            </if>
+            <if test="upstreamNotifyContent != null and upstreamNotifyContent != ''">
+                upstream_notify_content = #{upstreamNotifyContent},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_payment_order_upstream where id = #{id}
+    </delete>
+
+</mapper>
+

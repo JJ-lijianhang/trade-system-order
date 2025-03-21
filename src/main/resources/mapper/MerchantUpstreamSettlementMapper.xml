@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantUpstreamSettlementMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantUpstreamSettlementEntity" id="MerchantUpstreamSettlementMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="settleId" column="settle_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="currency" column="currency"/>
+        <result property="txMarkup" column="tx_markup"/>
+        <result property="transactionAmount" column="transaction_amount"/>
+        <result property="settlementAmount" column="settlement_amount"/>
+        <result property="rateFee" column="rate_fee"/>
+        <result property="fixFee" column="fix_fee"/>
+        <result property="percentageFee" column="percentage_fee"/>
+        <result property="upsteamCurrency" column="upsteam_currency"/>
+        <result property="upstreamSettlementAmount" column="upstream_settlement_amount"/>
+        <result property="upstreamRateFee" column="upstream_rate_fee"/>
+        <result property="upstreamFixFee" column="upstream_fix_fee"/>
+        <result property="upstreamPercentageFee" column="upstream_percentage_fee"/>
+        <result property="settleTimeBegin" column="settle_time_begin"/>
+        <result property="settleTimeEnd" column="settle_tIme_end"/>
+        <result property="settleStatus" column="settle_status"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="publishOper" column="publish_oper"/>
+        <result property="confirmOper" column="confirm_oper"/>
+        <result property="confirmTime" column="Confirm_Time"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantUpstreamSettlementMap">
+        select id,
+               provider_id,
+               provider_name,
+               settle_id,
+               merchant_id,
+               currency,
+               tx_markup,
+               transaction_amount,
+               settlement_amount,
+               rate_fee,
+               fix_fee,
+               percentage_fee,
+               upsteam_currency,
+               upstream_settlement_amount,
+               upstream_rate_fee,
+               upstream_fix_fee,
+               upstream_percentage_fee,
+               settle_time_begin,
+               settle_tIme_end,
+               settle_status,
+               created_time,
+               publish_time,
+               publish_oper,
+               confirm_oper,
+               Confirm_Time,
+               payment_time,
+               remark
+        from tb_merchant_upstream_settlement
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantUpstreamSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tx_markup, transaction_amount, settlement_amount, rate_fee, fix_fee,
+        percentage_fee, upsteam_currency, upstream_settlement_amount, upstream_rate_fee, upstream_fix_fee,
+        upstream_percentage_fee, settle_time_begin, settle_tIme_end, settle_status, created_time, publish_time,
+        publish_oper, confirm_oper, Confirm_Time, payment_time, remark
+        from tb_merchant_upstream_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="txMarkup != null">
+                and tx_markup = #{txMarkup}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="upsteamCurrency != null">
+                and upsteam_currency = #{upsteamCurrency}
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                and upstream_settlement_amount = #{upstreamSettlementAmount}
+            </if>
+            <if test="upstreamRateFee != null">
+                and upstream_rate_fee = #{upstreamRateFee}
+            </if>
+            <if test="upstreamFixFee != null">
+                and upstream_fix_fee = #{upstreamFixFee}
+            </if>
+            <if test="upstreamPercentageFee != null">
+                and upstream_percentage_fee = #{upstreamPercentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and Confirm_Time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantUpstreamSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tx_markup, transaction_amount, settlement_amount, rate_fee, fix_fee,
+        percentage_fee, upsteam_currency, upstream_settlement_amount, upstream_rate_fee, upstream_fix_fee,
+        upstream_percentage_fee, settle_time_begin, settle_tIme_end, settle_status, created_time, publish_time,
+        publish_oper, confirm_oper, Confirm_Time, payment_time, remark
+        from tb_merchant_upstream_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="txMarkup != null">
+                and tx_markup = #{txMarkup}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="upsteamCurrency != null">
+                and upsteam_currency = #{upsteamCurrency}
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                and upstream_settlement_amount = #{upstreamSettlementAmount}
+            </if>
+            <if test="upstreamRateFee != null">
+                and upstream_rate_fee = #{upstreamRateFee}
+            </if>
+            <if test="upstreamFixFee != null">
+                and upstream_fix_fee = #{upstreamFixFee}
+            </if>
+            <if test="upstreamPercentageFee != null">
+                and upstream_percentage_fee = #{upstreamPercentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and Confirm_Time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantUpstreamSettlementMap">
+        select
+        id,provider_id,provider_name, settle_id, merchant_id, currency, tx_markup, transaction_amount, settlement_amount, rate_fee, fix_fee,
+        percentage_fee, upsteam_currency, upstream_settlement_amount, upstream_rate_fee, upstream_fix_fee,
+        upstream_percentage_fee, settle_time_begin, settle_tIme_end, settle_status, created_time, publish_time,
+        publish_oper, confirm_oper, Confirm_Time, payment_time, remark
+        from tb_merchant_upstream_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="txMarkup != null">
+                and tx_markup = #{txMarkup}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="upsteamCurrency != null">
+                and upsteam_currency = #{upsteamCurrency}
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                and upstream_settlement_amount = #{upstreamSettlementAmount}
+            </if>
+            <if test="upstreamRateFee != null">
+                and upstream_rate_fee = #{upstreamRateFee}
+            </if>
+            <if test="upstreamFixFee != null">
+                and upstream_fix_fee = #{upstreamFixFee}
+            </if>
+            <if test="upstreamPercentageFee != null">
+                and upstream_percentage_fee = #{upstreamPercentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and Confirm_Time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_upstream_settlement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settleId != null and settleId != ''">
+                and settle_id = #{settleId}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="txMarkup != null">
+                and tx_markup = #{txMarkup}
+            </if>
+            <if test="transactionAmount != null">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="settlementAmount != null">
+                and settlement_amount = #{settlementAmount}
+            </if>
+            <if test="rateFee != null">
+                and rate_fee = #{rateFee}
+            </if>
+            <if test="fixFee != null">
+                and fix_fee = #{fixFee}
+            </if>
+            <if test="percentageFee != null">
+                and percentage_fee = #{percentageFee}
+            </if>
+            <if test="upsteamCurrency != null">
+                and upsteam_currency = #{upsteamCurrency}
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                and upstream_settlement_amount = #{upstreamSettlementAmount}
+            </if>
+            <if test="upstreamRateFee != null">
+                and upstream_rate_fee = #{upstreamRateFee}
+            </if>
+            <if test="upstreamFixFee != null">
+                and upstream_fix_fee = #{upstreamFixFee}
+            </if>
+            <if test="upstreamPercentageFee != null">
+                and upstream_percentage_fee = #{upstreamPercentageFee}
+            </if>
+            <if test="settleTimeBegin != null">
+                and settle_time_begin = #{settleTimeBegin}
+            </if>
+            <if test="settleTimeEnd != null">
+                and settle_tIme_end = #{settleTimeEnd}
+            </if>
+            <if test="settleStatus != null">
+                and settle_status = #{settleStatus}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="publishTime != null">
+                and publish_time = #{publishTime}
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                and publish_oper = #{publishOper}
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                and confirm_oper = #{confirmOper}
+            </if>
+            <if test="confirmTime != null">
+                and Confirm_Time = #{confirmTime}
+            </if>
+            <if test="paymentTime != null">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_upstream_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tx_markup, transaction_amount,
+                                                    settlement_amount, rate_fee, fix_fee, percentage_fee,
+                                                    upsteam_currency, upstream_settlement_amount, upstream_rate_fee,
+                                                    upstream_fix_fee, upstream_percentage_fee, settle_time_begin,
+                                                    settle_tIme_end, settle_status, created_time, publish_time,
+                                                    publish_oper, confirm_oper, Confirm_Time, payment_time, remark)
+        values (#{providerId},#{providerName},#{settleId}, #{merchantId}, #{currency}, #{txMarkup}, #{transactionAmount}, #{settlementAmount},
+                #{rateFee}, #{fixFee}, #{percentageFee}, #{upsteamCurrency}, #{upstreamSettlementAmount},
+                #{upstreamRateFee}, #{upstreamFixFee}, #{upstreamPercentageFee}, #{settleTimeBegin}, #{settleTimeEnd},
+                #{settleStatus}, #{createdTime}, #{publishTime}, #{publishOper}, #{confirmOper}, #{confirmTime},
+                #{paymentTime}, #{remark})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_upstream_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tx_markup, transaction_amount,
+        settlement_amount, rate_fee, fix_fee, percentage_fee, upsteam_currency, upstream_settlement_amount,
+        upstream_rate_fee, upstream_fix_fee, upstream_percentage_fee, settle_time_begin, settle_tIme_end, settle_status,
+        created_time, publish_time, publish_oper, confirm_oper, Confirm_Time, payment_time, remark)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settleId}, #{entity.merchantId}, #{entity.currency}, #{entity.txMarkup},
+            #{entity.transactionAmount}, #{entity.settlementAmount}, #{entity.rateFee}, #{entity.fixFee},
+            #{entity.percentageFee}, #{entity.upsteamCurrency}, #{entity.upstreamSettlementAmount},
+            #{entity.upstreamRateFee}, #{entity.upstreamFixFee}, #{entity.upstreamPercentageFee},
+            #{entity.settleTimeBegin}, #{entity.settleTimeEnd}, #{entity.settleStatus}, #{entity.createdTime},
+            #{entity.publishTime}, #{entity.publishOper}, #{entity.confirmOper}, #{entity.confirmTime},
+            #{entity.paymentTime}, #{entity.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_upstream_settlement(provider_id,provider_name,settle_id, merchant_id, currency, tx_markup, transaction_amount,
+        settlement_amount, rate_fee, fix_fee, percentage_fee, upsteam_currency, upstream_settlement_amount,
+        upstream_rate_fee, upstream_fix_fee, upstream_percentage_fee, settle_time_begin, settle_tIme_end, settle_status,
+        created_time, publish_time, publish_oper, confirm_oper, Confirm_Time, payment_time, remark)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settleId}, #{entity.merchantId}, #{entity.currency}, #{entity.txMarkup},
+            #{entity.transactionAmount}, #{entity.settlementAmount}, #{entity.rateFee}, #{entity.fixFee},
+            #{entity.percentageFee}, #{entity.upsteamCurrency}, #{entity.upstreamSettlementAmount},
+            #{entity.upstreamRateFee}, #{entity.upstreamFixFee}, #{entity.upstreamPercentageFee},
+            #{entity.settleTimeBegin}, #{entity.settleTimeEnd}, #{entity.settleStatus}, #{entity.createdTime},
+            #{entity.publishTime}, #{entity.publishOper}, #{entity.confirmOper}, #{entity.confirmTime},
+            #{entity.paymentTime}, #{entity.remark})
+        </foreach>
+        on duplicate key update
+        settle_id = values(settle_id),
+        merchant_id = values(merchant_id),
+        currency = values(currency),
+        tx_markup = values(tx_markup),
+        transaction_amount = values(transaction_amount),
+        settlement_amount = values(settlement_amount),
+        rate_fee = values(rate_fee),
+        fix_fee = values(fix_fee),
+        percentage_fee = values(percentage_fee),
+        upsteam_currency = values(upsteam_currency),
+        upstream_settlement_amount = values(upstream_settlement_amount),
+        upstream_rate_fee = values(upstream_rate_fee),
+        upstream_fix_fee = values(upstream_fix_fee),
+        upstream_percentage_fee = values(upstream_percentage_fee),
+        settle_time_begin = values(settle_time_begin),
+        settle_tIme_end = values(settle_tIme_end),
+        settle_status = values(settle_status),
+        created_time = values(created_time),
+        publish_time = values(publish_time),
+        publish_oper = values(publish_oper),
+        confirm_oper = values(confirm_oper),
+        Confirm_Time = values(Confirm_Time),
+        payment_time = values(payment_time),
+        remark = values(remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_upstream_settlement
+        <set>
+            <if test="settleId != null and settleId != ''">
+                settle_id = #{settleId},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="txMarkup != null">
+                tx_markup = #{txMarkup},
+            </if>
+            <if test="transactionAmount != null">
+                transaction_amount = #{transactionAmount},
+            </if>
+            <if test="settlementAmount != null">
+                settlement_amount = #{settlementAmount},
+            </if>
+            <if test="rateFee != null">
+                rate_fee = #{rateFee},
+            </if>
+            <if test="fixFee != null">
+                fix_fee = #{fixFee},
+            </if>
+            <if test="percentageFee != null">
+                percentage_fee = #{percentageFee},
+            </if>
+            <if test="upsteamCurrency != null">
+                upsteam_currency = #{upsteamCurrency},
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                upstream_settlement_amount = #{upstreamSettlementAmount},
+            </if>
+            <if test="upstreamRateFee != null">
+                upstream_rate_fee = #{upstreamRateFee},
+            </if>
+            <if test="upstreamFixFee != null">
+                upstream_fix_fee = #{upstreamFixFee},
+            </if>
+            <if test="upstreamPercentageFee != null">
+                upstream_percentage_fee = #{upstreamPercentageFee},
+            </if>
+            <if test="settleTimeBegin != null">
+                settle_time_begin = #{settleTimeBegin},
+            </if>
+            <if test="settleTimeEnd != null">
+                settle_tIme_end = #{settleTimeEnd},
+            </if>
+            <if test="settleStatus != null">
+                settle_status = #{settleStatus},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="publishTime != null">
+                publish_time = #{publishTime},
+            </if>
+            <if test="publishOper != null and publishOper != ''">
+                publish_oper = #{publishOper},
+            </if>
+            <if test="confirmOper != null and confirmOper != ''">
+                confirm_oper = #{confirmOper},
+            </if>
+            <if test="confirmTime != null">
+                Confirm_Time = #{confirmTime},
+            </if>
+            <if test="paymentTime != null">
+                payment_time = #{paymentTime},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_upstream_settlement
+        where id = #{id}
+    </delete>
+
+</mapper>
+

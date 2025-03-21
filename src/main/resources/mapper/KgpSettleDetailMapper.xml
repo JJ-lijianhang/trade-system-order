@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.KgpSettleDetailMapper">
+
+    <resultMap type="com.futurebank.order.entity.KgpSettleDetailEntity" id="KgpSettleDetailMap">
+        <result property="detail" column="detail"/>
+        <result property="receivertype" column="receiverType"/>
+        <result property="receiverid" column="receiverID"/>
+        <result property="projectid" column="projectID"/>
+        <result property="partnerid" column="partnerID"/>
+        <result property="partnermerchantid" column="partnerMerchantID"/>
+        <result property="partnershopid" column="partnerShopID"/>
+        <result property="partnerorderid" column="partnerOrderID"/>
+        <result property="partnerpaymentid" column="partnerPaymentID"/>
+        <result property="sourceoffundtype" column="sourceOfFundType"/>
+        <result property="sourceoffundmerchantid" column="sourceOfFundMerchantID"/>
+        <result property="sourceoffundshopid" column="sourceOfFundShopID"/>
+        <result property="paymentamount" column="paymentAmount"/>
+        <result property="paymentfeeabsorber" column="paymentFeeAbsorber"/>
+        <result property="paymentfeecollectiontype" column="paymentFeeCollectionType"/>
+        <result property="paymentfeeamount" column="paymentFeeAmount"/>
+        <result property="paymentvatamount" column="paymentVATAmount"/>
+        <result property="paymentfeenetamount" column="paymentFeeNetAmount"/>
+        <result property="paymentwhtamount" column="paymentWHTAmount"/>
+        <result property="currencycode" column="currencyCode"/>
+        <result property="paymentdatetime" column="paymentDateTime"/>
+        <result property="paymentprocessingdate" column="paymentProcessingDate"/>
+        <result property="payouttype" column="payoutType"/>
+        <result property="payoutlevel" column="payoutLevel"/>
+        <result property="mainbatchidtype" column="mainBatchIDType"/>
+        <result property="mainbatchid" column="mainBatchID"/>
+        <result property="distributionamount" column="distributionAmount"/>
+        <result property="accountnumber" column="accountNumber"/>
+        <result property="bankname" column="bankName"/>
+        <result property="payoutstatus" column="payoutStatus"/>
+        <result property="errorname" column="errorName"/>
+        <result property="createddatetime" column="createdDateTime"/>
+        <result property="transferdatetime" column="transferDateTime"/>
+        <result property="transfersuccessdatetime" column="transferSuccessDateTime"/>
+        <result property="completeddatetime" column="completedDateTime"/>
+        <result property="partnerbatchid" column="partnerBatchID"/>
+        <result property="batchid" column="batchID"/>
+        <result property="partnerpayoutmerchantid" column="partnerPayoutMerchantID"/>
+        <result property="payoutmerchantid" column="payoutMerchantID"/>
+        <result property="payoutpartnerbatchid" column="payoutPartnerBatchID"/>
+        <result property="payersourceoffund" column="payerSourceOfFund"/>
+        <result property="id" column="id"/>
+        <result property="isProcessed" column="is_processed"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="KgpSettleDetailMap">
+        select detail,
+               receiverType,
+               receiverID,
+               projectID,
+               partnerID,
+               partnerMerchantID,
+               partnerShopID,
+               partnerOrderID,
+               partnerPaymentID,
+               sourceOfFundType,
+               sourceOfFundMerchantID,
+               sourceOfFundShopID,
+               paymentAmount,
+               paymentFeeAbsorber,
+               paymentFeeCollectionType,
+               paymentFeeAmount,
+               paymentVATAmount,
+               paymentFeeNetAmount,
+               paymentWHTAmount,
+               currencyCode,
+               paymentDateTime,
+               paymentProcessingDate,
+               payoutType,
+               payoutLevel,
+               mainBatchIDType,
+               mainBatchID,
+               distributionAmount,
+               accountNumber,
+               bankName,
+               payoutStatus,
+               errorName,
+               createdDateTime,
+               transferDateTime,
+               transferSuccessDateTime,
+               completedDateTime,
+               partnerBatchID,
+               batchID,
+               partnerPayoutMerchantID,
+               payoutMerchantID,
+               payoutPartnerBatchID,
+               payerSourceOfFund,
+               id,
+               is_processed,
+               created_at,
+               update_at
+        from tb_kgp_settle_detail
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="KgpSettleDetailMap">
+        select
+        detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID, partnerShopID, partnerOrderID,
+        partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, paymentAmount,
+        paymentFeeAbsorber, paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount,
+        paymentWHTAmount, currencyCode, paymentDateTime, paymentProcessingDate, payoutType, payoutLevel,
+        mainBatchIDType, mainBatchID, distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+        createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime, partnerBatchID, batchID,
+        partnerPayoutMerchantID, payoutMerchantID, payoutPartnerBatchID, payerSourceOfFund, id, is_processed,
+        created_at, update_at
+        from tb_kgp_settle_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="receivertype != null and receivertype != ''">
+                and receiverType = #{receivertype}
+            </if>
+            <if test="receiverid != null and receiverid != ''">
+                and receiverID = #{receiverid}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="paymentamount != null and paymentamount != ''">
+                and paymentAmount = #{paymentamount}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="payouttype != null and payouttype != ''">
+                and payoutType = #{payouttype}
+            </if>
+            <if test="payoutlevel != null and payoutlevel != ''">
+                and payoutLevel = #{payoutlevel}
+            </if>
+            <if test="mainbatchidtype != null and mainbatchidtype != ''">
+                and mainBatchIDType = #{mainbatchidtype}
+            </if>
+            <if test="mainbatchid != null and mainbatchid != ''">
+                and mainBatchID = #{mainbatchid}
+            </if>
+            <if test="distributionamount != null and distributionamount != ''">
+                and distributionAmount = #{distributionamount}
+            </if>
+            <if test="accountnumber != null and accountnumber != ''">
+                and accountNumber = #{accountnumber}
+            </if>
+            <if test="bankname != null and bankname != ''">
+                and bankName = #{bankname}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="errorname != null and errorname != ''">
+                and errorName = #{errorname}
+            </if>
+            <if test="createddatetime != null and createddatetime != ''">
+                and createdDateTime = #{createddatetime}
+            </if>
+            <if test="transferdatetime != null and transferdatetime != ''">
+                and transferDateTime = #{transferdatetime}
+            </if>
+            <if test="transfersuccessdatetime != null and transfersuccessdatetime != ''">
+                and transferSuccessDateTime = #{transfersuccessdatetime}
+            </if>
+            <if test="completeddatetime != null and completeddatetime != ''">
+                and completedDateTime = #{completeddatetime}
+            </if>
+            <if test="partnerbatchid != null and partnerbatchid != ''">
+                and partnerBatchID = #{partnerbatchid}
+            </if>
+            <if test="batchid != null and batchid != ''">
+                and batchID = #{batchid}
+            </if>
+            <if test="partnerpayoutmerchantid != null and partnerpayoutmerchantid != ''">
+                and partnerPayoutMerchantID = #{partnerpayoutmerchantid}
+            </if>
+            <if test="payoutmerchantid != null and payoutmerchantid != ''">
+                and payoutMerchantID = #{payoutmerchantid}
+            </if>
+            <if test="payoutpartnerbatchid != null and payoutpartnerbatchid != ''">
+                and payoutPartnerBatchID = #{payoutpartnerbatchid}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="KgpSettleDetailMap">
+        select
+        detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID, partnerShopID, partnerOrderID,
+        partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, paymentAmount,
+        paymentFeeAbsorber, paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount,
+        paymentWHTAmount, currencyCode, paymentDateTime, paymentProcessingDate, payoutType, payoutLevel,
+        mainBatchIDType, mainBatchID, distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+        createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime, partnerBatchID, batchID,
+        partnerPayoutMerchantID, payoutMerchantID, payoutPartnerBatchID, payerSourceOfFund, id, is_processed,
+        created_at, update_at
+        from tb_kgp_settle_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="receivertype != null and receivertype != ''">
+                and receiverType = #{receivertype}
+            </if>
+            <if test="receiverid != null and receiverid != ''">
+                and receiverID = #{receiverid}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="paymentamount != null and paymentamount != ''">
+                and paymentAmount = #{paymentamount}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="payouttype != null and payouttype != ''">
+                and payoutType = #{payouttype}
+            </if>
+            <if test="payoutlevel != null and payoutlevel != ''">
+                and payoutLevel = #{payoutlevel}
+            </if>
+            <if test="mainbatchidtype != null and mainbatchidtype != ''">
+                and mainBatchIDType = #{mainbatchidtype}
+            </if>
+            <if test="mainbatchid != null and mainbatchid != ''">
+                and mainBatchID = #{mainbatchid}
+            </if>
+            <if test="distributionamount != null and distributionamount != ''">
+                and distributionAmount = #{distributionamount}
+            </if>
+            <if test="accountnumber != null and accountnumber != ''">
+                and accountNumber = #{accountnumber}
+            </if>
+            <if test="bankname != null and bankname != ''">
+                and bankName = #{bankname}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="errorname != null and errorname != ''">
+                and errorName = #{errorname}
+            </if>
+            <if test="createddatetime != null and createddatetime != ''">
+                and createdDateTime = #{createddatetime}
+            </if>
+            <if test="transferdatetime != null and transferdatetime != ''">
+                and transferDateTime = #{transferdatetime}
+            </if>
+            <if test="transfersuccessdatetime != null and transfersuccessdatetime != ''">
+                and transferSuccessDateTime = #{transfersuccessdatetime}
+            </if>
+            <if test="completeddatetime != null and completeddatetime != ''">
+                and completedDateTime = #{completeddatetime}
+            </if>
+            <if test="partnerbatchid != null and partnerbatchid != ''">
+                and partnerBatchID = #{partnerbatchid}
+            </if>
+            <if test="batchid != null and batchid != ''">
+                and batchID = #{batchid}
+            </if>
+            <if test="partnerpayoutmerchantid != null and partnerpayoutmerchantid != ''">
+                and partnerPayoutMerchantID = #{partnerpayoutmerchantid}
+            </if>
+            <if test="payoutmerchantid != null and payoutmerchantid != ''">
+                and payoutMerchantID = #{payoutmerchantid}
+            </if>
+            <if test="payoutpartnerbatchid != null and payoutpartnerbatchid != ''">
+                and payoutPartnerBatchID = #{payoutpartnerbatchid}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="KgpSettleDetailMap">
+        select
+        detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID, partnerShopID, partnerOrderID,
+        partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, paymentAmount,
+        paymentFeeAbsorber, paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount,
+        paymentWHTAmount, currencyCode, paymentDateTime, paymentProcessingDate, payoutType, payoutLevel,
+        mainBatchIDType, mainBatchID, distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+        createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime, partnerBatchID, batchID,
+        partnerPayoutMerchantID, payoutMerchantID, payoutPartnerBatchID, payerSourceOfFund, id, is_processed,
+        created_at, update_at
+        from tb_kgp_settle_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="receivertype != null and receivertype != ''">
+                and receiverType = #{receivertype}
+            </if>
+            <if test="receiverid != null and receiverid != ''">
+                and receiverID = #{receiverid}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="paymentamount != null and paymentamount != ''">
+                and paymentAmount = #{paymentamount}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="payouttype != null and payouttype != ''">
+                and payoutType = #{payouttype}
+            </if>
+            <if test="payoutlevel != null and payoutlevel != ''">
+                and payoutLevel = #{payoutlevel}
+            </if>
+            <if test="mainbatchidtype != null and mainbatchidtype != ''">
+                and mainBatchIDType = #{mainbatchidtype}
+            </if>
+            <if test="mainbatchid != null and mainbatchid != ''">
+                and mainBatchID = #{mainbatchid}
+            </if>
+            <if test="distributionamount != null and distributionamount != ''">
+                and distributionAmount = #{distributionamount}
+            </if>
+            <if test="accountnumber != null and accountnumber != ''">
+                and accountNumber = #{accountnumber}
+            </if>
+            <if test="bankname != null and bankname != ''">
+                and bankName = #{bankname}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="errorname != null and errorname != ''">
+                and errorName = #{errorname}
+            </if>
+            <if test="createddatetime != null and createddatetime != ''">
+                and createdDateTime = #{createddatetime}
+            </if>
+            <if test="transferdatetime != null and transferdatetime != ''">
+                and transferDateTime = #{transferdatetime}
+            </if>
+            <if test="transfersuccessdatetime != null and transfersuccessdatetime != ''">
+                and transferSuccessDateTime = #{transfersuccessdatetime}
+            </if>
+            <if test="completeddatetime != null and completeddatetime != ''">
+                and completedDateTime = #{completeddatetime}
+            </if>
+            <if test="partnerbatchid != null and partnerbatchid != ''">
+                and partnerBatchID = #{partnerbatchid}
+            </if>
+            <if test="batchid != null and batchid != ''">
+                and batchID = #{batchid}
+            </if>
+            <if test="partnerpayoutmerchantid != null and partnerpayoutmerchantid != ''">
+                and partnerPayoutMerchantID = #{partnerpayoutmerchantid}
+            </if>
+            <if test="payoutmerchantid != null and payoutmerchantid != ''">
+                and payoutMerchantID = #{payoutmerchantid}
+            </if>
+            <if test="payoutpartnerbatchid != null and payoutpartnerbatchid != ''">
+                and payoutPartnerBatchID = #{payoutpartnerbatchid}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_kgp_settle_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="receivertype != null and receivertype != ''">
+                and receiverType = #{receivertype}
+            </if>
+            <if test="receiverid != null and receiverid != ''">
+                and receiverID = #{receiverid}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="paymentamount != null and paymentamount != ''">
+                and paymentAmount = #{paymentamount}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="payouttype != null and payouttype != ''">
+                and payoutType = #{payouttype}
+            </if>
+            <if test="payoutlevel != null and payoutlevel != ''">
+                and payoutLevel = #{payoutlevel}
+            </if>
+            <if test="mainbatchidtype != null and mainbatchidtype != ''">
+                and mainBatchIDType = #{mainbatchidtype}
+            </if>
+            <if test="mainbatchid != null and mainbatchid != ''">
+                and mainBatchID = #{mainbatchid}
+            </if>
+            <if test="distributionamount != null and distributionamount != ''">
+                and distributionAmount = #{distributionamount}
+            </if>
+            <if test="accountnumber != null and accountnumber != ''">
+                and accountNumber = #{accountnumber}
+            </if>
+            <if test="bankname != null and bankname != ''">
+                and bankName = #{bankname}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="errorname != null and errorname != ''">
+                and errorName = #{errorname}
+            </if>
+            <if test="createddatetime != null and createddatetime != ''">
+                and createdDateTime = #{createddatetime}
+            </if>
+            <if test="transferdatetime != null and transferdatetime != ''">
+                and transferDateTime = #{transferdatetime}
+            </if>
+            <if test="transfersuccessdatetime != null and transfersuccessdatetime != ''">
+                and transferSuccessDateTime = #{transfersuccessdatetime}
+            </if>
+            <if test="completeddatetime != null and completeddatetime != ''">
+                and completedDateTime = #{completeddatetime}
+            </if>
+            <if test="partnerbatchid != null and partnerbatchid != ''">
+                and partnerBatchID = #{partnerbatchid}
+            </if>
+            <if test="batchid != null and batchid != ''">
+                and batchID = #{batchid}
+            </if>
+            <if test="partnerpayoutmerchantid != null and partnerpayoutmerchantid != ''">
+                and partnerPayoutMerchantID = #{partnerpayoutmerchantid}
+            </if>
+            <if test="payoutmerchantid != null and payoutmerchantid != ''">
+                and payoutMerchantID = #{payoutmerchantid}
+            </if>
+            <if test="payoutpartnerbatchid != null and payoutpartnerbatchid != ''">
+                and payoutPartnerBatchID = #{payoutpartnerbatchid}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_settle_detail(detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID,
+                                         partnerShopID, partnerOrderID, partnerPaymentID, sourceOfFundType,
+                                         sourceOfFundMerchantID, sourceOfFundShopID, paymentAmount, paymentFeeAbsorber,
+                                         paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount,
+                                         paymentFeeNetAmount, paymentWHTAmount, currencyCode, paymentDateTime,
+                                         paymentProcessingDate, payoutType, payoutLevel, mainBatchIDType, mainBatchID,
+                                         distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+                                         createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime,
+                                         partnerBatchID, batchID, partnerPayoutMerchantID, payoutMerchantID,
+                                         payoutPartnerBatchID, payerSourceOfFund, is_processed, created_at, update_at)
+        values (#{detail}, #{receivertype}, #{receiverid}, #{projectid}, #{partnerid}, #{partnermerchantid},
+                #{partnershopid}, #{partnerorderid}, #{partnerpaymentid}, #{sourceoffundtype},
+                #{sourceoffundmerchantid}, #{sourceoffundshopid}, #{paymentamount}, #{paymentfeeabsorber},
+                #{paymentfeecollectiontype}, #{paymentfeeamount}, #{paymentvatamount}, #{paymentfeenetamount},
+                #{paymentwhtamount}, #{currencycode}, #{paymentdatetime}, #{paymentprocessingdate}, #{payouttype},
+                #{payoutlevel}, #{mainbatchidtype}, #{mainbatchid}, #{distributionamount}, #{accountnumber},
+                #{bankname}, #{payoutstatus}, #{errorname}, #{createddatetime}, #{transferdatetime},
+                #{transfersuccessdatetime}, #{completeddatetime}, #{partnerbatchid}, #{batchid},
+                #{partnerpayoutmerchantid}, #{payoutmerchantid}, #{payoutpartnerbatchid}, #{payersourceoffund},
+                #{isProcessed}, #{createdAt}, #{updateAt})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_settle_detail(detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID,
+        partnerShopID, partnerOrderID, partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID,
+        paymentAmount, paymentFeeAbsorber, paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount,
+        paymentFeeNetAmount, paymentWHTAmount, currencyCode, paymentDateTime, paymentProcessingDate, payoutType,
+        payoutLevel, mainBatchIDType, mainBatchID, distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+        createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime, partnerBatchID, batchID,
+        partnerPayoutMerchantID, payoutMerchantID, payoutPartnerBatchID, payerSourceOfFund, is_processed, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.detail}, #{entity.receivertype}, #{entity.receiverid}, #{entity.projectid}, #{entity.partnerid},
+            #{entity.partnermerchantid}, #{entity.partnershopid}, #{entity.partnerorderid}, #{entity.partnerpaymentid},
+            #{entity.sourceoffundtype}, #{entity.sourceoffundmerchantid}, #{entity.sourceoffundshopid},
+            #{entity.paymentamount}, #{entity.paymentfeeabsorber}, #{entity.paymentfeecollectiontype},
+            #{entity.paymentfeeamount}, #{entity.paymentvatamount}, #{entity.paymentfeenetamount},
+            #{entity.paymentwhtamount}, #{entity.currencycode}, #{entity.paymentdatetime},
+            #{entity.paymentprocessingdate}, #{entity.payouttype}, #{entity.payoutlevel}, #{entity.mainbatchidtype},
+            #{entity.mainbatchid}, #{entity.distributionamount}, #{entity.accountnumber}, #{entity.bankname},
+            #{entity.payoutstatus}, #{entity.errorname}, #{entity.createddatetime}, #{entity.transferdatetime},
+            #{entity.transfersuccessdatetime}, #{entity.completeddatetime}, #{entity.partnerbatchid}, #{entity.batchid},
+            #{entity.partnerpayoutmerchantid}, #{entity.payoutmerchantid}, #{entity.payoutpartnerbatchid},
+            #{entity.payersourceoffund}, #{entity.isProcessed}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_settle_detail(detail, receiverType, receiverID, projectID, partnerID, partnerMerchantID,
+        partnerShopID, partnerOrderID, partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID,
+        paymentAmount, paymentFeeAbsorber, paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount,
+        paymentFeeNetAmount, paymentWHTAmount, currencyCode, paymentDateTime, paymentProcessingDate, payoutType,
+        payoutLevel, mainBatchIDType, mainBatchID, distributionAmount, accountNumber, bankName, payoutStatus, errorName,
+        createdDateTime, transferDateTime, transferSuccessDateTime, completedDateTime, partnerBatchID, batchID,
+        partnerPayoutMerchantID, payoutMerchantID, payoutPartnerBatchID, payerSourceOfFund, is_processed, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.detail}, #{entity.receivertype}, #{entity.receiverid}, #{entity.projectid}, #{entity.partnerid},
+            #{entity.partnermerchantid}, #{entity.partnershopid}, #{entity.partnerorderid}, #{entity.partnerpaymentid},
+            #{entity.sourceoffundtype}, #{entity.sourceoffundmerchantid}, #{entity.sourceoffundshopid},
+            #{entity.paymentamount}, #{entity.paymentfeeabsorber}, #{entity.paymentfeecollectiontype},
+            #{entity.paymentfeeamount}, #{entity.paymentvatamount}, #{entity.paymentfeenetamount},
+            #{entity.paymentwhtamount}, #{entity.currencycode}, #{entity.paymentdatetime},
+            #{entity.paymentprocessingdate}, #{entity.payouttype}, #{entity.payoutlevel}, #{entity.mainbatchidtype},
+            #{entity.mainbatchid}, #{entity.distributionamount}, #{entity.accountnumber}, #{entity.bankname},
+            #{entity.payoutstatus}, #{entity.errorname}, #{entity.createddatetime}, #{entity.transferdatetime},
+            #{entity.transfersuccessdatetime}, #{entity.completeddatetime}, #{entity.partnerbatchid}, #{entity.batchid},
+            #{entity.partnerpayoutmerchantid}, #{entity.payoutmerchantid}, #{entity.payoutpartnerbatchid},
+            #{entity.payersourceoffund}, #{entity.isProcessed}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+        on duplicate key update
+        detail = values(detail),
+        receiverType = values(receiverType),
+        receiverID = values(receiverID),
+        projectID = values(projectID),
+        partnerID = values(partnerID),
+        partnerMerchantID = values(partnerMerchantID),
+        partnerShopID = values(partnerShopID),
+        partnerOrderID = values(partnerOrderID),
+        partnerPaymentID = values(partnerPaymentID),
+        sourceOfFundType = values(sourceOfFundType),
+        sourceOfFundMerchantID = values(sourceOfFundMerchantID),
+        sourceOfFundShopID = values(sourceOfFundShopID),
+        paymentAmount = values(paymentAmount),
+        paymentFeeAbsorber = values(paymentFeeAbsorber),
+        paymentFeeCollectionType = values(paymentFeeCollectionType),
+        paymentFeeAmount = values(paymentFeeAmount),
+        paymentVATAmount = values(paymentVATAmount),
+        paymentFeeNetAmount = values(paymentFeeNetAmount),
+        paymentWHTAmount = values(paymentWHTAmount),
+        currencyCode = values(currencyCode),
+        paymentDateTime = values(paymentDateTime),
+        paymentProcessingDate = values(paymentProcessingDate),
+        payoutType = values(payoutType),
+        payoutLevel = values(payoutLevel),
+        mainBatchIDType = values(mainBatchIDType),
+        mainBatchID = values(mainBatchID),
+        distributionAmount = values(distributionAmount),
+        accountNumber = values(accountNumber),
+        bankName = values(bankName),
+        payoutStatus = values(payoutStatus),
+        errorName = values(errorName),
+        createdDateTime = values(createdDateTime),
+        transferDateTime = values(transferDateTime),
+        transferSuccessDateTime = values(transferSuccessDateTime),
+        completedDateTime = values(completedDateTime),
+        partnerBatchID = values(partnerBatchID),
+        batchID = values(batchID),
+        partnerPayoutMerchantID = values(partnerPayoutMerchantID),
+        payoutMerchantID = values(payoutMerchantID),
+        payoutPartnerBatchID = values(payoutPartnerBatchID),
+        payerSourceOfFund = values(payerSourceOfFund),
+        is_processed = values(is_processed),
+        created_at = values(created_at),
+        update_at = values(update_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_kgp_settle_detail
+        <set>
+            <if test="detail != null and detail != ''">
+                detail = #{detail},
+            </if>
+            <if test="receivertype != null and receivertype != ''">
+                receiverType = #{receivertype},
+            </if>
+            <if test="receiverid != null and receiverid != ''">
+                receiverID = #{receiverid},
+            </if>
+            <if test="projectid != null and projectid != ''">
+                projectID = #{projectid},
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                partnerID = #{partnerid},
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                partnerMerchantID = #{partnermerchantid},
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                partnerShopID = #{partnershopid},
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                partnerOrderID = #{partnerorderid},
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                partnerPaymentID = #{partnerpaymentid},
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                sourceOfFundType = #{sourceoffundtype},
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                sourceOfFundMerchantID = #{sourceoffundmerchantid},
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                sourceOfFundShopID = #{sourceoffundshopid},
+            </if>
+            <if test="paymentamount != null and paymentamount != ''">
+                paymentAmount = #{paymentamount},
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                paymentFeeAbsorber = #{paymentfeeabsorber},
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                paymentFeeCollectionType = #{paymentfeecollectiontype},
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                paymentFeeAmount = #{paymentfeeamount},
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                paymentVATAmount = #{paymentvatamount},
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                paymentFeeNetAmount = #{paymentfeenetamount},
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                paymentWHTAmount = #{paymentwhtamount},
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                currencyCode = #{currencycode},
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                paymentDateTime = #{paymentdatetime},
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                paymentProcessingDate = #{paymentprocessingdate},
+            </if>
+            <if test="payouttype != null and payouttype != ''">
+                payoutType = #{payouttype},
+            </if>
+            <if test="payoutlevel != null and payoutlevel != ''">
+                payoutLevel = #{payoutlevel},
+            </if>
+            <if test="mainbatchidtype != null and mainbatchidtype != ''">
+                mainBatchIDType = #{mainbatchidtype},
+            </if>
+            <if test="mainbatchid != null and mainbatchid != ''">
+                mainBatchID = #{mainbatchid},
+            </if>
+            <if test="distributionamount != null and distributionamount != ''">
+                distributionAmount = #{distributionamount},
+            </if>
+            <if test="accountnumber != null and accountnumber != ''">
+                accountNumber = #{accountnumber},
+            </if>
+            <if test="bankname != null and bankname != ''">
+                bankName = #{bankname},
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                payoutStatus = #{payoutstatus},
+            </if>
+            <if test="errorname != null and errorname != ''">
+                errorName = #{errorname},
+            </if>
+            <if test="createddatetime != null and createddatetime != ''">
+                createdDateTime = #{createddatetime},
+            </if>
+            <if test="transferdatetime != null and transferdatetime != ''">
+                transferDateTime = #{transferdatetime},
+            </if>
+            <if test="transfersuccessdatetime != null and transfersuccessdatetime != ''">
+                transferSuccessDateTime = #{transfersuccessdatetime},
+            </if>
+            <if test="completeddatetime != null and completeddatetime != ''">
+                completedDateTime = #{completeddatetime},
+            </if>
+            <if test="partnerbatchid != null and partnerbatchid != ''">
+                partnerBatchID = #{partnerbatchid},
+            </if>
+            <if test="batchid != null and batchid != ''">
+                batchID = #{batchid},
+            </if>
+            <if test="partnerpayoutmerchantid != null and partnerpayoutmerchantid != ''">
+                partnerPayoutMerchantID = #{partnerpayoutmerchantid},
+            </if>
+            <if test="payoutmerchantid != null and payoutmerchantid != ''">
+                payoutMerchantID = #{payoutmerchantid},
+            </if>
+            <if test="payoutpartnerbatchid != null and payoutpartnerbatchid != ''">
+                payoutPartnerBatchID = #{payoutpartnerbatchid},
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                payerSourceOfFund = #{payersourceoffund},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_kgp_settle_detail
+        where id = #{id}
+    </delete>
+
+</mapper>
+

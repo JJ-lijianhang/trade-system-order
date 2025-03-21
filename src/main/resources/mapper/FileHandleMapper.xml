@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.FileHandleMapper">
+
+    <resultMap type="com.futurebank.order.entity.FileHandleEntity" id="FileHandleMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="fileType" column="file_type"/>
+        <result property="fileName" column="file_name"/>
+        <result property="istate" column="istate"/>
+        <result property="filePath" column="file_path"/>
+        <result property="icount" column="icount"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FileHandleMap">
+        select id,
+               provider_id,
+               provider_name,
+               file_type,
+               file_name,
+               istate,
+               file_path,
+               icount,
+               created_time,
+               update_time
+        from tb_file_handle
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="FileHandleMap">
+        select
+        id, provider_id, provider_name, file_type, file_name, istate, file_path, icount, created_time, update_time
+        from tb_file_handle
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="icount != null">
+                and icount = #{icount}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="FileHandleMap">
+        select
+        id, provider_id, provider_name, file_type, file_name, istate, file_path, icount, created_time, update_time
+        from tb_file_handle
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="icount != null">
+                and icount = #{icount}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="FileHandleMap">
+        select
+        id, provider_id, provider_name, file_type, file_name, istate, file_path, icount, created_time, update_time
+        from tb_file_handle
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="icount != null">
+                and icount = #{icount}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_file_handle
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="providerId != null">
+                and provider_id = #{providerId}
+            </if>
+            <if test="providerName != null and providerName != ''">
+                and provider_name = #{providerName}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="istate != null">
+                and istate = #{istate}
+            </if>
+            <if test="filePath != null and filePath != ''">
+                and file_path = #{filePath}
+            </if>
+            <if test="icount != null">
+                and icount = #{icount}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle(provider_id, provider_name, file_type, file_name, istate, file_path, icount,
+                                   created_time, update_time)
+        values (#{providerId}, #{providerName}, #{fileType}, #{fileName}, #{istate}, #{filePath}, #{icount},
+                #{createdTime}, #{updateTime})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle(provider_id, provider_name, file_type, file_name, istate, file_path, icount,
+        created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId}, #{entity.providerName}, #{entity.fileType}, #{entity.fileName}, #{entity.istate},
+            #{entity.filePath}, #{entity.icount}, #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_file_handle(provider_id, provider_name, file_type, file_name, istate, file_path, icount,
+        created_time, update_time)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId}, #{entity.providerName}, #{entity.fileType}, #{entity.fileName}, #{entity.istate},
+            #{entity.filePath}, #{entity.icount}, #{entity.createdTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        provider_id = values(provider_id),
+        provider_name = values(provider_name),
+        file_type = values(file_type),
+        file_name = values(file_name),
+        istate = values(istate),
+        file_path = values(file_path),
+        icount = values(icount),
+        created_time = values(created_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_file_handle
+        <set>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="providerName != null and providerName != ''">
+                provider_name = #{providerName},
+            </if>
+            <if test="fileType != null and fileType != ''">
+                file_type = #{fileType},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="istate != null">
+                istate = #{istate},
+            </if>
+            <if test="filePath != null and filePath != ''">
+                file_path = #{filePath},
+            </if>
+            <if test="icount != null">
+                icount = #{icount},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_file_handle
+        where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.ReconciliationKlashaMapper">
+
+    <resultMap type="com.futurebank.order.entity.ReconciliationKlashaEntity" id="ReconciliationKlashaMap">
+        <result property="amount" column="amount"/>
+        <result property="businessid" column="businessId"/>
+        <result property="foreigncurrency" column="foreignCurrency"/>
+        <result property="sourcecurrency" column="sourceCurrency"/>
+        <result property="splittype" column="splitType"/>
+        <result property="foreignamount" column="foreignAmount"/>
+        <result property="settledsourceamount" column="settledSourceAmount"/>
+        <result property="settledstatus" column="settledStatus"/>
+        <result property="currency" column="currency"/>
+        <result property="id" column="id"/>
+        <result property="transactionOrderid" column="transaction_orderId"/>
+        <result property="transactionFee" column="transaction_fee"/>
+        <result property="transactionChannel" column="transaction_channel"/>
+        <result property="transactionChargedamount" column="transaction_chargedAmount"/>
+        <result property="transactionCallback" column="transaction_callBack"/>
+        <result property="transactionSourcecurrency" column="transaction_sourceCurrency"/>
+        <result property="transactionSettlementrate" column="transaction_settlementRate"/>
+        <result property="transactionTnxref" column="transaction_tnxRef"/>
+        <result property="transactionPaymenttype" column="transaction_paymentType"/>
+        <result property="transactionWebhooksent" column="transaction_webhookSent"/>
+        <result property="transactionCreatedat" column="transaction_createdAt"/>
+        <result property="transactionKtnxref" column="transaction_ktnxRef"/>
+        <result property="transactionGatewaycode" column="transaction_gatewayCode"/>
+        <result property="transactionRate" column="transaction_rate"/>
+        <result property="transactionProvider" column="transaction_provider"/>
+        <result property="transactionSourceremainingamount" column="transaction_sourceRemainingAmount"/>
+        <result property="transactionSettlementreference" column="transaction_settlementReference"/>
+        <result property="transactionExtra" column="transaction_extra"/>
+        <result property="transactionSourceamount" column="transaction_sourceAmount"/>
+        <result property="transactionCurrency" column="transaction_currency"/>
+        <result property="transactionId" column="transaction_id"/>
+        <result property="transactionUpdatedat" column="transaction_updatedAt"/>
+        <result property="transactionSourcecurrencyfee" column="transaction_sourceCurrencyFee"/>
+        <result property="transactionAmount" column="transaction_amount"/>
+        <result property="transactionPaymentplan" column="transaction_paymentPlan"/>
+        <result property="transactionBusiness" column="transaction_business"/>
+        <result property="transactionIp" column="transaction_ip"/>
+        <result property="transactionVat" column="transaction_vat"/>
+        <result property="transactionMessage" column="transaction_message"/>
+        <result property="transactionUserid" column="transaction_userId"/>
+        <result property="transactionSettledamount" column="transaction_settledAmount"/>
+        <result property="transactionSettledcurrency" column="transaction_settledCurrency"/>
+        <result property="transactionCardused" column="transaction_cardUsed"/>
+        <result property="transactionGateref" column="transaction_gateRef"/>
+        <result property="transactionSplitstatus" column="transaction_splitStatus"/>
+        <result property="transactionNarration" column="transaction_narration"/>
+        <result property="transactionFailurereason" column="transaction_failureReason"/>
+        <result property="transactionRememberme" column="transaction_rememberMe"/>
+        <result property="transactionStatus" column="transaction_status"/>
+        <result property="customerCreatedat" column="customer_createdAt"/>
+        <result property="customerPhone" column="customer_phone"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="customerId" column="customer_id"/>
+        <result property="customerEmail" column="customer_email"/>
+        <result property="customerUpdatedat" column="customer_updatedAt"/>
+        <result property="transactionTxnid" column="transaction_txnId"/>
+        <result property="updatedat" column="updatedAt"/>
+        <result property="isProcessed" column="is_processed"/>
+        <result property="rid" column="rid"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ReconciliationKlashaMap">
+        select amount,
+               businessId,
+               foreignCurrency,
+               sourceCurrency,
+               splitType,
+               foreignAmount,
+               settledSourceAmount,
+               settledStatus,
+               currency,
+               id,
+               transaction_orderId,
+               transaction_fee,
+               transaction_channel,
+               transaction_chargedAmount,
+               transaction_callBack,
+               transaction_sourceCurrency,
+               transaction_settlementRate,
+               transaction_tnxRef,
+               transaction_paymentType,
+               transaction_webhookSent,
+               transaction_createdAt,
+               transaction_ktnxRef,
+               transaction_gatewayCode,
+               transaction_rate,
+               transaction_provider,
+               transaction_sourceRemainingAmount,
+               transaction_settlementReference,
+               transaction_extra,
+               transaction_sourceAmount,
+               transaction_currency,
+               transaction_id,
+               transaction_updatedAt,
+               transaction_sourceCurrencyFee,
+               transaction_amount,
+               transaction_paymentPlan,
+               transaction_business,
+               transaction_ip,
+               transaction_vat,
+               transaction_message,
+               transaction_userId,
+               transaction_settledAmount,
+               transaction_settledCurrency,
+               transaction_cardUsed,
+               transaction_gateRef,
+               transaction_splitStatus,
+               transaction_narration,
+               transaction_failureReason,
+               transaction_rememberMe,
+               transaction_status,
+               customer_createdAt,
+               customer_phone,
+               customer_name,
+               customer_id,
+               customer_email,
+               customer_updatedAt,
+               transaction_txnId,
+               updatedAt,
+               is_processed,
+               rid
+        from tb_reconciliation_klasha
+        where rid = #{rid}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="ReconciliationKlashaMap">
+        select
+        amount, businessId, foreignCurrency, sourceCurrency, splitType, foreignAmount, settledSourceAmount,
+        settledStatus, currency, id, transaction_orderId, transaction_fee, transaction_channel,
+        transaction_chargedAmount, transaction_callBack, transaction_sourceCurrency, transaction_settlementRate,
+        transaction_tnxRef, transaction_paymentType, transaction_webhookSent, transaction_createdAt,
+        transaction_ktnxRef, transaction_gatewayCode, transaction_rate, transaction_provider,
+        transaction_sourceRemainingAmount, transaction_settlementReference, transaction_extra, transaction_sourceAmount,
+        transaction_currency, transaction_id, transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+        transaction_paymentPlan, transaction_business, transaction_ip, transaction_vat, transaction_message,
+        transaction_userId, transaction_settledAmount, transaction_settledCurrency, transaction_cardUsed,
+        transaction_gateRef, transaction_splitStatus, transaction_narration, transaction_failureReason,
+        transaction_rememberMe, transaction_status, customer_createdAt, customer_phone, customer_name, customer_id,
+        customer_email, customer_updatedAt, transaction_txnId, updatedAt, is_processed, rid
+        from tb_reconciliation_klasha
+        <where>
+            <if test="amount != null and amount != ''">
+                and amount = #{amount}
+            </if>
+            <if test="businessid != null and businessid != ''">
+                and businessId = #{businessid}
+            </if>
+            <if test="foreigncurrency != null and foreigncurrency != ''">
+                and foreignCurrency = #{foreigncurrency}
+            </if>
+            <if test="sourcecurrency != null and sourcecurrency != ''">
+                and sourceCurrency = #{sourcecurrency}
+            </if>
+            <if test="splittype != null and splittype != ''">
+                and splitType = #{splittype}
+            </if>
+            <if test="foreignamount != null and foreignamount != ''">
+                and foreignAmount = #{foreignamount}
+            </if>
+            <if test="settledsourceamount != null and settledsourceamount != ''">
+                and settledSourceAmount = #{settledsourceamount}
+            </if>
+            <if test="settledstatus != null and settledstatus != ''">
+                and settledStatus = #{settledstatus}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="transactionOrderid != null and transactionOrderid != ''">
+                and transaction_orderId = #{transactionOrderid}
+            </if>
+            <if test="transactionFee != null and transactionFee != ''">
+                and transaction_fee = #{transactionFee}
+            </if>
+            <if test="transactionChannel != null and transactionChannel != ''">
+                and transaction_channel = #{transactionChannel}
+            </if>
+            <if test="transactionChargedamount != null and transactionChargedamount != ''">
+                and transaction_chargedAmount = #{transactionChargedamount}
+            </if>
+            <if test="transactionCallback != null and transactionCallback != ''">
+                and transaction_callBack = #{transactionCallback}
+            </if>
+            <if test="transactionSourcecurrency != null and transactionSourcecurrency != ''">
+                and transaction_sourceCurrency = #{transactionSourcecurrency}
+            </if>
+            <if test="transactionSettlementrate != null and transactionSettlementrate != ''">
+                and transaction_settlementRate = #{transactionSettlementrate}
+            </if>
+            <if test="transactionTnxref != null and transactionTnxref != ''">
+                and transaction_tnxRef = #{transactionTnxref}
+            </if>
+            <if test="transactionPaymenttype != null and transactionPaymenttype != ''">
+                and transaction_paymentType = #{transactionPaymenttype}
+            </if>
+            <if test="transactionWebhooksent != null and transactionWebhooksent != ''">
+                and transaction_webhookSent = #{transactionWebhooksent}
+            </if>
+            <if test="transactionCreatedat != null and transactionCreatedat != ''">
+                and transaction_createdAt = #{transactionCreatedat}
+            </if>
+            <if test="transactionKtnxref != null and transactionKtnxref != ''">
+                and transaction_ktnxRef = #{transactionKtnxref}
+            </if>
+            <if test="transactionGatewaycode != null and transactionGatewaycode != ''">
+                and transaction_gatewayCode = #{transactionGatewaycode}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="transactionProvider != null and transactionProvider != ''">
+                and transaction_provider = #{transactionProvider}
+            </if>
+            <if test="transactionSourceremainingamount != null and transactionSourceremainingamount != ''">
+                and transaction_sourceRemainingAmount = #{transactionSourceremainingamount}
+            </if>
+            <if test="transactionSettlementreference != null and transactionSettlementreference != ''">
+                and transaction_settlementReference = #{transactionSettlementreference}
+            </if>
+            <if test="transactionExtra != null and transactionExtra != ''">
+                and transaction_extra = #{transactionExtra}
+            </if>
+            <if test="transactionSourceamount != null and transactionSourceamount != ''">
+                and transaction_sourceAmount = #{transactionSourceamount}
+            </if>
+            <if test="transactionCurrency != null and transactionCurrency != ''">
+                and transaction_currency = #{transactionCurrency}
+            </if>
+            <if test="transactionId != null and transactionId != ''">
+                and transaction_id = #{transactionId}
+            </if>
+            <if test="transactionUpdatedat != null and transactionUpdatedat != ''">
+                and transaction_updatedAt = #{transactionUpdatedat}
+            </if>
+            <if test="transactionSourcecurrencyfee != null and transactionSourcecurrencyfee != ''">
+                and transaction_sourceCurrencyFee = #{transactionSourcecurrencyfee}
+            </if>
+            <if test="transactionAmount != null and transactionAmount != ''">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="transactionPaymentplan != null and transactionPaymentplan != ''">
+                and transaction_paymentPlan = #{transactionPaymentplan}
+            </if>
+            <if test="transactionBusiness != null and transactionBusiness != ''">
+                and transaction_business = #{transactionBusiness}
+            </if>
+            <if test="transactionIp != null and transactionIp != ''">
+                and transaction_ip = #{transactionIp}
+            </if>
+            <if test="transactionVat != null and transactionVat != ''">
+                and transaction_vat = #{transactionVat}
+            </if>
+            <if test="transactionMessage != null and transactionMessage != ''">
+                and transaction_message = #{transactionMessage}
+            </if>
+            <if test="transactionUserid != null and transactionUserid != ''">
+                and transaction_userId = #{transactionUserid}
+            </if>
+            <if test="transactionSettledamount != null and transactionSettledamount != ''">
+                and transaction_settledAmount = #{transactionSettledamount}
+            </if>
+            <if test="transactionSettledcurrency != null and transactionSettledcurrency != ''">
+                and transaction_settledCurrency = #{transactionSettledcurrency}
+            </if>
+            <if test="transactionCardused != null and transactionCardused != ''">
+                and transaction_cardUsed = #{transactionCardused}
+            </if>
+            <if test="transactionGateref != null and transactionGateref != ''">
+                and transaction_gateRef = #{transactionGateref}
+            </if>
+            <if test="transactionSplitstatus != null and transactionSplitstatus != ''">
+                and transaction_splitStatus = #{transactionSplitstatus}
+            </if>
+            <if test="transactionNarration != null and transactionNarration != ''">
+                and transaction_narration = #{transactionNarration}
+            </if>
+            <if test="transactionFailurereason != null and transactionFailurereason != ''">
+                and transaction_failureReason = #{transactionFailurereason}
+            </if>
+            <if test="transactionRememberme != null and transactionRememberme != ''">
+                and transaction_rememberMe = #{transactionRememberme}
+            </if>
+            <if test="transactionStatus != null and transactionStatus != ''">
+                and transaction_status = #{transactionStatus}
+            </if>
+            <if test="customerCreatedat != null and customerCreatedat != ''">
+                and customer_createdAt = #{customerCreatedat}
+            </if>
+            <if test="customerPhone != null and customerPhone != ''">
+                and customer_phone = #{customerPhone}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="customerId != null and customerId != ''">
+                and customer_id = #{customerId}
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                and customer_email = #{customerEmail}
+            </if>
+            <if test="customerUpdatedat != null and customerUpdatedat != ''">
+                and customer_updatedAt = #{customerUpdatedat}
+            </if>
+            <if test="transactionTxnid != null and transactionTxnid != ''">
+                and transaction_txnId = #{transactionTxnid}
+            </if>
+            <if test="updatedat != null and updatedat != ''">
+                and updatedAt = #{updatedat}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="rid != null">
+                and rid = #{rid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="ReconciliationKlashaMap">
+        select
+        amount, businessId, foreignCurrency, sourceCurrency, splitType, foreignAmount, settledSourceAmount,
+        settledStatus, currency, id, transaction_orderId, transaction_fee, transaction_channel,
+        transaction_chargedAmount, transaction_callBack, transaction_sourceCurrency, transaction_settlementRate,
+        transaction_tnxRef, transaction_paymentType, transaction_webhookSent, transaction_createdAt,
+        transaction_ktnxRef, transaction_gatewayCode, transaction_rate, transaction_provider,
+        transaction_sourceRemainingAmount, transaction_settlementReference, transaction_extra, transaction_sourceAmount,
+        transaction_currency, transaction_id, transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+        transaction_paymentPlan, transaction_business, transaction_ip, transaction_vat, transaction_message,
+        transaction_userId, transaction_settledAmount, transaction_settledCurrency, transaction_cardUsed,
+        transaction_gateRef, transaction_splitStatus, transaction_narration, transaction_failureReason,
+        transaction_rememberMe, transaction_status, customer_createdAt, customer_phone, customer_name, customer_id,
+        customer_email, customer_updatedAt, transaction_txnId, updatedAt, is_processed, rid
+        from tb_reconciliation_klasha
+        <where>
+            <if test="amount != null and amount != ''">
+                and amount = #{amount}
+            </if>
+            <if test="businessid != null and businessid != ''">
+                and businessId = #{businessid}
+            </if>
+            <if test="foreigncurrency != null and foreigncurrency != ''">
+                and foreignCurrency = #{foreigncurrency}
+            </if>
+            <if test="sourcecurrency != null and sourcecurrency != ''">
+                and sourceCurrency = #{sourcecurrency}
+            </if>
+            <if test="splittype != null and splittype != ''">
+                and splitType = #{splittype}
+            </if>
+            <if test="foreignamount != null and foreignamount != ''">
+                and foreignAmount = #{foreignamount}
+            </if>
+            <if test="settledsourceamount != null and settledsourceamount != ''">
+                and settledSourceAmount = #{settledsourceamount}
+            </if>
+            <if test="settledstatus != null and settledstatus != ''">
+                and settledStatus = #{settledstatus}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="transactionOrderid != null and transactionOrderid != ''">
+                and transaction_orderId = #{transactionOrderid}
+            </if>
+            <if test="transactionFee != null and transactionFee != ''">
+                and transaction_fee = #{transactionFee}
+            </if>
+            <if test="transactionChannel != null and transactionChannel != ''">
+                and transaction_channel = #{transactionChannel}
+            </if>
+            <if test="transactionChargedamount != null and transactionChargedamount != ''">
+                and transaction_chargedAmount = #{transactionChargedamount}
+            </if>
+            <if test="transactionCallback != null and transactionCallback != ''">
+                and transaction_callBack = #{transactionCallback}
+            </if>
+            <if test="transactionSourcecurrency != null and transactionSourcecurrency != ''">
+                and transaction_sourceCurrency = #{transactionSourcecurrency}
+            </if>
+            <if test="transactionSettlementrate != null and transactionSettlementrate != ''">
+                and transaction_settlementRate = #{transactionSettlementrate}
+            </if>
+            <if test="transactionTnxref != null and transactionTnxref != ''">
+                and transaction_tnxRef = #{transactionTnxref}
+            </if>
+            <if test="transactionPaymenttype != null and transactionPaymenttype != ''">
+                and transaction_paymentType = #{transactionPaymenttype}
+            </if>
+            <if test="transactionWebhooksent != null and transactionWebhooksent != ''">
+                and transaction_webhookSent = #{transactionWebhooksent}
+            </if>
+            <if test="transactionCreatedat != null and transactionCreatedat != ''">
+                and transaction_createdAt = #{transactionCreatedat}
+            </if>
+            <if test="transactionKtnxref != null and transactionKtnxref != ''">
+                and transaction_ktnxRef = #{transactionKtnxref}
+            </if>
+            <if test="transactionGatewaycode != null and transactionGatewaycode != ''">
+                and transaction_gatewayCode = #{transactionGatewaycode}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="transactionProvider != null and transactionProvider != ''">
+                and transaction_provider = #{transactionProvider}
+            </if>
+            <if test="transactionSourceremainingamount != null and transactionSourceremainingamount != ''">
+                and transaction_sourceRemainingAmount = #{transactionSourceremainingamount}
+            </if>
+            <if test="transactionSettlementreference != null and transactionSettlementreference != ''">
+                and transaction_settlementReference = #{transactionSettlementreference}
+            </if>
+            <if test="transactionExtra != null and transactionExtra != ''">
+                and transaction_extra = #{transactionExtra}
+            </if>
+            <if test="transactionSourceamount != null and transactionSourceamount != ''">
+                and transaction_sourceAmount = #{transactionSourceamount}
+            </if>
+            <if test="transactionCurrency != null and transactionCurrency != ''">
+                and transaction_currency = #{transactionCurrency}
+            </if>
+            <if test="transactionId != null and transactionId != ''">
+                and transaction_id = #{transactionId}
+            </if>
+            <if test="transactionUpdatedat != null and transactionUpdatedat != ''">
+                and transaction_updatedAt = #{transactionUpdatedat}
+            </if>
+            <if test="transactionSourcecurrencyfee != null and transactionSourcecurrencyfee != ''">
+                and transaction_sourceCurrencyFee = #{transactionSourcecurrencyfee}
+            </if>
+            <if test="transactionAmount != null and transactionAmount != ''">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="transactionPaymentplan != null and transactionPaymentplan != ''">
+                and transaction_paymentPlan = #{transactionPaymentplan}
+            </if>
+            <if test="transactionBusiness != null and transactionBusiness != ''">
+                and transaction_business = #{transactionBusiness}
+            </if>
+            <if test="transactionIp != null and transactionIp != ''">
+                and transaction_ip = #{transactionIp}
+            </if>
+            <if test="transactionVat != null and transactionVat != ''">
+                and transaction_vat = #{transactionVat}
+            </if>
+            <if test="transactionMessage != null and transactionMessage != ''">
+                and transaction_message = #{transactionMessage}
+            </if>
+            <if test="transactionUserid != null and transactionUserid != ''">
+                and transaction_userId = #{transactionUserid}
+            </if>
+            <if test="transactionSettledamount != null and transactionSettledamount != ''">
+                and transaction_settledAmount = #{transactionSettledamount}
+            </if>
+            <if test="transactionSettledcurrency != null and transactionSettledcurrency != ''">
+                and transaction_settledCurrency = #{transactionSettledcurrency}
+            </if>
+            <if test="transactionCardused != null and transactionCardused != ''">
+                and transaction_cardUsed = #{transactionCardused}
+            </if>
+            <if test="transactionGateref != null and transactionGateref != ''">
+                and transaction_gateRef = #{transactionGateref}
+            </if>
+            <if test="transactionSplitstatus != null and transactionSplitstatus != ''">
+                and transaction_splitStatus = #{transactionSplitstatus}
+            </if>
+            <if test="transactionNarration != null and transactionNarration != ''">
+                and transaction_narration = #{transactionNarration}
+            </if>
+            <if test="transactionFailurereason != null and transactionFailurereason != ''">
+                and transaction_failureReason = #{transactionFailurereason}
+            </if>
+            <if test="transactionRememberme != null and transactionRememberme != ''">
+                and transaction_rememberMe = #{transactionRememberme}
+            </if>
+            <if test="transactionStatus != null and transactionStatus != ''">
+                and transaction_status = #{transactionStatus}
+            </if>
+            <if test="customerCreatedat != null and customerCreatedat != ''">
+                and customer_createdAt = #{customerCreatedat}
+            </if>
+            <if test="customerPhone != null and customerPhone != ''">
+                and customer_phone = #{customerPhone}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="customerId != null and customerId != ''">
+                and customer_id = #{customerId}
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                and customer_email = #{customerEmail}
+            </if>
+            <if test="customerUpdatedat != null and customerUpdatedat != ''">
+                and customer_updatedAt = #{customerUpdatedat}
+            </if>
+            <if test="transactionTxnid != null and transactionTxnid != ''">
+                and transaction_txnId = #{transactionTxnid}
+            </if>
+            <if test="updatedat != null and updatedat != ''">
+                and updatedAt = #{updatedat}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="rid != null">
+                and rid = #{rid}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="ReconciliationKlashaMap">
+        select
+        amount, businessId, foreignCurrency, sourceCurrency, splitType, foreignAmount, settledSourceAmount,
+        settledStatus, currency, id, transaction_orderId, transaction_fee, transaction_channel,
+        transaction_chargedAmount, transaction_callBack, transaction_sourceCurrency, transaction_settlementRate,
+        transaction_tnxRef, transaction_paymentType, transaction_webhookSent, transaction_createdAt,
+        transaction_ktnxRef, transaction_gatewayCode, transaction_rate, transaction_provider,
+        transaction_sourceRemainingAmount, transaction_settlementReference, transaction_extra, transaction_sourceAmount,
+        transaction_currency, transaction_id, transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+        transaction_paymentPlan, transaction_business, transaction_ip, transaction_vat, transaction_message,
+        transaction_userId, transaction_settledAmount, transaction_settledCurrency, transaction_cardUsed,
+        transaction_gateRef, transaction_splitStatus, transaction_narration, transaction_failureReason,
+        transaction_rememberMe, transaction_status, customer_createdAt, customer_phone, customer_name, customer_id,
+        customer_email, customer_updatedAt, transaction_txnId, updatedAt, is_processed, rid
+        from tb_reconciliation_klasha
+        <where>
+            <if test="amount != null and amount != ''">
+                and amount = #{amount}
+            </if>
+            <if test="businessid != null and businessid != ''">
+                and businessId = #{businessid}
+            </if>
+            <if test="foreigncurrency != null and foreigncurrency != ''">
+                and foreignCurrency = #{foreigncurrency}
+            </if>
+            <if test="sourcecurrency != null and sourcecurrency != ''">
+                and sourceCurrency = #{sourcecurrency}
+            </if>
+            <if test="splittype != null and splittype != ''">
+                and splitType = #{splittype}
+            </if>
+            <if test="foreignamount != null and foreignamount != ''">
+                and foreignAmount = #{foreignamount}
+            </if>
+            <if test="settledsourceamount != null and settledsourceamount != ''">
+                and settledSourceAmount = #{settledsourceamount}
+            </if>
+            <if test="settledstatus != null and settledstatus != ''">
+                and settledStatus = #{settledstatus}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="transactionOrderid != null and transactionOrderid != ''">
+                and transaction_orderId = #{transactionOrderid}
+            </if>
+            <if test="transactionFee != null and transactionFee != ''">
+                and transaction_fee = #{transactionFee}
+            </if>
+            <if test="transactionChannel != null and transactionChannel != ''">
+                and transaction_channel = #{transactionChannel}
+            </if>
+            <if test="transactionChargedamount != null and transactionChargedamount != ''">
+                and transaction_chargedAmount = #{transactionChargedamount}
+            </if>
+            <if test="transactionCallback != null and transactionCallback != ''">
+                and transaction_callBack = #{transactionCallback}
+            </if>
+            <if test="transactionSourcecurrency != null and transactionSourcecurrency != ''">
+                and transaction_sourceCurrency = #{transactionSourcecurrency}
+            </if>
+            <if test="transactionSettlementrate != null and transactionSettlementrate != ''">
+                and transaction_settlementRate = #{transactionSettlementrate}
+            </if>
+            <if test="transactionTnxref != null and transactionTnxref != ''">
+                and transaction_tnxRef = #{transactionTnxref}
+            </if>
+            <if test="transactionPaymenttype != null and transactionPaymenttype != ''">
+                and transaction_paymentType = #{transactionPaymenttype}
+            </if>
+            <if test="transactionWebhooksent != null and transactionWebhooksent != ''">
+                and transaction_webhookSent = #{transactionWebhooksent}
+            </if>
+            <if test="transactionCreatedat != null and transactionCreatedat != ''">
+                and transaction_createdAt = #{transactionCreatedat}
+            </if>
+            <if test="transactionKtnxref != null and transactionKtnxref != ''">
+                and transaction_ktnxRef = #{transactionKtnxref}
+            </if>
+            <if test="transactionGatewaycode != null and transactionGatewaycode != ''">
+                and transaction_gatewayCode = #{transactionGatewaycode}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="transactionProvider != null and transactionProvider != ''">
+                and transaction_provider = #{transactionProvider}
+            </if>
+            <if test="transactionSourceremainingamount != null and transactionSourceremainingamount != ''">
+                and transaction_sourceRemainingAmount = #{transactionSourceremainingamount}
+            </if>
+            <if test="transactionSettlementreference != null and transactionSettlementreference != ''">
+                and transaction_settlementReference = #{transactionSettlementreference}
+            </if>
+            <if test="transactionExtra != null and transactionExtra != ''">
+                and transaction_extra = #{transactionExtra}
+            </if>
+            <if test="transactionSourceamount != null and transactionSourceamount != ''">
+                and transaction_sourceAmount = #{transactionSourceamount}
+            </if>
+            <if test="transactionCurrency != null and transactionCurrency != ''">
+                and transaction_currency = #{transactionCurrency}
+            </if>
+            <if test="transactionId != null and transactionId != ''">
+                and transaction_id = #{transactionId}
+            </if>
+            <if test="transactionUpdatedat != null and transactionUpdatedat != ''">
+                and transaction_updatedAt = #{transactionUpdatedat}
+            </if>
+            <if test="transactionSourcecurrencyfee != null and transactionSourcecurrencyfee != ''">
+                and transaction_sourceCurrencyFee = #{transactionSourcecurrencyfee}
+            </if>
+            <if test="transactionAmount != null and transactionAmount != ''">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="transactionPaymentplan != null and transactionPaymentplan != ''">
+                and transaction_paymentPlan = #{transactionPaymentplan}
+            </if>
+            <if test="transactionBusiness != null and transactionBusiness != ''">
+                and transaction_business = #{transactionBusiness}
+            </if>
+            <if test="transactionIp != null and transactionIp != ''">
+                and transaction_ip = #{transactionIp}
+            </if>
+            <if test="transactionVat != null and transactionVat != ''">
+                and transaction_vat = #{transactionVat}
+            </if>
+            <if test="transactionMessage != null and transactionMessage != ''">
+                and transaction_message = #{transactionMessage}
+            </if>
+            <if test="transactionUserid != null and transactionUserid != ''">
+                and transaction_userId = #{transactionUserid}
+            </if>
+            <if test="transactionSettledamount != null and transactionSettledamount != ''">
+                and transaction_settledAmount = #{transactionSettledamount}
+            </if>
+            <if test="transactionSettledcurrency != null and transactionSettledcurrency != ''">
+                and transaction_settledCurrency = #{transactionSettledcurrency}
+            </if>
+            <if test="transactionCardused != null and transactionCardused != ''">
+                and transaction_cardUsed = #{transactionCardused}
+            </if>
+            <if test="transactionGateref != null and transactionGateref != ''">
+                and transaction_gateRef = #{transactionGateref}
+            </if>
+            <if test="transactionSplitstatus != null and transactionSplitstatus != ''">
+                and transaction_splitStatus = #{transactionSplitstatus}
+            </if>
+            <if test="transactionNarration != null and transactionNarration != ''">
+                and transaction_narration = #{transactionNarration}
+            </if>
+            <if test="transactionFailurereason != null and transactionFailurereason != ''">
+                and transaction_failureReason = #{transactionFailurereason}
+            </if>
+            <if test="transactionRememberme != null and transactionRememberme != ''">
+                and transaction_rememberMe = #{transactionRememberme}
+            </if>
+            <if test="transactionStatus != null and transactionStatus != ''">
+                and transaction_status = #{transactionStatus}
+            </if>
+            <if test="customerCreatedat != null and customerCreatedat != ''">
+                and customer_createdAt = #{customerCreatedat}
+            </if>
+            <if test="customerPhone != null and customerPhone != ''">
+                and customer_phone = #{customerPhone}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="customerId != null and customerId != ''">
+                and customer_id = #{customerId}
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                and customer_email = #{customerEmail}
+            </if>
+            <if test="customerUpdatedat != null and customerUpdatedat != ''">
+                and customer_updatedAt = #{customerUpdatedat}
+            </if>
+            <if test="transactionTxnid != null and transactionTxnid != ''">
+                and transaction_txnId = #{transactionTxnid}
+            </if>
+            <if test="updatedat != null and updatedat != ''">
+                and updatedAt = #{updatedat}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="rid != null">
+                and rid = #{rid}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_reconciliation_klasha
+        <where>
+            <if test="amount != null and amount != ''">
+                and amount = #{amount}
+            </if>
+            <if test="businessid != null and businessid != ''">
+                and businessId = #{businessid}
+            </if>
+            <if test="foreigncurrency != null and foreigncurrency != ''">
+                and foreignCurrency = #{foreigncurrency}
+            </if>
+            <if test="sourcecurrency != null and sourcecurrency != ''">
+                and sourceCurrency = #{sourcecurrency}
+            </if>
+            <if test="splittype != null and splittype != ''">
+                and splitType = #{splittype}
+            </if>
+            <if test="foreignamount != null and foreignamount != ''">
+                and foreignAmount = #{foreignamount}
+            </if>
+            <if test="settledsourceamount != null and settledsourceamount != ''">
+                and settledSourceAmount = #{settledsourceamount}
+            </if>
+            <if test="settledstatus != null and settledstatus != ''">
+                and settledStatus = #{settledstatus}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="transactionOrderid != null and transactionOrderid != ''">
+                and transaction_orderId = #{transactionOrderid}
+            </if>
+            <if test="transactionFee != null and transactionFee != ''">
+                and transaction_fee = #{transactionFee}
+            </if>
+            <if test="transactionChannel != null and transactionChannel != ''">
+                and transaction_channel = #{transactionChannel}
+            </if>
+            <if test="transactionChargedamount != null and transactionChargedamount != ''">
+                and transaction_chargedAmount = #{transactionChargedamount}
+            </if>
+            <if test="transactionCallback != null and transactionCallback != ''">
+                and transaction_callBack = #{transactionCallback}
+            </if>
+            <if test="transactionSourcecurrency != null and transactionSourcecurrency != ''">
+                and transaction_sourceCurrency = #{transactionSourcecurrency}
+            </if>
+            <if test="transactionSettlementrate != null and transactionSettlementrate != ''">
+                and transaction_settlementRate = #{transactionSettlementrate}
+            </if>
+            <if test="transactionTnxref != null and transactionTnxref != ''">
+                and transaction_tnxRef = #{transactionTnxref}
+            </if>
+            <if test="transactionPaymenttype != null and transactionPaymenttype != ''">
+                and transaction_paymentType = #{transactionPaymenttype}
+            </if>
+            <if test="transactionWebhooksent != null and transactionWebhooksent != ''">
+                and transaction_webhookSent = #{transactionWebhooksent}
+            </if>
+            <if test="transactionCreatedat != null and transactionCreatedat != ''">
+                and transaction_createdAt = #{transactionCreatedat}
+            </if>
+            <if test="transactionKtnxref != null and transactionKtnxref != ''">
+                and transaction_ktnxRef = #{transactionKtnxref}
+            </if>
+            <if test="transactionGatewaycode != null and transactionGatewaycode != ''">
+                and transaction_gatewayCode = #{transactionGatewaycode}
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                and transaction_rate = #{transactionRate}
+            </if>
+            <if test="transactionProvider != null and transactionProvider != ''">
+                and transaction_provider = #{transactionProvider}
+            </if>
+            <if test="transactionSourceremainingamount != null and transactionSourceremainingamount != ''">
+                and transaction_sourceRemainingAmount = #{transactionSourceremainingamount}
+            </if>
+            <if test="transactionSettlementreference != null and transactionSettlementreference != ''">
+                and transaction_settlementReference = #{transactionSettlementreference}
+            </if>
+            <if test="transactionExtra != null and transactionExtra != ''">
+                and transaction_extra = #{transactionExtra}
+            </if>
+            <if test="transactionSourceamount != null and transactionSourceamount != ''">
+                and transaction_sourceAmount = #{transactionSourceamount}
+            </if>
+            <if test="transactionCurrency != null and transactionCurrency != ''">
+                and transaction_currency = #{transactionCurrency}
+            </if>
+            <if test="transactionId != null and transactionId != ''">
+                and transaction_id = #{transactionId}
+            </if>
+            <if test="transactionUpdatedat != null and transactionUpdatedat != ''">
+                and transaction_updatedAt = #{transactionUpdatedat}
+            </if>
+            <if test="transactionSourcecurrencyfee != null and transactionSourcecurrencyfee != ''">
+                and transaction_sourceCurrencyFee = #{transactionSourcecurrencyfee}
+            </if>
+            <if test="transactionAmount != null and transactionAmount != ''">
+                and transaction_amount = #{transactionAmount}
+            </if>
+            <if test="transactionPaymentplan != null and transactionPaymentplan != ''">
+                and transaction_paymentPlan = #{transactionPaymentplan}
+            </if>
+            <if test="transactionBusiness != null and transactionBusiness != ''">
+                and transaction_business = #{transactionBusiness}
+            </if>
+            <if test="transactionIp != null and transactionIp != ''">
+                and transaction_ip = #{transactionIp}
+            </if>
+            <if test="transactionVat != null and transactionVat != ''">
+                and transaction_vat = #{transactionVat}
+            </if>
+            <if test="transactionMessage != null and transactionMessage != ''">
+                and transaction_message = #{transactionMessage}
+            </if>
+            <if test="transactionUserid != null and transactionUserid != ''">
+                and transaction_userId = #{transactionUserid}
+            </if>
+            <if test="transactionSettledamount != null and transactionSettledamount != ''">
+                and transaction_settledAmount = #{transactionSettledamount}
+            </if>
+            <if test="transactionSettledcurrency != null and transactionSettledcurrency != ''">
+                and transaction_settledCurrency = #{transactionSettledcurrency}
+            </if>
+            <if test="transactionCardused != null and transactionCardused != ''">
+                and transaction_cardUsed = #{transactionCardused}
+            </if>
+            <if test="transactionGateref != null and transactionGateref != ''">
+                and transaction_gateRef = #{transactionGateref}
+            </if>
+            <if test="transactionSplitstatus != null and transactionSplitstatus != ''">
+                and transaction_splitStatus = #{transactionSplitstatus}
+            </if>
+            <if test="transactionNarration != null and transactionNarration != ''">
+                and transaction_narration = #{transactionNarration}
+            </if>
+            <if test="transactionFailurereason != null and transactionFailurereason != ''">
+                and transaction_failureReason = #{transactionFailurereason}
+            </if>
+            <if test="transactionRememberme != null and transactionRememberme != ''">
+                and transaction_rememberMe = #{transactionRememberme}
+            </if>
+            <if test="transactionStatus != null and transactionStatus != ''">
+                and transaction_status = #{transactionStatus}
+            </if>
+            <if test="customerCreatedat != null and customerCreatedat != ''">
+                and customer_createdAt = #{customerCreatedat}
+            </if>
+            <if test="customerPhone != null and customerPhone != ''">
+                and customer_phone = #{customerPhone}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="customerId != null and customerId != ''">
+                and customer_id = #{customerId}
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                and customer_email = #{customerEmail}
+            </if>
+            <if test="customerUpdatedat != null and customerUpdatedat != ''">
+                and customer_updatedAt = #{customerUpdatedat}
+            </if>
+            <if test="transactionTxnid != null and transactionTxnid != ''">
+                and transaction_txnId = #{transactionTxnid}
+            </if>
+            <if test="updatedat != null and updatedat != ''">
+                and updatedAt = #{updatedat}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="rid != null">
+                and rid = #{rid}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="rid" useGeneratedKeys="true">
+        insert into tb_reconciliation_klasha(amount, businessId, foreignCurrency, sourceCurrency, splitType,
+                                             foreignAmount, settledSourceAmount, settledStatus, currency, id,
+                                             transaction_orderId, transaction_fee, transaction_channel,
+                                             transaction_chargedAmount, transaction_callBack,
+                                             transaction_sourceCurrency, transaction_settlementRate, transaction_tnxRef,
+                                             transaction_paymentType, transaction_webhookSent, transaction_createdAt,
+                                             transaction_ktnxRef, transaction_gatewayCode, transaction_rate,
+                                             transaction_provider, transaction_sourceRemainingAmount,
+                                             transaction_settlementReference, transaction_extra,
+                                             transaction_sourceAmount, transaction_currency, transaction_id,
+                                             transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+                                             transaction_paymentPlan, transaction_business, transaction_ip,
+                                             transaction_vat, transaction_message, transaction_userId,
+                                             transaction_settledAmount, transaction_settledCurrency,
+                                             transaction_cardUsed, transaction_gateRef, transaction_splitStatus,
+                                             transaction_narration, transaction_failureReason, transaction_rememberMe,
+                                             transaction_status, customer_createdAt, customer_phone, customer_name,
+                                             customer_id, customer_email, customer_updatedAt, transaction_txnId,
+                                             updatedAt, is_processed)
+        values (#{amount}, #{businessid}, #{foreigncurrency}, #{sourcecurrency}, #{splittype}, #{foreignamount},
+                #{settledsourceamount}, #{settledstatus}, #{currency}, #{id}, #{transactionOrderid}, #{transactionFee},
+                #{transactionChannel}, #{transactionChargedamount}, #{transactionCallback},
+                #{transactionSourcecurrency}, #{transactionSettlementrate}, #{transactionTnxref},
+                #{transactionPaymenttype}, #{transactionWebhooksent}, #{transactionCreatedat}, #{transactionKtnxref},
+                #{transactionGatewaycode}, #{transactionRate}, #{transactionProvider},
+                #{transactionSourceremainingamount}, #{transactionSettlementreference}, #{transactionExtra},
+                #{transactionSourceamount}, #{transactionCurrency}, #{transactionId}, #{transactionUpdatedat},
+                #{transactionSourcecurrencyfee}, #{transactionAmount}, #{transactionPaymentplan},
+                #{transactionBusiness}, #{transactionIp}, #{transactionVat}, #{transactionMessage},
+                #{transactionUserid}, #{transactionSettledamount}, #{transactionSettledcurrency},
+                #{transactionCardused}, #{transactionGateref}, #{transactionSplitstatus}, #{transactionNarration},
+                #{transactionFailurereason}, #{transactionRememberme}, #{transactionStatus}, #{customerCreatedat},
+                #{customerPhone}, #{customerName}, #{customerId}, #{customerEmail}, #{customerUpdatedat},
+                #{transactionTxnid}, #{updatedat}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="rid" useGeneratedKeys="true">
+        insert into tb_reconciliation_klasha(amount, businessId, foreignCurrency, sourceCurrency, splitType,
+        foreignAmount, settledSourceAmount, settledStatus, currency, id, transaction_orderId, transaction_fee,
+        transaction_channel, transaction_chargedAmount, transaction_callBack, transaction_sourceCurrency,
+        transaction_settlementRate, transaction_tnxRef, transaction_paymentType, transaction_webhookSent,
+        transaction_createdAt, transaction_ktnxRef, transaction_gatewayCode, transaction_rate, transaction_provider,
+        transaction_sourceRemainingAmount, transaction_settlementReference, transaction_extra, transaction_sourceAmount,
+        transaction_currency, transaction_id, transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+        transaction_paymentPlan, transaction_business, transaction_ip, transaction_vat, transaction_message,
+        transaction_userId, transaction_settledAmount, transaction_settledCurrency, transaction_cardUsed,
+        transaction_gateRef, transaction_splitStatus, transaction_narration, transaction_failureReason,
+        transaction_rememberMe, transaction_status, customer_createdAt, customer_phone, customer_name, customer_id,
+        customer_email, customer_updatedAt, transaction_txnId, updatedAt, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.amount}, #{entity.businessid}, #{entity.foreigncurrency}, #{entity.sourcecurrency},
+            #{entity.splittype}, #{entity.foreignamount}, #{entity.settledsourceamount}, #{entity.settledstatus},
+            #{entity.currency}, #{entity.id}, #{entity.transactionOrderid}, #{entity.transactionFee},
+            #{entity.transactionChannel}, #{entity.transactionChargedamount}, #{entity.transactionCallback},
+            #{entity.transactionSourcecurrency}, #{entity.transactionSettlementrate}, #{entity.transactionTnxref},
+            #{entity.transactionPaymenttype}, #{entity.transactionWebhooksent}, #{entity.transactionCreatedat},
+            #{entity.transactionKtnxref}, #{entity.transactionGatewaycode}, #{entity.transactionRate},
+            #{entity.transactionProvider}, #{entity.transactionSourceremainingamount},
+            #{entity.transactionSettlementreference}, #{entity.transactionExtra}, #{entity.transactionSourceamount},
+            #{entity.transactionCurrency}, #{entity.transactionId}, #{entity.transactionUpdatedat},
+            #{entity.transactionSourcecurrencyfee}, #{entity.transactionAmount}, #{entity.transactionPaymentplan},
+            #{entity.transactionBusiness}, #{entity.transactionIp}, #{entity.transactionVat},
+            #{entity.transactionMessage}, #{entity.transactionUserid}, #{entity.transactionSettledamount},
+            #{entity.transactionSettledcurrency}, #{entity.transactionCardused}, #{entity.transactionGateref},
+            #{entity.transactionSplitstatus}, #{entity.transactionNarration}, #{entity.transactionFailurereason},
+            #{entity.transactionRememberme}, #{entity.transactionStatus}, #{entity.customerCreatedat},
+            #{entity.customerPhone}, #{entity.customerName}, #{entity.customerId}, #{entity.customerEmail},
+            #{entity.customerUpdatedat}, #{entity.transactionTxnid}, #{entity.updatedat}, #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="rid" useGeneratedKeys="true">
+        insert into tb_reconciliation_klasha(amount, businessId, foreignCurrency, sourceCurrency, splitType,
+        foreignAmount, settledSourceAmount, settledStatus, currency, id, transaction_orderId, transaction_fee,
+        transaction_channel, transaction_chargedAmount, transaction_callBack, transaction_sourceCurrency,
+        transaction_settlementRate, transaction_tnxRef, transaction_paymentType, transaction_webhookSent,
+        transaction_createdAt, transaction_ktnxRef, transaction_gatewayCode, transaction_rate, transaction_provider,
+        transaction_sourceRemainingAmount, transaction_settlementReference, transaction_extra, transaction_sourceAmount,
+        transaction_currency, transaction_id, transaction_updatedAt, transaction_sourceCurrencyFee, transaction_amount,
+        transaction_paymentPlan, transaction_business, transaction_ip, transaction_vat, transaction_message,
+        transaction_userId, transaction_settledAmount, transaction_settledCurrency, transaction_cardUsed,
+        transaction_gateRef, transaction_splitStatus, transaction_narration, transaction_failureReason,
+        transaction_rememberMe, transaction_status, customer_createdAt, customer_phone, customer_name, customer_id,
+        customer_email, customer_updatedAt, transaction_txnId, updatedAt, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.amount}, #{entity.businessid}, #{entity.foreigncurrency}, #{entity.sourcecurrency},
+            #{entity.splittype}, #{entity.foreignamount}, #{entity.settledsourceamount}, #{entity.settledstatus},
+            #{entity.currency}, #{entity.id}, #{entity.transactionOrderid}, #{entity.transactionFee},
+            #{entity.transactionChannel}, #{entity.transactionChargedamount}, #{entity.transactionCallback},
+            #{entity.transactionSourcecurrency}, #{entity.transactionSettlementrate}, #{entity.transactionTnxref},
+            #{entity.transactionPaymenttype}, #{entity.transactionWebhooksent}, #{entity.transactionCreatedat},
+            #{entity.transactionKtnxref}, #{entity.transactionGatewaycode}, #{entity.transactionRate},
+            #{entity.transactionProvider}, #{entity.transactionSourceremainingamount},
+            #{entity.transactionSettlementreference}, #{entity.transactionExtra}, #{entity.transactionSourceamount},
+            #{entity.transactionCurrency}, #{entity.transactionId}, #{entity.transactionUpdatedat},
+            #{entity.transactionSourcecurrencyfee}, #{entity.transactionAmount}, #{entity.transactionPaymentplan},
+            #{entity.transactionBusiness}, #{entity.transactionIp}, #{entity.transactionVat},
+            #{entity.transactionMessage}, #{entity.transactionUserid}, #{entity.transactionSettledamount},
+            #{entity.transactionSettledcurrency}, #{entity.transactionCardused}, #{entity.transactionGateref},
+            #{entity.transactionSplitstatus}, #{entity.transactionNarration}, #{entity.transactionFailurereason},
+            #{entity.transactionRememberme}, #{entity.transactionStatus}, #{entity.customerCreatedat},
+            #{entity.customerPhone}, #{entity.customerName}, #{entity.customerId}, #{entity.customerEmail},
+            #{entity.customerUpdatedat}, #{entity.transactionTxnid}, #{entity.updatedat}, #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        amount = values(amount),
+        businessId = values(businessId),
+        foreignCurrency = values(foreignCurrency),
+        sourceCurrency = values(sourceCurrency),
+        splitType = values(splitType),
+        foreignAmount = values(foreignAmount),
+        settledSourceAmount = values(settledSourceAmount),
+        settledStatus = values(settledStatus),
+        currency = values(currency),
+        id = values(id),
+        transaction_orderId = values(transaction_orderId),
+        transaction_fee = values(transaction_fee),
+        transaction_channel = values(transaction_channel),
+        transaction_chargedAmount = values(transaction_chargedAmount),
+        transaction_callBack = values(transaction_callBack),
+        transaction_sourceCurrency = values(transaction_sourceCurrency),
+        transaction_settlementRate = values(transaction_settlementRate),
+        transaction_tnxRef = values(transaction_tnxRef),
+        transaction_paymentType = values(transaction_paymentType),
+        transaction_webhookSent = values(transaction_webhookSent),
+        transaction_createdAt = values(transaction_createdAt),
+        transaction_ktnxRef = values(transaction_ktnxRef),
+        transaction_gatewayCode = values(transaction_gatewayCode),
+        transaction_rate = values(transaction_rate),
+        transaction_provider = values(transaction_provider),
+        transaction_sourceRemainingAmount = values(transaction_sourceRemainingAmount),
+        transaction_settlementReference = values(transaction_settlementReference),
+        transaction_extra = values(transaction_extra),
+        transaction_sourceAmount = values(transaction_sourceAmount),
+        transaction_currency = values(transaction_currency),
+        transaction_id = values(transaction_id),
+        transaction_updatedAt = values(transaction_updatedAt),
+        transaction_sourceCurrencyFee = values(transaction_sourceCurrencyFee),
+        transaction_amount = values(transaction_amount),
+        transaction_paymentPlan = values(transaction_paymentPlan),
+        transaction_business = values(transaction_business),
+        transaction_ip = values(transaction_ip),
+        transaction_vat = values(transaction_vat),
+        transaction_message = values(transaction_message),
+        transaction_userId = values(transaction_userId),
+        transaction_settledAmount = values(transaction_settledAmount),
+        transaction_settledCurrency = values(transaction_settledCurrency),
+        transaction_cardUsed = values(transaction_cardUsed),
+        transaction_gateRef = values(transaction_gateRef),
+        transaction_splitStatus = values(transaction_splitStatus),
+        transaction_narration = values(transaction_narration),
+        transaction_failureReason = values(transaction_failureReason),
+        transaction_rememberMe = values(transaction_rememberMe),
+        transaction_status = values(transaction_status),
+        customer_createdAt = values(customer_createdAt),
+        customer_phone = values(customer_phone),
+        customer_name = values(customer_name),
+        customer_id = values(customer_id),
+        customer_email = values(customer_email),
+        customer_updatedAt = values(customer_updatedAt),
+        transaction_txnId = values(transaction_txnId),
+        updatedAt = values(updatedAt),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_reconciliation_klasha
+        <set>
+            <if test="amount != null and amount != ''">
+                amount = #{amount},
+            </if>
+            <if test="businessid != null and businessid != ''">
+                businessId = #{businessid},
+            </if>
+            <if test="foreigncurrency != null and foreigncurrency != ''">
+                foreignCurrency = #{foreigncurrency},
+            </if>
+            <if test="sourcecurrency != null and sourcecurrency != ''">
+                sourceCurrency = #{sourcecurrency},
+            </if>
+            <if test="splittype != null and splittype != ''">
+                splitType = #{splittype},
+            </if>
+            <if test="foreignamount != null and foreignamount != ''">
+                foreignAmount = #{foreignamount},
+            </if>
+            <if test="settledsourceamount != null and settledsourceamount != ''">
+                settledSourceAmount = #{settledsourceamount},
+            </if>
+            <if test="settledstatus != null and settledstatus != ''">
+                settledStatus = #{settledstatus},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="transactionOrderid != null and transactionOrderid != ''">
+                transaction_orderId = #{transactionOrderid},
+            </if>
+            <if test="transactionFee != null and transactionFee != ''">
+                transaction_fee = #{transactionFee},
+            </if>
+            <if test="transactionChannel != null and transactionChannel != ''">
+                transaction_channel = #{transactionChannel},
+            </if>
+            <if test="transactionChargedamount != null and transactionChargedamount != ''">
+                transaction_chargedAmount = #{transactionChargedamount},
+            </if>
+            <if test="transactionCallback != null and transactionCallback != ''">
+                transaction_callBack = #{transactionCallback},
+            </if>
+            <if test="transactionSourcecurrency != null and transactionSourcecurrency != ''">
+                transaction_sourceCurrency = #{transactionSourcecurrency},
+            </if>
+            <if test="transactionSettlementrate != null and transactionSettlementrate != ''">
+                transaction_settlementRate = #{transactionSettlementrate},
+            </if>
+            <if test="transactionTnxref != null and transactionTnxref != ''">
+                transaction_tnxRef = #{transactionTnxref},
+            </if>
+            <if test="transactionPaymenttype != null and transactionPaymenttype != ''">
+                transaction_paymentType = #{transactionPaymenttype},
+            </if>
+            <if test="transactionWebhooksent != null and transactionWebhooksent != ''">
+                transaction_webhookSent = #{transactionWebhooksent},
+            </if>
+            <if test="transactionCreatedat != null and transactionCreatedat != ''">
+                transaction_createdAt = #{transactionCreatedat},
+            </if>
+            <if test="transactionKtnxref != null and transactionKtnxref != ''">
+                transaction_ktnxRef = #{transactionKtnxref},
+            </if>
+            <if test="transactionGatewaycode != null and transactionGatewaycode != ''">
+                transaction_gatewayCode = #{transactionGatewaycode},
+            </if>
+            <if test="transactionRate != null and transactionRate != ''">
+                transaction_rate = #{transactionRate},
+            </if>
+            <if test="transactionProvider != null and transactionProvider != ''">
+                transaction_provider = #{transactionProvider},
+            </if>
+            <if test="transactionSourceremainingamount != null and transactionSourceremainingamount != ''">
+                transaction_sourceRemainingAmount = #{transactionSourceremainingamount},
+            </if>
+            <if test="transactionSettlementreference != null and transactionSettlementreference != ''">
+                transaction_settlementReference = #{transactionSettlementreference},
+            </if>
+            <if test="transactionExtra != null and transactionExtra != ''">
+                transaction_extra = #{transactionExtra},
+            </if>
+            <if test="transactionSourceamount != null and transactionSourceamount != ''">
+                transaction_sourceAmount = #{transactionSourceamount},
+            </if>
+            <if test="transactionCurrency != null and transactionCurrency != ''">
+                transaction_currency = #{transactionCurrency},
+            </if>
+            <if test="transactionId != null and transactionId != ''">
+                transaction_id = #{transactionId},
+            </if>
+            <if test="transactionUpdatedat != null and transactionUpdatedat != ''">
+                transaction_updatedAt = #{transactionUpdatedat},
+            </if>
+            <if test="transactionSourcecurrencyfee != null and transactionSourcecurrencyfee != ''">
+                transaction_sourceCurrencyFee = #{transactionSourcecurrencyfee},
+            </if>
+            <if test="transactionAmount != null and transactionAmount != ''">
+                transaction_amount = #{transactionAmount},
+            </if>
+            <if test="transactionPaymentplan != null and transactionPaymentplan != ''">
+                transaction_paymentPlan = #{transactionPaymentplan},
+            </if>
+            <if test="transactionBusiness != null and transactionBusiness != ''">
+                transaction_business = #{transactionBusiness},
+            </if>
+            <if test="transactionIp != null and transactionIp != ''">
+                transaction_ip = #{transactionIp},
+            </if>
+            <if test="transactionVat != null and transactionVat != ''">
+                transaction_vat = #{transactionVat},
+            </if>
+            <if test="transactionMessage != null and transactionMessage != ''">
+                transaction_message = #{transactionMessage},
+            </if>
+            <if test="transactionUserid != null and transactionUserid != ''">
+                transaction_userId = #{transactionUserid},
+            </if>
+            <if test="transactionSettledamount != null and transactionSettledamount != ''">
+                transaction_settledAmount = #{transactionSettledamount},
+            </if>
+            <if test="transactionSettledcurrency != null and transactionSettledcurrency != ''">
+                transaction_settledCurrency = #{transactionSettledcurrency},
+            </if>
+            <if test="transactionCardused != null and transactionCardused != ''">
+                transaction_cardUsed = #{transactionCardused},
+            </if>
+            <if test="transactionGateref != null and transactionGateref != ''">
+                transaction_gateRef = #{transactionGateref},
+            </if>
+            <if test="transactionSplitstatus != null and transactionSplitstatus != ''">
+                transaction_splitStatus = #{transactionSplitstatus},
+            </if>
+            <if test="transactionNarration != null and transactionNarration != ''">
+                transaction_narration = #{transactionNarration},
+            </if>
+            <if test="transactionFailurereason != null and transactionFailurereason != ''">
+                transaction_failureReason = #{transactionFailurereason},
+            </if>
+            <if test="transactionRememberme != null and transactionRememberme != ''">
+                transaction_rememberMe = #{transactionRememberme},
+            </if>
+            <if test="transactionStatus != null and transactionStatus != ''">
+                transaction_status = #{transactionStatus},
+            </if>
+            <if test="customerCreatedat != null and customerCreatedat != ''">
+                customer_createdAt = #{customerCreatedat},
+            </if>
+            <if test="customerPhone != null and customerPhone != ''">
+                customer_phone = #{customerPhone},
+            </if>
+            <if test="customerName != null and customerName != ''">
+                customer_name = #{customerName},
+            </if>
+            <if test="customerId != null and customerId != ''">
+                customer_id = #{customerId},
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                customer_email = #{customerEmail},
+            </if>
+            <if test="customerUpdatedat != null and customerUpdatedat != ''">
+                customer_updatedAt = #{customerUpdatedat},
+            </if>
+            <if test="transactionTxnid != null and transactionTxnid != ''">
+                transaction_txnId = #{transactionTxnid},
+            </if>
+            <if test="updatedat != null and updatedat != ''">
+                updatedAt = #{updatedat},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where rid = #{rid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_reconciliation_klasha
+        where rid = #{rid}
+    </delete>
+
+</mapper>
+

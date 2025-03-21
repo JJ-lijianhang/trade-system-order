@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.KgpPaymentDetailMapper">
+
+    <resultMap type="com.futurebank.order.entity.KgpPaymentDetailEntity" id="KgpPaymentDetailMap">
+        <result property="detail" column="detail"/>
+        <result property="projectid" column="projectID"/>
+        <result property="projectname" column="projectName"/>
+        <result property="partnerid" column="partnerID"/>
+        <result property="partnermerchantid" column="partnerMerchantID"/>
+        <result property="partnershopid" column="partnerShopID"/>
+        <result property="partnerorderid" column="partnerOrderID"/>
+        <result property="partnerpaymentid" column="partnerPaymentID"/>
+        <result property="sourceoffundtype" column="sourceOfFundType"/>
+        <result property="sourceoffundmerchantid" column="sourceOfFundMerchantID"/>
+        <result property="sourceoffundshopid" column="sourceOfFundShopID"/>
+        <result property="amount" column="Amount"/>
+        <result property="currencycode" column="currencyCode"/>
+        <result property="paymentstatus" column="paymentStatus"/>
+        <result property="createdatetime" column="createDateTime"/>
+        <result property="paymentdatetime" column="paymentDateTime"/>
+        <result property="partnerpaymentdate" column="partnerPaymentDate"/>
+        <result property="paymentprocessingdate" column="paymentProcessingDate"/>
+        <result property="cashid" column="cashID"/>
+        <result property="partnersof" column="partnerSOF"/>
+        <result property="cardbrand" column="cardBrand"/>
+        <result property="issuerbank" column="issuerBank"/>
+        <result property="cardmasking" column="cardMasking"/>
+        <result property="transactionaccount" column="transactionAccount"/>
+        <result property="approvalcode" column="approvalCode"/>
+        <result property="buyername" column="buyerName"/>
+        <result property="paymentfeeabsorber" column="paymentFeeAbsorber"/>
+        <result property="paymentfeecollectiontype" column="paymentFeeCollectionType"/>
+        <result property="paymentfeeamount" column="paymentFeeAmount"/>
+        <result property="paymentvatamount" column="paymentVATAmount"/>
+        <result property="paymentfeenetamount" column="paymentFeeNetAmount"/>
+        <result property="paymentwhtamount" column="paymentWHTAmount"/>
+        <result property="feecurrencycode" column="feeCurrencyCode"/>
+        <result property="reconcileflag" column="reconcileFlag"/>
+        <result property="refundflag" column="refundFlag"/>
+        <result property="payoutstatus" column="payoutStatus"/>
+        <result property="payersourceoffund" column="payerSourceOfFund"/>
+        <result property="id" column="id"/>
+        <result property="isProcessed" column="is_processed"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="KgpPaymentDetailMap">
+        select detail,
+               projectID,
+               projectName,
+               partnerID,
+               partnerMerchantID,
+               partnerShopID,
+               partnerOrderID,
+               partnerPaymentID,
+               sourceOfFundType,
+               sourceOfFundMerchantID,
+               sourceOfFundShopID,
+               Amount,
+               currencyCode,
+               paymentStatus,
+               createDateTime,
+               paymentDateTime,
+               partnerPaymentDate,
+               paymentProcessingDate,
+               cashID,
+               partnerSOF,
+               cardBrand,
+               issuerBank,
+               cardMasking,
+               transactionAccount,
+               approvalCode,
+               buyerName,
+               paymentFeeAbsorber,
+               paymentFeeCollectionType,
+               paymentFeeAmount,
+               paymentVATAmount,
+               paymentFeeNetAmount,
+               paymentWHTAmount,
+               feeCurrencyCode,
+               reconcileFlag,
+               refundFlag,
+               payoutStatus,
+               payerSourceOfFund,
+               id,
+               is_processed,
+               created_at,
+               update_at
+        from tb_kgp_payment_detail
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="KgpPaymentDetailMap">
+        select
+        detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID, partnerOrderID, partnerPaymentID,
+        sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, Amount, currencyCode, paymentStatus,
+        createDateTime, paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID, partnerSOF, cardBrand,
+        issuerBank, cardMasking, transactionAccount, approvalCode, buyerName, paymentFeeAbsorber,
+        paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+        feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund, id, is_processed, created_at,
+        update_at
+        from tb_kgp_payment_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="projectname != null and projectname != ''">
+                and projectName = #{projectname}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and Amount = #{amount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentstatus != null and paymentstatus != ''">
+                and paymentStatus = #{paymentstatus}
+            </if>
+            <if test="createdatetime != null and createdatetime != ''">
+                and createDateTime = #{createdatetime}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="partnerpaymentdate != null and partnerpaymentdate != ''">
+                and partnerPaymentDate = #{partnerpaymentdate}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="cashid != null and cashid != ''">
+                and cashID = #{cashid}
+            </if>
+            <if test="partnersof != null and partnersof != ''">
+                and partnerSOF = #{partnersof}
+            </if>
+            <if test="cardbrand != null and cardbrand != ''">
+                and cardBrand = #{cardbrand}
+            </if>
+            <if test="issuerbank != null and issuerbank != ''">
+                and issuerBank = #{issuerbank}
+            </if>
+            <if test="cardmasking != null and cardmasking != ''">
+                and cardMasking = #{cardmasking}
+            </if>
+            <if test="transactionaccount != null and transactionaccount != ''">
+                and transactionAccount = #{transactionaccount}
+            </if>
+            <if test="approvalcode != null and approvalcode != ''">
+                and approvalCode = #{approvalcode}
+            </if>
+            <if test="buyername != null and buyername != ''">
+                and buyerName = #{buyername}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="feecurrencycode != null and feecurrencycode != ''">
+                and feeCurrencyCode = #{feecurrencycode}
+            </if>
+            <if test="reconcileflag != null and reconcileflag != ''">
+                and reconcileFlag = #{reconcileflag}
+            </if>
+            <if test="refundflag != null and refundflag != ''">
+                and refundFlag = #{refundflag}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="KgpPaymentDetailMap">
+        select
+        detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID, partnerOrderID, partnerPaymentID,
+        sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, Amount, currencyCode, paymentStatus,
+        createDateTime, paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID, partnerSOF, cardBrand,
+        issuerBank, cardMasking, transactionAccount, approvalCode, buyerName, paymentFeeAbsorber,
+        paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+        feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund, id, is_processed, created_at,
+        update_at
+        from tb_kgp_payment_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="projectname != null and projectname != ''">
+                and projectName = #{projectname}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and Amount = #{amount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentstatus != null and paymentstatus != ''">
+                and paymentStatus = #{paymentstatus}
+            </if>
+            <if test="createdatetime != null and createdatetime != ''">
+                and createDateTime = #{createdatetime}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="partnerpaymentdate != null and partnerpaymentdate != ''">
+                and partnerPaymentDate = #{partnerpaymentdate}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="cashid != null and cashid != ''">
+                and cashID = #{cashid}
+            </if>
+            <if test="partnersof != null and partnersof != ''">
+                and partnerSOF = #{partnersof}
+            </if>
+            <if test="cardbrand != null and cardbrand != ''">
+                and cardBrand = #{cardbrand}
+            </if>
+            <if test="issuerbank != null and issuerbank != ''">
+                and issuerBank = #{issuerbank}
+            </if>
+            <if test="cardmasking != null and cardmasking != ''">
+                and cardMasking = #{cardmasking}
+            </if>
+            <if test="transactionaccount != null and transactionaccount != ''">
+                and transactionAccount = #{transactionaccount}
+            </if>
+            <if test="approvalcode != null and approvalcode != ''">
+                and approvalCode = #{approvalcode}
+            </if>
+            <if test="buyername != null and buyername != ''">
+                and buyerName = #{buyername}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="feecurrencycode != null and feecurrencycode != ''">
+                and feeCurrencyCode = #{feecurrencycode}
+            </if>
+            <if test="reconcileflag != null and reconcileflag != ''">
+                and reconcileFlag = #{reconcileflag}
+            </if>
+            <if test="refundflag != null and refundflag != ''">
+                and refundFlag = #{refundflag}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="KgpPaymentDetailMap">
+        select
+        detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID, partnerOrderID, partnerPaymentID,
+        sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, Amount, currencyCode, paymentStatus,
+        createDateTime, paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID, partnerSOF, cardBrand,
+        issuerBank, cardMasking, transactionAccount, approvalCode, buyerName, paymentFeeAbsorber,
+        paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+        feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund, id, is_processed, created_at,
+        update_at
+        from tb_kgp_payment_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="projectname != null and projectname != ''">
+                and projectName = #{projectname}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and Amount = #{amount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentstatus != null and paymentstatus != ''">
+                and paymentStatus = #{paymentstatus}
+            </if>
+            <if test="createdatetime != null and createdatetime != ''">
+                and createDateTime = #{createdatetime}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="partnerpaymentdate != null and partnerpaymentdate != ''">
+                and partnerPaymentDate = #{partnerpaymentdate}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="cashid != null and cashid != ''">
+                and cashID = #{cashid}
+            </if>
+            <if test="partnersof != null and partnersof != ''">
+                and partnerSOF = #{partnersof}
+            </if>
+            <if test="cardbrand != null and cardbrand != ''">
+                and cardBrand = #{cardbrand}
+            </if>
+            <if test="issuerbank != null and issuerbank != ''">
+                and issuerBank = #{issuerbank}
+            </if>
+            <if test="cardmasking != null and cardmasking != ''">
+                and cardMasking = #{cardmasking}
+            </if>
+            <if test="transactionaccount != null and transactionaccount != ''">
+                and transactionAccount = #{transactionaccount}
+            </if>
+            <if test="approvalcode != null and approvalcode != ''">
+                and approvalCode = #{approvalcode}
+            </if>
+            <if test="buyername != null and buyername != ''">
+                and buyerName = #{buyername}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="feecurrencycode != null and feecurrencycode != ''">
+                and feeCurrencyCode = #{feecurrencycode}
+            </if>
+            <if test="reconcileflag != null and reconcileflag != ''">
+                and reconcileFlag = #{reconcileflag}
+            </if>
+            <if test="refundflag != null and refundflag != ''">
+                and refundFlag = #{refundflag}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_kgp_payment_detail
+        <where>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="projectid != null and projectid != ''">
+                and projectID = #{projectid}
+            </if>
+            <if test="projectname != null and projectname != ''">
+                and projectName = #{projectname}
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                and partnerID = #{partnerid}
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                and partnerMerchantID = #{partnermerchantid}
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                and partnerShopID = #{partnershopid}
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                and partnerOrderID = #{partnerorderid}
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                and partnerPaymentID = #{partnerpaymentid}
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                and sourceOfFundType = #{sourceoffundtype}
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                and sourceOfFundMerchantID = #{sourceoffundmerchantid}
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                and sourceOfFundShopID = #{sourceoffundshopid}
+            </if>
+            <if test="amount != null and amount != ''">
+                and Amount = #{amount}
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                and currencyCode = #{currencycode}
+            </if>
+            <if test="paymentstatus != null and paymentstatus != ''">
+                and paymentStatus = #{paymentstatus}
+            </if>
+            <if test="createdatetime != null and createdatetime != ''">
+                and createDateTime = #{createdatetime}
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                and paymentDateTime = #{paymentdatetime}
+            </if>
+            <if test="partnerpaymentdate != null and partnerpaymentdate != ''">
+                and partnerPaymentDate = #{partnerpaymentdate}
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                and paymentProcessingDate = #{paymentprocessingdate}
+            </if>
+            <if test="cashid != null and cashid != ''">
+                and cashID = #{cashid}
+            </if>
+            <if test="partnersof != null and partnersof != ''">
+                and partnerSOF = #{partnersof}
+            </if>
+            <if test="cardbrand != null and cardbrand != ''">
+                and cardBrand = #{cardbrand}
+            </if>
+            <if test="issuerbank != null and issuerbank != ''">
+                and issuerBank = #{issuerbank}
+            </if>
+            <if test="cardmasking != null and cardmasking != ''">
+                and cardMasking = #{cardmasking}
+            </if>
+            <if test="transactionaccount != null and transactionaccount != ''">
+                and transactionAccount = #{transactionaccount}
+            </if>
+            <if test="approvalcode != null and approvalcode != ''">
+                and approvalCode = #{approvalcode}
+            </if>
+            <if test="buyername != null and buyername != ''">
+                and buyerName = #{buyername}
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                and paymentFeeAbsorber = #{paymentfeeabsorber}
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                and paymentFeeCollectionType = #{paymentfeecollectiontype}
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                and paymentFeeAmount = #{paymentfeeamount}
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                and paymentVATAmount = #{paymentvatamount}
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                and paymentFeeNetAmount = #{paymentfeenetamount}
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                and paymentWHTAmount = #{paymentwhtamount}
+            </if>
+            <if test="feecurrencycode != null and feecurrencycode != ''">
+                and feeCurrencyCode = #{feecurrencycode}
+            </if>
+            <if test="reconcileflag != null and reconcileflag != ''">
+                and reconcileFlag = #{reconcileflag}
+            </if>
+            <if test="refundflag != null and refundflag != ''">
+                and refundFlag = #{refundflag}
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                and payoutStatus = #{payoutstatus}
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                and payerSourceOfFund = #{payersourceoffund}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_payment_detail(detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID,
+                                          partnerOrderID, partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID,
+                                          sourceOfFundShopID, Amount, currencyCode, paymentStatus, createDateTime,
+                                          paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID,
+                                          partnerSOF, cardBrand, issuerBank, cardMasking, transactionAccount,
+                                          approvalCode, buyerName, paymentFeeAbsorber, paymentFeeCollectionType,
+                                          paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+                                          feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund,
+                                          is_processed, created_at, update_at)
+        values (#{detail}, #{projectid}, #{projectname}, #{partnerid}, #{partnermerchantid}, #{partnershopid},
+                #{partnerorderid}, #{partnerpaymentid}, #{sourceoffundtype}, #{sourceoffundmerchantid},
+                #{sourceoffundshopid}, #{amount}, #{currencycode}, #{paymentstatus}, #{createdatetime},
+                #{paymentdatetime}, #{partnerpaymentdate}, #{paymentprocessingdate}, #{cashid}, #{partnersof},
+                #{cardbrand}, #{issuerbank}, #{cardmasking}, #{transactionaccount}, #{approvalcode}, #{buyername},
+                #{paymentfeeabsorber}, #{paymentfeecollectiontype}, #{paymentfeeamount}, #{paymentvatamount},
+                #{paymentfeenetamount}, #{paymentwhtamount}, #{feecurrencycode}, #{reconcileflag}, #{refundflag},
+                #{payoutstatus}, #{payersourceoffund}, #{isProcessed}, #{createdAt}, #{updateAt})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_payment_detail(detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID,
+        partnerOrderID, partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, Amount,
+        currencyCode, paymentStatus, createDateTime, paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID,
+        partnerSOF, cardBrand, issuerBank, cardMasking, transactionAccount, approvalCode, buyerName, paymentFeeAbsorber,
+        paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+        feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund, is_processed, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.detail}, #{entity.projectid}, #{entity.projectname}, #{entity.partnerid},
+            #{entity.partnermerchantid}, #{entity.partnershopid}, #{entity.partnerorderid}, #{entity.partnerpaymentid},
+            #{entity.sourceoffundtype}, #{entity.sourceoffundmerchantid}, #{entity.sourceoffundshopid},
+            #{entity.amount}, #{entity.currencycode}, #{entity.paymentstatus}, #{entity.createdatetime},
+            #{entity.paymentdatetime}, #{entity.partnerpaymentdate}, #{entity.paymentprocessingdate}, #{entity.cashid},
+            #{entity.partnersof}, #{entity.cardbrand}, #{entity.issuerbank}, #{entity.cardmasking},
+            #{entity.transactionaccount}, #{entity.approvalcode}, #{entity.buyername}, #{entity.paymentfeeabsorber},
+            #{entity.paymentfeecollectiontype}, #{entity.paymentfeeamount}, #{entity.paymentvatamount},
+            #{entity.paymentfeenetamount}, #{entity.paymentwhtamount}, #{entity.feecurrencycode},
+            #{entity.reconcileflag}, #{entity.refundflag}, #{entity.payoutstatus}, #{entity.payersourceoffund},
+            #{entity.isProcessed}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_kgp_payment_detail(detail, projectID, projectName, partnerID, partnerMerchantID, partnerShopID,
+        partnerOrderID, partnerPaymentID, sourceOfFundType, sourceOfFundMerchantID, sourceOfFundShopID, Amount,
+        currencyCode, paymentStatus, createDateTime, paymentDateTime, partnerPaymentDate, paymentProcessingDate, cashID,
+        partnerSOF, cardBrand, issuerBank, cardMasking, transactionAccount, approvalCode, buyerName, paymentFeeAbsorber,
+        paymentFeeCollectionType, paymentFeeAmount, paymentVATAmount, paymentFeeNetAmount, paymentWHTAmount,
+        feeCurrencyCode, reconcileFlag, refundFlag, payoutStatus, payerSourceOfFund, is_processed, created_at,
+        update_at)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.detail}, #{entity.projectid}, #{entity.projectname}, #{entity.partnerid},
+            #{entity.partnermerchantid}, #{entity.partnershopid}, #{entity.partnerorderid}, #{entity.partnerpaymentid},
+            #{entity.sourceoffundtype}, #{entity.sourceoffundmerchantid}, #{entity.sourceoffundshopid},
+            #{entity.amount}, #{entity.currencycode}, #{entity.paymentstatus}, #{entity.createdatetime},
+            #{entity.paymentdatetime}, #{entity.partnerpaymentdate}, #{entity.paymentprocessingdate}, #{entity.cashid},
+            #{entity.partnersof}, #{entity.cardbrand}, #{entity.issuerbank}, #{entity.cardmasking},
+            #{entity.transactionaccount}, #{entity.approvalcode}, #{entity.buyername}, #{entity.paymentfeeabsorber},
+            #{entity.paymentfeecollectiontype}, #{entity.paymentfeeamount}, #{entity.paymentvatamount},
+            #{entity.paymentfeenetamount}, #{entity.paymentwhtamount}, #{entity.feecurrencycode},
+            #{entity.reconcileflag}, #{entity.refundflag}, #{entity.payoutstatus}, #{entity.payersourceoffund},
+            #{entity.isProcessed}, #{entity.createdAt}, #{entity.updateAt})
+        </foreach>
+        on duplicate key update
+        detail = values(detail),
+        projectID = values(projectID),
+        projectName = values(projectName),
+        partnerID = values(partnerID),
+        partnerMerchantID = values(partnerMerchantID),
+        partnerShopID = values(partnerShopID),
+        partnerOrderID = values(partnerOrderID),
+        partnerPaymentID = values(partnerPaymentID),
+        sourceOfFundType = values(sourceOfFundType),
+        sourceOfFundMerchantID = values(sourceOfFundMerchantID),
+        sourceOfFundShopID = values(sourceOfFundShopID),
+        Amount = values(Amount),
+        currencyCode = values(currencyCode),
+        paymentStatus = values(paymentStatus),
+        createDateTime = values(createDateTime),
+        paymentDateTime = values(paymentDateTime),
+        partnerPaymentDate = values(partnerPaymentDate),
+        paymentProcessingDate = values(paymentProcessingDate),
+        cashID = values(cashID),
+        partnerSOF = values(partnerSOF),
+        cardBrand = values(cardBrand),
+        issuerBank = values(issuerBank),
+        cardMasking = values(cardMasking),
+        transactionAccount = values(transactionAccount),
+        approvalCode = values(approvalCode),
+        buyerName = values(buyerName),
+        paymentFeeAbsorber = values(paymentFeeAbsorber),
+        paymentFeeCollectionType = values(paymentFeeCollectionType),
+        paymentFeeAmount = values(paymentFeeAmount),
+        paymentVATAmount = values(paymentVATAmount),
+        paymentFeeNetAmount = values(paymentFeeNetAmount),
+        paymentWHTAmount = values(paymentWHTAmount),
+        feeCurrencyCode = values(feeCurrencyCode),
+        reconcileFlag = values(reconcileFlag),
+        refundFlag = values(refundFlag),
+        payoutStatus = values(payoutStatus),
+        payerSourceOfFund = values(payerSourceOfFund),
+        is_processed = values(is_processed),
+        created_at = values(created_at),
+        update_at = values(update_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_kgp_payment_detail
+        <set>
+            <if test="detail != null and detail != ''">
+                detail = #{detail},
+            </if>
+            <if test="projectid != null and projectid != ''">
+                projectID = #{projectid},
+            </if>
+            <if test="projectname != null and projectname != ''">
+                projectName = #{projectname},
+            </if>
+            <if test="partnerid != null and partnerid != ''">
+                partnerID = #{partnerid},
+            </if>
+            <if test="partnermerchantid != null and partnermerchantid != ''">
+                partnerMerchantID = #{partnermerchantid},
+            </if>
+            <if test="partnershopid != null and partnershopid != ''">
+                partnerShopID = #{partnershopid},
+            </if>
+            <if test="partnerorderid != null and partnerorderid != ''">
+                partnerOrderID = #{partnerorderid},
+            </if>
+            <if test="partnerpaymentid != null and partnerpaymentid != ''">
+                partnerPaymentID = #{partnerpaymentid},
+            </if>
+            <if test="sourceoffundtype != null and sourceoffundtype != ''">
+                sourceOfFundType = #{sourceoffundtype},
+            </if>
+            <if test="sourceoffundmerchantid != null and sourceoffundmerchantid != ''">
+                sourceOfFundMerchantID = #{sourceoffundmerchantid},
+            </if>
+            <if test="sourceoffundshopid != null and sourceoffundshopid != ''">
+                sourceOfFundShopID = #{sourceoffundshopid},
+            </if>
+            <if test="amount != null and amount != ''">
+                Amount = #{amount},
+            </if>
+            <if test="currencycode != null and currencycode != ''">
+                currencyCode = #{currencycode},
+            </if>
+            <if test="paymentstatus != null and paymentstatus != ''">
+                paymentStatus = #{paymentstatus},
+            </if>
+            <if test="createdatetime != null and createdatetime != ''">
+                createDateTime = #{createdatetime},
+            </if>
+            <if test="paymentdatetime != null and paymentdatetime != ''">
+                paymentDateTime = #{paymentdatetime},
+            </if>
+            <if test="partnerpaymentdate != null and partnerpaymentdate != ''">
+                partnerPaymentDate = #{partnerpaymentdate},
+            </if>
+            <if test="paymentprocessingdate != null and paymentprocessingdate != ''">
+                paymentProcessingDate = #{paymentprocessingdate},
+            </if>
+            <if test="cashid != null and cashid != ''">
+                cashID = #{cashid},
+            </if>
+            <if test="partnersof != null and partnersof != ''">
+                partnerSOF = #{partnersof},
+            </if>
+            <if test="cardbrand != null and cardbrand != ''">
+                cardBrand = #{cardbrand},
+            </if>
+            <if test="issuerbank != null and issuerbank != ''">
+                issuerBank = #{issuerbank},
+            </if>
+            <if test="cardmasking != null and cardmasking != ''">
+                cardMasking = #{cardmasking},
+            </if>
+            <if test="transactionaccount != null and transactionaccount != ''">
+                transactionAccount = #{transactionaccount},
+            </if>
+            <if test="approvalcode != null and approvalcode != ''">
+                approvalCode = #{approvalcode},
+            </if>
+            <if test="buyername != null and buyername != ''">
+                buyerName = #{buyername},
+            </if>
+            <if test="paymentfeeabsorber != null and paymentfeeabsorber != ''">
+                paymentFeeAbsorber = #{paymentfeeabsorber},
+            </if>
+            <if test="paymentfeecollectiontype != null and paymentfeecollectiontype != ''">
+                paymentFeeCollectionType = #{paymentfeecollectiontype},
+            </if>
+            <if test="paymentfeeamount != null and paymentfeeamount != ''">
+                paymentFeeAmount = #{paymentfeeamount},
+            </if>
+            <if test="paymentvatamount != null and paymentvatamount != ''">
+                paymentVATAmount = #{paymentvatamount},
+            </if>
+            <if test="paymentfeenetamount != null and paymentfeenetamount != ''">
+                paymentFeeNetAmount = #{paymentfeenetamount},
+            </if>
+            <if test="paymentwhtamount != null and paymentwhtamount != ''">
+                paymentWHTAmount = #{paymentwhtamount},
+            </if>
+            <if test="feecurrencycode != null and feecurrencycode != ''">
+                feeCurrencyCode = #{feecurrencycode},
+            </if>
+            <if test="reconcileflag != null and reconcileflag != ''">
+                reconcileFlag = #{reconcileflag},
+            </if>
+            <if test="refundflag != null and refundflag != ''">
+                refundFlag = #{refundflag},
+            </if>
+            <if test="payoutstatus != null and payoutstatus != ''">
+                payoutStatus = #{payoutstatus},
+            </if>
+            <if test="payersourceoffund != null and payersourceoffund != ''">
+                payerSourceOfFund = #{payersourceoffund},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_kgp_payment_detail
+        where id = #{id}
+    </delete>
+
+</mapper>
+

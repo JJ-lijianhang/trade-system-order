@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.KgpSettleBillMapper">
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.KgpSettlementBill" >
+        <result column="id" property="id" />
+        <result column="upstream_settlement_date" property="upstreamSettlementDate" />
+        <result column="upstream_settlement_time_zone" property="upstreamSettlementTimeZone" />
+        <result column="partner_payment_id" property="partnerPaymentId" />
+        <result column="payment_id" property="paymentId" />
+        <result column="amount_currency_code_Thb" property="amountCurrencyCodeThb"  javaType="java.math.BigDecimal"/>
+        <result column="amount_value_Thb" property="amountValueThb"  javaType="java.math.BigDecimal"/>
+        <result column="exchange_rate" property="exchangeRate"  javaType="java.math.BigDecimal"/>
+        <result column="amount_currency_code_usd" property="amountCurrencyCodeUsd"  javaType="java.math.BigDecimal"/>
+        <result column="amount_value_usd" property="amountValueUsd"  javaType="java.math.BigDecimal"/>
+        <result column="source_of_fund_type" property="sourceOfFundType" />
+        <result column="source_of_fund_status" property="sourceOfFundStatus" />
+        <result column="payment_status" property="paymentStatus" />
+        <result column="create_date" property="createDate" />
+        <result column="create_time" property="createTime" />
+        <result column="payment_date" property="paymentDate" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="payment_processing_date" property="paymentProcessingDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="update_time" property="updateTime" />
+        <result column="payout_status" property="payoutStatus" />
+        <result column="refund_flag" property="refundFlag" />
+        <result column="fee_currency_code_Thb" property="feeCurrencyCodeThb"  javaType="java.math.BigDecimal"/>
+        <result column="fee_value_Thb" property="feeValueThb"  javaType="java.math.BigDecimal"/>
+        <result column="fee_vat_Thb" property="feeVatThb"  javaType="java.math.BigDecimal"/>
+        <result column="fee_wht_Thb" property="feeWhtThb"  javaType="java.math.BigDecimal"/>
+        <result column="total_settlement_Thb" property="totalSettlementThb"  javaType="java.math.BigDecimal"/>
+        <result column="fee_currency_code_usd" property="feeCurrencyCodeUsd"  javaType="java.math.BigDecimal"/>
+        <result column="fee_value_usd" property="feeValueUsd"  javaType="java.math.BigDecimal"/>
+        <result column="fee_vat_usd" property="feeVatUsd"  javaType="java.math.BigDecimal"/>
+        <result column="fee_wht_usd" property="feeWhtUsd"  javaType="java.math.BigDecimal"/>
+        <result column="total_settlement_usd" property="totalSettlementUsd"  javaType="java.math.BigDecimal"/>
+        <result column="chargeback_status" property="chargebackStatus" />
+        <result column="payout_batch_id" property="payoutBatchId" />
+        <result column="project_id" property="projectId" />
+        <result column="project_name" property="projectName" />
+        <result column="partner_order_id" property="partnerOrderId" />
+        <result column="partner_merchant_id" property="partnerMerchantId" />
+        <result column="partner_shop_id" property="partnerShopId" />
+        <result column="revision" property="revision" />
+        <result column="created_by" property="createdBy" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        upstream_settlement_date,
+        upstream_settlement_time_zone,
+        partner_payment_id,
+        payment_id,
+        amount_currency_code_Thb,
+        amount_value_Thb,
+        exchange_rate,
+        amount_currency_code_usd,
+        amount_value_usd,
+        source_of_fund_type,
+        source_of_fund_status,
+        payment_status,
+        create_date,
+        create_time,
+        payment_date,
+        payment_time,
+        payment_processing_date,
+        update_date,
+        update_time,
+        payout_status,
+        refund_flag,
+        fee_currency_code_Thb,
+        fee_value_Thb,
+        fee_vat_Thb,
+        fee_wht_Thb,
+        total_settlement_Thb,
+        fee_currency_code_usd,
+        fee_value_usd,
+        fee_vat_usd,
+        fee_wht_usd,
+        total_settlement_usd,
+        chargeback_status,
+        payout_batch_id,
+        project_id,
+        project_name,
+        partner_order_id,
+        partner_merchant_id,
+        partner_shop_id,
+        revision,
+        created_by,
+        created_time,
+        updated_by,
+        updated_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.futurebank.order.entity.KgpSettlementBill">
+        INSERT INTO tb_kgp_settlement_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != upstreamSettlementDate and '' != upstreamSettlementDate">
+                upstream_settlement_date,
+            </if>
+            <if test="null != upstreamSettlementTimeZone and '' != upstreamSettlementTimeZone">
+                upstream_settlement_time_zone,
+            </if>
+            <if test="null != partnerPaymentId and '' != partnerPaymentId">
+                partner_payment_id,
+            </if>
+            <if test="null != paymentId and '' != paymentId">
+                payment_id,
+            </if>
+            <if test="null != amountCurrencyCodeThb">
+                amount_currency_code_Thb,
+            </if>
+            <if test="null != amountValueThb">
+                amount_value_Thb,
+            </if>
+            <if test="null != exchangeRate">
+                exchange_rate,
+            </if>
+            <if test="null != amountCurrencyCodeUsd">
+                amount_currency_code_usd,
+            </if>
+            <if test="null != amountValueUsd">
+                amount_value_usd,
+            </if>
+            <if test="null != sourceOfFundType and '' != sourceOfFundType">
+                source_of_fund_type,
+            </if>
+            <if test="null != sourceOfFundStatus and '' != sourceOfFundStatus">
+                source_of_fund_status,
+            </if>
+            <if test="null != paymentStatus and '' != paymentStatus">
+                payment_status,
+            </if>
+            <if test="null != createDate">
+                create_date,
+            </if>
+            <if test="null != createTime">
+                create_time,
+            </if>
+            <if test="null != paymentDate">
+                payment_date,
+            </if>
+            <if test="null != paymentTime">
+                payment_time,
+            </if>
+            <if test="null != paymentProcessingDate">
+                payment_processing_date,
+            </if>
+            <if test="null != updateDate ">
+                update_date,
+            </if>
+            <if test="null != updateTime">
+                update_time,
+            </if>
+            <if test="null != payoutStatus and '' != payoutStatus">
+                payout_status,
+            </if>
+            <if test="null != refundFlag and '' != refundFlag">
+                refund_flag,
+            </if>
+            <if test="null != feeCurrencyCodeThb">
+                fee_currency_code_Thb,
+            </if>
+            <if test="null != feeValueThb">
+                fee_value_Thb,
+            </if>
+            <if test="null != feeVatThb">
+                fee_vat_Thb,
+            </if>
+            <if test="null != feeWhtThb">
+                fee_wht_Thb,
+            </if>
+            <if test="null != totalSettlementThb ">
+                total_settlement_Thb,
+            </if>
+            <if test="null != feeCurrencyCodeUsd">
+                fee_currency_code_usd,
+            </if>
+            <if test="null != feeValueUsd">
+                fee_value_usd,
+            </if>
+            <if test="null != feeVatUsd ">
+                fee_vat_usd,
+            </if>
+            <if test="null != feeWhtUsd">
+                fee_wht_usd,
+            </if>
+            <if test="null != totalSettlementUsd ">
+                total_settlement_usd,
+            </if>
+            <if test="null != chargebackStatus and '' != chargebackStatus">
+                chargeback_status,
+            </if>
+            <if test="null != payoutBatchId and '' != payoutBatchId">
+                payout_batch_id,
+            </if>
+            <if test="null != projectId and '' != projectId">
+                project_id,
+            </if>
+            <if test="null != projectName and '' != projectName">
+                project_name,
+            </if>
+            <if test="null != partnerOrderId and '' != partnerOrderId">
+                partner_order_id,
+            </if>
+            <if test="null != partnerMerchantId and '' != partnerMerchantId">
+                partner_merchant_id,
+            </if>
+            <if test="null != partnerShopId and '' != partnerShopId">
+                partner_shop_id,
+            </if>
+            <if test="null != revision and '' != revision">
+                revision,
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                created_by,
+            </if>
+            <if test="null != createdTime">
+                created_time,
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                updated_by,
+            </if>
+            <if test="null != updatedTime">
+                updated_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != upstreamSettlementDate and '' != upstreamSettlementDate">
+                #{upstreamSettlementDate},
+            </if>
+            <if test="null != upstreamSettlementTimeZone and '' != upstreamSettlementTimeZone">
+                #{upstreamSettlementTimeZone},
+            </if>
+            <if test="null != partnerPaymentId and '' != partnerPaymentId">
+                #{partnerPaymentId},
+            </if>
+            <if test="null != paymentId and '' != paymentId">
+                #{paymentId},
+            </if>
+            <if test="null != amountCurrencyCodeThb">
+                #{amountCurrencyCodeThb},
+            </if>
+            <if test="null != amountValueThb">
+                #{amountValueThb},
+            </if>
+            <if test="null != exchangeRate ">
+                #{exchangeRate},
+            </if>
+            <if test="null != amountCurrencyCodeUsd">
+                #{amountCurrencyCodeUsd},
+            </if>
+            <if test="null != amountValueUsd">
+                #{amountValueUsd},
+            </if>
+            <if test="null != sourceOfFundType and '' != sourceOfFundType">
+                #{sourceOfFundType},
+            </if>
+            <if test="null != sourceOfFundStatus and '' != sourceOfFundStatus">
+                #{sourceOfFundStatus},
+            </if>
+            <if test="null != paymentStatus and '' != paymentStatus">
+                #{paymentStatus},
+            </if>
+            <if test="null != createDate ">
+                #{createDate},
+            </if>
+            <if test="null != createTime ">
+                #{createTime},
+            </if>
+            <if test="null != paymentDate ">
+                #{paymentDate},
+            </if>
+            <if test="null != paymentTime ">
+                #{paymentTime},
+            </if>
+            <if test="null != paymentProcessingDate ">
+                #{paymentProcessingDate},
+            </if>
+            <if test="null != updateDate ">
+                #{updateDate},
+            </if>
+            <if test="null != updateTime ">
+                #{updateTime},
+            </if>
+            <if test="null != payoutStatus and '' != payoutStatus">
+                #{payoutStatus},
+            </if>
+            <if test="null != refundFlag and '' != refundFlag">
+                #{refundFlag},
+            </if>
+            <if test="null != feeCurrencyCodeThb">
+                #{feeCurrencyCodeThb},
+            </if>
+            <if test="null != feeValueThb">
+                #{feeValueThb},
+            </if>
+            <if test="null != feeVatThb">
+                #{feeVatThb},
+            </if>
+            <if test="null != feeWhtThb">
+                #{feeWhtThb},
+            </if>
+            <if test="null != totalSettlementThb">
+                #{totalSettlementThb},
+            </if>
+            <if test="null != feeCurrencyCodeUsd">
+                #{feeCurrencyCodeUsd},
+            </if>
+            <if test="null != feeValueUsd">
+                #{feeValueUsd},
+            </if>
+            <if test="null != feeVatUsd">
+                #{feeVatUsd},
+            </if>
+            <if test="null != feeWhtUsd">
+                #{feeWhtUsd},
+            </if>
+            <if test="null != totalSettlementUsd ">
+                #{totalSettlementUsd},
+            </if>
+            <if test="null != chargebackStatus and '' != chargebackStatus">
+                #{chargebackStatus},
+            </if>
+            <if test="null != payoutBatchId and '' != payoutBatchId">
+                #{payoutBatchId},
+            </if>
+            <if test="null != projectId and '' != projectId">
+                #{projectId},
+            </if>
+            <if test="null != projectName and '' != projectName">
+                #{projectName},
+            </if>
+            <if test="null != partnerOrderId and '' != partnerOrderId">
+                #{partnerOrderId},
+            </if>
+            <if test="null != partnerMerchantId and '' != partnerMerchantId">
+                #{partnerMerchantId},
+            </if>
+            <if test="null != partnerShopId and '' != partnerShopId">
+                #{partnerShopId},
+            </if>
+            <if test="null != revision and '' != revision">
+                #{revision},
+            </if>
+            <if test="null != createdBy and '' != createdBy">
+                #{createdBy},
+            </if>
+            <if test="null != createdTime ">
+                #{createdTime},
+            </if>
+            <if test="null != updatedBy and '' != updatedBy">
+                #{updatedBy},
+            </if>
+            <if test="null != updatedTime ">
+                #{updatedTime}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO tb_kgp_settlement_bill (
+        upstream_settlement_date,
+        upstream_settlement_time_zone,
+        partner_payment_id,
+        payment_id,
+        amount_currency_code_thb,
+        amount_value_thb,
+        exchange_rate,
+        amount_currency_code_usd,
+        amount_value_usd,
+        source_of_fund_type,
+        source_of_fund_status,
+        payment_status,
+        create_date,
+        create_time,
+        payment_date,
+        payment_time,
+        payment_processing_date,
+        update_date,
+        update_time,
+        payout_status,
+        refund_flag,
+        fee_currency_code_thb,
+        fee_value_Thb,
+        fee_vat_Thb,
+        fee_wht_Thb,
+        total_settlement_thb,
+        fee_currency_code_usd,
+        fee_value_usd,
+        fee_vat_usd,
+        fee_wht_usd,
+        total_settlement_usd,
+        chargeback_status,
+        payout_batch_id,
+        project_id,
+        project_name,
+        partner_order_id,
+        partner_merchant_id,
+        partner_shop_id,
+        revision,
+        created_by,
+        created_time,
+        updated_by,
+        updated_time
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.upstreamSettlementDate},
+            #{item.upstreamSettlementTimeZone},
+            #{item.partnerPaymentId},
+            #{item.paymentId},
+            #{item.amountCurrencyCodeThb},
+            #{item.amountValueThb},
+            #{item.exchangeRate},
+            #{item.amountCurrencyCodeUsd},
+            #{item.amountValueUsd},
+            #{item.sourceOfFundType},
+            #{item.sourceOfFundStatus},
+            #{item.paymentStatus},
+            #{item.createDate},
+            #{item.createTime},
+            #{item.paymentDate},
+            #{item.paymentTime},
+            #{item.paymentProcessingDate},
+            #{item.updateDate},
+            #{item.updateTime},
+            #{item.payoutStatus},
+            #{item.refundFlag},
+            #{item.feeCurrencyCodeThb},
+            #{item.feeValueThb},
+            #{item.feeVatThb},
+            #{item.feeWhtThb},
+            #{item.totalSettlementThb},
+            #{item.feeCurrencyCodeUsd},
+            #{item.feeValueUsd},
+            #{item.feeVatUsd},
+            #{item.feeWhtUsd},
+            #{item.totalSettlementUsd},
+            #{item.chargebackStatus},
+            #{item.payoutBatchId},
+            #{item.projectId},
+            #{item.projectName},
+            #{item.partnerOrderId},
+            #{item.partnerMerchantId},
+            #{item.partnerShopId},
+            #{item.revision},
+            #{item.createdBy},
+            #{item.createdTime},
+            #{item.updatedBy},
+            #{item.updatedTime}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM tb_kgp_settlement_bill
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.futurebank.order.entity.KgpSettlementBill">
+        UPDATE tb_kgp_settlement_bill
+        <set>
+            <if test="null != partnerPaymentId and '' != partnerPaymentId">partner_payment_id = #{partnerPaymentId},</if>
+            <if test="null != paymentId and '' != paymentId">payment_id = #{paymentId},</if>
+            <if test="null != amountCurrencyCodeThb ">amount_currency_code_Thb = #{amountCurrencyCodeThb},</if>
+            <if test="null != amountValueThb ">amount_value_Thb = #{amountValueThb},</if>
+            <if test="null != exchangeRate ">exchange_rate = #{exchangeRate},</if>
+            <if test="null != amountCurrencyCodeUsd ">amount_currency_code_usd = #{amountCurrencyCodeUsd},</if>
+            <if test="null != amountValueUsd ">amount_value_usd = #{amountValueUsd},</if>
+            <if test="null != sourceOfFundType and '' != sourceOfFundType">source_of_fund_type = #{sourceOfFundType},</if>
+            <if test="null != sourceOfFundStatus and '' != sourceOfFundStatus">source_of_fund_status = #{sourceOfFundStatus},</if>
+            <if test="null != paymentStatus and '' != paymentStatus">payment_status = #{paymentStatus},</if>
+            <if test="null != createDate ">create_date = #{createDate},</if>
+            <if test="null != createTime ">create_time = #{createTime},</if>
+            <if test="null != paymentDate ">payment_date = #{paymentDate},</if>
+            <if test="null != paymentTime ">payment_time = #{paymentTime},</if>
+            <if test="null != paymentProcessingDate ">payment_processing_date = #{paymentProcessingDate},</if>
+            <if test="null != updateDate ">update_date = #{updateDate},</if>
+            <if test="null != updateTime ">update_time = #{updateTime},</if>
+            <if test="null != payoutStatus and '' != payoutStatus">payout_status = #{payoutStatus},</if>
+            <if test="null != refundFlag and '' != refundFlag">refund_flag = #{refundFlag},</if>
+            <if test="null != feeCurrencyCodeThb ">fee_currency_code_Thb = #{feeCurrencyCodeThb},</if>
+            <if test="null != feeValueThb ">fee_value_Thb = #{feeValueThb},</if>
+            <if test="null != feeVatThb ">fee_vat_Thb = #{feeVatThb},</if>
+            <if test="null != feeWhtThb ">fee_wht_Thb = #{feeWhtThb},</if>
+            <if test="null != totalSettlementThb ">total_settlement_Thb = #{totalSettlementThb},</if>
+            <if test="null != feeCurrencyCodeUsd ">fee_currency_code_usd = #{feeCurrencyCodeUsd},</if>
+            <if test="null != feeValueUsd ">fee_value_usd = #{feeValueUsd},</if>
+            <if test="null != feeVatUsd ">fee_vat_usd = #{feeVatUsd},</if>
+            <if test="null != feeWhtUsd ">fee_wht_usd = #{feeWhtUsd},</if>
+            <if test="null != totalSettlementUsd ">total_settlement_usd = #{totalSettlementUsd},</if>
+            <if test="null != chargebackStatus and '' != chargebackStatus">chargeback_status = #{chargebackStatus},</if>
+            <if test="null != payoutBatchId and '' != payoutBatchId">payout_batch_id = #{payoutBatchId},</if>
+            <if test="null != projectId and '' != projectId">project_id = #{projectId},</if>
+            <if test="null != projectName and '' != projectName">project_name = #{projectName},</if>
+            <if test="null != partnerOrderId and '' != partnerOrderId">partner_order_id = #{partnerOrderId},</if>
+            <if test="null != partnerMerchantId and '' != partnerMerchantId">partner_merchant_id = #{partnerMerchantId},</if>
+            <if test="null != partnerShopId and '' != partnerShopId">partner_shop_id = #{partnerShopId},</if>
+            <if test="null != revision and '' != revision">revision = #{revision},</if>
+            <if test="null != createdBy and '' != createdBy">created_by = #{createdBy},</if>
+            <if test="null != createdTime ">created_time = #{createdTime},</if>
+            <if test="null != updatedBy and '' != updatedBy">updated_by = #{updatedBy},</if>
+            <if test="null != updatedTime ">updated_time = #{updatedTime}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="querySettlementBillingsByUpstreamOrderNo" resultType="com.futurebank.order.entity.PaymentBillingEntity">
+        SELECT
+            bill_id, bill_no, merchant_id, merchant_name, provider_id, platform_id, channel_id, channel_rates_id, product_id, product_channel_id, order_type,
+            transaction_type, acquiring_mode, country, payment_method, currency, settlement_currency, order_amount, merchant_currency, merchant_order_amount,
+            order_status, upstream_status, reference_order_no, downstream_order_no, platform_order_no, upstream_order_no, order_create_time, order_complete_time,
+            order_notify_time, estimated_amount, estimated_exchange_rate, downstream_fixed_fee, downstream_tx_rate, downstream_fee, downstream_fee_c,
+            downstream_estimated_amount, downstream_estimated_fee, downstream_estimated_exchange, downstream_estimated_exchange_rate, downstream_reconciliation_status,
+            downstream_reconciliation_date, downstream_settlement_status, settlement_cycle, downstream_settlement_date, downstream_settlement_amount, downstream_total_fee,
+            upstream_fixed_fee, upstream_tx_rate, upstream_fee, upstream_actual_fee, upstream_estimated_amount, upstream_estimated_fee, upstream_actual_exchange,
+            upstream_actual_exchange_rate, upstream_actual_exchange_fee, upstream_reconciliation_status, upstream_reconciliation_date, upstream_settlement_status,
+            upstream_settlement_date, upstream_total_fee, upstream_settlement_amount, payment_exchange, payment_exchange_rate, payment_tx_markup, profit, repair_status,
+            created_time, update_time, downstream_order_no_origin, payment_tx_markup_usd, downstream_fixed_fee_usd, upstream_vat, downstream_vat,
+            estimated_upstream_vat_fee, estimated_downstream_vat_fee, downstream_gateway_fee, upstream_gateway_fee
+        FROM tb_payment_billing
+        where upstream_order_no IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="querySettlementOrderByUpstreamOrderNo" resultType="com.futurebank.order.entity.PaymentOrderEntity">
+        SELECT id,upstream_order_no,downstream_order_no,platform_order_no,order_status,order_amount,currency,order_create_time,order_complete_time  FROM tb_payment_order WHERE upstream_order_no IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <insert id="insertPaymentBillingBatch" keyProperty="billId" useGeneratedKeys="true">
+        insert into tb_payment_billing_diff(bill_no, merchant_id, merchant_name, provider_id, platform_id, channel_id,
+            channel_rates_id, product_id, product_channel_id, order_type, transaction_type, acquiring_mode, country,
+            payment_method, currency, settlement_currency, order_amount, merchant_currency, merchant_order_amount,
+            order_status, upstream_status, reference_order_no, downstream_order_no, platform_order_no, upstream_order_no,
+            order_create_time, order_complete_time, order_notify_time, estimated_amount, estimated_exchange_rate,
+            downstream_fixed_fee, downstream_tx_rate, downstream_fee, downstream_fee_c, downstream_estimated_amount,
+            downstream_estimated_fee, downstream_estimated_exchange, downstream_estimated_exchange_rate,
+            downstream_reconciliation_status, downstream_reconciliation_date, downstream_settlement_status,
+            settlement_cycle, downstream_settlement_date, downstream_settlement_amount, downstream_total_fee,
+            upstream_fixed_fee, upstream_tx_rate, upstream_fee, upstream_actual_fee, upstream_estimated_amount,
+            upstream_estimated_fee, upstream_actual_exchange, upstream_actual_exchange_rate, upstream_actual_exchange_fee,
+            upstream_reconciliation_status, upstream_reconciliation_date, upstream_settlement_status,
+            upstream_settlement_date, upstream_total_fee, upstream_settlement_amount, payment_exchange,
+            payment_exchange_rate, payment_tx_markup, profit, repair_status, created_time, update_time,
+            downstream_order_no_origin, payment_tx_markup_usd, downstream_fixed_fee_usd, upstream_vat, downstream_vat,
+            estimated_upstream_vat_fee, estimated_downstream_vat_fee, downstream_gateway_fee, upstream_gateway_fee)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.billNo}, #{entity.merchantId}, #{entity.merchantName}, #{entity.providerId}, #{entity.platformId},
+            #{entity.channelId}, #{entity.channelRatesId}, #{entity.productId}, #{entity.productChannelId},
+            #{entity.orderType}, #{entity.transactionType}, #{entity.acquiringMode}, #{entity.country},
+            #{entity.paymentMethod}, #{entity.currency}, #{entity.settlementCurrency}, #{entity.orderAmount},
+            #{entity.merchantCurrency}, #{entity.merchantOrderAmount}, #{entity.orderStatus}, #{entity.upstreamStatus},
+            #{entity.referenceOrderNo}, #{entity.downstreamOrderNo}, #{entity.platformOrderNo},
+            #{entity.upstreamOrderNo}, #{entity.orderCreateTime}, #{entity.orderCompleteTime},
+            #{entity.orderNotifyTime}, #{entity.estimatedAmount}, #{entity.estimatedExchangeRate},
+            #{entity.downstreamFixedFee}, #{entity.downstreamTxRate}, #{entity.downstreamFee}, #{entity.downstreamFeeC},
+            #{entity.downstreamEstimatedAmount}, #{entity.downstreamEstimatedFee},
+            #{entity.downstreamEstimatedExchange}, #{entity.downstreamEstimatedExchangeRate},
+            #{entity.downstreamReconciliationStatus}, #{entity.downstreamReconciliationDate},
+            #{entity.downstreamSettlementStatus}, #{entity.settlementCycle}, #{entity.downstreamSettlementDate},
+            #{entity.downstreamSettlementAmount}, #{entity.downstreamTotalFee}, #{entity.upstreamFixedFee},
+            #{entity.upstreamTxRate}, #{entity.upstreamFee}, #{entity.upstreamActualFee},
+            #{entity.upstreamEstimatedAmount}, #{entity.upstreamEstimatedFee}, #{entity.upstreamActualExchange},
+            #{entity.upstreamActualExchangeRate}, #{entity.upstreamActualExchangeFee},
+            #{entity.upstreamReconciliationStatus}, #{entity.upstreamReconciliationDate},
+            #{entity.upstreamSettlementStatus}, #{entity.upstreamSettlementDate}, #{entity.upstreamTotalFee},
+            #{entity.upstreamSettlementAmount}, #{entity.paymentExchange}, #{entity.paymentExchangeRate},
+            #{entity.paymentTxMarkup}, #{entity.profit}, #{entity.repairStatus}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.downstreamOrderNoOrigin}, #{entity.paymentTxMarkupUsd},
+            #{entity.downstreamFixedFeeUsd}, #{entity.upstreamVat}, #{entity.downstreamVat},
+            #{entity.estimatedUpstreamVatFee}, #{entity.estimatedDownstreamVatFee}, #{entity.downstreamGatewayFee},
+            #{entity.upstreamGatewayFee})
+        </foreach>
+    </insert>
+
+    <update id="updateBill" parameterType="com.futurebank.order.entity.PaymentBillingEntity">
+        update tb_payment_billing
+        <set>
+            <if test="billNo != null and billNo != ''">
+                bill_no = #{billNo},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="channelRatesId != null">
+                channel_rates_id = #{channelRatesId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productChannelId != null">
+                product_channel_id = #{productChannelId},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                acquiring_mode = #{acquiringMode},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                settlement_currency = #{settlementCurrency},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="merchantOrderAmount != null">
+                merchant_order_amount = #{merchantOrderAmount},
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                order_status = #{orderStatus},
+            </if>
+            <if test="upstreamStatus != null and upstreamStatus != ''">
+                upstream_status = #{upstreamStatus},
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+            <if test="orderCreateTime != null">
+                order_create_time = #{orderCreateTime},
+            </if>
+            <if test="orderCompleteTime != null">
+                order_complete_time = #{orderCompleteTime},
+            </if>
+            <if test="orderNotifyTime != null">
+                order_notify_time = #{orderNotifyTime},
+            </if>
+            <if test="estimatedAmount != null">
+                estimated_amount = #{estimatedAmount},
+            </if>
+            <if test="estimatedExchangeRate != null and estimatedExchangeRate != ''">
+                estimated_exchange_rate = #{estimatedExchangeRate},
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                downstream_fixed_fee = #{downstreamFixedFee},
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                downstream_tx_rate = #{downstreamTxRate},
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                downstream_fee = #{downstreamFee},
+            </if>
+            <if test="downstreamFeeC != null and downstreamFeeC != ''">
+                downstream_fee_c = #{downstreamFeeC},
+            </if>
+            <if test="downstreamEstimatedAmount != null">
+                downstream_estimated_amount = #{downstreamEstimatedAmount},
+            </if>
+            <if test="downstreamEstimatedFee != null">
+                downstream_estimated_fee = #{downstreamEstimatedFee},
+            </if>
+            <if test="downstreamEstimatedExchange != null">
+                downstream_estimated_exchange = #{downstreamEstimatedExchange},
+            </if>
+            <if test="downstreamEstimatedExchangeRate != null">
+                downstream_estimated_exchange_rate = #{downstreamEstimatedExchangeRate},
+            </if>
+            <if test="downstreamReconciliationStatus != null">
+                downstream_reconciliation_status = #{downstreamReconciliationStatus},
+            </if>
+            <if test="downstreamReconciliationDate != null">
+                downstream_reconciliation_date = #{downstreamReconciliationDate},
+            </if>
+            <if test="downstreamSettlementStatus != null">
+                downstream_settlement_status = #{downstreamSettlementStatus},
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                settlement_cycle = #{settlementCycle},
+            </if>
+            <if test="downstreamSettlementDate != null">
+                downstream_settlement_date = #{downstreamSettlementDate},
+            </if>
+            <if test="downstreamSettlementAmount != null">
+                downstream_settlement_amount = #{downstreamSettlementAmount},
+            </if>
+            <if test="downstreamTotalFee != null">
+                downstream_total_fee = #{downstreamTotalFee},
+            </if>
+            <if test="upstreamFixedFee != null and upstreamFixedFee != ''">
+                upstream_fixed_fee = #{upstreamFixedFee},
+            </if>
+            <if test="upstreamTxRate != null and upstreamTxRate != ''">
+                upstream_tx_rate = #{upstreamTxRate},
+            </if>
+            <if test="upstreamFee != null and upstreamFee != ''">
+                upstream_fee = #{upstreamFee},
+            </if>
+            <if test="upstreamActualFee != null and upstreamActualFee != ''">
+                upstream_actual_fee = #{upstreamActualFee},
+            </if>
+            <if test="upstreamEstimatedAmount != null">
+                upstream_estimated_amount = #{upstreamEstimatedAmount},
+            </if>
+            <if test="upstreamEstimatedFee != null">
+                upstream_estimated_fee = #{upstreamEstimatedFee},
+            </if>
+            <if test="upstreamActualExchange != null and upstreamActualExchange != ''">
+                upstream_actual_exchange = #{upstreamActualExchange},
+            </if>
+            <if test="upstreamActualExchangeRate != null and upstreamActualExchangeRate != ''">
+                upstream_actual_exchange_rate = #{upstreamActualExchangeRate},
+            </if>
+            <if test="upstreamActualExchangeFee != null">
+                upstream_actual_exchange_fee = #{upstreamActualExchangeFee},
+            </if>
+            <if test="upstreamReconciliationStatus != null">
+                upstream_reconciliation_status = #{upstreamReconciliationStatus},
+            </if>
+            <if test="upstreamReconciliationDate != null">
+                upstream_reconciliation_date = #{upstreamReconciliationDate},
+            </if>
+            <if test="upstreamSettlementStatus != null">
+                upstream_settlement_status = #{upstreamSettlementStatus},
+            </if>
+            <if test="upstreamSettlementDate != null">
+                upstream_settlement_date = #{upstreamSettlementDate},
+            </if>
+            <if test="upstreamTotalFee != null">
+                upstream_total_fee = #{upstreamTotalFee},
+            </if>
+            <if test="upstreamSettlementAmount != null">
+                upstream_settlement_amount = #{upstreamSettlementAmount},
+            </if>
+            <if test="paymentExchange != null">
+                payment_exchange = #{paymentExchange},
+            </if>
+            <if test="paymentExchangeRate != null">
+                payment_exchange_rate = #{paymentExchangeRate},
+            </if>
+            <if test="paymentTxMarkup != null">
+                payment_tx_markup = #{paymentTxMarkup},
+            </if>
+            <if test="profit != null">
+                profit = #{profit},
+            </if>
+            <if test="repairStatus != null">
+                repair_status = #{repairStatus},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="downstreamOrderNoOrigin != null and downstreamOrderNoOrigin != ''">
+                downstream_order_no_origin = #{downstreamOrderNoOrigin},
+            </if>
+            <if test="paymentTxMarkupUsd != null">
+                payment_tx_markup_usd = #{paymentTxMarkupUsd},
+            </if>
+            <if test="downstreamFixedFeeUsd != null">
+                downstream_fixed_fee_usd = #{downstreamFixedFeeUsd},
+            </if>
+            <if test="upstreamVat != null">
+                upstream_vat = #{upstreamVat},
+            </if>
+            <if test="downstreamVat != null">
+                downstream_vat = #{downstreamVat},
+            </if>
+            <if test="estimatedUpstreamVatFee != null">
+                estimated_upstream_vat_fee = #{estimatedUpstreamVatFee},
+            </if>
+            <if test="estimatedDownstreamVatFee != null">
+                estimated_downstream_vat_fee = #{estimatedDownstreamVatFee},
+            </if>
+            <if test="downstreamGatewayFee != null and downstreamGatewayFee != ''">
+                downstream_gateway_fee = #{downstreamGatewayFee},
+            </if>
+            <if test="upstreamGatewayFee != null and upstreamGatewayFee != ''">
+                upstream_gateway_fee = #{upstreamGatewayFee},
+            </if>
+        </set>
+        where bill_id = #{billId}
+    </update>
+
+    <update id="updateOrder" parameterType="com.futurebank.order.entity.PaymentOrderEntity">
+        update tb_payment_order
+        <set>
+            <if test="sessionId != null and sessionId != ''">
+                session_id = #{sessionId},
+            </if>
+            <if test="requestCount != null">
+                request_count = #{requestCount},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                merchant_name = #{merchantName},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId},
+            </if>
+            <if test="channelRatesId != null">
+                channel_rates_id = #{channelRatesId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productChannelId != null">
+                product_channel_id = #{productChannelId},
+            </if>
+            <if test="providerId != null">
+                provider_id = #{providerId},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="acquiringMode != null and acquiringMode != ''">
+                acquiring_mode = #{acquiringMode},
+            </if>
+            <if test="transactionType != null and transactionType != ''">
+                transaction_type = #{transactionType},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="upstreamOrderNo != null and upstreamOrderNo != ''">
+                upstream_order_no = #{upstreamOrderNo},
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="upstreamFixedFee != null and upstreamFixedFee != ''">
+                upstream_fixed_fee = #{upstreamFixedFee},
+            </if>
+            <if test="upstreamTxRate != null and upstreamTxRate != ''">
+                upstream_tx_rate = #{upstreamTxRate},
+            </if>
+            <if test="upstreamTotalFee != null">
+                upstream_total_fee = #{upstreamTotalFee},
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                downstream_fixed_fee = #{downstreamFixedFee},
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                downstream_tx_rate = #{downstreamTxRate},
+            </if>
+            <if test="downstreamTotalFee != null">
+                downstream_total_fee = #{downstreamTotalFee},
+            </if>
+            <if test="buyerId != null and buyerId != ''">
+                buyer_id = #{buyerId},
+            </if>
+            <if test="languageCode != null and languageCode != ''">
+                language_code = #{languageCode},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="merchantOrderAmount != null">
+                merchant_order_amount = #{merchantOrderAmount},
+            </if>
+            <if test="paymentExchange != null">
+                payment_exchange = #{paymentExchange},
+            </if>
+            <if test="paymentExchangeRate != null">
+                payment_exchange_rate = #{paymentExchangeRate},
+            </if>
+            <if test="settlementCurrency != null and settlementCurrency != ''">
+                settlement_currency = #{settlementCurrency},
+            </if>
+            <if test="productName != null and productName != ''">
+                product_name = #{productName},
+            </if>
+            <if test="productDetail != null and productDetail != ''">
+                product_detail = #{productDetail},
+            </if>
+            <if test="inventories != null and inventories != ''">
+                inventories = #{inventories},
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                order_status = #{orderStatus},
+            </if>
+            <if test="reviewStatus != null and reviewStatus != ''">
+                review_status = #{reviewStatus},
+            </if>
+            <if test="requestStatus != null">
+                request_status = #{requestStatus},
+            </if>
+            <if test="orderQueryStatus != null">
+                order_query_status = #{orderQueryStatus},
+            </if>
+            <if test="refundQueryStatus != null">
+                refund_query_status = #{refundQueryStatus},
+            </if>
+            <if test="rejectionReason != null and rejectionReason != ''">
+                rejection_reason = #{rejectionReason},
+            </if>
+            <if test="refundReason != null and refundReason != ''">
+                refund_reason = #{refundReason},
+            </if>
+            <if test="upstreamStatus != null and upstreamStatus != ''">
+                upstream_status = #{upstreamStatus},
+            </if>
+            <if test="errorMsg != null and errorMsg != ''">
+                error_msg = #{errorMsg},
+            </if>
+            <if test="failReason != null and failReason != ''">
+                fail_reason = #{failReason},
+            </if>
+            <if test="redirectsecret != null and redirectsecret != ''">
+                redirectSecret = #{redirectsecret},
+            </if>
+            <if test="downstreamNotifyUrl != null and downstreamNotifyUrl != ''">
+                downstream_notify_url = #{downstreamNotifyUrl},
+            </if>
+            <if test="downstreamRedirectUrl != null and downstreamRedirectUrl != ''">
+                downstream_redirect_url = #{downstreamRedirectUrl},
+            </if>
+            <if test="orderCreateTime != null">
+                order_create_time = #{orderCreateTime},
+            </if>
+            <if test="orderCompleteTime != null">
+                order_complete_time = #{orderCompleteTime},
+            </if>
+            <if test="orderNotifyTime != null">
+                order_notify_time = #{orderNotifyTime},
+            </if>
+            <if test="settlementCycle != null and settlementCycle != ''">
+                settlement_cycle = #{settlementCycle},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId},
+            </if>
+            <if test="platformId != null">
+                platform_id = #{platformId},
+            </if>
+            <if test="paymentTxMarkup != null">
+                payment_tx_markup = #{paymentTxMarkup},
+            </if>
+            <if test="estimatedAmount != null">
+                estimated_amount = #{estimatedAmount},
+            </if>
+            <if test="estimatedExchangeRate != null and estimatedExchangeRate != ''">
+                estimated_exchange_rate = #{estimatedExchangeRate},
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                downstream_fee = #{downstreamFee},
+            </if>
+            <if test="downstreamFeeC != null and downstreamFeeC != ''">
+                downstream_fee_c = #{downstreamFeeC},
+            </if>
+            <if test="downstreamEstimatedAmount != null">
+                downstream_estimated_amount = #{downstreamEstimatedAmount},
+            </if>
+            <if test="downstreamEstimatedFee != null">
+                downstream_estimated_fee = #{downstreamEstimatedFee},
+            </if>
+            <if test="upstreamFee != null and upstreamFee != ''">
+                upstream_fee = #{upstreamFee},
+            </if>
+            <if test="upstreamEstimatedAmount != null">
+                upstream_estimated_amount = #{upstreamEstimatedAmount},
+            </if>
+            <if test="upstreamEstimatedFee != null">
+                upstream_estimated_fee = #{upstreamEstimatedFee},
+            </if>
+            <if test="riskType != null">
+                risk_type = #{riskType},
+            </if>
+            <if test="profit != null">
+                profit = #{profit},
+            </if>
+            <if test="freezeType != null">
+                freeze_type = #{freezeType},
+            </if>
+            <if test="origin != null and origin != ''">
+                origin = #{origin},
+            </if>
+            <if test="threedsStatus != null and threedsStatus != ''">
+                threeds_status = #{threedsStatus},
+            </if>
+            <if test="mode != null and mode != ''">
+                mode = #{mode},
+            </if>
+            <if test="initialAuthentication != null and initialAuthentication != ''">
+                initial_authentication = #{initialAuthentication},
+            </if>
+            <if test="initialAuthenticationTime != null">
+                initial_authentication_time = #{initialAuthenticationTime},
+            </if>
+            <if test="initialAuthenticationStatus != null and initialAuthenticationStatus != ''">
+                initial_authentication_status = #{initialAuthenticationStatus},
+            </if>
+            <if test="authStep1Request != null and authStep1Request != ''">
+                auth_step1_request = #{authStep1Request},
+            </if>
+            <if test="authStep1Response != null and authStep1Response != ''">
+                auth_step1_response = #{authStep1Response},
+            </if>
+            <if test="authStep1Status != null and authStep1Status != ''">
+                auth_step1_status = #{authStep1Status},
+            </if>
+            <if test="authStep1Time != null">
+                auth_step1_time = #{authStep1Time},
+            </if>
+            <if test="authStep2Request != null and authStep2Request != ''">
+                auth_step2_request = #{authStep2Request},
+            </if>
+            <if test="authStep2Response != null and authStep2Response != ''">
+                auth_step2_response = #{authStep2Response},
+            </if>
+            <if test="authStep2Status != null and authStep2Status != ''">
+                auth_step2_status = #{authStep2Status},
+            </if>
+            <if test="authStep2Time != null">
+                auth_step2_time = #{authStep2Time},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId},
+            </if>
+            <if test="operatorTime != null">
+                operator_time = #{operatorTime},
+            </if>
+            <if test="tags != null and tags != ''">
+                tags = #{tags},
+            </if>
+            <if test="downstreamOrderNoOrigin != null and downstreamOrderNoOrigin != ''">
+                downstream_order_no_origin = #{downstreamOrderNoOrigin},
+            </if>
+            <if test="paymentTxMarkupUsd != null">
+                payment_tx_markup_usd = #{paymentTxMarkupUsd},
+            </if>
+            <if test="downstreamFixedFeeUsd != null">
+                downstream_fixed_fee_usd = #{downstreamFixedFeeUsd},
+            </if>
+            <if test="upstreamVat != null">
+                upstream_vat = #{upstreamVat},
+            </if>
+            <if test="downstreamVat != null">
+                downstream_vat = #{downstreamVat},
+            </if>
+            <if test="estimatedUpstreamVatFee != null">
+                estimated_upstream_vat_fee = #{estimatedUpstreamVatFee},
+            </if>
+            <if test="estimatedDownstreamVatFee != null">
+                estimated_downstream_vat_fee = #{estimatedDownstreamVatFee},
+            </if>
+            <if test="documentId != null and documentId != ''">
+                document_id = #{documentId},
+            </if>
+            <if test="transRefId != null and transRefId != ''">
+                trans_ref_id = #{transRefId},
+            </if>
+            <if test="uploadVoucherFile != null and uploadVoucherFile != ''">
+                upload_voucher_file = #{uploadVoucherFile},
+            </if>
+            <if test="refundAccountNo != null and refundAccountNo != ''">
+                refund_account_no = #{refundAccountNo},
+            </if>
+            <if test="returnAccountName != null and returnAccountName != ''">
+                return_account_name = #{returnAccountName},
+            </if>
+            <if test="merchantRequestTime != null">
+                merchant_request_time = #{merchantRequestTime},
+            </if>
+            <if test="channelRequestTime != null">
+                channel_request_time = #{channelRequestTime},
+            </if>
+            <if test="downstreamGatewayFee != null and downstreamGatewayFee != ''">
+                downstream_gateway_fee = #{downstreamGatewayFee},
+            </if>
+            <if test="upstreamGatewayFee != null and upstreamGatewayFee != ''">
+                upstream_gateway_fee = #{upstreamGatewayFee},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_kgp_settlement_bill
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tb_kgp_settlement_bill
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tb_kgp_settlement_bill
+    </select>
+
+</mapper>

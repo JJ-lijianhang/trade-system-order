@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.PproSTransactionMapper">
+
+    <resultMap type="com.futurebank.order.entity.PproSTransactionEntity" id="PproSTransactionMap">
+        <result property="id" column="id"/>
+        <result property="merchantTxId" column="MERCHANT_TX_ID"/>
+        <result property="txId" column="TX_ID"/>
+        <result property="paymentReference" column="PAYMENT_REFERENCE"/>
+        <result property="eventType" column="EVENT_TYPE"/>
+        <result property="eventTimestamp" column="EVENT_TIMESTAMP"/>
+        <result property="merchantId" column="MERCHANT_ID"/>
+        <result property="paymentMethod" column="PAYMENT_METHOD"/>
+        <result property="feeType" column="FEE_TYPE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="currency" column="CURRENCY"/>
+        <result property="country" column="COUNTRY"/>
+        <result property="referenceTxId" column="REFERENCE_TX_ID"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="settlementDate" column="SETTLEMENT_DATE"/>
+        <result property="recordCount" column="RECORD_COUNT"/>
+        <result property="isProcessed" column="is_processed"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PproSTransactionMap">
+        select id,
+               MERCHANT_TX_ID,
+               TX_ID,
+               PAYMENT_REFERENCE,
+               EVENT_TYPE,
+               EVENT_TIMESTAMP,
+               MERCHANT_ID,
+               PAYMENT_METHOD,
+               FEE_TYPE,
+               AMOUNT,
+               CURRENCY,
+               COUNTRY,
+               REFERENCE_TX_ID,
+               created_time,
+               update_time,
+               file_name,
+               SETTLEMENT_DATE,
+               RECORD_COUNT,
+               is_processed
+        from tb_ppro_s_transaction
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="PproSTransactionMap">
+        select
+        id, MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+        FEE_TYPE, AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, created_time, update_time, file_name, SETTLEMENT_DATE,
+        RECORD_COUNT, is_processed
+        from tb_ppro_s_transaction
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="txId != null and txId != ''">
+                and TX_ID = #{txId}
+            </if>
+            <if test="paymentReference != null and paymentReference != ''">
+                and PAYMENT_REFERENCE = #{paymentReference}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and FEE_TYPE = #{feeType}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="PproSTransactionMap">
+        select
+        id, MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+        FEE_TYPE, AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, created_time, update_time, file_name, SETTLEMENT_DATE,
+        RECORD_COUNT, is_processed
+        from tb_ppro_s_transaction
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="txId != null and txId != ''">
+                and TX_ID = #{txId}
+            </if>
+            <if test="paymentReference != null and paymentReference != ''">
+                and PAYMENT_REFERENCE = #{paymentReference}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and FEE_TYPE = #{feeType}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="PproSTransactionMap">
+        select
+        id, MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP, MERCHANT_ID, PAYMENT_METHOD,
+        FEE_TYPE, AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, created_time, update_time, file_name, SETTLEMENT_DATE,
+        RECORD_COUNT, is_processed
+        from tb_ppro_s_transaction
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="txId != null and txId != ''">
+                and TX_ID = #{txId}
+            </if>
+            <if test="paymentReference != null and paymentReference != ''">
+                and PAYMENT_REFERENCE = #{paymentReference}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and FEE_TYPE = #{feeType}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_ppro_s_transaction
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                and MERCHANT_TX_ID = #{merchantTxId}
+            </if>
+            <if test="txId != null and txId != ''">
+                and TX_ID = #{txId}
+            </if>
+            <if test="paymentReference != null and paymentReference != ''">
+                and PAYMENT_REFERENCE = #{paymentReference}
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and EVENT_TYPE = #{eventType}
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                and EVENT_TIMESTAMP = #{eventTimestamp}
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                and MERCHANT_ID = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and PAYMENT_METHOD = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and FEE_TYPE = #{feeType}
+            </if>
+            <if test="amount != null and amount != ''">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and CURRENCY = #{currency}
+            </if>
+            <if test="country != null and country != ''">
+                and COUNTRY = #{country}
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                and REFERENCE_TX_ID = #{referenceTxId}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                and file_name = #{fileName}
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                and SETTLEMENT_DATE = #{settlementDate}
+            </if>
+            <if test="recordCount != null">
+                and RECORD_COUNT = #{recordCount}
+            </if>
+            <if test="isProcessed != null">
+                and is_processed = #{isProcessed}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_transaction(MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP,
+                                          MERCHANT_ID, PAYMENT_METHOD, FEE_TYPE, AMOUNT, CURRENCY, COUNTRY,
+                                          REFERENCE_TX_ID, created_time, update_time, file_name, SETTLEMENT_DATE,
+                                          RECORD_COUNT, is_processed)
+        values (#{merchantTxId}, #{txId}, #{paymentReference}, #{eventType}, #{eventTimestamp}, #{merchantId},
+                #{paymentMethod}, #{feeType}, #{amount}, #{currency}, #{country}, #{referenceTxId}, #{createdTime},
+                #{updateTime}, #{fileName}, #{settlementDate}, #{recordCount}, #{isProcessed})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_transaction(MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP,
+        MERCHANT_ID, PAYMENT_METHOD, FEE_TYPE, AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, created_time, update_time,
+        file_name, SETTLEMENT_DATE, RECORD_COUNT, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantTxId}, #{entity.txId}, #{entity.paymentReference}, #{entity.eventType},
+            #{entity.eventTimestamp}, #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType},
+            #{entity.amount}, #{entity.currency}, #{entity.country}, #{entity.referenceTxId}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.fileName}, #{entity.settlementDate}, #{entity.recordCount},
+            #{entity.isProcessed})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_ppro_s_transaction(MERCHANT_TX_ID, TX_ID, PAYMENT_REFERENCE, EVENT_TYPE, EVENT_TIMESTAMP,
+        MERCHANT_ID, PAYMENT_METHOD, FEE_TYPE, AMOUNT, CURRENCY, COUNTRY, REFERENCE_TX_ID, created_time, update_time,
+        file_name, SETTLEMENT_DATE, RECORD_COUNT, is_processed)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.merchantTxId}, #{entity.txId}, #{entity.paymentReference}, #{entity.eventType},
+            #{entity.eventTimestamp}, #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType},
+            #{entity.amount}, #{entity.currency}, #{entity.country}, #{entity.referenceTxId}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.fileName}, #{entity.settlementDate}, #{entity.recordCount},
+            #{entity.isProcessed})
+        </foreach>
+        on duplicate key update
+        MERCHANT_TX_ID = values(MERCHANT_TX_ID),
+        TX_ID = values(TX_ID),
+        PAYMENT_REFERENCE = values(PAYMENT_REFERENCE),
+        EVENT_TYPE = values(EVENT_TYPE),
+        EVENT_TIMESTAMP = values(EVENT_TIMESTAMP),
+        MERCHANT_ID = values(MERCHANT_ID),
+        PAYMENT_METHOD = values(PAYMENT_METHOD),
+        FEE_TYPE = values(FEE_TYPE),
+        AMOUNT = values(AMOUNT),
+        CURRENCY = values(CURRENCY),
+        COUNTRY = values(COUNTRY),
+        REFERENCE_TX_ID = values(REFERENCE_TX_ID),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        file_name = values(file_name),
+        SETTLEMENT_DATE = values(SETTLEMENT_DATE),
+        RECORD_COUNT = values(RECORD_COUNT),
+        is_processed = values(is_processed)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_ppro_s_transaction
+        <set>
+            <if test="merchantTxId != null and merchantTxId != ''">
+                MERCHANT_TX_ID = #{merchantTxId},
+            </if>
+            <if test="txId != null and txId != ''">
+                TX_ID = #{txId},
+            </if>
+            <if test="paymentReference != null and paymentReference != ''">
+                PAYMENT_REFERENCE = #{paymentReference},
+            </if>
+            <if test="eventType != null and eventType != ''">
+                EVENT_TYPE = #{eventType},
+            </if>
+            <if test="eventTimestamp != null and eventTimestamp != ''">
+                EVENT_TIMESTAMP = #{eventTimestamp},
+            </if>
+            <if test="merchantId != null and merchantId != ''">
+                MERCHANT_ID = #{merchantId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                PAYMENT_METHOD = #{paymentMethod},
+            </if>
+            <if test="feeType != null and feeType != ''">
+                FEE_TYPE = #{feeType},
+            </if>
+            <if test="amount != null and amount != ''">
+                AMOUNT = #{amount},
+            </if>
+            <if test="currency != null and currency != ''">
+                CURRENCY = #{currency},
+            </if>
+            <if test="country != null and country != ''">
+                COUNTRY = #{country},
+            </if>
+            <if test="referenceTxId != null and referenceTxId != ''">
+                REFERENCE_TX_ID = #{referenceTxId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="fileName != null and fileName != ''">
+                file_name = #{fileName},
+            </if>
+            <if test="settlementDate != null and settlementDate != ''">
+                SETTLEMENT_DATE = #{settlementDate},
+            </if>
+            <if test="recordCount != null">
+                RECORD_COUNT = #{recordCount},
+            </if>
+            <if test="isProcessed != null">
+                is_processed = #{isProcessed},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_ppro_s_transaction
+        where id = #{id}
+    </delete>
+
+</mapper>
+

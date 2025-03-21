@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantWalletRpMapper">
+
+    <resultMap id="BaseResultMap" type="com.futurebank.order.entity.MerchantWalletEntity" >
+        <result column="id" property="id" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="agent_id" property="agentId" />
+        <result column="platform_id" property="platformId" />
+        <result column="provider_id" property="providerId" />
+        <result column="currency" property="currency" />
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="recharge_balance" property="rechargeBalance" jdbcType="DECIMAL"/>
+        <result column="acquiring_balance" property="acquiringBalance" jdbcType="DECIMAL"/>
+        <result column="collection_balance" property="collectionBalance" jdbcType="DECIMAL"/>
+        <result column="pending_balance" property="pendingBalance" jdbcType="DECIMAL"/>
+        <result column="freeze_amount" property="freezeAmount" jdbcType="DECIMAL"/>
+        <result column="withdrawal_amount" property="withdrawalAmount" jdbcType="DECIMAL"/>
+        <result column="istate" property="istate" />
+        <result column="version" property="version" />
+        <result column="created_time" property="createdTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <select id="getMerchantWalletByMerchantIdAndCurrency" resultMap="BaseResultMap" flushCache="true" useCache="false">
+        SELECT
+            `id`, `merchant_id`, `agent_id`, `platform_id`, `provider_id`, `currency`, `balance`, `recharge_balance`, `acquiring_balance`,
+            `collection_balance`, `pending_balance`, `freeze_amount`, `withdrawal_amount`, `istate`, `version`, `created_time`, `update_time`
+        FROM
+            tb_merchant_wallet_rp
+        WHERE merchant_id = #{merchantId} and currency = #{currency}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_wallet_rp(merchant_id, agent_id, platform_id, provider_id, currency, balance,
+                                       recharge_balance, acquiring_balance, collection_balance, pending_balance,
+                                       freeze_amount, withdrawal_amount, version, created_time, update_time)
+        values (#{merchantId}, #{agentId}, #{platformId}, #{providerId}, #{currency}, #{balance}, #{rechargeBalance},
+                #{acquiringBalance}, #{collectionBalance}, #{pendingBalance}, #{freezeAmount}, #{withdrawalAmount},
+                #{version}, #{createdTime}, #{updateTime})
+
+    </insert>
+
+    <update id="updateWalletPendingBalance">
+        update tb_merchant_wallet_sub
+        set  balance = balance + #{money} , revision = revision + 1
+        where merchant_id = #{merchantId} and wallet_code = #{walletCode} and currency = #{currency} and revision = #{version}
+    </update>
+
+
+    <select id="queryPendingWalletByMerchantIdAndCurrency" resultType="com.futurebank.order.entity.MerchantWalletSubEntity">
+         SELECT
+             `id`, `merchant_id`, `agent_id`, `platform_id`, `provider_id`, `wallet_name`, `wallet_type`, `wallet_code`,
+             `currency`,`balance`, `desc`, `revision`, `created_by`, `created_time`, `updated_by`, `updated_time`
+         FROM
+             tb_merchant_wallet_sub
+         WHERE merchant_id = #{merchantId} and wallet_code = #{walletCode} and currency = #{currency}
+    </select>
+
+    <insert id="addMerchantPendingWallet" keyProperty="id" useGeneratedKeys="true">
+            insert into tb_merchant_wallet_sub( merchant_id, agent_id, platform_id, provider_id, wallet_name, wallet_type, wallet_code,currency, balance, `desc`, revision, created_by, created_time, updated_by, updated_time)
+            values (
+                    #{merchantId}, #{agentId}, #{platformId}, #{providerId}, #{walletName}, #{walletType}, #{walletCode},
+                    #{currency}, #{balance}, #{desc}, #{revision}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime}
+                   )
+    </insert>
+
+    <select id="queryBalance" resultType="com.futurebank.order.vo.AccountBalanceVo">
+        SELECT
+            m.merchant_id,
+            m.agent_id,
+            m.platform_id,
+            m.provider_id,
+            m.currency,
+            m.balance,
+            m.collection_balance + m.acquiring_balance availableBalance,
+            m.recharge_balance,
+            m.acquiring_balance,
+            m.collection_balance,
+            m.freeze_amount,
+            m.withdrawal_amount,
+            m.istate,
+            s.wallet_code pendingWalletCode,
+            s.wallet_name pendingWalletName,
+            s.balance pendingWalletBalance
+        FROM
+            tb_merchant_wallet_rp m
+        LEFT JOIN
+            tb_merchant_wallet_sub s
+        ON
+            m.merchant_id = s.merchant_id AND m.currency = s.currency
+        <where>
+            <if test="merchantId != null">
+                and m.merchant_id = #{merchantId}
+            </if>
+            <if test="currency != null and currency != '' ">
+                and m.currency = #{currency}
+            </if>
+        </where>
+    </select>
+</mapper>

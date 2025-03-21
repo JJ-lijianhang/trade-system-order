@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.futurebank.order.mapper.MerchantSettmentDetailsMapper">
+
+    <resultMap type="com.futurebank.order.entity.MerchantSettmentDetailsEntity" id="MerchantSettmentDetailsMap">
+        <result property="id" column="id"/>
+        <result property="providerId" column="provider_id"/>
+        <result property="providerName" column="provider_name"/>
+        <result property="settlementId" column="settlement_id"/>
+        <result property="downstreamOrderNo" column="downstream_order_no"/>
+        <result property="platformOrderNo" column="platform_order_no"/>
+        <result property="referenceOrderNo" column="reference_order_no"/>
+        <result property="orderType" column="order_type"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="orderCreateTime" column="order_create_time"/>
+        <result property="orderCompleteTime" column="order_complete_time"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="feeType" column="fee_type"/>
+        <result property="merchantOrderAmount" column="merchant_order_amount"/>
+        <result property="orderAmount" column="order_amount"/>
+        <result property="currency" column="currency"/>
+        <result property="merchantCurrency" column="merchant_currency"/>
+        <result property="country" column="country"/>
+        <result property="exchange" column="exchange"/>
+        <result property="exchangeAmount" column="exchange_amount"/>
+        <result property="markup" column="markup"/>
+        <result property="markupAmount" column="markup_amount"/>
+        <result property="downstreamFixedFee" column="downstream_fixed_fee"/>
+        <result property="downstreamTxRate" column="downstream_tx_rate"/>
+        <result property="downstreamFee" column="downstream_fee"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="consumerAmount" column="consumer_amount"/>
+        <result property="consumerCurrency" column="consumer_currency"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MerchantSettmentDetailsMap">
+        select id,
+               provider_id,
+               provider_name,
+               settlement_id,
+               downstream_order_no,
+               platform_order_no,
+               reference_order_no,
+               order_type,
+               order_status,
+               order_create_time,
+               order_complete_time,
+               merchant_id,
+               payment_method,
+               fee_type,
+               merchant_order_amount,
+               order_amount,
+               currency,
+               merchant_currency,
+               country,
+               exchange,
+               exchange_amount,
+               markup,
+               markup_amount,
+               downstream_fixed_fee,
+               downstream_tx_rate,
+               downstream_fee,
+               created_time,
+               update_time,
+               consumer_amount,
+               consumer_currency
+        from tb_merchant_settment_details
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-数据库分页-->
+    <select id="queryByPage" resultMap="MerchantSettmentDetailsMap">
+        select
+        id,provider_id,provider_name, settlement_id, downstream_order_no, platform_order_no, reference_order_no, order_type, order_status,
+        order_create_time, order_complete_time, merchant_id, payment_method, fee_type, merchant_order_amount,
+        order_amount, currency, merchant_currency, country, exchange, exchange_amount, markup, markup_amount,
+        downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time, update_time, consumer_amount,
+        consumer_currency
+        from tb_merchant_settment_details
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="orderCreateTime != null">
+                and order_create_time = #{orderCreateTime}
+            </if>
+            <if test="orderCompleteTime != null">
+                and order_complete_time = #{orderCompleteTime}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupAmount != null">
+                and markup_amount = #{markupAmount}
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                and downstream_fixed_fee = #{downstreamFixedFee}
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                and downstream_tx_rate = #{downstreamTxRate}
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                and downstream_fee = #{downstreamFee}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="consumerAmount != null">
+                and consumer_amount = #{consumerAmount}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--查询指定行数据-代码分页-->
+    <select id="list" resultMap="MerchantSettmentDetailsMap">
+        select
+        id,provider_id,provider_name, settlement_id, downstream_order_no, platform_order_no, reference_order_no, order_type, order_status,
+        order_create_time, order_complete_time, merchant_id, payment_method, fee_type, merchant_order_amount,
+        order_amount, currency, merchant_currency, country, exchange, exchange_amount, markup, markup_amount,
+        downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time, update_time, consumer_amount,
+        consumer_currency
+        from tb_merchant_settment_details
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="orderCreateTime != null">
+                and order_create_time = #{orderCreateTime}
+            </if>
+            <if test="orderCompleteTime != null">
+                and order_complete_time = #{orderCompleteTime}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupAmount != null">
+                and markup_amount = #{markupAmount}
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                and downstream_fixed_fee = #{downstreamFixedFee}
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                and downstream_tx_rate = #{downstreamTxRate}
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                and downstream_fee = #{downstreamFee}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="consumerAmount != null">
+                and consumer_amount = #{consumerAmount}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="listByDate" resultMap="MerchantSettmentDetailsMap">
+        select
+        id,provider_id,provider_name, settlement_id, downstream_order_no, platform_order_no, reference_order_no, order_type, order_status,
+        order_create_time, order_complete_time, merchant_id, payment_method, fee_type, merchant_order_amount,
+        order_amount, currency, merchant_currency, country, exchange, exchange_amount, markup, markup_amount,
+        downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time, update_time, consumer_amount,
+        consumer_currency
+        from tb_merchant_settment_details
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="orderCreateTime != null">
+                and order_create_time = #{orderCreateTime}
+            </if>
+            <if test="orderCompleteTime != null">
+                and order_complete_time = #{orderCompleteTime}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupAmount != null">
+                and markup_amount = #{markupAmount}
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                and downstream_fixed_fee = #{downstreamFixedFee}
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                and downstream_tx_rate = #{downstreamTxRate}
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                and downstream_fee = #{downstreamFee}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="consumerAmount != null">
+                and consumer_amount = #{consumerAmount}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and created_time>= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and created_time&lt;= #{endDate}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from tb_merchant_settment_details
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="settlementId != null and settlementId != ''">
+                and settlement_id = #{settlementId}
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                and downstream_order_no = #{downstreamOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                and reference_order_no = #{referenceOrderNo}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="orderCreateTime != null">
+                and order_create_time = #{orderCreateTime}
+            </if>
+            <if test="orderCompleteTime != null">
+                and order_complete_time = #{orderCompleteTime}
+            </if>
+            <if test="merchantId != null">
+                and merchant_id = #{merchantId}
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                and payment_method = #{paymentMethod}
+            </if>
+            <if test="feeType != null and feeType != ''">
+                and fee_type = #{feeType}
+            </if>
+            <if test="merchantOrderAmount != null">
+                and merchant_order_amount = #{merchantOrderAmount}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="currency != null and currency != ''">
+                and currency = #{currency}
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                and merchant_currency = #{merchantCurrency}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="exchange != null">
+                and exchange = #{exchange}
+            </if>
+            <if test="exchangeAmount != null">
+                and exchange_amount = #{exchangeAmount}
+            </if>
+            <if test="markup != null">
+                and markup = #{markup}
+            </if>
+            <if test="markupAmount != null">
+                and markup_amount = #{markupAmount}
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                and downstream_fixed_fee = #{downstreamFixedFee}
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                and downstream_tx_rate = #{downstreamTxRate}
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                and downstream_fee = #{downstreamFee}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="consumerAmount != null">
+                and consumer_amount = #{consumerAmount}
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                and consumer_currency = #{consumerCurrency}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settment_details(provider_id,provider_name,settlement_id, downstream_order_no, platform_order_no,
+                                                 reference_order_no, order_type, order_status, order_create_time,
+                                                 order_complete_time, merchant_id, payment_method, fee_type,
+                                                 merchant_order_amount, order_amount, currency, merchant_currency,
+                                                 country, exchange, exchange_amount, markup, markup_amount,
+                                                 downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time,
+                                                 update_time, consumer_amount, consumer_currency)
+        values (#{providerId},#{providerName},#{settlementId}, #{downstreamOrderNo}, #{platformOrderNo}, #{referenceOrderNo}, #{orderType},
+                #{orderStatus}, #{orderCreateTime}, #{orderCompleteTime}, #{merchantId}, #{paymentMethod}, #{feeType},
+                #{merchantOrderAmount}, #{orderAmount}, #{currency}, #{merchantCurrency}, #{country}, #{exchange},
+                #{exchangeAmount}, #{markup}, #{markupAmount}, #{downstreamFixedFee}, #{downstreamTxRate},
+                #{downstreamFee}, #{createdTime}, #{updateTime}, #{consumerAmount}, #{consumerCurrency})
+
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settment_details(provider_id,provider_name,settlement_id, downstream_order_no, platform_order_no,
+        reference_order_no, order_type, order_status, order_create_time, order_complete_time, merchant_id,
+        payment_method, fee_type, merchant_order_amount, order_amount, currency, merchant_currency, country, exchange,
+        exchange_amount, markup, markup_amount, downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time,
+        update_time, consumer_amount, consumer_currency)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settlementId}, #{entity.downstreamOrderNo}, #{entity.platformOrderNo}, #{entity.referenceOrderNo},
+            #{entity.orderType}, #{entity.orderStatus}, #{entity.orderCreateTime}, #{entity.orderCompleteTime},
+            #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType}, #{entity.merchantOrderAmount},
+            #{entity.orderAmount}, #{entity.currency}, #{entity.merchantCurrency}, #{entity.country},
+            #{entity.exchange}, #{entity.exchangeAmount}, #{entity.markup}, #{entity.markupAmount},
+            #{entity.downstreamFixedFee}, #{entity.downstreamTxRate}, #{entity.downstreamFee}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.consumerAmount}, #{entity.consumerCurrency})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_merchant_settment_details(provider_id,provider_name,settlement_id, downstream_order_no, platform_order_no,
+        reference_order_no, order_type, order_status, order_create_time, order_complete_time, merchant_id,
+        payment_method, fee_type, merchant_order_amount, order_amount, currency, merchant_currency, country, exchange,
+        exchange_amount, markup, markup_amount, downstream_fixed_fee, downstream_tx_rate, downstream_fee, created_time,
+        update_time, consumer_amount, consumer_currency)
+        values
+        <foreach collection="list" item="entity" separator=",">
+            (#{entity.providerId},#{entity.providerName},#{entity.settlementId}, #{entity.downstreamOrderNo}, #{entity.platformOrderNo}, #{entity.referenceOrderNo},
+            #{entity.orderType}, #{entity.orderStatus}, #{entity.orderCreateTime}, #{entity.orderCompleteTime},
+            #{entity.merchantId}, #{entity.paymentMethod}, #{entity.feeType}, #{entity.merchantOrderAmount},
+            #{entity.orderAmount}, #{entity.currency}, #{entity.merchantCurrency}, #{entity.country},
+            #{entity.exchange}, #{entity.exchangeAmount}, #{entity.markup}, #{entity.markupAmount},
+            #{entity.downstreamFixedFee}, #{entity.downstreamTxRate}, #{entity.downstreamFee}, #{entity.createdTime},
+            #{entity.updateTime}, #{entity.consumerAmount}, #{entity.consumerCurrency})
+        </foreach>
+        on duplicate key update
+        settlement_id = values(settlement_id),
+        downstream_order_no = values(downstream_order_no),
+        platform_order_no = values(platform_order_no),
+        reference_order_no = values(reference_order_no),
+        order_type = values(order_type),
+        order_status = values(order_status),
+        order_create_time = values(order_create_time),
+        order_complete_time = values(order_complete_time),
+        merchant_id = values(merchant_id),
+        payment_method = values(payment_method),
+        fee_type = values(fee_type),
+        merchant_order_amount = values(merchant_order_amount),
+        order_amount = values(order_amount),
+        currency = values(currency),
+        merchant_currency = values(merchant_currency),
+        country = values(country),
+        exchange = values(exchange),
+        exchange_amount = values(exchange_amount),
+        markup = values(markup),
+        markup_amount = values(markup_amount),
+        downstream_fixed_fee = values(downstream_fixed_fee),
+        downstream_tx_rate = values(downstream_tx_rate),
+        downstream_fee = values(downstream_fee),
+        created_time = values(created_time),
+        update_time = values(update_time),
+        consumer_amount = values(consumer_amount),
+        consumer_currency = values(consumer_currency)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_merchant_settment_details
+        <set>
+            <if test="settlementId != null and settlementId != ''">
+                settlement_id = #{settlementId},
+            </if>
+            <if test="downstreamOrderNo != null and downstreamOrderNo != ''">
+                downstream_order_no = #{downstreamOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="referenceOrderNo != null and referenceOrderNo != ''">
+                reference_order_no = #{referenceOrderNo},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                order_status = #{orderStatus},
+            </if>
+            <if test="orderCreateTime != null">
+                order_create_time = #{orderCreateTime},
+            </if>
+            <if test="orderCompleteTime != null">
+                order_complete_time = #{orderCompleteTime},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId},
+            </if>
+            <if test="paymentMethod != null and paymentMethod != ''">
+                payment_method = #{paymentMethod},
+            </if>
+            <if test="feeType != null and feeType != ''">
+                fee_type = #{feeType},
+            </if>
+            <if test="merchantOrderAmount != null">
+                merchant_order_amount = #{merchantOrderAmount},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="currency != null and currency != ''">
+                currency = #{currency},
+            </if>
+            <if test="merchantCurrency != null and merchantCurrency != ''">
+                merchant_currency = #{merchantCurrency},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="exchange != null">
+                exchange = #{exchange},
+            </if>
+            <if test="exchangeAmount != null">
+                exchange_amount = #{exchangeAmount},
+            </if>
+            <if test="markup != null">
+                markup = #{markup},
+            </if>
+            <if test="markupAmount != null">
+                markup_amount = #{markupAmount},
+            </if>
+            <if test="downstreamFixedFee != null and downstreamFixedFee != ''">
+                downstream_fixed_fee = #{downstreamFixedFee},
+            </if>
+            <if test="downstreamTxRate != null and downstreamTxRate != ''">
+                downstream_tx_rate = #{downstreamTxRate},
+            </if>
+            <if test="downstreamFee != null and downstreamFee != ''">
+                downstream_fee = #{downstreamFee},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="consumerAmount != null">
+                consumer_amount = #{consumerAmount},
+            </if>
+            <if test="consumerCurrency != null and consumerCurrency != ''">
+                consumer_currency = #{consumerCurrency},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from tb_merchant_settment_details
+        where id = #{id}
+    </delete>
+
+</mapper>
+

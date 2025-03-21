@@ -1,0 +1,449 @@
+2025-03-21 11:13:44.686   WARN  21288
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:13:44.686   WARN  21288
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:13:44.686   WARN  21288
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:13:44.686   WARN  21288
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 11:13:45.198   WARN  21288
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 11:13:45.200   WARN  21288
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 11:13:45.390   WARN  21288
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 11:13:46.398   WARN  21288
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 11:13:50.639   WARN  21288
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'payin-refund-kgp': Unsatisfied dependency expressed through field 'ossClient': No qualifying bean of type 'com.aliyun.oss.OSSClient' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-03-21 11:13:50.745   WARN  21288
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 11:13:50.745   WARN  21288
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 11:13:50.745   WARN  21288
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 11:13:50.745   WARN  21288
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 11:14:54.292   WARN   7928
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:14:54.292   WARN   7928
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:14:54.292   WARN   7928
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:14:54.292   WARN   7928
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 11:14:54.815   WARN   7928
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 11:14:54.818   WARN   7928
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 11:14:55.025   WARN   7928
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 11:14:56.042   WARN   7928
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 11:15:03.731   WARN   7928
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 11:20:55.322   WARN   7928
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 11:20:55.322   WARN   7928
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 11:20:55.322   WARN   7928
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 11:20:55.323   WARN   7928
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 11:51:23.189   WARN  16584
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.futurebank.order.TradeSystemOrderApplication]
+2025-03-21 11:51:23.215   WARN  16584
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 11:51:23.216   WARN  16584
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 11:51:23.216   WARN  16584
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 11:51:23.216   WARN  16584
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 11:53:22.612   WARN   5256
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.futurebank.order.TradeSystemOrderApplication]
+2025-03-21 11:53:22.641   WARN   5256
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 11:53:22.641   WARN   5256
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 11:53:22.641   WARN   5256
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 11:53:22.642   WARN   5256
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 11:56:39.824   WARN  33916
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:56:39.824   WARN  33916
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:56:39.824   WARN  33916
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 11:56:39.824   WARN  33916
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 11:56:40.334   WARN  33916
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 11:56:40.337   WARN  33916
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 11:56:40.533   WARN  33916
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 11:56:41.468   WARN  33916
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 11:56:47.883   WARN  33916
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 11:56:49.009   WARN  33916
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 14:15:41.910   WARN   4600
+            [           main] c.a.c.n.c.NacosConfigDataLoader [253] : [Nacos Config] config[dataId=trade-system-order.yaml, group=DEFAULT_GROUP] is empty
+2025-03-21 14:15:43.046   WARN   4600
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:15:43.046   WARN   4600
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:15:43.046   WARN   4600
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:15:43.046   WARN   4600
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:15:43.562   WARN   4600
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:15:43.567   WARN   4600
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:15:43.811   WARN   4600
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:16:27.342   WARN   4600
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:16:27.342   WARN   4600
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:16:27.344   WARN   4600
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:16:27.345   WARN   4600
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:16:27.344   WARN   4600
+            [           main] o.h.e.j.e.i.JdbcEnvironmentInitiator [359] : HHH000342: Could not obtain connection to query metadata
+java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:290) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:123) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:77) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) [spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) [spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) [spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954) [spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) [spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) [spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) [spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) [spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) [spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) [spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) [spring-boot-3.3.3.jar:3.3.3]
+	at com.futurebank.order.TradeSystemOrderApplication.main(TradeSystemOrderApplication.java:22) [classes/:?]
+2025-03-21 14:16:27.346   WARN   4600
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2025-03-21 14:16:36.006   WARN  33356
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:16:36.006   WARN  33356
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:16:36.007   WARN  33356
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:16:36.007   WARN  33356
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:16:36.509   WARN  33356
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:16:36.512   WARN  33356
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:16:36.718   WARN  33356
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:16:42.454   WARN  33356
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:16:42.454   WARN  33356
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:16:42.455   WARN  33356
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:16:42.455   WARN  33356
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:17:55.924   WARN  19596
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:17:55.924   WARN  19596
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:17:55.924   WARN  19596
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:17:55.924   WARN  19596
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:17:56.442   WARN  19596
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:17:56.445   WARN  19596
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:17:56.644   WARN  19596
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:17:57.609   WARN  19596
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 14:17:58.894   WARN  19596
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'consumerRefundMessageConfig': Unsatisfied dependency expressed through field 'payinRefundProcessor': Error creating bean with name 'payinRefundProcessor' defined in file [C:\Users\jh3nn\IdeaProjects\20250317\trade-system-order\target\classes\com\futurebank\order\service\payin\PayinRefundProcessor.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'payin-refund-AlipayPlus': Unsatisfied dependency expressed through field 'idGeneratorService': Error creating bean with name 'idGeneratorService': Invocation of init method failed
+2025-03-21 14:17:58.934   WARN  19596
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:17:58.934   WARN  19596
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:17:58.934   WARN  19596
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:17:58.934   WARN  19596
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:18:27.159   WARN  30360
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:18:27.159   WARN  30360
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:18:27.159   WARN  30360
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:18:27.160   WARN  30360
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:18:27.687   WARN  30360
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:18:27.690   WARN  30360
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:18:27.892   WARN  30360
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:18:28.832   WARN  30360
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 14:18:30.046   WARN  30360
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'consumerRefundMessageConfig': Unsatisfied dependency expressed through field 'payinRefundProcessor': Error creating bean with name 'payinRefundProcessor' defined in file [C:\Users\jh3nn\IdeaProjects\20250317\trade-system-order\target\classes\com\futurebank\order\service\payin\PayinRefundProcessor.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'payin-refund-AlipayPlus': Unsatisfied dependency expressed through field 'idGeneratorService': Error creating bean with name 'idGeneratorService': Invocation of init method failed
+2025-03-21 14:18:30.086   WARN  30360
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:18:30.086   WARN  30360
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:18:30.087   WARN  30360
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:18:30.087   WARN  30360
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:20:27.020   WARN  24568
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:20:27.021   WARN  24568
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:20:27.021   WARN  24568
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:20:27.021   WARN  24568
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:20:27.528   WARN  24568
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:20:27.530   WARN  24568
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:20:27.713   WARN  24568
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:20:28.662   WARN  24568
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 14:20:46.776   WARN  24568
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'consumerRefundMessageConfig': Unsatisfied dependency expressed through field 'payinRefundProcessor': Error creating bean with name 'payinRefundProcessor' defined in file [C:\Users\jh3nn\IdeaProjects\20250317\trade-system-order\target\classes\com\futurebank\order\service\payin\PayinRefundProcessor.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'payin-refund-kgp': Unsatisfied dependency expressed through field 'redisCache': Error creating bean with name 'redisCache': Unsatisfied dependency expressed through field 'redisTemplate': Error creating bean with name 'redisTemplate' defined in class path resource [com/futurebank/cache/RedisConfig.class]: Unsatisfied dependency expressed through method 'redisTemplate' parameter 0: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfiguration.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfiguration.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: Unable to connect to Redis server: r-gs5cte8w0kj0zley5c.redis.singapore.rds.aliyuncs.com/172.29.161.250:6379
+2025-03-21 14:20:47.779   WARN  24568
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:20:47.779   WARN  24568
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:20:47.779   WARN  24568
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:20:47.780   WARN  24568
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:22:27.069   WARN  32884
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:22:27.070   WARN  32884
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:22:27.070   WARN  32884
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:22:27.070   WARN  32884
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:22:27.587   WARN  32884
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:22:27.590   WARN  32884
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:22:27.783   WARN  32884
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:22:28.834   WARN  32884
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 14:22:36.593   WARN  32884
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 14:22:38.944   WARN  32884
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 14:23:03.490   WARN  32884
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 14:23:03.490   WARN  32884
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 14:23:03.490   WARN  32884
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 14:23:03.491   WARN  32884
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 14:23:13.365   WARN  34120
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:23:13.365   WARN  34120
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:23:13.365   WARN  34120
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 14:23:13.365   WARN  34120
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 14:23:13.877   WARN  34120
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 14:23:13.879   WARN  34120
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 14:23:14.078   WARN  34120
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 14:23:15.013   WARN  34120
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 14:23:22.628   WARN  34120
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 14:23:23.822   WARN  34120
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 15:22:34.477   WARN  34120
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:22:34.477   WARN  34120
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:22:34.477   WARN  34120
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:22:34.479   WARN  34120
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 15:22:41.706   WARN  18160
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:22:41.706   WARN  18160
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:22:41.706   WARN  18160
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:22:41.706   WARN  18160
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 15:22:42.229   WARN  18160
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 15:22:42.231   WARN  18160
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 15:22:42.425   WARN  18160
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 15:22:43.420   WARN  18160
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 15:22:47.461   WARN  18160
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'reportExportController': Unsatisfied dependency expressed through field 'rocketMQTemplate': No qualifying bean of type 'org.apache.rocketmq.spring.core.RocketMQTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-03-21 15:22:47.572   WARN  18160
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:22:47.572   WARN  18160
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:22:47.572   WARN  18160
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:22:47.572   WARN  18160
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 15:31:48.464   WARN  23772
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:31:48.464   WARN  23772
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:31:48.464   WARN  23772
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:31:48.464   WARN  23772
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 15:31:48.999   WARN  23772
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 15:31:49.002   WARN  23772
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 15:31:49.216   WARN  23772
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 15:31:50.238   WARN  23772
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 15:31:54.354   WARN  23772
+            [           main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [633] : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'reportExportController': Unsatisfied dependency expressed through field 'rocketMQTemplate': No qualifying bean of type 'org.apache.rocketmq.spring.core.RocketMQTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-03-21 15:31:54.466   WARN  23772
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:31:54.466   WARN  23772
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:31:54.467   WARN  23772
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:31:54.467   WARN  23772
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 15:32:42.874   WARN  22124
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:32:42.874   WARN  22124
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:32:42.874   WARN  22124
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:32:42.875   WARN  22124
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 15:32:43.380   WARN  22124
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 15:32:43.383   WARN  22124
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 15:32:43.572   WARN  22124
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 15:32:44.501   WARN  22124
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 15:32:52.334   WARN  22124
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 15:32:53.499   WARN  22124
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 15:33:33.657   WARN  22124
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:33:33.657   WARN  22124
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:33:33.657   WARN  22124
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:33:33.658   WARN  22124
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 15:33:41.885   WARN  33924
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:33:41.885   WARN  33924
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:33:41.885   WARN  33924
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:33:41.885   WARN  33924
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 15:33:42.383   WARN  33924
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 15:33:42.386   WARN  33924
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 15:33:42.577   WARN  33924
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 15:33:43.554   WARN  33924
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 15:33:49.120   WARN  33924
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 15:33:50.266   WARN  33924
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 15:35:25.222   WARN  33924
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:35:25.222   WARN  33924
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:35:25.222   WARN  33924
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
+2025-03-21 15:35:25.222   WARN  33924
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:35:33.277   WARN    472
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'baseMapper' and 'com.futurebank.order.mapper.base.BaseMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:35:33.277   WARN    472
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'reportExportMapper' and 'com.futurebank.order.mapper.ReportExportMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:35:33.277   WARN    472
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : Skipping MapperFactoryBean with name 'summaryQueryMapper' and 'com.futurebank.order.mapper.SummaryQueryMapper' mapperInterface. Bean already defined with the same name!
+2025-03-21 15:35:33.277   WARN    472
+            [           main] o.m.s.m.ClassPathMapperScanner [44] : No MyBatis mapper was found in '[com.futurebank.order]' package. Please check your configuration.
+2025-03-21 15:35:33.801   WARN    472
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [429] : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-21 15:35:33.804   WARN    472
+            [           main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [437] : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-03-21 15:35:33.989   WARN    472
+            [           main] i.u.w.jsr [68] : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2025-03-21 15:35:34.919   WARN    472
+            [           main] o.h.d.Dialect [354] : HHH000511: The 5.7.44 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-21 15:35:40.506   WARN    472
+            [           main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [236] : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21 15:35:41.695   WARN    472
+            [           main] o.s.b.a.f.FreeMarkerAutoConfiguration [66] : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-03-21 15:47:05.628   WARN    472
+            [       Thread-3] c.a.n.c.n.NotifyCenter [134] : [NotifyCenter] Start destroying Publisher
+2025-03-21 15:47:05.629   WARN    472
+            [       Thread-3] c.a.n.c.n.NotifyCenter [151] : [NotifyCenter] Destruction of the end
+2025-03-21 15:47:05.629   WARN    472
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [102] : [HttpClientBeanHolder] Start destroying common HttpClient
+2025-03-21 15:47:05.630   WARN    472
+            [       Thread-1] c.a.n.c.h.HttpClientBeanHolder [111] : [HttpClientBeanHolder] Destruction of the end
