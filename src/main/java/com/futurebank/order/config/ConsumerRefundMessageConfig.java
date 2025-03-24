@@ -1,23 +1,19 @@
 package com.futurebank.order.config;
 
 import com.futurebank.order.service.payin.PayinRefundProcessor;
+import com.futurebank.rocketmq.MqConsumerBinding;
+import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.rocketmq.acl.common.AclClientRPCHook;
-import org.apache.rocketmq.acl.common.SessionCredentials;
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.apache.rocketmq.remoting.RPCHook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @author ljh
@@ -27,59 +23,32 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Configuration
-public class ConsumerRefundMessageConfig {
+@MqConsumerBinding(name ="RefundMessageTopic")
+public class ConsumerRefundMessageConfig implements MessageListenerConcurrently{
 
-
-    private static final String TOPIC = "RefundMessageTopic";
-    private static final String CONSUMER_GROUP = "RefundMessageGroup";
-
-
-    @Value("${rocketmq.accessKey}")
-    private String accessKey;
-    @Value("${rocketmq.secretKey}")
-    private String secretKey;
-    @Value("${rocketmq.endpoints}")
-    private String endpoints;
-
-    @Autowired
+    @Resource
     private PayinRefundProcessor payinRefundProcessor;
 
 
-    @Bean(name = "refundMessageConsumer")
-    public DefaultMQPushConsumer delayOrderConsumer() throws MQClientException {
+    @SneakyThrows
+    @Override
+    public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
+        for (MessageExt messageExt : list) {
 
+            String body =new String(messageExt.getBody(), StandardCharsets.UTF_8);
+            log.info("notify Received: body={} messageId={}",  body, messageExt.getMsgId());
 
-        RPCHook aclHook = null;
-        if (StringUtils.isNotBlank(accessKey) && StringUtils.isNotBlank(secretKey)) {
-            aclHook = new AclClientRPCHook(new SessionCredentials(accessKey,secretKey));
-        }
-
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP, aclHook, new AllocateMessageQueueAveragely());
-        consumer.setNamesrvAddr(endpoints);
-        consumer.setConsumeTimeout(3000);
-        consumer.setConsumeThreadMin(1);
-        consumer.setConsumeThreadMax(2);
-        consumer.subscribe(TOPIC,"*");
-        consumer.registerMessageListener((MessageListenerConcurrently) (list, consumeConcurrentlyContext) -> {
-            for (MessageExt messageExt : list) {
-                String body =new String(messageExt.getBody(), StandardCharsets.UTF_8);
-                log.info("refund message: body={} messageId={}",  body, messageExt.getMsgId());
-                if (StringUtils.isBlank(body)) {
-                    continue;
-                }
-
-                try {
-                    payinRefundProcessor.processRefund(body);
-                } catch (Exception e) {
-                    return ConsumeConcurrentlyStatus.RECONSUME_LATER;
-                }
+            if (StringUtils.isBlank(body)) {
+                continue;
             }
-            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-        });
 
-        // 启动 Consumer
-        consumer.start();
-        return consumer;
+            try {
+                payinRefundProcessor.processRefund(body);
+            } catch (Exception e) {
+                return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            }
+        }
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 
 }

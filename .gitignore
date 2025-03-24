@@ -3,11 +3,13 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.log
 
 
 mvnw
 mvnw.cmd
 .mvn/wrapper/
+*.log
 
 ### STS ###
 .apt_generated
@@ -17,12 +19,14 @@ mvnw.cmd
 .settings
 .springBeans
 .sts4-cache
+*.log
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+*.log
 
 ### NetBeans ###
 /nbproject/private/
@@ -36,3 +40,4 @@ build/
 
 ### VS Code ###
 .vscode/
+*.log
