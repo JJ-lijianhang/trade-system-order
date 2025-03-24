@@ -37,8 +37,8 @@ public class PaymentOrderService extends BaseService<PaymentOrderMapper, Payment
         return paymentOrderMapper.getPaymentOrderByUpstreamOrderNo(upstreamOrderNo);
     }
 
-    public List<PaymentOrderEntity> getPaymentOrderEntity(String platformOrderNo) {
-        return paymentOrderMapper.getPaymentOrderEntity(platformOrderNo);
+    public List<PaymentOrderEntity> getPaymentOrderEntity(List ids) {
+        return paymentOrderMapper.getPaymentOrderEntity(ids);
     }
 
 

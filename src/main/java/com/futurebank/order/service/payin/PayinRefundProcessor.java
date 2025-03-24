@@ -52,9 +52,9 @@ public class PayinRefundProcessor {
         return this.refundServiceMap.get(serviceName);
     }
 
-    public CommonResp processRefund(String platformOrderNo) throws Exception {
+    public CommonResp processRefund(List ids) throws Exception {
 
-        List<PaymentOrderEntity> refundOrderList = paymentService.getPaymentOrderEntity(platformOrderNo);
+        List<PaymentOrderEntity> refundOrderList = paymentService.getPaymentOrderEntity(ids);
         log.info("refundOrderList size:{}", refundOrderList.size());
 
         if (refundOrderList == null || refundOrderList.size() == 0) {

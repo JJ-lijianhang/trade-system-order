@@ -30,7 +30,7 @@ public class RefundTask {
     public void upStreamRefund() throws Exception {
         log.info("payinRefundProcessor.processRefund() start");
         try {
-            payinRefundProcessor.processRefund("");
+            payinRefundProcessor.processRefund(null);
         } catch (Exception e) {
             log.error("payinRefundProcessor.processRefund() error", e);
         }

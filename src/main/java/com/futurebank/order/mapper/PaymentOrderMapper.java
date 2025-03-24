@@ -31,8 +31,8 @@ public interface PaymentOrderMapper extends BaseMapper<PaymentOrderEntity> {
     PaymentOrderEntity getPaymentOrderByOrderNo(@Param("tradeNo") String tradeNo);
 
     @DS("slave")
-    @Select("select * from tb_payment_order where order_type='refund' and review_status='approved' and request_status=0 and platform_order_no = #{platformOrderNo}")
-    List<PaymentOrderEntity> getPaymentOrderEntity(String platformOrderNo);
+    @Select("SELECT * FROM tb_payment_order WHERE order_type='refund' AND review_status='approved' AND request_status=0 AND id IN (#{ids})")
+    List<PaymentOrderEntity> getPaymentOrderEntity(@Param("ids") List<String> ids);
 
     @DS("slave")
     @Select("select * from tb_payment_order where order_type='transaction'  and order_query_status=0 and status='PENDING' and order by order_create_time asc limit 1000")
