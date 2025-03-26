@@ -26,4 +26,18 @@ public class SettlementController {
             log.error("payinRefundProcessor.processRefund() error", e);
         }
     }
+    /**
+     * 本地退款返还
+     * @throws Exception
+     */
+    @GetMapping("/refundBackProcess")
+    public void refundBackProcess() throws Exception {
+        log.info("local service process refundBack start");
+        try {
+            payinRefundProcessor.refundBack();
+        } catch (Exception e) {
+            log.error("payinRefundProcessor.processRefund() error", e);
+        }
+    }
+
 }
