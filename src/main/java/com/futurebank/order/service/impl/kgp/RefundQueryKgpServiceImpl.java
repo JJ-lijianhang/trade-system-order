@@ -2,37 +2,34 @@ package com.futurebank.order.service.impl.kgp;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.futurebank.pojo.base.CodeEunm;
+import com.futurebank.cache.RedisCache;
 import com.futurebank.pojo.enums.PaymentStatusEnum;
-import com.futurebank.pojo.exception.CustomException;
 import com.futurebank.pojo.utils.BigDecimalUtils;
-import com.futurebank.pojo.utils.DateUtils;
-import com.futurebank.pojo.utils.FuturebankUtil;
 import com.futurebank.pojo.utils.SingUtils;
 import com.futurebank.pojo.vo.notify.NotificationMessage;
 import com.futurebank.pojo.vo.notify.NotificationRequestItem;
 import com.futurebank.pojo.vo.payment.Amount;
-import com.futurebank.cache.RedisCache;
+import com.futurebank.rocketmq.NotifyEvent;
+import com.futurebank.rocketmq.RocketMQProducer;
 import com.futurebank.order.entity.MerchantEntity;
 import com.futurebank.order.entity.PaymentBillingEntity;
 import com.futurebank.order.entity.PaymentOrderEntity;
 import com.futurebank.order.entity.PaymentProviderEntity;
 import com.futurebank.order.service.*;
 import com.futurebank.order.service.payin.PayinRefundQueryService;
-import com.futurebank.order.service.producer.SendMQService;
+import com.futurebank.order.utils.DateUtils;
+import com.futurebank.order.utils.FuturebankUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.futurebank.pojo.vo.notify.NotificationRequestItem.EVENT_CODE_REFUND;
 
@@ -56,8 +53,10 @@ class RefundQueryKgpServiceImpl implements PayinRefundQueryService {
     @Autowired
     PaymentOrderDownstreamService paymentOrderDownstreamService;
 
+//    @Autowired
+//    SendMQService sendMQService;
     @Autowired
-    SendMQService sendMQService;
+    private RocketMQProducer rocketMQProducer;
 
     @Autowired
     MerchantService merchantService;
@@ -197,7 +196,13 @@ class RefundQueryKgpServiceImpl implements PayinRefundQueryService {
         refundNotifyMessage.setWebhookUrl(paymentOrderEntity.getDownstreamNotifyUrl());
         refundNotifyMessage.setProviderReference(paymentOrderEntity.getUpstreamOrderNo());
         updateBill(paymentOrderEntity);
-        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+//        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+
+        NotifyEvent event = new NotifyEvent();
+        event.setData(refundNotifyMessage);
+        event.setKey("RefundNotifyTopic");
+        rocketMQProducer.sendMessage(event);
+
     }
 
 

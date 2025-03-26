@@ -2,37 +2,23 @@ package com.futurebank.order.service.impl.klasha;
 
 import com.alibaba.fastjson.JSON;
 import com.futurebank.cache.RedisCache;
-import com.futurebank.order.entity.MerchantEntity;
-import com.futurebank.order.entity.PaymentBillingEntity;
-import com.futurebank.order.entity.PaymentOrderDownstreamEntity;
-import com.futurebank.order.entity.PaymentOrderEntity;
-import com.futurebank.order.entity.PaymentProviderEntity;
-import com.futurebank.order.service.FundsHandleService;
-import com.futurebank.order.service.HttpClientService;
-import com.futurebank.order.service.IdGeneratorService;
-import com.futurebank.order.service.KlashaTokenService;
-import com.futurebank.order.service.MerchantChargeService;
-import com.futurebank.order.service.MerchantService;
-import com.futurebank.order.service.MerchantWalletService;
-import com.futurebank.order.service.PaymentBillService;
-import com.futurebank.order.service.PaymentBillingService;
-import com.futurebank.order.service.PaymentOrderDownstreamService;
-import com.futurebank.order.service.PaymentOrderService;
-import com.futurebank.order.service.PaymentOrderUpstreamService;
-import com.futurebank.order.service.payin.PayinRefundService;
-import com.futurebank.order.service.producer.SendMQService;
 import com.futurebank.pojo.base.CodeEunm;
 import com.futurebank.pojo.enums.PaymentStatusEnum;
 import com.futurebank.pojo.exception.CustomException;
 import com.futurebank.pojo.utils.BigDecimalUtils;
-import com.futurebank.pojo.utils.DateUtils;
-import com.futurebank.pojo.utils.FuturebankUtil;
 import com.futurebank.pojo.utils.SingUtils;
 import com.futurebank.pojo.vo.klasha.RefundResponse;
 import com.futurebank.pojo.vo.notify.NotificationMessage;
 import com.futurebank.pojo.vo.notify.NotificationRequestItem;
 import com.futurebank.pojo.vo.payment.Amount;
 import com.futurebank.pojo.vo.payment.PaymentRequest;
+import com.futurebank.rocketmq.NotifyEvent;
+import com.futurebank.rocketmq.RocketMQProducer;
+import com.futurebank.order.entity.*;
+import com.futurebank.order.service.*;
+import com.futurebank.order.service.payin.PayinRefundService;
+import com.futurebank.order.utils.DateUtils;
+import com.futurebank.order.utils.FuturebankUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -68,8 +54,11 @@ class PayinRefundKlashaServiceImpl implements PayinRefundService {
     @Autowired
     PaymentOrderDownstreamService paymentOrderDownstreamService;
 
+//    @Autowired
+//    SendMQService sendMQService;
+
     @Autowired
-    SendMQService sendMQService;
+    private RocketMQProducer rocketMQProducer;
 
     @Autowired
     MerchantService merchantService;
@@ -259,7 +248,12 @@ class PayinRefundKlashaServiceImpl implements PayinRefundService {
         refundNotifyMessage.setWebhookUrl(paymentOrderEntity.getDownstreamNotifyUrl());
         refundNotifyMessage.setProviderReference(paymentOrderEntity.getUpstreamOrderNo());
         updateBill(paymentOrderEntity);
-        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+//        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+
+        NotifyEvent event = new NotifyEvent();
+        event.setData(refundNotifyMessage);
+        event.setKey("RefundNotifyTopic");
+        rocketMQProducer.sendMessage(event);
     }
 
 

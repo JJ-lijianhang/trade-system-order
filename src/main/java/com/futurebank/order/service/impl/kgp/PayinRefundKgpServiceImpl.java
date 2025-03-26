@@ -2,20 +2,17 @@ package com.futurebank.order.service.impl.kgp;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSClient;
 import com.futurebank.cache.RedisCache;
+import com.futurebank.pojo.utils.Unique17DigitIdGeneratorUtils;
 import com.futurebank.order.entity.MerchantEntity;
 import com.futurebank.order.entity.PaymentOrderDownstreamEntity;
 import com.futurebank.order.entity.PaymentOrderEntity;
 import com.futurebank.order.entity.PaymentProviderEntity;
-import com.futurebank.order.service.HttpClientService;
-import com.futurebank.order.service.IdGeneratorService;
-import com.futurebank.order.service.MerchantService;
-import com.futurebank.order.service.PaymentOrderDownstreamService;
-import com.futurebank.order.service.PaymentOrderService;
+import com.futurebank.order.service.*;
 import com.futurebank.order.service.payin.PayinRefundQueryService;
 import com.futurebank.order.service.payin.PayinRefundService;
-import com.futurebank.pojo.utils.FuturebankUtil;
-import com.futurebank.pojo.utils.Unique17DigitIdGeneratorUtils;
+import com.futurebank.order.utils.FuturebankUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +59,8 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
     @Qualifier("refund-query-kgp")
     PayinRefundQueryService payinRefundQueryService;
 
-
+    @Autowired
+    OSSClient ossClient;
 
     @Value("${aliyun.oss.file.bucketname}")
     private String bucketName;
@@ -226,7 +225,40 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
 
     }
 
+    public void uploadPaymentSlip(PaymentOrderEntity paymentOrderEntity, PaymentProviderEntity paymentProviderEntity) throws Exception {
+        String payinConfig = paymentProviderEntity.getPayinConfig();
+        String url = FuturebankUtil.getConfigValue(payinConfig, "refund.url");
+        String PartnerID = FuturebankUtil.getConfigValue(payinConfig, "PartnerID");
+        String ProjectID = FuturebankUtil.getConfigValue(payinConfig, "ProjectID");
+        String ProjectKey = FuturebankUtil.getConfigValue(payinConfig, "ProjectKey");
+        String requestId = idGeneratorService.snowFlake(1L) + "";
 
+        String token = getToken(paymentProviderEntity);
+
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put("content-type", "application/json");
+        headerMap.put("Authorization", "Bearer " + token);
+        headerMap.put("RequestID", requestId);
+        headerMap.put("PartnerID", PartnerID);
+        headerMap.put("ProjectID", ProjectID);
+        headerMap.put("ProjectKey", ProjectKey);
+
+        try {
+            InputStream inputStream = ossClient.getObject(bucketName, "PaymentSlip/1852287091761872896.png").getObjectContent();
+            if (inputStream == null) {
+                log.error("kgp 获取凭证失败 {}", paymentOrderEntity.getDownstreamOrderNo());
+                return;
+            }
+            String resp = httpClientService.uploadFile(url, inputStream, headerMap, "1852287091761872896.png", "kgp");
+            log.info("kgp refund response  refund url={}, postMap={}, response={}", url, JSON.toJSONString(headerMap), resp);
+
+        } catch (Exception e) {
+            log.error("kgp 获取凭证失败 {}", paymentOrderEntity.getDownstreamOrderNo());
+            return;
+        }
+
+
+    }
 
     /**
      * 获取token

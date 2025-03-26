@@ -10,13 +10,16 @@ package com.futurebank.order.utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
+import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * an util that deal with signature
@@ -213,5 +216,43 @@ public class SignatureTool {
     private static String decode(String originalStr,
                                  String characterEncoding) throws UnsupportedEncodingException {
         return URLDecoder.decode(originalStr, characterEncoding);
+    }
+
+    /**
+     * 好易联签名
+     * 第一步： 設所有發送或者接收到的數據為集合M，將集合M內非空參數值的參數按照參數名ASCII碼從小到大排序（字典序），使用URL鍵值對的格式（即key1=value1&key2=value2…）拼接成字符串stringA。 特別注意以下重要規則：
+     * 參數名ASCII碼從小到大排序（字典序）；
+     * 如果參數的值為空不參與簽名；
+     * 參數名區分大小寫；
+     * 驗證調用返回或支付中心主動通知簽名時，傳送的sign參數不參與簽名，將生成的簽名與該sign值作校驗。
+     * 支付中心接口可能增加字段，驗證簽名時必須支持增加的擴展字段
+     * 第二步： 在stringA最後拼接上key[即 StringA +"&key=" + 私鑰 ] 得到stringSignTemp字符串，並對stringSignTemp進行MD5運算，再將得到的字符串所有字符轉換為大寫，得到sign值signValue。
+     * @param params
+     * @param privateKey
+     * @return
+     * @throws Exception
+     */
+    public static String easyLinkSign(Map<String, Object> params, String privateKey) throws Exception {
+        StringBuilder stringA = new StringBuilder();
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            if (entry.getValue() != null) {
+                String valueStr = entry.getValue().toString();
+                if (!valueStr.isEmpty()) {
+                    stringA.append(entry.getKey()).append("=").append(valueStr).append("&");
+                }
+            }
+        }
+        stringA.append("key=").append(privateKey);
+
+        // MD5 加密
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] digest = md.digest(stringA.toString().getBytes(StandardCharsets.UTF_8));
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : digest) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+        return hexString.toString().toUpperCase();
     }
 }

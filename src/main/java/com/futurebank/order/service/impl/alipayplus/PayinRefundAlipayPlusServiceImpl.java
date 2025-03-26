@@ -5,18 +5,19 @@ import com.futurebank.pojo.base.CodeEunm;
 import com.futurebank.pojo.enums.PaymentStatusEnum;
 import com.futurebank.pojo.exception.CustomException;
 import com.futurebank.pojo.utils.BigDecimalUtils;
-import com.futurebank.pojo.utils.DateUtils;
-import com.futurebank.pojo.utils.FuturebankUtil;
 import com.futurebank.pojo.utils.SingUtils;
 import com.futurebank.pojo.vo.notify.NotificationMessage;
 import com.futurebank.pojo.vo.notify.NotificationRequestItem;
 import com.futurebank.pojo.vo.payment.Amount;
 import com.futurebank.pojo.vo.payment.PaymentRequest;
+import com.futurebank.rocketmq.NotifyEvent;
+import com.futurebank.rocketmq.RocketMQProducer;
 import com.futurebank.order.entity.*;
 import com.futurebank.order.enums.ResultStatusType;
 import com.futurebank.order.service.*;
 import com.futurebank.order.service.payin.PayinRefundService;
-import com.futurebank.order.service.producer.SendMQService;
+import com.futurebank.order.utils.DateUtils;
+import com.futurebank.order.utils.FuturebankUtil;
 import com.futurebank.order.utils.GsonUtils;
 import com.futurebank.order.utils.SignatureTool;
 import com.futurebank.order.vo.alipayplus.RefundResponse;
@@ -30,7 +31,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.futurebank.pojo.vo.notify.NotificationRequestItem.EVENT_CODE_REFUND;
 
@@ -54,8 +59,11 @@ class PayinRefundAlipayPlusServiceImpl implements PayinRefundService {
     @Autowired
     PaymentOrderDownstreamService paymentOrderDownstreamService;
 
+//    @Autowired
+//    SendMQService sendMQService;
+
     @Autowired
-    SendMQService sendMQService;
+    private RocketMQProducer rocketMQProducer;
 
     @Autowired
     MerchantService merchantService;
@@ -231,7 +239,11 @@ class PayinRefundAlipayPlusServiceImpl implements PayinRefundService {
         updateBill(paymentOrderEntity);
 
         //发送MQ消息，异步通知下游商户退款状态
-        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+//        sendMQService.refundNotify(JSON.toJSONString(refundNotifyMessage));
+        NotifyEvent event = new NotifyEvent();
+        event.setData(refundNotifyMessage);
+        event.setKey("RefundNotifyTopic");
+        rocketMQProducer.sendMessage(event);
 
     }
 

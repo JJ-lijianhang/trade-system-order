@@ -49,7 +49,7 @@ public class RefundProcessConsumer implements MessageListenerConcurrently {
                 continue;
             }
             try {
-                payinRefundProcessor.processRefund(ids);
+                //payinRefundProcessor.processRefund(ids);
             } catch (Exception e) {
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
