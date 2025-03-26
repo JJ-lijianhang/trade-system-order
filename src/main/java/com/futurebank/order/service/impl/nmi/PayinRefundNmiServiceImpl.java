@@ -73,9 +73,6 @@ class PayinRefundNmiServiceImpl implements PayinRefundService {
     PaymentBillService paymentBillService;
     @Autowired
     PaymentBillingService paymentBillingService;
-    @Autowired
-    @Qualifier("refund-query-nmi")
-    PayinRefundQueryService payinRefundQueryService;
 
 
     @Override
