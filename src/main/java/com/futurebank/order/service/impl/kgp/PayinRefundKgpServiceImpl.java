@@ -59,11 +59,6 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
     @Qualifier("refund-query-kgp")
     PayinRefundQueryService payinRefundQueryService;
 
-
-    @Value("${aliyun.oss.file.bucketname}")
-    private String bucketName;
-
-
     @Override
     public void refund(PaymentOrderEntity paymentOrderEntity, PaymentProviderEntity paymentProviderEntity) throws Exception {
         MerchantEntity merchantEntity = merchantService.getMerchant(paymentOrderEntity.getMerchantId() + "");
