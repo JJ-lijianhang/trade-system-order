@@ -24,12 +24,12 @@ public class ReportExportController {
 
     @PostMapping("/textMq")
     public CommonResp<String> export(@RequestParam("messageBody") String messageBody) {
-        String topic = "RefundMessageTopic";
+        /*String topic = "RefundMessageTopic";
         NotifyEvent event = new NotifyEvent();
         event.setData(JSON.toJSONString(messageBody));
         event.setKey(topic);
         rocketMQProducer.sendMessage(event);
-
+*/
         return CommonResp.ok(true);
     }
 }
