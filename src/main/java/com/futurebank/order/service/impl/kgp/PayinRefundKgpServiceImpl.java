@@ -4,22 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.oss.OSSClient;
 import com.futurebank.cache.RedisCache;
+import com.futurebank.pojo.utils.Unique17DigitIdGeneratorUtils;
 import com.futurebank.order.entity.MerchantEntity;
 import com.futurebank.order.entity.PaymentOrderDownstreamEntity;
 import com.futurebank.order.entity.PaymentOrderEntity;
 import com.futurebank.order.entity.PaymentProviderEntity;
-import com.futurebank.order.service.HttpClientService;
-import com.futurebank.order.service.IdGeneratorService;
-import com.futurebank.order.service.MerchantService;
-import com.futurebank.order.service.PaymentOrderDownstreamService;
-import com.futurebank.order.service.PaymentOrderService;
+import com.futurebank.order.service.*;
 import com.futurebank.order.service.payin.PayinRefundQueryService;
 import com.futurebank.order.service.payin.PayinRefundService;
 import com.futurebank.order.utils.FuturebankUtil;
-import com.futurebank.pojo.utils.Unique17DigitIdGeneratorUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +56,7 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
     RedisCache redisCache;
 
     @Autowired
+    @Qualifier("refund-query-kgp")
     PayinRefundQueryService payinRefundQueryService;
 
     @Autowired
