@@ -61,7 +61,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jakarta.annotation.Resource;
 
 import static com.futurebank.pojo.vo.notify.NotificationRequestItem.EVENT_CODE_REFUND;
 
