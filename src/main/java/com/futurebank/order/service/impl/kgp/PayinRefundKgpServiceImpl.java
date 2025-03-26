@@ -59,8 +59,6 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
     @Qualifier("refund-query-kgp")
     PayinRefundQueryService payinRefundQueryService;
 
-    @Autowired
-    OSSClient ossClient;
 
     @Value("${aliyun.oss.file.bucketname}")
     private String bucketName;
@@ -222,41 +220,6 @@ class PayinRefundKgpServiceImpl implements PayinRefundService {
         }
 
         payinRefundQueryService.refundQuery(paymentOrderEntity, paymentProviderEntity);
-
-    }
-
-    public void uploadPaymentSlip(PaymentOrderEntity paymentOrderEntity, PaymentProviderEntity paymentProviderEntity) throws Exception {
-        String payinConfig = paymentProviderEntity.getPayinConfig();
-        String url = FuturebankUtil.getConfigValue(payinConfig, "refund.url");
-        String PartnerID = FuturebankUtil.getConfigValue(payinConfig, "PartnerID");
-        String ProjectID = FuturebankUtil.getConfigValue(payinConfig, "ProjectID");
-        String ProjectKey = FuturebankUtil.getConfigValue(payinConfig, "ProjectKey");
-        String requestId = idGeneratorService.snowFlake(1L) + "";
-
-        String token = getToken(paymentProviderEntity);
-
-        Map<String, String> headerMap = new HashMap<>();
-        headerMap.put("content-type", "application/json");
-        headerMap.put("Authorization", "Bearer " + token);
-        headerMap.put("RequestID", requestId);
-        headerMap.put("PartnerID", PartnerID);
-        headerMap.put("ProjectID", ProjectID);
-        headerMap.put("ProjectKey", ProjectKey);
-
-        try {
-            InputStream inputStream = ossClient.getObject(bucketName, "PaymentSlip/1852287091761872896.png").getObjectContent();
-            if (inputStream == null) {
-                log.error("kgp 获取凭证失败 {}", paymentOrderEntity.getDownstreamOrderNo());
-                return;
-            }
-            String resp = httpClientService.uploadFile(url, inputStream, headerMap, "1852287091761872896.png", "kgp");
-            log.info("kgp refund response  refund url={}, postMap={}, response={}", url, JSON.toJSONString(headerMap), resp);
-
-        } catch (Exception e) {
-            log.error("kgp 获取凭证失败 {}", paymentOrderEntity.getDownstreamOrderNo());
-            return;
-        }
-
 
     }
 
